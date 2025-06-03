@@ -10,6 +10,7 @@ from typing import Dict, List, Optional, Any
 from datetime import datetime
 from loguru import logger
 from pathlib import Path
+import threading
 
 class ReviewManager:
     """Gerenciador de revisão de artigos"""
@@ -17,8 +18,16 @@ class ReviewManager:
     def __init__(self, db_path: str = "data/review_articles.db"):
         """Inicializa o gerenciador de revisão"""
         self.db_path = db_path
-        self.ensure_data_directory()
-        self.init_database()
+        self.lock = threading.Lock()
+        
+        # Garantir que o diretório existe
+        Path(self.db_path).parent.mkdir(parents=True, exist_ok=True)
+        
+        # Verificar e corrigir banco de dados
+        self._verify_and_fix_database()
+        
+        # Inicializar banco
+        self._init_database()
         
         # Configurar logging
         logger.add(
@@ -29,49 +38,186 @@ class ReviewManager:
             format="{time} | {level} | {message}"
         )
         
-        logger.info("📝 Review Manager inicializado")
+        logger.info(f"✅ ReviewManager inicializado - DB: {self.db_path}")
     
-    def ensure_data_directory(self):
-        """Garante que o diretório de dados existe"""
-        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+    def _verify_and_fix_database(self):
+        """Verifica se o banco está válido e corrige se necessário"""
+        try:
+            if Path(self.db_path).exists():
+                # Tentar conectar e fazer uma query simples
+                with sqlite3.connect(self.db_path) as conn:
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+                    tables = cursor.fetchall()
+                    
+                    # Se não tem a tabela articles, recriar
+                    if not any('articles' in str(table) for table in tables):
+                        logger.warning("⚠️ Tabela 'articles' não encontrada, recriando banco...")
+                        self._recreate_database()
+                    else:
+                        logger.info("✅ Banco de dados verificado e válido")
+                        
+        except sqlite3.DatabaseError as e:
+            logger.error(f"❌ Banco corrompido: {e}")
+            logger.info("🔧 Recriando banco de dados...")
+            self._recreate_database()
+        except Exception as e:
+            logger.error(f"❌ Erro ao verificar banco: {e}")
+            self._recreate_database()
     
-    def init_database(self):
-        """Inicializa banco de dados SQLite"""
+    def _recreate_database(self):
+        """Recria o banco de dados do zero"""
+        try:
+            # Backup do arquivo atual se existir
+            if Path(self.db_path).exists():
+                backup_path = f"{self.db_path}.backup.{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                Path(self.db_path).rename(backup_path)
+                logger.info(f"📦 Backup criado: {backup_path}")
+            
+            # Remover arquivo corrompido
+            if Path(self.db_path).exists():
+                Path(self.db_path).unlink()
+                
+            logger.info("🔧 Recriando banco de dados...")
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao recriar banco: {e}")
+    
+    def _init_database(self):
+        """Inicializa o banco de dados"""
         try:
             with sqlite3.connect(self.db_path) as conn:
-                conn.execute("""
+                cursor = conn.cursor()
+                
+                # Criar tabela principal
+                cursor.execute("""
                     CREATE TABLE IF NOT EXISTS articles (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         titulo TEXT NOT NULL,
-                        slug TEXT NOT NULL,
+                        slug TEXT,
                         meta_descricao TEXT,
                         conteudo TEXT NOT NULL,
-                        tags TEXT,  -- JSON array
+                        tags TEXT DEFAULT '[]',
                         produto_id TEXT,
                         produto_nome TEXT,
-                        status TEXT DEFAULT 'pendente',  -- pendente, aprovado, rejeitado
+                        status TEXT DEFAULT 'pendente',
                         data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         data_revisao TIMESTAMP,
                         comentario_revisor TEXT,
                         revisor_nome TEXT,
                         score_seo INTEGER DEFAULT 0,
                         tipo_produto TEXT,
-                        tom_usado TEXT,
-                        generation_data TEXT  -- JSON com dados completos da geração
+                        tom_usado TEXT DEFAULT 'profissional',
+                        generation_data TEXT,
+                        content_hash TEXT
                     )
                 """)
                 
-                # Criar índices para performance
-                conn.execute("CREATE INDEX IF NOT EXISTS idx_status ON articles(status)")
-                conn.execute("CREATE INDEX IF NOT EXISTS idx_data_criacao ON articles(data_criacao)")
-                conn.execute("CREATE INDEX IF NOT EXISTS idx_produto_id ON articles(produto_id)")
+                # Criar índices
+                cursor.execute("CREATE INDEX IF NOT EXISTS idx_status ON articles(status)")
+                cursor.execute("CREATE INDEX IF NOT EXISTS idx_data_criacao ON articles(data_criacao)")
+                cursor.execute("CREATE INDEX IF NOT EXISTS idx_produto_id ON articles(produto_id)")
                 
                 conn.commit()
-                logger.info("✅ Banco de dados de revisão inicializado")
+                
+                # Verificar se há dados
+                cursor.execute("SELECT COUNT(*) FROM articles")
+                count = cursor.fetchone()[0]
+                
+                if count == 0:
+                    logger.info("📝 Banco vazio, criando artigos de exemplo...")
+                    self._create_sample_articles()
+                else:
+                    logger.info(f"📊 Banco inicializado com {count} artigos")
+                    
+        except Exception as e:
+            logger.error(f"❌ Erro ao inicializar banco: {e}")
+            raise
+    
+    def _create_sample_articles(self):
+        """Cria artigos de exemplo para teste"""
+        try:
+            sample_articles = [
+                {
+                    'titulo': 'Impressora HP LaserJet Pro M404n: Review Completo 2025',
+                    'slug': 'impressora-hp-laserjet-pro-m404n-review',
+                    'meta_descricao': 'Análise completa da HP LaserJet Pro M404n. Especificações, prós e contras, e vale a pena comprar em 2025.',
+                    'conteudo': '''# Impressora HP LaserJet Pro M404n: Review Completo
+
+## Introdução
+A HP LaserJet Pro M404n é uma impressora laser monocromática projetada para pequenos escritórios e uso doméstico profissional.
+
+## Especificações Técnicas
+- **Velocidade**: Até 38 ppm
+- **Resolução**: 1200 x 1200 dpi
+- **Conectividade**: USB, Ethernet
+- **Capacidade**: 250 folhas
+
+## Prós e Contras
+**Prós:**
+- Alta velocidade de impressão
+- Qualidade de texto excelente
+- Conectividade de rede
+
+**Contras:**
+- Apenas monocromática
+- Sem WiFi integrado
+
+## Conclusão
+Excelente opção para quem precisa de impressões rápidas e de qualidade em preto e branco.''',
+                    'tags': '["impressora", "hp", "laser", "escritório"]',
+                    'produto_nome': 'Impressora HP LaserJet Pro M404n',
+                    'status': 'pendente',
+                    'tipo_produto': 'impressora',
+                    'tom_usado': 'profissional'
+                },
+                {
+                    'titulo': 'Mouse Gamer Logitech G502 HERO: Vale a Pena?',
+                    'slug': 'mouse-gamer-logitech-g502-hero-review',
+                    'meta_descricao': 'Review do mouse gamer Logitech G502 HERO. Especificações, performance em jogos e custo-benefício.',
+                    'conteudo': '''# Mouse Gamer Logitech G502 HERO: Análise Detalhada
+
+## Características Principais
+O Logitech G502 HERO é um mouse gamer com sensor HERO 25K de alta precisão.
+
+## Performance
+- **DPI**: Até 25.600
+- **Aceleração**: 40G
+- **Velocidade**: 400 IPS
+
+## Design e Ergonomia
+Mouse com design ergonômico, ideal para destros, com 11 botões programáveis.
+
+## Conclusão
+Uma das melhores opções para gamers que buscam precisão e customização.''',
+                    'tags': '["mouse", "gamer", "logitech", "periférico"]',
+                    'produto_nome': 'Mouse Gamer Logitech G502 HERO',
+                    'status': 'pendente',
+                    'tipo_produto': 'periférico',
+                    'tom_usado': 'profissional'
+                }
+            ]
+            
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                
+                for article in sample_articles:
+                    cursor.execute("""
+                        INSERT INTO articles (
+                            titulo, slug, meta_descricao, conteudo, tags,
+                            produto_nome, status, tipo_produto, tom_usado
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """, (
+                        article['titulo'], article['slug'], article['meta_descricao'],
+                        article['conteudo'], article['tags'], article['produto_nome'],
+                        article['status'], article['tipo_produto'], article['tom_usado']
+                    ))
+                
+                conn.commit()
+                logger.info(f"✅ {len(sample_articles)} artigos de exemplo criados")
                 
         except Exception as e:
-            logger.error(f"❌ Erro ao inicializar banco de dados: {e}")
-            raise
+            logger.error(f"❌ Erro ao criar artigos de exemplo: {e}")
     
     def save_article_for_review(self, article_data: Dict[str, Any]) -> int:
         """
