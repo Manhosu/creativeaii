@@ -274,62 +274,63 @@ class WordPressClient:
             logger.error(f"❌ Erro no upload de mídia: {e}")
             return None
     
-    def create_post(self, title: str, content: str, status: str = 'draft',
-                   categories: List[int] = None, tags: List[int] = None,
-                   featured_media: int = None, excerpt: str = None,
-                   slug: str = None, meta: Dict[str, Any] = None) -> Optional[Dict[str, Any]]:
+    def create_post(self, post_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """
         Cria novo post no WordPress
         
         Args:
-            title: Título do post
-            content: Conteúdo HTML do post
-            status: Status do post (draft, publish, private)
-            categories: Lista de IDs de categorias
-            tags: Lista de IDs de tags
-            featured_media: ID da imagem destacada
-            excerpt: Resumo do post
-            slug: Slug do post
-            meta: Metadados customizados
+            post_data: Dicionário com dados do post
+                - title: Título do post
+                - content: Conteúdo HTML do post
+                - status: Status do post (draft, publish, private)
+                - categories: Lista de IDs de categorias
+                - tags: Lista de IDs de tags
+                - featured_media: ID da imagem destacada
+                - excerpt: Resumo do post
+                - slug: Slug do post
+                - meta: Metadados customizados
             
         Returns:
             Dados do post criado ou None se falhou
         """
         try:
+            # Validar dados obrigatórios
+            if not post_data.get('title'):
+                raise ValueError("Título é obrigatório")
+            
+            if not post_data.get('content'):
+                raise ValueError("Conteúdo é obrigatório")
+            
+            # Configurar dados padrão
             data = {
-                'title': title,
-                'content': content,
-                'status': status
+                'title': post_data['title'],
+                'content': post_data['content'],
+                'status': post_data.get('status', 'draft')
             }
             
-            if categories:
-                data['categories'] = categories
-            if tags:
-                data['tags'] = tags
-            if featured_media:
-                data['featured_media'] = featured_media
-            if excerpt:
-                data['excerpt'] = excerpt
-            if slug:
-                data['slug'] = slug
-            if meta:
-                data['meta'] = meta
+            # Adicionar campos opcionais se fornecidos
+            optional_fields = ['categories', 'tags', 'featured_media', 'excerpt', 'slug', 'meta']
+            for field in optional_fields:
+                if field in post_data and post_data[field] is not None:
+                    data[field] = post_data[field]
+            
+            logger.info(f"📝 Criando post: '{data['title'][:50]}...' (status: {data['status']})")
             
             response = self.session.post(f"{self.api_base}/posts", json=data)
             
             if response.status_code == 201:
                 post = response.json()
-                logger.info(f"✅ Post criado: '{title}' (ID: {post.get('id')})")
+                logger.info(f"✅ Post criado: ID {post.get('id')} - '{post.get('title', {}).get('rendered', 'N/A')}'")
                 return post
             else:
                 error_data = response.json()
                 error_msg = error_data.get('message', 'Erro desconhecido')
-                logger.error(f"❌ Erro ao criar post '{title}': {error_msg}")
+                logger.error(f"❌ Erro ao criar post: {error_msg}")
                 logger.debug(f"Detalhes do erro: {error_data}")
                 return None
                 
         except Exception as e:
-            logger.error(f"❌ Erro ao criar post '{title}': {e}")
+            logger.error(f"❌ Erro ao criar post: {e}")
             return None
     
     def update_post(self, post_id: int, updates: Dict[str, Any]) -> Optional[Dict[str, Any]]:
