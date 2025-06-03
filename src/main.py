@@ -3254,7 +3254,7 @@ async def test_wordpress_connection():
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/publisher/publish")
-async def publish_article(request: PublicationRequest):
+async def publish_article(publication_data: dict):
     """Publica artigo aprovado no WordPress"""
     if not PUBLISHER_AVAILABLE:
         raise HTTPException(status_code=503, detail="Módulo publisher não disponível")
@@ -3263,47 +3263,103 @@ async def publish_article(request: PublicationRequest):
         raise HTTPException(status_code=503, detail="Módulo review necessário para buscar artigo")
     
     try:
+        # CORREÇÃO URGENTE: Validação robusta dos dados de entrada
+        logger.info(f"🚀 Recebendo requisição de publicação: {publication_data}")
+        
+        # Validar e extrair article_id
+        article_id = publication_data.get('article_id')
+        if not article_id:
+            logger.error("❌ ERRO 400: article_id não fornecido")
+            raise HTTPException(status_code=400, detail="Campo 'article_id' é obrigatório")
+        
+        # Converter para int se necessário
+        try:
+            article_id = int(article_id)
+        except (ValueError, TypeError):
+            logger.error(f"❌ ERRO 400: article_id inválido: {article_id}")
+            raise HTTPException(status_code=400, detail=f"Campo 'article_id' deve ser um número válido. Recebido: {article_id}")
+        
+        # Extrair outros parâmetros com valores padrão
+        publish_immediately = publication_data.get('publish_immediately', True)
+        scheduled_date_str = publication_data.get('scheduled_date')
+        
+        logger.info(f"📝 Processando publicação: article_id={article_id}, publish_immediately={publish_immediately}")
+        
         # Buscar artigo no sistema de revisão
         review_manager = ReviewManager()
-        article = review_manager.get_article(request.article_id)
+        article = review_manager.get_article(article_id)  # Usar método correto
         
         if not article:
-            raise HTTPException(status_code=404, detail="Artigo não encontrado")
+            logger.error(f"❌ ERRO 404: Artigo {article_id} não encontrado")
+            raise HTTPException(status_code=404, detail=f"Artigo com ID {article_id} não encontrado")
         
-        if article.get('status') != 'aprovado':
-            raise HTTPException(status_code=400, detail="Apenas artigos aprovados podem ser publicados")
+        # Verificar status do artigo
+        article_status = article.get('status', '').lower()
+        if article_status != 'aprovado':
+            logger.warning(f"⚠️ Artigo {article_id} não está aprovado (status: {article_status})")
+            raise HTTPException(status_code=400, detail=f"Apenas artigos aprovados podem ser publicados. Status atual: {article_status}")
+        
+        # Processar data agendada se fornecida
+        scheduled_date = None
+        if scheduled_date_str:
+            try:
+                scheduled_date = datetime.fromisoformat(scheduled_date_str.replace('Z', '+00:00'))
+            except Exception as e:
+                logger.error(f"❌ Erro no formato da data: {e}")
+                raise HTTPException(status_code=400, detail="Formato de data inválido. Use formato ISO.")
         
         # Publicar artigo
+        logger.info(f"📤 Iniciando publicação do artigo {article_id}")
         pub_manager = PublicationManager()
-        
-        scheduled_date = None
-        if request.scheduled_date:
-            try:
-                scheduled_date = datetime.fromisoformat(request.scheduled_date.replace('Z', '+00:00'))
-            except:
-                raise HTTPException(status_code=400, detail="Formato de data inválido. Use ISO format.")
         
         result = pub_manager.publish_article(
             article_data=article,
-            publish_immediately=request.publish_immediately,
+            publish_immediately=publish_immediately,
             scheduled_date=scheduled_date
         )
         
-        if result['success']:
-            # Marcar artigo como publicado no sistema de revisão
-            if request.publish_immediately:
-                review_manager.mark_as_published(
-                    request.article_id, 
-                    result.get('wp_url')
-                )
+        logger.info(f"📊 Resultado da publicação: {result}")
         
-        return result
+        # Se publicação foi bem-sucedida, marcar artigo como publicado
+        if result.get('success') and publish_immediately:
+            try:
+                review_manager.mark_as_published(
+                    article_id, 
+                    result.get('wp_url', '')
+                )
+                logger.info(f"✅ Artigo {article_id} marcado como publicado no sistema de revisão")
+            except Exception as e:
+                logger.warning(f"⚠️ Erro ao marcar como publicado: {e}")
+        
+        # Retornar resultado com informações adicionais
+        if result.get('success'):
+            response = {
+                'success': True,
+                'message': 'Artigo publicado com sucesso!',
+                'wp_post_id': result.get('wp_post_id'),
+                'wp_url': result.get('wp_url'),
+                'status': result.get('status'),
+                'note': result.get('note'),
+                'publication_id': result.get('publication_id'),
+                'article_id': article_id
+            }
+        else:
+            response = {
+                'success': False,
+                'error': result.get('error', 'Erro desconhecido na publicação'),
+                'error_code': 'PUBLICATION_FAILED',
+                'article_id': article_id
+            }
+        
+        return response
         
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"❌ Erro ao publicar artigo: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"❌ ERRO CRÍTICO ao publicar artigo: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Erro interno do servidor: {str(e)}")
 
 @app.get("/publisher/list")
 async def list_publications(status: str = None, limit: int = 50):

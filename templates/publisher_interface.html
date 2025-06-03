@@ -608,30 +608,103 @@
                 return;
             }
             
+            console.log('🚀 Iniciando publicação do artigo:', articleId);
             showNotification('📤 Publicando', 'Enviando artigo para o WordPress...');
             
             try {
+                // CORREÇÃO URGENTE: Garantir que articleId é um número válido
+                const validArticleId = parseInt(articleId);
+                if (isNaN(validArticleId) || validArticleId <= 0) {
+                    throw new Error(`ID do artigo inválido: ${articleId}`);
+                }
+                
+                const requestData = {
+                    article_id: validArticleId,
+                    publish_immediately: true
+                };
+                
+                console.log('📤 Enviando dados:', requestData);
+                
                 const response = await fetch('/publisher/publish', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        article_id: articleId,
-                        publish_immediately: true
-                    })
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
                 });
                 
-                const data = await response.json();
+                console.log('📡 Resposta do servidor:', response.status, response.statusText);
                 
-                if (data.success) {
-                    showNotification('🎉 Publicado!', 'Artigo publicado com sucesso no WordPress!');
+                // CORREÇÃO: Verificar se resposta é JSON válida
+                let data;
+                try {
+                    const responseText = await response.text();
+                    console.log('📄 Resposta raw:', responseText);
+                    data = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('❌ Erro ao fazer parse da resposta:', parseError);
+                    throw new Error('Resposta do servidor não é um JSON válido');
+                }
+                
+                console.log('📦 Dados da resposta:', data);
+                
+                if (response.ok && data.success) {
+                    console.log('✅ Publicação bem-sucedida!');
+                    showNotification('🎉 Publicado!', 
+                        data.message || 'Artigo publicado com sucesso no WordPress!', 
+                        'success'
+                    );
+                    
+                    // Mostrar detalhes da publicação
+                    if (data.wp_url) {
+                        setTimeout(() => {
+                            showNotification('🔗 Link da Publicação', 
+                                `<a href="${data.wp_url}" target="_blank" style="color: #10b981; text-decoration: underline;">Ver artigo publicado</a>`,
+                                'info'
+                            );
+                        }, 2000);
+                    }
+                    
                     loadApprovedArticles(); // Recarregar lista
                     loadStats(); // Atualizar estatísticas
                 } else {
-                    showNotification('❌ Falha na Publicação', data.message || 'Erro ao publicar artigo.', 'error');
+                    console.error('❌ Falha na publicação:', data);
+                    
+                    // Mensagem de erro mais específica
+                    const errorMessage = data.error || data.message || 'Erro desconhecido na publicação';
+                    const errorCode = data.error_code || 'UNKNOWN_ERROR';
+                    
+                    showNotification('❌ Falha na Publicação', 
+                        `${errorMessage} (Código: ${errorCode})`, 
+                        'error'
+                    );
+                    
+                    // Se for erro de configuração, mostrar dica
+                    if (errorCode.includes('NOT_FOUND') || errorCode.includes('NOT_APPROVED')) {
+                        setTimeout(() => {
+                            showNotification('💡 Dica', 
+                                'Verifique se o artigo existe e está aprovado.',
+                                'warning'
+                            );
+                        }, 3000);
+                    }
                 }
                 
             } catch (error) {
-                showNotification('❌ Erro', 'Erro ao publicar: ' + error.message, 'error');
+                console.error('❌ Erro durante publicação:', error);
+                showNotification('❌ Erro de Conexão', 
+                    `Erro ao publicar: ${error.message}`, 
+                    'error'
+                );
+                
+                // Sugestão de ação
+                setTimeout(() => {
+                    showNotification('🔧 Sugestão', 
+                        'Tente recarregar a página e tentar novamente.',
+                        'info'
+                    );
+                }, 3000);
             }
         }
         
