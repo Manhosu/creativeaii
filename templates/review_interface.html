@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Revisar Artigos - Sistema SEO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: #475569;
+            --shadow: rgba(0, 0, 0, 0.25);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .review-status {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .workflow-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+        
+        .workflow-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .instructions {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .instructions h3 {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ul {
+            color: var(--text-secondary);
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 20px 25px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            flex-direction: column;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.6);
+        }
+        
+        .action-btn.success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .action-btn.success:hover {
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.6);
+        }
+        
+        .action-btn.warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        
+        .action-btn.warning:hover {
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
+        }
+        
+        .btn-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+        
+        .articles-section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .article-card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .article-card.approved {
+            border-left: 5px solid var(--success);
+        }
+        
+        .article-card.rejected {
+            border-left: 5px solid var(--danger);
+        }
+        
+        .article-card.pending {
+            border-left: 5px solid var(--warning);
+        }
+        
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .article-status {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-approved {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .status-rejected {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        .article-content {
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+        
+        .article-keywords {
+            margin: 15px 0;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 2px;
+        }
+        
+        .review-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .review-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .review-btn.approve {
+            background: var(--success);
+            color: white;
+        }
+        
+        .review-btn.approve:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        .review-btn.reject {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .review-btn.reject:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+        
+        .review-btn.edit {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .review-btn.edit:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+        
+        .review-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .feedback-input {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            margin-top: 15px;
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .feedback-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 4px solid var(--success);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            border-left-color: var(--danger);
+        }
+        
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--success);
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 10px 20px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .filter-tab:hover {
+            border-color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .action-buttons { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .article-header { flex-direction: column; gap: 10px; }
+            .review-actions { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+        
+        <div class="header">
+            <h1>📝 Revisar Artigos</h1>
+            <p>Revise, aprove ou rejeite os artigos gerados pela IA antes da publicação</p>
+        </div>
+        
+        <div class="review-status">
+            <h3 id="reviewStatusTitle">📊 Verificando sistema de revisão...</h3>
+            <p id="reviewStatusMessage">Aguarde enquanto carregamos o status do sistema</p>
+        </div>
+        
+        <div class="workflow-section">
+            <h2 class="workflow-title">🔍 Como Funciona a Revisão</h2>
+            
+            <div class="instructions">
+                <h3>✅ O que você pode fazer:</h3>
+                <ul>
+                    <li>Revisar todos os artigos gerados pela IA</li>
+                    <li>Aprovar artigos que estão prontos para publicação</li>
+                    <li>Rejeitar artigos que precisam ser refeitos</li>
+                    <li>Adicionar feedback para melhorar futuros artigos</li>
+                    <li>Editar pequenos detalhes nos artigos aprovados</li>
+                    <li>Acompanhar o histórico de todas as revisões</li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn success" onclick="loadPendingArticles()">
+                    📝 Artigos Pendentes
+                    <div class="btn-subtitle">Para revisar e aprovar</div>
+                </button>
+                
+                <button class="action-btn" onclick="loadApprovedArticles()">
+                    ✅ Artigos Aprovados
+                    <div class="btn-subtitle">Prontos para publicação</div>
+                </button>
+                
+                <button class="action-btn warning" onclick="loadRejectedArticles()">
+                    ❌ Artigos Rejeitados
+                    <div class="btn-subtitle">Que precisam ser refeitos</div>
+                </button>
+                
+                <button class="action-btn warning" onclick="viewStats()">
+                    📊 Estatísticas
+                    <div class="btn-subtitle">Dados da revisão</div>
+                </button>
+            </div>
+            
+            <div class="articles-section" id="articlesSection">
+                <div class="filter-tabs">
+                    <div class="filter-tab active" data-filter="all">Todos</div>
+                    <div class="filter-tab" data-filter="pendente">Pendentes</div>
+                    <div class="filter-tab" data-filter="aprovado">Aprovados</div>
+                    <div class="filter-tab" data-filter="rejeitado">Rejeitados</div>
+                </div>
+                
+                <div id="articlesContainer">
+                    <p style="text-align: center; color: var(--text-secondary); padding: 40px;">
+                        Carregando artigos...
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalArticles">-</div>
+                    <div class="stat-label">Total de Artigos</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="pendingArticles">-</div>
+                    <div class="stat-label">Aguardando Revisão</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="approvedArticles">-</div>
+                    <div class="stat-label">Aprovados</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="rejectedArticles">-</div>
+                    <div class="stat-label">Rejeitados</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <div style="font-weight: 600;" id="notificationTitle">Notificação</div>
+        <div style="font-size: 0.9rem; margin-top: 5px;" id="notificationMessage">Mensagem</div>
+    </div>
+    
+    <script>
+        let currentFilter = 'all';
+        let allArticles = [];
+        
+        // Verificar status do sistema ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            checkReviewStatus();
+            loadStats();
+            setupFilterTabs();
+        });
+        
+        function showNotification(title, message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        function setupFilterTabs() {
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentFilter = tab.dataset.filter;
+                    filterArticles();
+                });
+            });
+        }
+        
+        async function filterArticles() {
+            const container = document.getElementById('articlesContainer');
+            
+            // Se é um filtro específico, carregar da API para garantir dados atualizados
+            if (currentFilter !== 'all') {
+                await loadArticles(currentFilter);
+                return;
+            }
+            
+            // Se é "all", usar a função de filtro local
+            let filteredArticles = allArticles;
+            displayArticles(filteredArticles);
+        }
+        
+        async function checkReviewStatus() {
+            try {
+                const response = await fetch('/review');
+                const data = await response.json();
+                
+                const statusTitle = document.getElementById('reviewStatusTitle');
+                const statusMessage = document.getElementById('reviewStatusMessage');
+                
+                if (data.status === 'ready') {
+                    statusTitle.textContent = '✅ Sistema de Revisão Ativo!';
+                    statusMessage.textContent = 'O sistema está funcionando e pronto para revisar artigos.';
+                } else {
+                    statusTitle.textContent = '⚠️ Sistema com Problemas';
+                    statusMessage.textContent = 'Há algum problema com o sistema de revisão.';
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status:', error);
+                document.getElementById('reviewStatusTitle').textContent = '❌ Erro de Conexão';
+                document.getElementById('reviewStatusMessage').textContent = 'Não foi possível verificar o status do sistema.';
+            }
+        }
+        
+        async function loadStats() {
+            try {
+                const response = await fetch('/review/stats');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.statistics;
+                    document.getElementById('totalArticles').textContent = stats.total_artigos || '0';
+                    document.getElementById('pendingArticles').textContent = stats.pendentes || '0';
+                    document.getElementById('approvedArticles').textContent = stats.aprovados || '0';
+                    document.getElementById('rejectedArticles').textContent = stats.rejeitados || '0';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+        
+        async function loadPendingArticles() {
+            await loadArticles('pendente');
+            showNotification('📝 Carregando', 'Buscando artigos pendentes de revisão...');
+        }
+        
+        async function loadApprovedArticles() {
+            await loadArticles('aprovado');
+            showNotification('✅ Carregando', 'Buscando artigos aprovados...');
+            
+            // Adicionar seção de publicação se houver artigos aprovados
+            setTimeout(() => {
+                addPublishingSection();
+            }, 1000);
+        }
+        
+        function addPublishingSection() {
+            const approvedArticles = allArticles.filter(article => article.status === 'aprovado');
+            
+            if (approvedArticles.length > 0) {
+                const container = document.getElementById('articlesContainer');
+                const publishSection = `
+                    <div style="background: linear-gradient(135deg, var(--success), #059669); 
+                                border-radius: 15px; padding: 25px; margin-bottom: 20px; 
+                                text-align: center; color: white;">
+                        <h3 style="margin-bottom: 15px;">🚀 Artigos Prontos para Publicação</h3>
+                        <p style="margin-bottom: 20px; opacity: 0.9;">
+                            ${approvedArticles.length} artigo(s) aprovado(s) e pronto(s) para publicar no WordPress
+                        </p>
+                        <button onclick="publishAllApproved()" style="
+                            background: rgba(255,255,255,0.2); 
+                            color: white; 
+                            border: 2px solid white; 
+                            padding: 12px 24px; 
+                            border-radius: 8px; 
+                            font-weight: 600; 
+                            cursor: pointer; 
+                            margin-right: 10px;
+                            transition: all 0.3s ease;
+                        ">
+                            📤 Publicar Todos
+                        </button>
+                        <button onclick="showPublishOptions()" style="
+                            background: transparent; 
+                            color: white; 
+                            border: 2px solid rgba(255,255,255,0.5); 
+                            padding: 12px 24px; 
+                            border-radius: 8px; 
+                            font-weight: 600; 
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        ">
+                            ⚙️ Opções de Publicação
+                        </button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('afterbegin', publishSection);
+            }
+        }
+        
+        async function loadRejectedArticles() {
+            await loadArticles('rejeitado');
+            showNotification('❌ Carregando', 'Buscando artigos rejeitados...');
+        }
+        
+        async function loadArticles(status = 'all') {
+            try {
+                showNotification('📥 Carregando', 'Buscando artigos...', 'info');
+                
+                const statusParam = status === 'all' ? '' : `?status=${status}`;
+                const response = await fetch(`/review/api/list${statusParam}`);
+                const data = await response.json();
+                
+                if (data.success && data.articles) {
+                    allArticles = data.articles;
+                    displayArticles(allArticles);
+                    showNotification('✅ Artigos Carregados', `${data.count} artigos encontrados.`);
+                    
+                    // Sincronizar a aba ativa com o status carregado
+                    updateActiveTab(status);
+                    
+                } else {
+                    allArticles = [];
+                    const container = document.getElementById('articlesContainer');
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <h4>📝 Nenhum artigo encontrado</h4>
+                            <p>Não há artigos ${status === 'all' ? '' : status === 'pendente' ? 'pendentes' : status === 'aprovado' ? 'aprovados' : 'rejeitados'} no momento.</p>
+                        </div>
+                    `;
+                    showNotification('📝 Nenhum Artigo', `Não há artigos ${status === 'all' ? '' : status}.`, 'warning');
+                }
+                
+                const articlesSection = document.getElementById('articlesSection');
+                articlesSection.style.display = 'block';
+                articlesSection.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Erro ao carregar artigos:', error);
+                showNotification('❌ Erro', 'Erro ao carregar artigos: ' + error.message, 'error');
+            }
+        }
+        
+        function updateActiveTab(status) {
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.filter === status) {
+                    tab.classList.add('active');
+                    currentFilter = status;
+                }
+            });
+        }
+        
+        function displayArticles(articles) {
+            const container = document.getElementById('articlesContainer');
+            
+            if (articles.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                        <h4>📝 Nenhum artigo encontrado</h4>
+                        <p>Não há artigos para este filtro no momento.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let articlesHTML = '';
+            
+            articles.forEach(article => {
+                const statusClass = article.status === 'aprovado' ? 'approved' : 
+                                  article.status === 'rejeitado' ? 'rejected' : 'pending';
+                const statusText = article.status === 'aprovado' ? 'Aprovado' : 
+                                  article.status === 'rejeitado' ? 'Rejeitado' : 'Pendente';
+                
+                articlesHTML += `
+                    <div class="article-card ${statusClass}">
+                        <div class="article-header">
+                            <div>
+                                <div class="article-title">${article.titulo || 'Título não disponível'}</div>
+                                <div class="article-meta">
+                                    <span>Criado: ${new Date(article.data_criacao).toLocaleDateString('pt-BR')}</span>
+                                    <span>Palavras: ${article.conteudo ? article.conteudo.split(' ').length : '0'}</span>
+                                    ${article.meta_descricao ? `<span>Meta: ${article.meta_descricao.length} chars</span>` : ''}
+                                </div>
+                            </div>
+                            <div class="article-status status-${article.status}">
+                                ${statusText}
+                            </div>
+                        </div>
+                        
+                        <div class="article-content">
+                            ${article.conteudo || 'Conteúdo não disponível'}
+                        </div>
+                        
+                        ${article.tags ? `
+                            <div class="article-keywords">
+                                <strong>Palavras-chave:</strong>
+                                ${(Array.isArray(article.tags) ? article.tags : article.tags.split(',')).map(tag => 
+                                    `<span class="keyword-tag">${tag.trim()}</span>`
+                                ).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        ${article.feedback ? `
+                            <div style="margin: 15px 0; padding: 15px; background: var(--bg-primary); border-radius: 8px; border-left: 3px solid var(--warning);">
+                                <strong>Feedback anterior:</strong><br>
+                                ${article.feedback}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="review-actions">
+                            ${article.status === 'pendente' ? `
+                                <button class="review-btn approve" onclick="approveArticle(${article.id})">
+                                    ✅ Aprovar
+                                </button>
+                                <button class="review-btn reject" onclick="showRejectForm(${article.id})">
+                                    ❌ Rejeitar
+                                </button>
+                            ` : ''}
+                            
+                            ${article.status === 'aprovado' ? `
+                                <button class="review-btn publish" onclick="publishSingleArticle(${article.id})" style="
+                                    background: linear-gradient(135deg, var(--success), #059669);
+                                    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+                                ">
+                                    🚀 Publicar no WordPress
+                                </button>
+                            ` : ''}
+                            
+                            ${article.status === 'rejeitado' ? `
+                                <button class="review-btn approve" onclick="approveArticle(${article.id})">
+                                    ✅ Aprovar Mesmo Assim
+                                </button>
+                            ` : ''}
+                            
+                            <button class="review-btn edit" onclick="editArticle(${article.id})">
+                                ✏️ Editar
+                            </button>
+                        </div>
+                        
+                        <div id="rejectForm${article.id}" style="display: none; margin-top: 15px;">
+                            <textarea class="feedback-input" placeholder="Explique por que está rejeitando este artigo (opcional)..." id="feedback${article.id}"></textarea>
+                            <div style="margin-top: 10px; display: flex; gap: 10px;">
+                                <button class="review-btn reject" onclick="rejectArticle(${article.id})">
+                                    Confirmar Rejeição
+                                </button>
+                                <button class="review-btn" style="background: var(--bg-primary);" onclick="hideRejectForm(${article.id})">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = articlesHTML;
+        }
+        
+        async function approveArticle(articleId) {
+            if (!confirm('Tem certeza que deseja aprovar este artigo?')) {
+                return;
+            }
+            
+            showNotification('✅ Aprovando', 'Aprovando artigo...');
+            
+            try {
+                const response = await fetch(`/review/${articleId}/approve`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        comment: "Artigo aprovado pela interface web",
+                        reviewer: "Sistema Web"
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('🎉 Aprovado!', 'Artigo aprovado com sucesso!');
+                    await loadArticles('all'); // Recarregar lista
+                    loadStats(); // Atualizar estatísticas
+                } else {
+                    showNotification('❌ Falha na Aprovação', data.message || 'Erro ao aprovar artigo.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao aprovar: ' + error.message, 'error');
+            }
+        }
+        
+        function showRejectForm(articleId) {
+            document.getElementById(`rejectForm${articleId}`).style.display = 'block';
+        }
+        
+        function hideRejectForm(articleId) {
+            document.getElementById(`rejectForm${articleId}`).style.display = 'none';
+        }
+        
+        async function rejectArticle(articleId) {
+            const feedback = document.getElementById(`feedback${articleId}`).value.trim();
+            
+            showNotification('❌ Rejeitando', 'Rejeitando artigo...');
+            
+            try {
+                const response = await fetch(`/review/${articleId}/reject`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        comment: feedback || 'Artigo rejeitado sem feedback específico.',
+                        reviewer: "Sistema Web"
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('📝 Rejeitado', 'Artigo rejeitado. Feedback salvo.');
+                    await loadArticles('all'); // Recarregar lista
+                    loadStats(); // Atualizar estatísticas
+                } else {
+                    showNotification('❌ Falha na Rejeição', data.message || 'Erro ao rejeitar artigo.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao rejeitar: ' + error.message, 'error');
+            }
+        }
+        
+        function editArticle(articleId) {
+            // Buscar dados do artigo para edição
+            fetch(`/review/${articleId}`)
+                .then(response => response.json())
+                .then(article => {
+                    if (article) {
+                        showEditModal(article);
+                    } else {
+                        showNotification('❌ Erro', 'Artigo não encontrado para edição.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar artigo:', error);
+                    showNotification('❌ Erro', 'Erro ao carregar artigo para edição.', 'error');
+                });
+        }
+        
+        function showEditModal(article) {
+            // Criar modal de edição
+            const modal = document.createElement('div');
+            modal.id = 'editModal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+                padding: 20px;
+                box-sizing: border-box;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: var(--bg-secondary);
+                    border-radius: 15px;
+                    width: 100%;
+                    max-width: 800px;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    padding: 30px;
+                    position: relative;
+                ">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="color: var(--text-primary); margin: 0;">✏️ Editar Artigo</h2>
+                        <button onclick="closeEditModal()" style="
+                            background: var(--danger);
+                            color: white;
+                            border: none;
+                            border-radius: 50%;
+                            width: 40px;
+                            height: 40px;
+                            cursor: pointer;
+                            font-size: 18px;
+                        ">×</button>
+                    </div>
+                    
+                    <form id="editForm" onsubmit="saveArticle(event, ${article.id})">
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">Título:</label>
+                            <input type="text" id="editTitle" value="${(article.titulo || '').replace(/"/g, '&quot;')}" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: var(--bg-primary);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                color: var(--text-primary);
+                                font-size: 16px;
+                            " required>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">Slug (URL):</label>
+                            <input type="text" id="editSlug" value="${(article.slug || '').replace(/"/g, '&quot;')}" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: var(--bg-primary);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                color: var(--text-primary);
+                                font-size: 16px;
+                            ">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">Meta Descrição:</label>
+                            <textarea id="editMetaDescription" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: var(--bg-primary);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                color: var(--text-primary);
+                                font-size: 14px;
+                                min-height: 80px;
+                                resize: vertical;
+                            " maxlength="160">${(article.meta_descricao || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                                <span id="metaCharCount">${(article.meta_descricao || '').length}</span>/160 caracteres
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">Conteúdo:</label>
+                            <textarea id="editContent" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: var(--bg-primary);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                color: var(--text-primary);
+                                font-size: 14px;
+                                min-height: 300px;
+                                resize: vertical;
+                                line-height: 1.6;
+                            " required>${(article.conteudo || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                                <span id="contentWordCount">${article.conteudo ? article.conteudo.split(' ').length : 0}</span> palavras
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">Tags (separadas por vírgula):</label>
+                            <input type="text" id="editTags" value="${Array.isArray(article.tags) ? article.tags.join(', ') : (article.tags || '').replace(/"/g, '&quot;')}" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: var(--bg-primary);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                color: var(--text-primary);
+                                font-size: 14px;
+                            ">
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: block; color: var(--text-primary); margin-bottom: 8px; font-weight: 600;">Comentário da Edição:</label>
+                            <textarea id="editComment" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: var(--bg-primary);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                color: var(--text-primary);
+                                font-size: 14px;
+                                min-height: 80px;
+                                resize: vertical;
+                            " placeholder="Descreva as alterações realizadas..."></textarea>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; justify-content: flex-end;">
+                            <button type="button" onclick="closeEditModal()" style="
+                                padding: 12px 24px;
+                                background: var(--bg-primary);
+                                color: var(--text-secondary);
+                                border: 1px solid var(--border);
+                                border-radius: 8px;
+                                cursor: pointer;
+                                font-weight: 600;
+                            ">Cancelar</button>
+                            
+                            <button type="submit" style="
+                                padding: 12px 24px;
+                                background: var(--success);
+                                color: white;
+                                border: none;
+                                border-radius: 8px;
+                                cursor: pointer;
+                                font-weight: 600;
+                            ">💾 Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Adicionar contadores em tempo real
+            setupEditCounters();
+            
+            // Focar no título
+            document.getElementById('editTitle').focus();
+        }
+        
+        function setupEditCounters() {
+            const metaInput = document.getElementById('editMetaDescription');
+            const contentInput = document.getElementById('editContent');
+            const metaCounter = document.getElementById('metaCharCount');
+            const wordCounter = document.getElementById('contentWordCount');
+            
+            metaInput.addEventListener('input', function() {
+                metaCounter.textContent = this.value.length;
+                if (this.value.length > 160) {
+                    metaCounter.style.color = 'var(--danger)';
+                } else {
+                    metaCounter.style.color = 'var(--text-secondary)';
+                }
+            });
+            
+            contentInput.addEventListener('input', function() {
+                const words = this.value.trim() ? this.value.trim().split(/\s+/).length : 0;
+                wordCounter.textContent = words;
+            });
+        }
+        
+        function closeEditModal() {
+            const modal = document.getElementById('editModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        async function saveArticle(event, articleId) {
+            event.preventDefault();
+            
+            const title = document.getElementById('editTitle').value.trim();
+            const slug = document.getElementById('editSlug').value.trim();
+            const metaDescription = document.getElementById('editMetaDescription').value.trim();
+            const content = document.getElementById('editContent').value.trim();
+            const tags = document.getElementById('editTags').value.trim();
+            const comment = document.getElementById('editComment').value.trim();
+            
+            if (!title || !content) {
+                showNotification('⚠️ Campos Obrigatórios', 'Título e conteúdo são obrigatórios.', 'warning');
+                return;
+            }
+            
+            const updateData = {
+                titulo: title,
+                slug: slug,
+                meta_descricao: metaDescription,
+                conteudo: content,
+                tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+                comentario_revisor: comment || 'Artigo editado via interface web'
+            };
+            
+            showNotification('💾 Salvando', 'Salvando alterações...');
+            
+            try {
+                const response = await fetch(`/review/${articleId}/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updateData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Salvo!', 'Artigo atualizado com sucesso!');
+                    closeEditModal();
+                    await loadArticles('all'); // Recarregar lista
+                } else {
+                    showNotification('❌ Erro ao Salvar', data.message || 'Erro ao atualizar artigo.', 'error');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao salvar:', error);
+                showNotification('❌ Erro', 'Erro ao salvar: ' + error.message, 'error');
+            }
+        }
+
+        function viewStats() {
+            showNotification('📊 Estatísticas', 'Visualizando estatísticas na tela principal.');
+            // As estatísticas já estão visíveis na tela principal
+        }
+
+        // Funções de publicação para artigos aprovados
+        async function publishAllApproved() {
+            const approvedArticles = allArticles.filter(article => article.status === 'aprovado');
+            
+            if (approvedArticles.length === 0) {
+                showNotification('⚠️ Nenhum Artigo', 'Não há artigos aprovados para publicar.', 'warning');
+                return;
+            }
+            
+            if (!confirm(`Tem certeza que deseja publicar ${approvedArticles.length} artigo(s) aprovado(s)?`)) {
+                return;
+            }
+            
+            showNotification('🚀 Publicando', `Publicando ${approvedArticles.length} artigos...`);
+            
+            let publishedCount = 0;
+            let errorCount = 0;
+            
+            for (const article of approvedArticles) {
+                try {
+                    const response = await fetch('/publisher/publish', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            article_id: article.id,
+                            publish_immediately: true
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        publishedCount++;
+                        // Marcar como publicado na API
+                        await fetch(`/review/${article.id}/update`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                comentario_revisor: `Publicado em: ${data.wordpress_url || 'WordPress'}`
+                            })
+                        });
+                    } else {
+                        errorCount++;
+                    }
+                } catch (error) {
+                    console.error(`Erro ao publicar artigo ${article.id}:`, error);
+                    errorCount++;
+                }
+            }
+            
+            if (publishedCount > 0) {
+                showNotification('🎉 Publicação Concluída!', 
+                    `${publishedCount} artigo(s) publicado(s) com sucesso! ${errorCount > 0 ? `${errorCount} erro(s).` : ''}`, 
+                    errorCount > 0 ? 'warning' : 'success'
+                );
+                
+                // Recarregar lista e stats
+                await loadArticles('all');
+                loadStats();
+            } else {
+                showNotification('❌ Falha na Publicação', 'Nenhum artigo foi publicado. Verifique a configuração do WordPress.', 'error');
+            }
+        }
+        
+        async function publishSingleArticle(articleId) {
+            if (!confirm('Tem certeza que deseja publicar este artigo?')) {
+                return;
+            }
+            
+            showNotification('🚀 Publicando', 'Publicando artigo...');
+            
+            try {
+                const response = await fetch('/publisher/publish', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        article_id: articleId,
+                        publish_immediately: true
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('🎉 Publicado!', 'Artigo publicado com sucesso no WordPress!');
+                    
+                    // Marcar como publicado
+                    await fetch(`/review/${articleId}/update`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            comentario_revisor: `Publicado em: ${data.wordpress_url || 'WordPress'}`
+                        })
+                    });
+                    
+                    // Recarregar lista
+                    await loadArticles('all');
+                    loadStats();
+                } else {
+                    showNotification('❌ Falha na Publicação', data.message || 'Erro ao publicar artigo.', 'error');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao publicar:', error);
+                showNotification('❌ Erro', 'Erro ao publicar: ' + error.message, 'error');
+            }
+        }
+        
+        function showPublishOptions() {
+            showNotification('⚙️ Opções de Publicação', 'Acesse /interface/publisher para configurações avançadas de publicação.');
+            setTimeout(() => {
+                window.open('/interface/publisher', '_blank');
+            }, 2000);
+        }
+
+        // Carregar artigos pendentes por padrão
+        setTimeout(() => {
+            loadArticles('all');
+        }, 1000);
+    </script>
+</body>
+</html> 

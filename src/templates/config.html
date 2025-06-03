@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚙️ Configurações - Sistema SEO</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --accent-blue: #007aff;
+            --accent-green: #34c759;
+            --accent-orange: #ff9500;
+            --accent-red: #ff3b30;
+            --accent-purple: #af52de;
+            --border-color: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            animation: backgroundFlow 30s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundFlow {
+            0%, 100% { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%); }
+            50% { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+            background: var(--bg-secondary);
+            padding: 5px;
+            border-radius: 16px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .tab-btn:hover::before {
+            left: 100%;
+        }
+        
+        .tab-btn.active {
+            background: var(--glass-bg);
+            color: var(--accent-blue);
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+        }
+        
+        .tab-btn:hover {
+            color: var(--accent-blue);
+        }
+        
+        .tab-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+        }
+        
+        .form-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'SF Mono', Consolas, Monaco, monospace;
+            line-height: 1.6;
+        }
+        
+        .form-group small {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: 1px solid var(--accent-blue);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent-green), #30a46c);
+            color: white;
+            border: 1px solid var(--accent-green);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--accent-red), #d70015);
+            color: white;
+            border: 1px solid var(--accent-red);
+        }
+        
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.8rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .url-list, .template-list {
+            margin-top: 20px;
+        }
+        
+        .url-item, .template-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .url-item:hover, .template-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-blue);
+        }
+        
+        .url-info, .template-info {
+            flex: 1;
+        }
+        
+        .url-info h4, .template-info h4 {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .url-info p, .template-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px 15px; }
+            .header { padding: 20px; }
+            .tab-content { padding: 20px; }
+            .nav-tabs { flex-direction: column; }
+            .floating-nav {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚙️ Configurações do Sistema</h1>
+            <p>Gerencie todas as configurações do sistema de geração de conteúdo SEO</p>
+            <div class="action-buttons">
+                <a href="/" class="btn btn-secondary">🏠 Dashboard</a>
+                <button onclick="exportConfig()" class="btn btn-primary">📥 Exportar</button>
+                <button onclick="createBackup()" class="btn btn-success">💾 Backup</button>
+            </div>
+        </div>
+
+        <!-- Navegação por abas -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('urls')">📂 URLs Monitoradas</button>
+            <button class="tab-btn" onclick="showTab('ai')">🤖 IA e SEO</button>
+            <button class="tab-btn" onclick="showTab('wordpress')">🌐 WordPress</button>
+            <button class="tab-btn" onclick="showTab('templates')">📝 Templates</button>
+            <button class="tab-btn" onclick="showTab('system')">⚙️ Sistema</button>
+        </div>
+
+        <!-- Aba URLs Monitoradas -->
+        <div id="urls-tab" class="tab-content active">
+            <h2>📂 URLs Monitoradas</h2>
+            
+            <div class="form-section">
+                <h3>Adicionar Nova URL</h3>
+                <form id="add-url-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Categoria:</label>
+                            <input type="text" id="url-category" placeholder="Ex: impressoras">
+                        </div>
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <input type="text" id="url-name" placeholder="Ex: Impressoras Creative Cópias">
+                        </div>
+                        <div class="form-group">
+                            <label>URL:</label>
+                            <input type="url" id="url-address" placeholder="https://exemplo.com/categoria">
+                        </div>
+                        <div class="form-group">
+                            <label>Prioridade (1-10):</label>
+                            <input type="number" id="url-priority" min="1" max="10" value="5">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">➕ Adicionar URL</button>
+                </form>
+            </div>
+
+            <div class="url-list" id="urls-list">
+                <div class="loading">Carregando URLs...</div>
+            </div>
+        </div>
+
+        <!-- Aba IA e SEO -->
+        <div id="ai-tab" class="tab-content">
+            <h2>🤖 Configurações de IA e SEO</h2>
+            
+            <form id="ai-config-form">
+                <div class="form-section">
+                    <h3>OpenAI</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Modelo:</label>
+                            <select id="openai-model">
+                                <option value="gpt-4">GPT-4</option>
+                                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Temperatura (0.0-1.0):</label>
+                            <input type="number" id="temperature" step="0.1" min="0" max="1" value="0.7">
+                            <small>Criatividade da IA</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Max Tokens:</label>
+                            <input type="number" id="max-tokens" value="2000">
+                        </div>
+                        <div class="form-group">
+                            <label>Tom de Voz:</label>
+                            <select id="tone">
+                                <option value="profissional">Profissional</option>
+                                <option value="amigável">Amigável</option>
+                                <option value="vendedor">Vendedor</option>
+                                <option value="técnico">Técnico</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Prompt Base:</label>
+                        <textarea id="base-prompt" rows="4" placeholder="Prompt padrão para geração de conteúdo..."></textarea>
+                        <small>Prompt base usado para todas as gerações</small>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>SEO</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Max Caracteres Título:</label>
+                            <input type="number" id="title-max-length" value="60">
+                        </div>
+                        <div class="form-group">
+                            <label>Max Caracteres Meta Description:</label>
+                            <input type="number" id="meta-max-length" value="160">
+                        </div>
+                        <div class="form-group">
+                            <label>Keywords por Artigo:</label>
+                            <input type="number" id="keywords-per-article" value="10">
+                        </div>
+                        <div class="form-group">
+                            <label>Densidade Keyword (%):</label>
+                            <input type="number" id="keyword-density" step="0.1" value="2.5">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">💾 Salvar Configurações</button>
+            </form>
+        </div>
+
+        <!-- Aba WordPress -->
+        <div id="wordpress-tab" class="tab-content">
+            <h2>🌐 Configurações do WordPress</h2>
+            
+            <form id="wordpress-config-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>URL do Site:</label>
+                        <input type="url" id="wp-site-url" placeholder="https://meusite.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Usuário da API:</label>
+                        <input type="text" id="wp-username" placeholder="admin">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha/Token da API:</label>
+                        <input type="password" id="wp-password" placeholder="senha ou app password">
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria Padrão:</label>
+                        <input type="number" id="wp-default-category" value="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="wp-auto-publish"> 
+                        Publicar automaticamente após aprovação
+                    </label>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">💾 Salvar</button>
+                    <button type="button" onclick="testWordPress()" class="btn btn-success">🧪 Testar Conexão</button>
+                </div>
+
+                <div id="wp-test-result" class="test-result"></div>
+            </form>
+        </div>
+
+        <!-- Aba Templates -->
+        <div id="templates-tab" class="tab-content">
+            <h2>📝 Templates de Conteúdo</h2>
+            
+            <div class="form-section">
+                <h3>Adicionar Novo Template</h3>
+                <form id="add-template-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nome do Template:</label>
+                            <input type="text" id="template-name" placeholder="Ex: impressora_laser">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Produto:</label>
+                            <input type="text" id="product-type" placeholder="Ex: impressora">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Template do Título:</label>
+                        <input type="text" id="title-template" placeholder="{nome}: {marca} - Descrição">
+                        <small>Use {nome}, {marca}, {modelo} como variáveis</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Template do Conteúdo:</label>
+                        <textarea id="content-template" rows="6" placeholder="Template do artigo..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Template Meta Description:</label>
+                        <input type="text" id="meta-template" placeholder="Descrição do {nome} da {marca}...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Template Keywords:</label>
+                        <input type="text" id="keywords-template" placeholder="{tipo}, {marca}, {modelo}">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">➕ Adicionar Template</button>
+                </form>
+            </div>
+
+            <div class="template-list" id="templates-list">
+                <div class="loading">Carregando templates...</div>
+            </div>
+        </div>
+
+        <!-- Aba Sistema -->
+        <div id="system-tab" class="tab-content">
+            <h2>⚙️ Configurações do Sistema</h2>
+            
+            <div class="stats-grid" id="system-stats">
+                <div class="loading">Carregando estatísticas...</div>
+            </div>
+
+            <form id="system-config-form">
+                <div class="form-section">
+                    <h3>Configurações Gerais</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nível de Log:</label>
+                            <select id="log-level">
+                                <option value="DEBUG">Debug</option>
+                                <option value="INFO">Info</option>
+                                <option value="WARNING">Warning</option>
+                                <option value="ERROR">Error</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Max Artigos por Dia:</label>
+                            <input type="number" id="max-articles-day" value="50">
+                        </div>
+                        <div class="form-group">
+                            <label>Retenção de Backup (dias):</label>
+                            <input type="number" id="backup-retention" value="30">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Backup e Restauração</h3>
+                    <div class="action-buttons">
+                        <button type="button" onclick="createBackup()" class="btn btn-success">💾 Criar Backup</button>
+                        <button type="button" onclick="exportConfig()" class="btn btn-primary">📥 Exportar Config</button>
+                        <label class="btn btn-secondary">
+                            📤 Importar Config
+                            <input type="file" accept=".json" onchange="importConfig(this)" style="display: none;">
+                        </label>
+                        <button type="button" onclick="resetAllConfigs()" class="btn btn-danger">🔄 Reset Geral</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">💾 Salvar Configurações</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Estado global
+        let currentTab = 'urls';
+        let configs = {};
+        let urls = [];
+        let templates = [];
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Forms
+            document.getElementById('add-url-form').addEventListener('submit', addURL);
+            document.getElementById('ai-config-form').addEventListener('submit', saveAIConfig);
+            document.getElementById('wordpress-config-form').addEventListener('submit', saveWordPressConfig);
+            document.getElementById('add-template-form').addEventListener('submit', addTemplate);
+            document.getElementById('system-config-form').addEventListener('submit', saveSystemConfig);
+        }
+
+        // Navegação por abas
+        function showTab(tabName) {
+            // Esconder todas as abas
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar aba selecionada
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            currentTab = tabName;
+            
+            // Carregar dados específicos da aba
+            if (tabName === 'urls') loadURLs();
+            else if (tabName === 'ai') loadAIConfig();
+            else if (tabName === 'wordpress') loadWordPressConfig();
+            else if (tabName === 'templates') loadTemplates();
+            else if (tabName === 'system') loadSystemStats();
+        }
+
+        // Carregamento de dados
+        async function loadAllData() {
+            try {
+                const response = await fetch('/config/data');
+                const data = await response.json();
+                
+                configs = data.configurations || {};
+                urls = data.monitored_urls || [];
+                templates = data.content_templates || [];
+                
+                // Carregar dados na aba atual
+                if (currentTab === 'urls') loadURLs();
+                else if (currentTab === 'ai') loadAIConfig();
+                else if (currentTab === 'wordpress') loadWordPressConfig();
+                else if (currentTab === 'templates') loadTemplates();
+                else if (currentTab === 'system') loadSystemStats();
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                showAlert('Erro ao carregar configurações', 'error');
+            }
+        }
+
+        function loadURLs() {
+            const container = document.getElementById('urls-list');
+            
+            if (urls.length === 0) {
+                container.innerHTML = '<p>Nenhuma URL configurada.</p>';
+                return;
+            }
+            
+            const html = urls.map(url => `
+                <div class="url-item">
+                    <div class="url-info">
+                        <h4>${url.name}</h4>
+                        <p><strong>Categoria:</strong> ${url.category}</p>
+                        <p><strong>URL:</strong> <a href="${url.url}" target="_blank">${url.url}</a></p>
+                        <p><strong>Prioridade:</strong> ${url.priority}/10</p>
+                        ${url.last_scraped ? `<p><strong>Último scraping:</strong> ${new Date(url.last_scraped).toLocaleString()}</p>` : ''}
+                    </div>
+                    <div class="item-actions">
+                        <span class="status-indicator ${url.active ? 'status-active' : 'status-inactive'}">
+                            ${url.active ? 'Ativo' : 'Inativo'}
+                        </span>
+                        <button onclick="removeURL(${url.id})" class="btn btn-danger btn-small">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = html;
+        }
+
+        function loadAIConfig() {
+            const generator = configs.generator || {};
+            const seo = configs.seo || {};
+            
+            document.getElementById('openai-model').value = generator.openai_model?.value || 'gpt-4';
+            document.getElementById('temperature').value = generator.temperature?.value || '0.7';
+            document.getElementById('max-tokens').value = generator.max_tokens?.value || '2000';
+            document.getElementById('tone').value = generator.tone?.value || 'profissional';
+            document.getElementById('base-prompt').value = generator.base_prompt?.value || '';
+            
+            document.getElementById('title-max-length').value = seo.meta_title_max_length?.value || '60';
+            document.getElementById('meta-max-length').value = seo.meta_description_max_length?.value || '160';
+            document.getElementById('keywords-per-article').value = seo.keywords_per_article?.value || '10';
+            document.getElementById('keyword-density').value = seo.focus_keyword_density?.value || '2.5';
+        }
+
+        function loadWordPressConfig() {
+            const wp = configs.wordpress || {};
+            
+            document.getElementById('wp-site-url').value = wp.site_url?.value || '';
+            document.getElementById('wp-username').value = wp.api_username?.value || '';
+            document.getElementById('wp-password').value = wp.api_password?.value || '';
+            document.getElementById('wp-default-category').value = wp.default_category?.value || '1';
+            document.getElementById('wp-auto-publish').checked = wp.auto_publish?.value === 'true';
+        }
+
+        function loadTemplates() {
+            const container = document.getElementById('templates-list');
+            
+            if (templates.length === 0) {
+                container.innerHTML = '<p>Nenhum template configurado.</p>';
+                return;
+            }
+            
+            const html = templates.map(template => `
+                <div class="template-item">
+                    <div class="template-info">
+                        <h4>${template.template_name}</h4>
+                        <p><strong>Tipo:</strong> ${template.product_type}</p>
+                        <p><strong>Título:</strong> ${template.title_template}</p>
+                        <p><strong>Meta:</strong> ${template.meta_description_template || 'N/A'}</p>
+                    </div>
+                    <div class="item-actions">
+                        <span class="status-indicator ${template.active ? 'status-active' : 'status-inactive'}">
+                            ${template.active ? 'Ativo' : 'Inativo'}
+                        </span>
+                        <button onclick="editTemplate(${template.id})" class="btn btn-primary btn-small">✏️</button>
+                        <button onclick="removeTemplate(${template.id})" class="btn btn-danger btn-small">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = html;
+        }
+
+        async function loadSystemStats() {
+            try {
+                const response = await fetch('/config/stats');
+                const stats = await response.json();
+                
+                const container = document.getElementById('system-stats');
+                container.innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-number">${Object.keys(configs).length}</div>
+                        <div class="stat-label">Seções de Config</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${urls.length}</div>
+                        <div class="stat-label">URLs Monitoradas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${templates.length}</div>
+                        <div class="stat-label">Templates</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">${stats.total_backups || 0}</div>
+                        <div class="stat-label">Backups</div>
+                    </div>
+                `;
+                
+                // Carregar configurações do sistema
+                const system = configs.system || {};
+                document.getElementById('log-level').value = system.log_level?.value || 'INFO';
+                document.getElementById('max-articles-day').value = system.max_articles_per_day?.value || '50';
+                document.getElementById('backup-retention').value = system.backup_retention_days?.value || '30';
+                
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+
+        // Funções de ação
+        async function addURL(event) {
+            event.preventDefault();
+            
+            const data = {
+                category: document.getElementById('url-category').value,
+                name: document.getElementById('url-name').value,
+                url: document.getElementById('url-address').value,
+                priority: parseInt(document.getElementById('url-priority').value)
+            };
+            
+            try {
+                const response = await fetch('/config/urls/add', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    showAlert('URL adicionada com sucesso!', 'success');
+                    document.getElementById('add-url-form').reset();
+                    loadAllData();
+                } else {
+                    showAlert('Erro ao adicionar URL', 'error');
+                }
+            } catch (error) {
+                showAlert('Erro na requisição', 'error');
+            }
+        }
+
+        async function removeURL(urlId) {
+            if (!confirm('Deseja remover esta URL?')) return;
+            
+            try {
+                const response = await fetch(`/config/urls/${urlId}`, {method: 'DELETE'});
+                if (response.ok) {
+                    showAlert('URL removida!', 'success');
+                    loadAllData();
+                }
+            } catch (error) {
+                showAlert('Erro ao remover URL', 'error');
+            }
+        }
+
+        async function saveAIConfig(event) {
+            event.preventDefault();
+            
+            const data = {
+                generator: {
+                    openai_model: {value: document.getElementById('openai-model').value, type: 'string'},
+                    temperature: {value: document.getElementById('temperature').value, type: 'float'},
+                    max_tokens: {value: document.getElementById('max-tokens').value, type: 'integer'},
+                    tone: {value: document.getElementById('tone').value, type: 'string'},
+                    base_prompt: {value: document.getElementById('base-prompt').value, type: 'text'}
+                },
+                seo: {
+                    meta_title_max_length: {value: document.getElementById('title-max-length').value, type: 'integer'},
+                    meta_description_max_length: {value: document.getElementById('meta-max-length').value, type: 'integer'},
+                    keywords_per_article: {value: document.getElementById('keywords-per-article').value, type: 'integer'},
+                    focus_keyword_density: {value: document.getElementById('keyword-density').value, type: 'float'}
+                }
+            };
+            
+            await saveConfig(data);
+        }
+
+        async function saveWordPressConfig(event) {
+            event.preventDefault();
+            
+            const data = {
+                wordpress: {
+                    site_url: {value: document.getElementById('wp-site-url').value, type: 'string'},
+                    api_username: {value: document.getElementById('wp-username').value, type: 'string'},
+                    api_password: {value: document.getElementById('wp-password').value, type: 'password'},
+                    default_category: {value: document.getElementById('wp-default-category').value, type: 'integer'},
+                    auto_publish: {value: document.getElementById('wp-auto-publish').checked.toString(), type: 'boolean'}
+                }
+            };
+            
+            await saveConfig(data);
+        }
+
+        async function saveSystemConfig(event) {
+            event.preventDefault();
+            
+            const data = {
+                system: {
+                    log_level: {value: document.getElementById('log-level').value, type: 'string'},
+                    max_articles_per_day: {value: document.getElementById('max-articles-day').value, type: 'integer'},
+                    backup_retention_days: {value: document.getElementById('backup-retention').value, type: 'integer'}
+                }
+            };
+            
+            await saveConfig(data);
+        }
+
+        async function saveConfig(data) {
+            try {
+                const response = await fetch('/config/update', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        configurations: data
+                    })
+                });
+                
+                if (response.ok) {
+                    showAlert('Configurações salvas!', 'success');
+                    loadAllData();
+                } else {
+                    const errorData = await response.json();
+                    showAlert(`Erro ao salvar: ${errorData.detail || 'Erro desconhecido'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao salvar configurações:', error);
+                showAlert('Erro na requisição', 'error');
+            }
+        }
+
+        async function testWordPress() {
+            const testResult = document.getElementById('wp-test-result');
+            testResult.style.display = 'block';
+            testResult.className = 'test-result loading';
+            testResult.innerHTML = 'Testando conexão...';
+            
+            try {
+                const response = await fetch('/publisher/test', {method: 'POST'});
+                const result = await response.json();
+                
+                if (result.success) {
+                    testResult.className = 'test-result test-success';
+                    testResult.innerHTML = '✅ Conexão bem-sucedida!';
+                } else {
+                    testResult.className = 'test-result test-error';
+                    testResult.innerHTML = '❌ Erro: ' + result.message;
+                }
+            } catch (error) {
+                testResult.className = 'test-result test-error';
+                testResult.innerHTML = '❌ Erro na conexão';
+            }
+        }
+
+        async function exportConfig() {
+            try {
+                const response = await fetch('/config/export');
+                const data = await response.json();
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `config_${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                showAlert('Configurações exportadas!', 'success');
+            } catch (error) {
+                showAlert('Erro ao exportar', 'error');
+            }
+        }
+
+        async function createBackup() {
+            try {
+                const response = await fetch('/config/backup', {method: 'POST'});
+                const result = await response.json();
+                
+                if (result.success) {
+                    showAlert(`Backup criado: ${result.backup_name}`, 'success');
+                } else {
+                    showAlert('Erro ao criar backup', 'error');
+                }
+            } catch (error) {
+                showAlert('Erro na criação do backup', 'error');
+            }
+        }
+
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = message;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(alert, container.firstChild);
+            
+            setTimeout(() => alert.remove(), 5000);
+        }
+    </script>
+</body>
+</html> 

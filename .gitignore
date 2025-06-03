@@ -1,0 +1,141 @@
+# Git Ignore para Creative API - Sistema de Geração de Conteúdo SEO
+
+# Arquivos de ambiente e configuração sensível
+.env
+config.env
+*.env
+!config_example.env
+
+# Chaves de API e senhas
+api_keys.py
+secrets.py
+passwords.txt
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribuição / build
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testes
+.tox/
+.nox/
+.coverage
+.pytest_cache/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+railway_test_env/
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs específicos do projeto
+logs/*.log
+logs/*.txt
+*.log
+
+# Arquivos temporários
+temp/
+tmp/
+cache/
+.cache/
+
+# Bancos de dados de desenvolvimento (mantém estrutura)
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+!data/review_articles.db
+!data/scraping_data.db
+
+# Arquivos de backup
+backup/
+*.bak
+*.backup
+
+# Arquivos de teste e debug
+test_*.py
+debug_*.py
+check_*.py
+inspect_*.py
+verificar_*.py
+corrigir_*.py
+fix_*.py
+reset_*.py
+final_*.py
+
+# Documentação gerada
+docs/_build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Sistema de chat/conversa
+chat.md
+CONVERSA.md
+conversation.md
+
+# Arquivos específicos Railway (já configurados)
+Procfile
+
+# Node modules (se houver frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Requirements backups
+requirements_*.txt
+!requirements.txt 

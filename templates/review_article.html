@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Revisão de Artigo - SEO Content Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --accent-blue: #007aff;
+            --accent-green: #34c759;
+            --accent-orange: #ff9500;
+            --accent-red: #ff3b30;
+            --accent-purple: #af52de;
+            --border-color: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --editor-bg: rgba(255, 255, 255, 0.03);
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            animation: backgroundFlow 25s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundFlow {
+            0%, 100% { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%); }
+            33% { background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #2a2a2a 100%); }
+            66% { background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .header-info h1 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+        }
+        
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-pendente {
+            background: rgba(255, 149, 0, 0.2);
+            color: var(--accent-orange);
+            border-color: rgba(255, 149, 0, 0.3);
+        }
+        
+        .status-aprovado {
+            background: rgba(52, 199, 89, 0.2);
+            color: var(--accent-green);
+            border-color: rgba(52, 199, 89, 0.3);
+        }
+        
+        .status-rejeitado {
+            background: rgba(255, 59, 48, 0.2);
+            color: var(--accent-red);
+            border-color: rgba(255, 59, 48, 0.3);
+        }
+        
+        .status-publicado {
+            background: rgba(175, 82, 222, 0.2);
+            color: var(--accent-purple);
+            border-color: rgba(175, 82, 222, 0.3);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .tabs-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .tabs {
+            display: flex;
+            background: var(--bg-secondary);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 16px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .tab:hover::before {
+            left: 100%;
+        }
+        
+        .tab.active {
+            background: var(--glass-bg);
+            border-bottom-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+        
+        .tab:hover {
+            background: var(--glass-bg);
+            color: var(--accent-blue);
+        }
+        
+        .tab-content {
+            padding: 30px;
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-grid {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--editor-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .content-editor {
+            min-height: 400px;
+            font-family: 'SF Mono', Consolas, Monaco, monospace;
+            line-height: 1.8;
+        }
+        
+        .char-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+        
+        .char-counter.warning {
+            color: var(--accent-orange);
+        }
+        
+        .char-counter.error {
+            color: var(--accent-red);
+        }
+        
+        .seo-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .metric-good { color: var(--accent-green); }
+        .metric-warning { color: var(--accent-orange); }
+        .metric-bad { color: var(--accent-red); }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .tags-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 15px;
+            background: var(--editor-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            min-height: 60px;
+            align-items: flex-start;
+            cursor: text;
+            transition: all 0.3s ease;
+        }
+        
+        .tags-input:focus-within {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 122, 255, 0.2);
+            color: var(--accent-blue);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .tag-remove {
+            cursor: pointer;
+            font-weight: bold;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+        
+        .tag-remove:hover {
+            opacity: 1;
+        }
+        
+        .tag-input {
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 6px;
+            outline: none;
+            flex: 1;
+            min-width: 100px;
+        }
+        
+        .preview-content {
+            background: var(--editor-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .preview-content h1,
+        .preview-content h2,
+        .preview-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        
+        .preview-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .preview-content ul,
+        .preview-content ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        
+        .actions-bar {
+            position: sticky;
+            bottom: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .action-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .action-btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: 1px solid var(--accent-blue);
+        }
+        
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent-green), #30a46c);
+            color: white;
+            border: 1px solid var(--accent-green);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--accent-red), #d70015);
+            color: white;
+            border: 1px solid var(--accent-red);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .floating-nav {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+            
+            .actions-bar {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .floating-nav {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 20px;
+            }
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--glass-border);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="floating-nav">
+        <a href="/review/list" class="nav-btn" title="Voltar à Lista">←</a>
+        <a href="/" class="nav-btn" title="Dashboard">🏠</a>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-info">
+                <h1>{{ article.titulo or 'Artigo sem título' }}</h1>
+                <div class="header-meta">
+                    <span>📅 {{ article.data_criacao.strftime('%d/%m/%Y %H:%M') if article.data_criacao else 'Data não informada' }}</span>
+                    {% if article.revisor %}
+                    <span>👤 {{ article.revisor }}</span>
+                    {% endif %}
+                    <span>🔗 {{ article.slug or 'Sem slug' }}</span>
+                </div>
+            </div>
+            <div class="status-badge status-{{ article.status or 'pendente' }}">
+                {{ article.status or 'pendente' }}
+            </div>
+        </div>
+        
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('preview')">
+                    👁️ Preview
+                </div>
+                <div class="tab" onclick="switchTab('seo')">
+                    📊 SEO
+                </div>
+                <div class="tab" onclick="switchTab('info')">
+                    ℹ️ Informações
+                </div>
+                {% if is_edit_mode %}
+                <div class="tab" onclick="switchTab('edit')">
+                    ✏️ Editar
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Tab Preview -->
+            <div id="preview-tab" class="tab-content active">
+                <div class="preview-content">
+                    {{ article.conteudo | safe if article.conteudo else '<p>Conteúdo não disponível</p>' }}
+                </div>
+            </div>
+            
+            <!-- Tab SEO -->
+            <div id="seo-tab" class="tab-content">
+                <div class="seo-metrics">
+                    <div class="metric-card">
+                        <div class="metric-value metric-{{ 'good' if article.titulo and len(article.titulo) <= 60 else 'warning' if article.titulo and len(article.titulo) <= 70 else 'bad' }}">
+                            {{ article.titulo|length if article.titulo else 0 }}
+                        </div>
+                        <div class="metric-label">Caracteres do Título (máx 60)</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value metric-{{ 'good' if article.meta_descricao and len(article.meta_descricao) <= 160 else 'warning' if article.meta_descricao and len(article.meta_descricao) <= 170 else 'bad' }}">
+                            {{ article.meta_descricao|length if article.meta_descricao else 0 }}
+                        </div>
+                        <div class="metric-label">Caracteres da Meta (máx 160)</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value metric-{{ 'good' if article.tags and len(article.tags) >= 3 else 'warning' if article.tags and len(article.tags) >= 1 else 'bad' }}">
+                            {{ article.tags|length if article.tags else 0 }}
+                        </div>
+                        <div class="metric-label">Tags (mín 3)</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value metric-{{ 'good' if article.slug else 'bad' }}">
+                            {{ 'OK' if article.slug else 'FALTA' }}
+                        </div>
+                        <div class="metric-label">Slug SEO</div>
+                    </div>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Meta Description</label>
+                        <div style="position: relative;">
+                            <textarea class="form-textarea" readonly>{{ article.meta_descricao or 'Meta description não definida' }}</textarea>
+                            <div class="char-counter {{ 'error' if article.meta_descricao and len(article.meta_descricao) > 160 else 'warning' if article.meta_descricao and len(article.meta_descricao) > 150 else '' }}">
+                                {{ article.meta_descricao|length if article.meta_descricao else 0 }}/160
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Slug SEO</label>
+                        <input type="text" class="form-input" value="{{ article.slug or '' }}" readonly>
+                    </div>
+                    
+                    {% if article.tags %}
+                    <div class="form-group">
+                        <label class="form-label">Tags</label>
+                        <div class="tags-display">
+                            {% for tag in article.tags %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Tab Informações -->
+            <div id="info-tab" class="tab-content">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">ID do Artigo</label>
+                        <input type="text" class="form-input" value="{{ article.id }}" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Data de Criação</label>
+                        <input type="text" class="form-input" value="{{ article.data_criacao.strftime('%d/%m/%Y %H:%M:%S') if article.data_criacao else 'Não informado' }}" readonly>
+                    </div>
+                    
+                    {% if article.revisor %}
+                    <div class="form-group">
+                        <label class="form-label">Revisor</label>
+                        <input type="text" class="form-input" value="{{ article.revisor }}" readonly>
+                    </div>
+                    {% endif %}
+                    
+                    {% if article.comentario_revisor %}
+                    <div class="form-group">
+                        <label class="form-label">Comentário do Revisor</label>
+                        <textarea class="form-textarea" readonly>{{ article.comentario_revisor }}</textarea>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="form-group">
+                        <label class="form-label">Estatísticas</label>
+                        <div class="seo-metrics">
+                            <div class="metric-card">
+                                <div class="metric-value metric-good">{{ article.conteudo.split()|length if article.conteudo else 0 }}</div>
+                                <div class="metric-label">Palavras</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value metric-good">{{ article.conteudo|length if article.conteudo else 0 }}</div>
+                                <div class="metric-label">Caracteres</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value metric-good">{{ article.conteudo.count('<h') if article.conteudo else 0 }}</div>
+                                <div class="metric-label">Títulos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Editar -->
+            {% if is_edit_mode %}
+            <div id="edit-tab" class="tab-content">
+                <form id="edit-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Título do Artigo</label>
+                            <div style="position: relative;">
+                                <input type="text" class="form-input" id="titulo" value="{{ article.titulo or '' }}" 
+                                       onkeyup="updateCharCount('titulo', 60)">
+                                <div class="char-counter" id="titulo-counter">{{ article.titulo|length if article.titulo else 0 }}/60</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Slug SEO</label>
+                            <input type="text" class="form-input" id="slug" value="{{ article.slug or '' }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Meta Description</label>
+                            <div style="position: relative;">
+                                <textarea class="form-textarea" id="meta_descricao" 
+                                          onkeyup="updateCharCount('meta_descricao', 160)">{{ article.meta_descricao or '' }}</textarea>
+                                <div class="char-counter" id="meta_descricao-counter">{{ article.meta_descricao|length if article.meta_descricao else 0 }}/160</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Tags</label>
+                            <div class="tags-input" onclick="focusTagInput()">
+                                <div id="tags-container">
+                                    {% if article.tags %}
+                                        {% for tag in article.tags %}
+                                        <span class="tag">{{ tag }}<span class="tag-remove" onclick="removeTag(this)">×</span></span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <input type="text" class="tag-input" id="tag-input" placeholder="Adicionar tag..." 
+                                       onkeypress="handleTagInput(event)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Conteúdo</label>
+                            <textarea class="form-textarea content-editor" id="conteudo">{{ article.conteudo or '' }}</textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="actions-bar">
+            {% if article.status == 'pendente' %}
+            <button class="action-btn btn-success" onclick="approveArticle()">
+                ✅ Aprovar Artigo
+            </button>
+            <button class="action-btn btn-danger" onclick="rejectArticle()">
+                ❌ Rejeitar Artigo
+            </button>
+            {% endif %}
+            
+            {% if is_edit_mode %}
+            <button class="action-btn btn-primary" onclick="saveChanges()">
+                💾 Salvar Alterações
+            </button>
+            {% else %}
+            <a href="/review/{{ article.id }}/edit" class="action-btn btn-secondary">
+                ✏️ Editar Artigo
+            </a>
+            {% endif %}
+            
+            {% if article.status == 'aprovado' %}
+            <button class="action-btn btn-primary" onclick="publishArticle()">
+                🚀 Publicar no WordPress
+            </button>
+            {% endif %}
+            
+            <a href="/review/list" class="action-btn btn-secondary">
+                📋 Voltar à Lista
+            </a>
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <script>
+        // Sistema de abas
+        function switchTab(tabName) {
+            // Desativar todas as abas
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Ativar aba selecionada
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+        
+        // Contador de caracteres
+        function updateCharCount(fieldId, maxLength) {
+            const field = document.getElementById(fieldId);
+            const counter = document.getElementById(fieldId + '-counter');
+            const currentLength = field.value.length;
+            
+            counter.textContent = `${currentLength}/${maxLength}`;
+            counter.className = 'char-counter';
+            
+            if (currentLength > maxLength) {
+                counter.classList.add('error');
+            } else if (currentLength > maxLength * 0.9) {
+                counter.classList.add('warning');
+            }
+        }
+        
+        // Sistema de tags
+        function focusTagInput() {
+            document.getElementById('tag-input').focus();
+        }
+        
+        function handleTagInput(event) {
+            if (event.key === 'Enter' && event.target.value.trim()) {
+                event.preventDefault();
+                addTag(event.target.value.trim());
+                event.target.value = '';
+            }
+        }
+        
+        function addTag(tagText) {
+            const container = document.getElementById('tags-container');
+            const tag = document.createElement('span');
+            tag.className = 'tag';
+            tag.innerHTML = `${tagText}<span class="tag-remove" onclick="removeTag(this)">×</span>`;
+            container.appendChild(tag);
+        }
+        
+        function removeTag(element) {
+            element.parentElement.remove();
+        }
+        
+        // Funções de ação
+        async function approveArticle() {
+            const comment = prompt('Comentário de aprovação (opcional):');
+            if (comment === null) return;
+            
+            showLoading(true);
+            try {
+                const response = await fetch(`/review/{{ article.id }}/approve`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        comment: comment || '',
+                        reviewer: 'Revisor Web'
+                    })
+                });
+                
+                if (response.ok) {
+                    showNotification('✅ Artigo aprovado com sucesso!', 'success');
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showNotification('❌ Erro ao aprovar artigo', 'error');
+                }
+            } catch (error) {
+                showNotification('❌ Erro de conexão', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function rejectArticle() {
+            const reason = prompt('Motivo da rejeição (obrigatório):');
+            if (!reason) return;
+            
+            showLoading(true);
+            try {
+                const response = await fetch(`/review/{{ article.id }}/reject`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        comment: reason,
+                        reviewer: 'Revisor Web'
+                    })
+                });
+                
+                if (response.ok) {
+                    showNotification('❌ Artigo rejeitado', 'warning');
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showNotification('❌ Erro ao rejeitar artigo', 'error');
+                }
+            } catch (error) {
+                showNotification('❌ Erro de conexão', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function saveChanges() {
+            const formData = {
+                titulo: document.getElementById('titulo').value,
+                slug: document.getElementById('slug').value,
+                meta_descricao: document.getElementById('meta_descricao').value,
+                conteudo: document.getElementById('conteudo').value,
+                tags: Array.from(document.querySelectorAll('#tags-container .tag')).map(tag => tag.textContent.replace('×', '').trim())
+            };
+            
+            showLoading(true);
+            try {
+                const response = await fetch(`/review/{{ article.id }}/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    showNotification('💾 Alterações salvas com sucesso!', 'success');
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showNotification('❌ Erro ao salvar alterações', 'error');
+                }
+            } catch (error) {
+                showNotification('❌ Erro de conexão', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Sistema de notificações
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                border-radius: 12px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                backdrop-filter: blur(20px);
+            `;
+            
+            switch(type) {
+                case 'success':
+                    notification.style.background = 'rgba(52, 199, 89, 0.9)';
+                    break;
+                case 'error':
+                    notification.style.background = 'rgba(255, 59, 48, 0.9)';
+                    break;
+                case 'warning':
+                    notification.style.background = 'rgba(255, 149, 0, 0.9)';
+                    break;
+                default:
+                    notification.style.background = 'rgba(0, 122, 255, 0.9)';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+        
+        function showLoading(show) {
+            const overlay = document.getElementById('loading-overlay');
+            overlay.classList.toggle('active', show);
+        }
+        
+        // Efeito parallax suave
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.2;
+            document.querySelector('.background-animation').style.transform = `translateY(${rate}px)`;
+        });
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atualizar contadores iniciais
+            {% if is_edit_mode %}
+            updateCharCount('titulo', 60);
+            updateCharCount('meta_descricao', 160);
+            {% endif %}
+        });
+    </script>
+</body>
+</html> 
+ 
+ 
+ 
+ 

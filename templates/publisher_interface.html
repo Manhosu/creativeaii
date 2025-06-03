@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📤 Publicar no Blog - Sistema SEO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: #475569;
+            --shadow: rgba(0, 0, 0, 0.25);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .wp-status {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 5px solid var(--warning);
+        }
+        
+        .workflow-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+        
+        .workflow-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .instructions {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .instructions h3 {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ul {
+            color: var(--text-secondary);
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 20px 25px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            flex-direction: column;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.6);
+        }
+        
+        .action-btn.success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .action-btn.success:hover {
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.6);
+        }
+        
+        .action-btn.warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        
+        .action-btn.warning:hover {
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
+        }
+        
+        .action-btn.danger {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+        
+        .action-btn.danger:hover {
+            box-shadow: 0 12px 35px rgba(239, 68, 68, 0.6);
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+        
+        .approved-articles {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .article-item {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .article-info h4 {
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+        
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .publish-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .publish-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 4px solid var(--success);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            border-left-color: var(--danger);
+        }
+        
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--success);
+        }
+        
+        .wp-config-alert {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: var(--warning);
+        }
+        
+        .wp-config-alert h4 {
+            margin-bottom: 10px;
+        }
+        
+        .publications-list {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .publication-item {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--success);
+        }
+        
+        .publication-item.failed {
+            border-left-color: var(--danger);
+        }
+        
+        .publication-item.pending {
+            border-left-color: var(--warning);
+        }
+        
+        .publication-info {
+            flex: 1;
+        }
+        
+        .publication-status {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .status-published {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .status-failed {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .action-buttons { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .article-item { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+        
+        <div class="header">
+            <h1>📤 Publicar no Blog</h1>
+            <p>Publique automaticamente os artigos aprovados no seu WordPress</p>
+        </div>
+        
+        <div class="wp-status">
+            <h3 id="wpStatusTitle">🔗 Verificando WordPress...</h3>
+            <p id="wpStatusMessage">Aguarde enquanto verificamos a conexão com seu blog</p>
+        </div>
+        
+        <div class="workflow-section">
+            <h2 class="workflow-title">🚀 Como Funciona a Publicação</h2>
+            
+            <div class="instructions">
+                <h3>📝 O que este módulo faz:</h3>
+                <ul>
+                    <li>Conecta automaticamente com seu blog WordPress</li>
+                    <li>Publica artigos que foram aprovados na revisão</li>
+                    <li>Mantém formatação, imagens e SEO otimizados</li>
+                    <li>Programa publicações para datas específicas</li>
+                    <li>Monitora status de cada publicação</li>
+                    <li>Permite republicar artigos que falharam</li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn success" onclick="testWordPressConnection()">
+                    🔗 Testar WordPress
+                    <div class="btn-subtitle">Verificar conexão com o blog</div>
+                </button>
+                
+                <button class="action-btn" onclick="loadApprovedArticles()">
+                    📋 Ver Artigos Aprovados
+                    <div class="btn-subtitle">Prontos para publicação</div>
+                </button>
+                
+                <button class="action-btn warning" onclick="viewPublications()">
+                    📊 Publicações Recentes
+                    <div class="btn-subtitle">Histórico de publicações</div>
+                </button>
+                
+                <button class="action-btn danger" onclick="viewStats()">
+                    📈 Estatísticas
+                    <div class="btn-subtitle">Dados de publicação</div>
+                </button>
+            </div>
+            
+            <div class="approved-articles" id="approvedArticles">
+                <h3 style="margin-bottom: 20px; color: var(--success);">📝 Artigos Prontos para Publicar</h3>
+                <div id="articlesList">
+                    <p style="text-align: center; color: var(--text-secondary);">Carregando artigos...</p>
+                </div>
+            </div>
+            
+            <div class="publications-list" id="publicationsList">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">📰 Publicações Recentes</h3>
+                <div id="publicationsContainer">
+                    <p style="text-align: center; color: var(--text-secondary);">Carregando publicações...</p>
+                </div>
+            </div>
+            
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPublications">-</div>
+                    <div class="stat-label">Total de Publicações</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="successfulPublications">-</div>
+                    <div class="stat-label">Publicações Bem-sucedidas</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="failedPublications">-</div>
+                    <div class="stat-label">Publicações Falharam</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="wpStatus">-</div>
+                    <div class="stat-label">Status WordPress</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <div style="font-weight: 600;" id="notificationTitle">Notificação</div>
+        <div style="font-size: 0.9rem; margin-top: 5px;" id="notificationMessage">Mensagem</div>
+    </div>
+    
+    <script>
+        // Verificar status do WordPress ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            checkWordPressStatus();
+            loadStats();
+        });
+        
+        function showNotification(title, message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        async function checkWordPressStatus() {
+            try {
+                const response = await fetch('/publisher');
+                const data = await response.json();
+                
+                const statusTitle = document.getElementById('wpStatusTitle');
+                const statusMessage = document.getElementById('wpStatusMessage');
+                
+                if (data.status === 'ready' && data.wordpress?.success) {
+                    statusTitle.textContent = '✅ WordPress Conectado!';
+                    statusMessage.textContent = `Conexão estabelecida com ${data.wordpress.site_url || 'seu blog'}. Sistema pronto para publicar.`;
+                } else {
+                    statusTitle.textContent = '⚠️ WordPress Desconectado';
+                    statusMessage.textContent = 'Não foi possível conectar com o WordPress. Verifique as configurações.';
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status do WordPress:', error);
+                document.getElementById('wpStatusTitle').textContent = '❌ Erro de Conexão';
+                document.getElementById('wpStatusMessage').textContent = 'Não foi possível verificar o status do WordPress.';
+            }
+        }
+        
+        async function loadStats() {
+            try {
+                const response = await fetch('/publisher/stats');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.statistics;
+                    document.getElementById('totalPublications').textContent = stats.total_publications || '0';
+                    document.getElementById('successfulPublications').textContent = stats.published || '0';
+                    document.getElementById('failedPublications').textContent = stats.failed || '0';
+                    document.getElementById('wpStatus').textContent = stats.wordpress_configured ? '✅' : '❌';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+        
+        async function testWordPressConnection() {
+            showNotification('🔗 Testando WordPress', 'Verificando conexão com o blog...');
+            
+            try {
+                const response = await fetch('/publisher/test', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Conexão OK!', 'WordPress conectado e funcionando perfeitamente!');
+                    checkWordPressStatus(); // Atualizar status
+                } else {
+                    showNotification('❌ Falha na Conexão', data.message || 'Erro ao conectar com WordPress.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao testar conexão: ' + error.message, 'error');
+            }
+        }
+        
+        async function loadApprovedArticles() {
+            showNotification('📋 Carregando', 'Buscando artigos aprovados...');
+            
+            try {
+                const response = await fetch('/review/approved');
+                const data = await response.json();
+                
+                const approvedSection = document.getElementById('approvedArticles');
+                const articlesList = document.getElementById('articlesList');
+                
+                if (data.success && data.approved_articles.length > 0) {
+                    let articlesHTML = '';
+                    
+                    data.approved_articles.forEach(article => {
+                        articlesHTML += `
+                            <div class="article-item">
+                                <div class="article-info">
+                                    <h4>${article.titulo || 'Título não disponível'}</h4>
+                                    <div class="article-meta">
+                                        Aprovado em: ${new Date(article.data_aprovacao).toLocaleDateString('pt-BR')} | 
+                                        Palavras: ${article.conteudo ? article.conteudo.split(' ').length : '0'}
+                                    </div>
+                                </div>
+                                <button class="publish-btn" onclick="publishArticle(${article.id})">
+                                    📤 Publicar Agora
+                                </button>
+                            </div>
+                        `;
+                    });
+                    
+                    articlesList.innerHTML = articlesHTML;
+                    showNotification('📝 Artigos Carregados', `${data.approved_articles.length} artigos prontos para publicação!`);
+                } else {
+                    articlesList.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <h4>📝 Nenhum artigo aprovado</h4>
+                            <p>Não há artigos prontos para publicação no momento.</p>
+                            <p style="margin-top: 10px;">
+                                <a href="/review/list" style="color: var(--primary);">Ver sistema de revisão</a>
+                            </p>
+                        </div>
+                    `;
+                    showNotification('📝 Nenhum Artigo', 'Não há artigos aprovados para publicação.', 'warning');
+                }
+                
+                approvedSection.style.display = 'block';
+                approvedSection.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao carregar artigos: ' + error.message, 'error');
+            }
+        }
+        
+        async function publishArticle(articleId) {
+            if (!confirm('Tem certeza que deseja publicar este artigo no WordPress?')) {
+                return;
+            }
+            
+            showNotification('📤 Publicando', 'Enviando artigo para o WordPress...');
+            
+            try {
+                const response = await fetch('/publisher/publish', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        article_id: articleId,
+                        publish_immediately: true
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('🎉 Publicado!', 'Artigo publicado com sucesso no WordPress!');
+                    loadApprovedArticles(); // Recarregar lista
+                    loadStats(); // Atualizar estatísticas
+                } else {
+                    showNotification('❌ Falha na Publicação', data.message || 'Erro ao publicar artigo.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao publicar: ' + error.message, 'error');
+            }
+        }
+        
+        async function viewPublications() {
+            showNotification('📊 Carregando', 'Buscando histórico de publicações...');
+            
+            try {
+                const response = await fetch('/publisher/list');
+                const data = await response.json();
+                
+                const publicationsSection = document.getElementById('publicationsList');
+                const publicationsContainer = document.getElementById('publicationsContainer');
+                
+                if (data.success && data.publications.length > 0) {
+                    let publicationsHTML = '';
+                    
+                    data.publications.forEach(pub => {
+                        const statusClass = pub.status === 'published' ? 'status-published' : 
+                                          pub.status === 'failed' ? 'status-failed' : 'status-pending';
+                        const borderClass = pub.status === 'published' ? '' : 
+                                          pub.status === 'failed' ? 'failed' : 'pending';
+                        
+                        publicationsHTML += `
+                            <div class="publication-item ${borderClass}">
+                                <div class="publication-info">
+                                    <h4>${pub.article_title || 'Título não disponível'}</h4>
+                                    <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                                        Publicado em: ${new Date(pub.created_at).toLocaleDateString('pt-BR')}
+                                        ${pub.wp_url ? ` | <a href="${pub.wp_url}" target="_blank" style="color: var(--primary);">Ver no blog</a>` : ''}
+                                    </div>
+                                </div>
+                                <div class="publication-status ${statusClass}">
+                                    ${pub.status === 'published' ? '✅ Publicado' : 
+                                      pub.status === 'failed' ? '❌ Falhou' : '⏳ Pendente'}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    publicationsContainer.innerHTML = publicationsHTML;
+                    showNotification('📰 Publicações Carregadas', `${data.publications.length} publicações encontradas!`);
+                } else {
+                    publicationsContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <h4>📰 Nenhuma publicação</h4>
+                            <p>Ainda não há publicações registradas.</p>
+                        </div>
+                    `;
+                    showNotification('📰 Nenhuma Publicação', 'Não há publicações no histórico.', 'warning');
+                }
+                
+                publicationsSection.style.display = 'block';
+                publicationsSection.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao carregar publicações: ' + error.message, 'error');
+            }
+        }
+        
+        function viewStats() {
+            loadStats();
+            showNotification('📈 Estatísticas', 'Estatísticas atualizadas!');
+        }
+    </script>
+</body>
+</html> 

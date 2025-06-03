@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏰ Agendamento - Sistema SEO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: #475569;
+            --shadow: rgba(0, 0, 0, 0.25);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .scheduler-status {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 5px solid var(--success);
+        }
+        
+        .workflow-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+        
+        .workflow-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .instructions {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .instructions h3 {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ul {
+            color: var(--text-secondary);
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 20px 25px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            flex-direction: column;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.6);
+        }
+        
+        .action-btn.success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .action-btn.success:hover {
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.6);
+        }
+        
+        .action-btn.warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        
+        .action-btn.warning:hover {
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
+        }
+        
+        .action-btn.danger {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+        
+        .action-btn.danger:hover {
+            box-shadow: 0 12px 35px rgba(239, 68, 68, 0.6);
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+        
+        .jobs-section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .job-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .job-card.active {
+            border-left: 5px solid var(--success);
+        }
+        
+        .job-card.paused {
+            border-left: 5px solid var(--warning);
+        }
+        
+        .job-card.error {
+            border-left: 5px solid var(--danger);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .job-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .job-status {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .status-paused {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        .job-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .job-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .job-btn.start {
+            background: var(--success);
+            color: white;
+        }
+        
+        .job-btn.pause {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .job-btn.run-now {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .job-btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+        
+        .job-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .history-section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .history-item {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .history-item.success {
+            border-left-color: var(--success);
+        }
+        
+        .history-item.error {
+            border-left-color: var(--danger);
+        }
+        
+        .history-info {
+            flex: 1;
+        }
+        
+        .history-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .history-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .history-status {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 4px solid var(--success);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            border-left-color: var(--danger);
+        }
+        
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--success);
+        }
+        
+        .schedule-info {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid var(--border);
+        }
+        
+        .next-run {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .action-buttons { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .job-header { flex-direction: column; gap: 10px; }
+            .history-item { flex-direction: column; gap: 10px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+        
+        <div class="header">
+            <h1>⏰ Agendamento</h1>
+            <p>Configure e monitore tarefas automáticas do sistema</p>
+        </div>
+        
+        <div class="scheduler-status">
+            <h3 id="schedulerStatusTitle">🔄 Verificando Scheduler...</h3>
+            <p id="schedulerStatusMessage">Aguarde enquanto verificamos o status do agendador</p>
+        </div>
+        
+        <div class="workflow-section">
+            <h2 class="workflow-title">📅 Como Funciona o Agendamento</h2>
+            
+            <div class="instructions">
+                <h3>⚙️ O que o sistema faz automaticamente:</h3>
+                <ul>
+                    <li>Executa busca de produtos semanalmente (domingos às 10h)</li>
+                    <li>Gera artigos com IA semanalmente (domingos às 10h15)</li>
+                    <li>Limpa dados antigos mensalmente (primeiro domingo às 2h)</li>
+                    <li>Monitora falhas e tenta reexecutar tarefas</li>
+                    <li>Mantém histórico de todas as execuções</li>
+                    <li>Permite execução manual de tarefas</li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn success" onclick="loadJobs()">
+                    📋 Ver Tarefas Ativas
+                    <div class="btn-subtitle">Agendamentos configurados</div>
+                </button>
+                
+                <button class="action-btn" onclick="loadHistory()">
+                    📊 Histórico
+                    <div class="btn-subtitle">Últimas execuções</div>
+                </button>
+                
+                <button class="action-btn warning" onclick="pauseAllJobs()">
+                    ⏸️ Pausar Tudo
+                    <div class="btn-subtitle">Parar agendamentos</div>
+                </button>
+                
+                <button class="action-btn danger" onclick="resumeAllJobs()">
+                    ▶️ Retomar Tudo
+                    <div class="btn-subtitle">Reativar agendamentos</div>
+                </button>
+            </div>
+            
+            <div class="jobs-section" id="jobsSection">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">📋 Tarefas Agendadas</h3>
+                <div id="jobsContainer">
+                    <p style="text-align: center; color: var(--text-secondary); padding: 40px;">
+                        Carregando tarefas...
+                    </p>
+                </div>
+            </div>
+            
+            <div class="history-section" id="historySection">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">📈 Histórico de Execuções</h3>
+                <div id="historyContainer">
+                    <p style="text-align: center; color: var(--text-secondary); padding: 40px;">
+                        Carregando histórico...
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-number" id="activeJobs">-</div>
+                    <div class="stat-label">Tarefas Ativas</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="totalExecutions">-</div>
+                    <div class="stat-label">Execuções Hoje</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="successRate">-</div>
+                    <div class="stat-label">Taxa de Sucesso</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="nextExecution">-</div>
+                    <div class="stat-label">Próxima Execução</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <div style="font-weight: 600;" id="notificationTitle">Notificação</div>
+        <div style="font-size: 0.9rem; margin-top: 5px;" id="notificationMessage">Mensagem</div>
+    </div>
+    
+    <script>
+        // Verificar status do scheduler ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSchedulerStatus();
+            loadStats();
+        });
+        
+        function showNotification(title, message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        async function checkSchedulerStatus() {
+            try {
+                const response = await fetch('/scheduler');
+                const data = await response.json();
+                
+                const statusTitle = document.getElementById('schedulerStatusTitle');
+                const statusMessage = document.getElementById('schedulerStatusMessage');
+                
+                if (data.status === 'ready' && data.scheduler_running) {
+                    statusTitle.textContent = '✅ Scheduler Ativo!';
+                    statusMessage.textContent = 'O agendador está funcionando e executando tarefas automaticamente.';
+                } else {
+                    statusTitle.textContent = '⚠️ Scheduler Parado';
+                    statusMessage.textContent = 'O agendador não está ativo. As tarefas não serão executadas automaticamente.';
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status:', error);
+                document.getElementById('schedulerStatusTitle').textContent = '❌ Erro de Conexão';
+                document.getElementById('schedulerStatusMessage').textContent = 'Não foi possível verificar o status do agendador.';
+            }
+        }
+        
+        async function loadStats() {
+            try {
+                const response = await fetch('/scheduler/stats');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.statistics;
+                    document.getElementById('activeJobs').textContent = stats.active_jobs || '0';
+                    document.getElementById('totalExecutions').textContent = stats.executions_today || '0';
+                    document.getElementById('successRate').textContent = (stats.success_rate || 0) + '%';
+                    
+                    // Formatar próxima execução
+                    if (stats.next_execution) {
+                        const nextDate = new Date(stats.next_execution);
+                        const now = new Date();
+                        const diffHours = Math.round((nextDate - now) / (1000 * 60 * 60));
+                        
+                        if (diffHours < 24) {
+                            document.getElementById('nextExecution').textContent = diffHours + 'h';
+                        } else {
+                            document.getElementById('nextExecution').textContent = Math.round(diffHours / 24) + 'd';
+                        }
+                    } else {
+                        document.getElementById('nextExecution').textContent = '-';
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+        
+        async function loadJobs() {
+            showNotification('📋 Carregando', 'Buscando tarefas agendadas...');
+            
+            try {
+                const response = await fetch('/scheduler/jobs');
+                const data = await response.json();
+                
+                const jobsSection = document.getElementById('jobsSection');
+                const jobsContainer = document.getElementById('jobsContainer');
+                
+                if (data.success && data.jobs.length > 0) {
+                    let jobsHTML = '';
+                    
+                    data.jobs.forEach(job => {
+                        const statusClass = job.status === 'active' ? 'active' : 
+                                          job.status === 'paused' ? 'paused' : 'error';
+                        const statusText = job.status === 'active' ? 'Ativo' : 
+                                          job.status === 'paused' ? 'Pausado' : 'Erro';
+                        
+                        // Calcular próxima execução
+                        let nextRunText = 'Não agendado';
+                        if (job.next_run) {
+                            const nextRun = new Date(job.next_run);
+                            nextRunText = nextRun.toLocaleString('pt-BR');
+                        }
+                        
+                        jobsHTML += `
+                            <div class="job-card ${statusClass}">
+                                <div class="job-header">
+                                    <div>
+                                        <div class="job-title">${job.name || 'Tarefa'}</div>
+                                        <div class="job-meta">
+                                            <span><strong>Tipo:</strong> ${job.task_type || 'Desconhecido'}</span>
+                                            <span><strong>Cronograma:</strong> ${job.schedule || 'Não definido'}</span>
+                                            <span><strong>Última execução:</strong> ${job.last_run ? new Date(job.last_run).toLocaleString('pt-BR') : 'Nunca'}</span>
+                                        </div>
+                                    </div>
+                                    <div class="job-status status-${job.status}">
+                                        ${statusText}
+                                    </div>
+                                </div>
+                                
+                                <div class="schedule-info">
+                                    <div class="next-run">Próxima execução: ${nextRunText}</div>
+                                    ${job.description ? `<div style="margin-top: 8px; color: var(--text-secondary);">${job.description}</div>` : ''}
+                                </div>
+                                
+                                <div class="job-controls">
+                                    ${job.status === 'paused' ? `
+                                        <button class="job-btn start" onclick="resumeJob('${job.id}')">
+                                            ▶️ Retomar
+                                        </button>
+                                    ` : `
+                                        <button class="job-btn pause" onclick="pauseJob('${job.id}')">
+                                            ⏸️ Pausar
+                                        </button>
+                                    `}
+                                    
+                                    <button class="job-btn run-now" onclick="runJobNow('${job.id}')">
+                                        🚀 Executar Agora
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    jobsContainer.innerHTML = jobsHTML;
+                    showNotification('📋 Tarefas Carregadas', `${data.jobs.length} tarefas encontradas!`);
+                } else {
+                    jobsContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <h4>📋 Nenhuma tarefa configurada</h4>
+                            <p>Não há tarefas agendadas no momento.</p>
+                        </div>
+                    `;
+                    showNotification('📋 Nenhuma Tarefa', 'Não há tarefas agendadas.', 'warning');
+                }
+                
+                jobsSection.style.display = 'block';
+                jobsSection.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao carregar tarefas: ' + error.message, 'error');
+            }
+        }
+        
+        async function loadHistory() {
+            showNotification('📊 Carregando', 'Buscando histórico de execuções...');
+            
+            try {
+                const response = await fetch('/scheduler/history');
+                const data = await response.json();
+                
+                const historySection = document.getElementById('historySection');
+                const historyContainer = document.getElementById('historyContainer');
+                
+                if (data.success && data.history.length > 0) {
+                    let historyHTML = '';
+                    
+                    data.history.forEach(execution => {
+                        const statusClass = execution.status === 'success' ? 'success' : 'error';
+                        const statusText = execution.status === 'success' ? '✅ Sucesso' : '❌ Falha';
+                        
+                        historyHTML += `
+                            <div class="history-item ${statusClass}">
+                                <div class="history-info">
+                                    <div class="history-title">${execution.job_name || 'Tarefa'}</div>
+                                    <div class="history-details">
+                                        ${new Date(execution.executed_at).toLocaleString('pt-BR')} | 
+                                        Duração: ${execution.duration || '0'}s
+                                        ${execution.result ? ` | ${execution.result}` : ''}
+                                    </div>
+                                </div>
+                                <div class="history-status ${statusClass}">
+                                    ${statusText}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    historyContainer.innerHTML = historyHTML;
+                    showNotification('📊 Histórico Carregado', `${data.history.length} execuções encontradas!`);
+                } else {
+                    historyContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <h4>📊 Nenhuma execução</h4>
+                            <p>Ainda não há histórico de execuções.</p>
+                        </div>
+                    `;
+                    showNotification('📊 Nenhum Histórico', 'Não há execuções no histórico.', 'warning');
+                }
+                
+                historySection.style.display = 'block';
+                historySection.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao carregar histórico: ' + error.message, 'error');
+            }
+        }
+        
+        async function pauseJob(jobId) {
+            if (!confirm('Tem certeza que deseja pausar esta tarefa?')) {
+                return;
+            }
+            
+            showNotification('⏸️ Pausando', 'Pausando tarefa...');
+            
+            try {
+                const response = await fetch('/scheduler/pause', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ job_id: jobId })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('⏸️ Pausado!', 'Tarefa pausada com sucesso!');
+                    loadJobs(); // Recarregar lista
+                    loadStats(); // Atualizar estatísticas
+                } else {
+                    showNotification('❌ Falha', data.message || 'Erro ao pausar tarefa.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao pausar: ' + error.message, 'error');
+            }
+        }
+        
+        async function resumeJob(jobId) {
+            showNotification('▶️ Retomando', 'Retomando tarefa...');
+            
+            try {
+                const response = await fetch('/scheduler/resume', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ job_id: jobId })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('▶️ Retomado!', 'Tarefa retomada com sucesso!');
+                    loadJobs(); // Recarregar lista
+                    loadStats(); // Atualizar estatísticas
+                } else {
+                    showNotification('❌ Falha', data.message || 'Erro ao retomar tarefa.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao retomar: ' + error.message, 'error');
+            }
+        }
+        
+        async function runJobNow(jobId) {
+            if (!confirm('Tem certeza que deseja executar esta tarefa agora?')) {
+                return;
+            }
+            
+            showNotification('🚀 Executando', 'Executando tarefa manualmente...');
+            
+            try {
+                const response = await fetch('/scheduler/run-now', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ job_id: jobId })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('🚀 Executado!', 'Tarefa executada com sucesso!');
+                    loadHistory(); // Recarregar histórico
+                    loadStats(); // Atualizar estatísticas
+                } else {
+                    showNotification('❌ Falha', data.message || 'Erro ao executar tarefa.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao executar: ' + error.message, 'error');
+            }
+        }
+        
+        async function pauseAllJobs() {
+            if (!confirm('Tem certeza que deseja pausar TODAS as tarefas?')) {
+                return;
+            }
+            
+            showNotification('⏸️ Pausando Tudo', 'Pausando todas as tarefas...');
+            
+            try {
+                const response = await fetch('/scheduler/pause-all', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('⏸️ Tudo Pausado!', 'Todas as tarefas foram pausadas.');
+                    loadJobs(); // Recarregar lista
+                    loadStats(); // Atualizar estatísticas
+                    checkSchedulerStatus(); // Atualizar status
+                } else {
+                    showNotification('❌ Falha', data.message || 'Erro ao pausar tarefas.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao pausar: ' + error.message, 'error');
+            }
+        }
+        
+        async function resumeAllJobs() {
+            showNotification('▶️ Retomando Tudo', 'Retomando todas as tarefas...');
+            
+            try {
+                const response = await fetch('/scheduler/resume-all', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('▶️ Tudo Retomado!', 'Todas as tarefas foram retomadas.');
+                    loadJobs(); // Recarregar lista
+                    loadStats(); // Atualizar estatísticas
+                    checkSchedulerStatus(); // Atualizar status
+                } else {
+                    showNotification('❌ Falha', data.message || 'Erro ao retomar tarefas.', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao retomar: ' + error.message, 'error');
+            }
+        }
+    </script>
+</body>
+</html> 

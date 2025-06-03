@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✍️ Gerar Artigos - Sistema SEO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: #475569;
+            --shadow: rgba(0, 0, 0, 0.25);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .ai-status {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 5px solid var(--success);
+        }
+        
+        .workflow-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+        
+        .workflow-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .instructions {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .instructions h3 {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ul {
+            color: var(--text-secondary);
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .generation-form {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-help {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.6);
+        }
+        
+        .action-btn.success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .action-btn.success:hover {
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.6);
+        }
+        
+        .action-btn.warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        
+        .action-btn.warning:hover {
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .progress-section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .progress-bar {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .generated-article {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+            border: 1px solid var(--success);
+        }
+        
+        .article-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+        
+        .article-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .meta-item {
+            background: var(--bg-secondary);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .article-content {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 25px var(--shadow);
+            border-left: 4px solid var(--success);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 350px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            border-left-color: var(--danger);
+        }
+        
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--success);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .action-buttons { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .article-meta { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+        
+        <div class="header">
+            <h1>✍️ Gerar Artigos</h1>
+            <p>Crie artigos únicos e otimizados usando inteligência artificial</p>
+        </div>
+        
+        <div class="ai-status">
+            <h3 id="aiStatusTitle">🤖 Verificando IA...</h3>
+            <p id="aiStatusMessage">Aguarde enquanto verificamos a conexão com a inteligência artificial</p>
+        </div>
+        
+        <div class="workflow-section">
+            <h2 class="workflow-title">🎯 Como Funciona a Geração</h2>
+            
+            <div class="instructions">
+                <h3>🧠 O que a IA faz:</h3>
+                <ul>
+                    <li>Analisa as informações do produto (nome, descrição, preço)</li>
+                    <li>Cria um título SEO otimizado e atrativo</li>
+                    <li>Escreve um artigo completo com introdução, desenvolvimento e conclusão</li>
+                    <li>Gera meta descrição para os motores de busca</li>
+                    <li>Sugere palavras-chave relevantes</li>
+                    <li>Mantém tom profissional e conteúdo original</li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn success" onclick="testGeneration()">
+                    🧪 Testar IA
+                    <span style="font-size: 0.9rem; opacity: 0.8;">Gerar artigo de exemplo</span>
+                </button>
+                
+                <button class="action-btn warning" onclick="viewStats()">
+                    📊 Ver Estatísticas
+                    <span style="font-size: 0.9rem; opacity: 0.8;">Artigos já gerados</span>
+                </button>
+            </div>
+            
+            <div class="generation-form" id="generationForm">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">🎯 Gerar Artigo Personalizado</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Nome do Produto *</label>
+                    <input type="text" class="form-input" id="productName" placeholder="Ex: Impressora HP DeskJet 3776">
+                    <div class="form-help">Nome completo do produto para o qual você quer gerar o artigo</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Descrição do Produto</label>
+                    <textarea class="form-textarea" id="productDescription" placeholder="Descreva as principais características do produto..."></textarea>
+                    <div class="form-help">Quanto mais detalhes, melhor será o artigo gerado</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Preço (opcional)</label>
+                    <input type="text" class="form-input" id="productPrice" placeholder="R$ 299,90">
+                    <div class="form-help">Preço para incluir no artigo</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Palavras-chave Extras</label>
+                    <input type="text" class="form-input" id="customKeywords" placeholder="impressora, casa, escritório">
+                    <div class="form-help">Palavras separadas por vírgula para focar no SEO</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Tom do Artigo</label>
+                    <select class="form-select" id="articleTone">
+                        <option value="profissional">Profissional</option>
+                        <option value="casual">Casual</option>
+                        <option value="entusiasmado">Entusiasmado</option>
+                        <option value="técnico">Técnico</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Instruções Especiais</label>
+                    <textarea class="form-textarea" id="customInstructions" placeholder="Ex: Foque em economia de tinta, mencione uso doméstico..."></textarea>
+                    <div class="form-help">Instruções específicas para a IA sobre o que destacar</div>
+                </div>
+                
+                <button class="action-btn" onclick="generateCustomArticle()" style="width: 100%; margin-top: 20px;">
+                    ✨ Gerar Artigo Personalizado
+                </button>
+            </div>
+            
+            <div class="progress-section" id="progressSection">
+                <h3>🤖 IA Trabalhando...</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">Iniciando geração...</p>
+            </div>
+            
+            <div class="generated-article" id="generatedArticle">
+                <div class="article-header">
+                    <div class="article-title" id="articleTitle">Título do Artigo</div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <strong>Meta Descrição:</strong>
+                            <div id="metaDescription">-</div>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Palavras-chave:</strong>
+                            <div id="keywords">-</div>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Palavras:</strong>
+                            <div id="wordCount">-</div>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Status:</strong>
+                            <div id="articleStatus">Pronto para revisão</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-content" id="articleContent">
+                    Conteúdo do artigo aparecerá aqui...
+                </div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="action-btn success" onclick="sendToReview()">
+                        📝 Enviar para Revisão
+                    </button>
+                    <button class="action-btn warning" onclick="regenerateArticle()">
+                        🔄 Gerar Novamente
+                    </button>
+                </div>
+            </div>
+            
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalGenerated">-</div>
+                    <div class="stat-label">Artigos Gerados</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="aiMode">-</div>
+                    <div class="stat-label">Modo IA</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="averageWords">-</div>
+                    <div class="stat-label">Palavras Média</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="successRate">-</div>
+                    <div class="stat-label">Taxa de Sucesso</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <div style="font-weight: 600;" id="notificationTitle">Notificação</div>
+        <div style="font-size: 0.9rem; margin-top: 5px;" id="notificationMessage">Mensagem</div>
+    </div>
+    
+    <script>
+        let currentArticle = null;
+        
+        // Verificar status da IA ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAIStatus();
+            loadStats();
+        });
+        
+        function showNotification(title, message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        function showProgress(show = true) {
+            const progressSection = document.getElementById('progressSection');
+            progressSection.style.display = show ? 'block' : 'none';
+        }
+        
+        function updateProgress(percent, text) {
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
+            progressFill.style.width = percent + '%';
+            progressText.textContent = text;
+        }
+        
+        function showGeneratedArticle(article) {
+            const articleSection = document.getElementById('generatedArticle');
+            
+            document.getElementById('articleTitle').textContent = article.titulo || 'Título não disponível';
+            document.getElementById('metaDescription').textContent = article.meta_descricao || 'Não disponível';
+            document.getElementById('keywords').textContent = (article.tags || []).join(', ') || 'Não disponível';
+            document.getElementById('wordCount').textContent = article.conteudo ? article.conteudo.split(' ').length : '0';
+            document.getElementById('articleContent').innerHTML = article.conteudo || 'Conteúdo não disponível';
+            
+            articleSection.style.display = 'block';
+            articleSection.scrollIntoView({ behavior: 'smooth' });
+            
+            currentArticle = article;
+        }
+        
+        async function checkAIStatus() {
+            try {
+                const response = await fetch('/generator');
+                const data = await response.json();
+                
+                const statusTitle = document.getElementById('aiStatusTitle');
+                const statusMessage = document.getElementById('aiStatusMessage');
+                
+                if (data.status === 'ready') {
+                    statusTitle.textContent = '🤖 IA Pronta!';
+                    const mode = data.data?.simulation_mode ? 'Simulação' : 'OpenAI Real';
+                    statusMessage.textContent = `A inteligência artificial está funcionando perfeitamente. Modo: ${mode}`;
+                } else {
+                    statusTitle.textContent = '⚠️ IA com Problemas';
+                    statusMessage.textContent = 'Há algum problema com a IA. Verifique as configurações da API.';
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status da IA:', error);
+                document.getElementById('aiStatusTitle').textContent = '❌ Erro de Conexão';
+                document.getElementById('aiStatusMessage').textContent = 'Não foi possível verificar o status da IA.';
+            }
+        }
+        
+        async function loadStats() {
+            try {
+                const response = await fetch('/generator/stats');
+                const data = await response.json();
+                
+                // Dados corrigidos baseados no banco de dados
+                const totalGenerated = data.total_articles_database || data.manager_stats?.total_generated || 0;
+                const averageWords = data.manager_stats?.average_words || 0;
+                const successRate = data.manager_stats?.success_rate || 100;
+                
+                document.getElementById('totalGenerated').textContent = totalGenerated;
+                document.getElementById('aiMode').textContent = data.simulation_mode ? '🧪' : '🤖';
+                document.getElementById('averageWords').textContent = averageWords;
+                document.getElementById('successRate').textContent = `${successRate}%`;
+                
+                console.log('Stats carregadas:', {
+                    totalGenerated,
+                    averageWords,
+                    successRate,
+                    simulationMode: data.simulation_mode
+                });
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+                // Valores padrão em caso de erro
+                document.getElementById('totalGenerated').textContent = 'Erro';
+                document.getElementById('averageWords').textContent = 'Erro';
+                document.getElementById('successRate').textContent = 'Erro';
+            }
+        }
+        
+        async function testGeneration() {
+            showNotification('🧪 Testando IA', 'Gerando artigo de exemplo...');
+            showProgress();
+            updateProgress(20, 'Conectando à IA...');
+            
+            try {
+                const response = await fetch('/generator/test', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                updateProgress(60, 'IA escrevendo artigo...');
+                
+                const data = await response.json();
+                
+                updateProgress(100, 'Artigo gerado!');
+                
+                setTimeout(() => {
+                    showProgress(false);
+                    if (data.status === 'success') {
+                        showNotification('🎉 Sucesso!', 'Artigo de teste gerado com sucesso!');
+                        showGeneratedArticle(data.article);
+                    } else {
+                        showNotification('❌ Falha', 'Não foi possível gerar o artigo de teste.', 'error');
+                    }
+                }, 1000);
+                
+            } catch (error) {
+                showProgress(false);
+                showNotification('❌ Erro', 'Erro ao testar IA: ' + error.message, 'error');
+            }
+        }
+        
+        async function generateCustomArticle() {
+            const productName = document.getElementById('productName').value.trim();
+            
+            if (!productName) {
+                showNotification('⚠️ Campo Obrigatório', 'Por favor, insira o nome do produto.', 'warning');
+                document.getElementById('productName').focus();
+                return;
+            }
+            
+            const productData = {
+                nome: productName,
+                descricao: document.getElementById('productDescription').value.trim() || productName,
+                preco: document.getElementById('productPrice').value.trim(),
+                categoria: 'Produto',
+                url: 'https://example.com/' + productName.toLowerCase().replace(/\s+/g, '-')
+            };
+            
+            const customKeywords = document.getElementById('customKeywords').value.trim();
+            const tone = document.getElementById('articleTone').value;
+            const customInstructions = document.getElementById('customInstructions').value.trim();
+            
+            showNotification('✨ Gerando Artigo', 'A IA está criando seu artigo personalizado...');
+            showProgress();
+            updateProgress(10, 'Analisando produto...');
+            
+            try {
+                const requestBody = {
+                    product_data: productData,
+                    tone: tone
+                };
+                
+                if (customKeywords) {
+                    requestBody.custom_keywords = customKeywords.split(',').map(k => k.trim());
+                }
+                
+                if (customInstructions) {
+                    requestBody.custom_instructions = customInstructions;
+                }
+                
+                updateProgress(30, 'Enviando para IA...');
+                
+                const response = await fetch('/generator/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                updateProgress(70, 'IA escrevendo artigo...');
+                
+                const data = await response.json();
+                
+                updateProgress(100, 'Artigo finalizado!');
+                
+                setTimeout(() => {
+                    showProgress(false);
+                    if (data.status === 'success') {
+                        showNotification('🎉 Artigo Criado!', 'Seu artigo personalizado foi gerado com sucesso!');
+                        showGeneratedArticle(data.article);
+                        loadStats(); // Atualizar estatísticas
+                    } else {
+                        showNotification('❌ Falha na Geração', 'Não foi possível gerar o artigo. Tente novamente.', 'error');
+                    }
+                }, 1500);
+                
+            } catch (error) {
+                showProgress(false);
+                showNotification('❌ Erro', 'Erro ao gerar artigo: ' + error.message, 'error');
+            }
+        }
+        
+        async function sendToReview() {
+            if (!currentArticle) {
+                showNotification('⚠️ Nenhum Artigo', 'Não há artigo para enviar para revisão.', 'warning');
+                return;
+            }
+            
+            showNotification('📝 Enviando', 'Salvando artigo para revisão...');
+            
+            try {
+                const response = await fetch('/review/save-from-generator', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentArticle)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Enviado!', 'Artigo enviado para revisão com sucesso!');
+                    document.getElementById('articleStatus').textContent = 'Enviado para revisão';
+                } else {
+                    throw new Error(data.message || 'Erro desconhecido');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao enviar para revisão: ' + error.message, 'error');
+            }
+        }
+        
+        function regenerateArticle() {
+            if (!currentArticle) {
+                showNotification('⚠️ Nenhum Artigo', 'Não há artigo para regenerar.', 'warning');
+                return;
+            }
+            
+            // Limpar artigo atual e gerar novamente
+            document.getElementById('generatedArticle').style.display = 'none';
+            currentArticle = null;
+            generateCustomArticle();
+        }
+        
+        function viewStats() {
+            loadStats();
+            showNotification('📊 Estatísticas', 'Estatísticas atualizadas!');
+        }
+    </script>
+</body>
+</html> 
