@@ -475,19 +475,14 @@
             </div>
             
             <div class="action-buttons">
-                <button class="action-btn success" onclick="loadPendingArticles()">
+                <button class="action-btn" onclick="loadPendingArticles()">
                     📝 Artigos Pendentes
                     <div class="btn-subtitle">Para revisar e aprovar</div>
                 </button>
                 
-                <button class="action-btn" onclick="loadApprovedArticles()">
+                <button class="action-btn success" onclick="loadApprovedArticles()">
                     ✅ Artigos Aprovados
                     <div class="btn-subtitle">Prontos para publicação</div>
-                </button>
-                
-                <button class="action-btn warning" onclick="loadRejectedArticles()">
-                    ❌ Artigos Rejeitados
-                    <div class="btn-subtitle">Que precisam ser refeitos</div>
                 </button>
                 
                 <button class="action-btn warning" onclick="viewStats()">
@@ -498,10 +493,8 @@
             
             <div class="articles-section" id="articlesSection">
                 <div class="filter-tabs">
-                    <div class="filter-tab active" data-filter="all">Todos</div>
-                    <div class="filter-tab" data-filter="pendente">Pendentes</div>
-                    <div class="filter-tab" data-filter="aprovado">Aprovados</div>
-                    <div class="filter-tab" data-filter="rejeitado">Rejeitados</div>
+                    <div class="filter-tab active" data-filter="pendente">📝 Pendentes</div>
+                    <div class="filter-tab" data-filter="aprovado">✅ Aprovados</div>
                 </div>
                 
                 <div id="articlesContainer">
@@ -541,7 +534,7 @@
     </div>
     
     <script>
-        let currentFilter = 'all';
+        let currentFilter = 'pendente';
         let allArticles = [];
         
         // Verificar status do sistema ao carregar a página
@@ -549,6 +542,8 @@
             checkReviewStatus();
             loadStats();
             setupFilterTabs();
+            // Carregar artigos pendentes por padrão
+            loadArticles('pendente');
         });
         
         function showNotification(title, message, type = 'success') {
@@ -574,23 +569,13 @@
                     tabs.forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
                     currentFilter = tab.dataset.filter;
-                    filterArticles();
+                    loadArticles(currentFilter);
                 });
             });
         }
         
         async function filterArticles() {
-            const container = document.getElementById('articlesContainer');
-            
-            // Se é um filtro específico, carregar da API para garantir dados atualizados
-            if (currentFilter !== 'all') {
-                await loadArticles(currentFilter);
-                return;
-            }
-            
-            // Se é "all", usar a função de filtro local
-            let filteredArticles = allArticles;
-            displayArticles(filteredArticles);
+            await loadArticles(currentFilter);
         }
         
         async function checkReviewStatus() {
@@ -691,12 +676,7 @@
             }
         }
         
-        async function loadRejectedArticles() {
-            await loadArticles('rejeitado');
-            showNotification('❌ Carregando', 'Buscando artigos rejeitados...');
-        }
-        
-        async function loadArticles(status = 'all') {
+        async function loadArticles(status = 'pendente') {
             try {
                 showNotification('📥 Carregando', 'Buscando artigos...', 'info');
                 
@@ -1303,11 +1283,6 @@
                 window.open('/interface/publisher', '_blank');
             }, 2000);
         }
-
-        // Carregar artigos pendentes por padrão
-        setTimeout(() => {
-            loadArticles('all');
-        }, 1000);
     </script>
 </body>
 </html> 

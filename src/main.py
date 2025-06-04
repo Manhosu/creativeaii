@@ -747,14 +747,14 @@ async def dashboard():
                     }
                     
                     .container { 
-                        max-width: 1200px; 
+                        max-width: 900px; 
                         margin: 0 auto; 
                         padding: 20px;
                     }
                     
                     .header {
                         text-align: center;
-                        margin-bottom: 40px;
+                        margin-bottom: 50px;
                         padding: 40px 20px;
                     }
                     
@@ -777,127 +777,158 @@ async def dashboard():
                     
                     .status-banner {
                         background: linear-gradient(135deg, var(--success), #059669);
-                        padding: 20px;
-                        border-radius: 15px;
+                        padding: 25px;
+                        border-radius: 20px;
                         text-align: center;
-                        margin-bottom: 40px;
+                        margin-bottom: 50px;
                         box-shadow: 0 10px 25px rgba(0,0,0,0.3);
                     }
                     
                     .status-banner h3 {
-                        font-size: 1.5rem;
+                        font-size: 1.6rem;
                         margin-bottom: 10px;
                         font-weight: 600;
                     }
                     
-                    .quick-actions {
+                    .main-actions {
                         display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                        gap: 30px;
+                        grid-template-columns: 1fr;
+                        gap: 25px;
                         margin-bottom: 50px;
                     }
                     
                     .action-card {
                         background: var(--bg-card);
-                        border-radius: 20px;
-                        padding: 30px;
+                        border-radius: 25px;
+                        padding: 40px;
                         text-align: center;
                         transition: all 0.3s ease;
                         border: 2px solid transparent;
-                        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
                     }
                     
                     .action-card:hover {
-                        transform: translateY(-5px);
+                        transform: translateY(-8px);
                         border-color: var(--primary);
-                        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+                        box-shadow: 0 25px 50px rgba(0,0,0,0.4);
                     }
                     
                     .action-icon {
-                        font-size: 4rem;
-                        margin-bottom: 20px;
+                        font-size: 5rem;
+                        margin-bottom: 25px;
                         display: block;
                     }
                     
                     .action-title {
-                        font-size: 1.5rem;
-                        font-weight: 600;
+                        font-size: 2rem;
+                        font-weight: 700;
                         margin-bottom: 15px;
                         color: var(--text-primary);
                     }
                     
                     .action-desc {
                         color: var(--text-secondary);
-                        margin-bottom: 25px;
-                        font-size: 1.1rem;
+                        margin-bottom: 30px;
+                        font-size: 1.2rem;
+                        line-height: 1.5;
                     }
                     
                     .action-btn {
                         background: linear-gradient(135deg, var(--primary), var(--primary-dark));
                         color: white;
                         border: none;
-                        padding: 15px 30px;
+                        padding: 18px 40px;
                         border-radius: 50px;
-                        font-size: 1.1rem;
+                        font-size: 1.2rem;
                         font-weight: 600;
                         cursor: pointer;
                         transition: all 0.3s ease;
                         text-decoration: none; 
                         display: inline-block;
-                        box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+                        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
                     }
                     
                     .action-btn:hover {
-                        transform: translateY(-2px);
-                        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6);
+                        transform: translateY(-3px);
+                        box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
                     }
                     
-                    .action-btn.complete-btn {
+                    .action-btn.success-btn {
                         background: linear-gradient(135deg, var(--success), #059669);
-                        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
-                        font-size: 1.2rem;
-                        padding: 20px 40px;
+                        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
                     }
                     
-                    .action-btn.complete-btn:hover {
-                        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.6);
+                    .action-btn.success-btn:hover {
+                        box-shadow: 0 15px 35px rgba(16, 185, 129, 0.6);
                     }
                     
-                    .workflow-section {
-                        background: var(--bg-secondary);
-                        border-radius: 20px;
-                        padding: 40px;
-                        margin-bottom: 40px;
-                        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                    .action-btn.warning-btn {
+                        background: linear-gradient(135deg, var(--warning), #d97706);
+                        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
                     }
                     
-                    .workflow-title {
-                        text-align: center;
-                        font-size: 2rem;
-                        font-weight: 600;
-                        margin-bottom: 30px;
-                        color: var(--primary);
+                    .action-btn.warning-btn:hover {
+                        box-shadow: 0 15px 35px rgba(245, 158, 11, 0.6);
                     }
                     
                     .complete-workflow {
+                        background: var(--bg-secondary);
+                        border-radius: 25px;
+                        padding: 50px;
                         text-align: center;
-                        margin-top: 30px;
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+                        border: 2px solid var(--success);
+                    }
+                    
+                    .complete-workflow h2 {
+                        font-size: 2.5rem;
+                        margin-bottom: 20px;
+                        color: var(--success);
+                    }
+                    
+                    .complete-workflow p {
+                        font-size: 1.3rem;
+                        color: var(--text-secondary);
+                        margin-bottom: 40px;
+                        max-width: 600px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    
+                    .complete-btn {
+                        background: linear-gradient(135deg, var(--success), #059669);
+                        color: white;
+                        border: none;
+                        padding: 25px 50px;
+                        border-radius: 50px;
+                        font-size: 1.4rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+                        border: 3px solid rgba(255,255,255,0.1);
+                    }
+                    
+                    .complete-btn:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 20px 45px rgba(16, 185, 129, 0.6);
+                        border-color: rgba(255,255,255,0.3);
                     }
                     
                     .notification {
                         position: fixed;
-                        top: 20px;
-                        right: 20px;
+                        top: 30px;
+                        right: 30px;
                         background: var(--bg-card);
                         color: var(--text-primary);
-                        padding: 20px;
-                        border-radius: 15px;
-                        border-left: 4px solid var(--success);
-                        max-width: 400px;
-                        transform: translateX(450px);
+                        padding: 25px;
+                        border-radius: 20px;
+                        border-left: 5px solid var(--success);
+                        max-width: 450px;
+                        transform: translateX(500px);
                         transition: transform 0.3s ease;
                         z-index: 1000;
-                        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
                     }
                     
                     .notification.show {
@@ -906,7 +937,9 @@ async def dashboard():
                     
                     @media (max-width: 768px) {
                         .header h1 { font-size: 2.5rem; }
-                        .quick-actions { grid-template-columns: 1fr; }
+                        .container { padding: 15px; }
+                        .action-card { padding: 30px; }
+                        .complete-workflow { padding: 30px; }
                     }
                 </style>
             </head>
@@ -922,50 +955,34 @@ async def dashboard():
                         <p>Todos os módulos estão funcionando corretamente</p>
                     </div>
                     
-                    <div class="quick-actions">
-                        <div class="action-card">
-                            <div class="action-icon">⚙️</div>
-                            <div class="action-title">Buscar Produtos</div>
-                            <div class="action-desc">Encontre produtos automaticamente</div>
-                            <a href="/interface/scraper" class="action-btn">Acessar</a>
-                        </div>
-                        
-                        <div class="action-card">
-                            <div class="action-icon">⚙️</div>
-                            <div class="action-title">Gerar Artigos</div>
-                            <div class="action-desc">Crie artigos com IA</div>
-                            <a href="/interface/generator" class="action-btn">Acessar</a>
-                        </div>
-                        
+                    <div class="main-actions">
                         <div class="action-card">
                             <div class="action-icon">📝</div>
-                            <div class="action-title">Revisar Conteúdo</div>
-                            <div class="action-desc">Revise e aprove artigos</div>
-                            <a href="/interface/review" class="action-btn">Acessar</a>
+                            <div class="action-title">Revisão de Artigos</div>
+                            <div class="action-desc">Revise, aprove ou rejeite artigos gerados pela IA</div>
+                            <a href="/interface/review" class="action-btn">Abrir Revisor</a>
                         </div>
                         
                         <div class="action-card">
                             <div class="action-icon">🚀</div>
-                            <div class="action-title">Publicar</div>
-                            <div class="action-desc">Publique no WordPress</div>
-                            <a href="/interface/publisher" class="action-btn">Acessar</a>
-                            </div>
-                        </div>
-                        
-                    <div class="workflow-section">
-                        <h2 class="workflow-title">🎯 Processo Completo</h2>
-                        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 30px;">
-                            Execute todo o fluxo automaticamente: buscar produtos → gerar artigos → disponibilizar para revisão
-                        </p>
-                        
-                        <div class="complete-workflow">
-                            <button onclick="runCompleteWorkflow()" class="action-btn complete-btn">
-                                ✨ Executar Processo Completo Agora
-                            </button>
-                            </div>
+                            <div class="action-title">Publicação</div>
+                            <div class="action-desc">Publique artigos aprovados no WordPress</div>
+                            <a href="/interface/publisher" class="action-btn warning-btn">Publicar Artigos</a>
                         </div>
                     </div>
                     
+                    <div class="complete-workflow">
+                        <h2>🎯 Processo Completo</h2>
+                        <p>
+                            Execute todo o fluxo automaticamente: buscar produtos → gerar artigos → disponibilizar para revisão
+                        </p>
+                        
+                        <button onclick="runCompleteWorkflow()" class="complete-btn">
+                            ✨ Executar Processo Completo
+                        </button>
+                    </div>
+                </div>
+                
                 <div class="notification" id="notification">
                     <div style="font-weight: 600;">✅ Sistema Pronto!</div>
                     <div style="font-size: 0.9rem; margin-top: 5px;">Todas as funcionalidades estão disponíveis</div>
@@ -1034,7 +1051,7 @@ async def dashboard():
                             setTimeout(() => {
                                 completeBtn.style.opacity = '1';
                                 completeBtn.style.pointerEvents = 'auto';
-                                completeBtn.innerHTML = '✨ Executar Processo Completo Agora';
+                                completeBtn.innerHTML = '✨ Executar Processo Completo';
                             }, 5000);
                         })
                         .catch(error => {
@@ -1055,425 +1072,19 @@ async def dashboard():
                             // Reabilitar botão
                             completeBtn.style.opacity = '1';
                             completeBtn.style.pointerEvents = 'auto';
-                            completeBtn.innerHTML = '✨ Executar Processo Completo Agora';
+                            completeBtn.innerHTML = '✨ Executar Processo Completo';
                         });
                     }
-
-                    // Sistema de Execução Individual com Feedback Visual Elegante
-                    async function executeModule(moduleName, endpoint, buttonElement) {
-                        if (!buttonElement) {
-                            console.error('Elemento do botão não encontrado');
-                            return;
-                        }
-                        
-                        const originalText = buttonElement.innerHTML;
-                        
-                        // Estado de loading
-                        buttonElement.innerHTML = '⏳ Verificando...';
-                        buttonElement.style.background = 'linear-gradient(135deg, #6c757d, #495057)';
-                        buttonElement.style.pointerEvents = 'none';
-                        
-                        try {
-                            const response = await fetch(endpoint, {
-                                method: 'GET',
-                                headers: { 'Content-Type': 'application/json' }
-                            });
-                            
-                            if (response.ok) {
-                                const result = await response.json();
-                                
-                                // Simular processamento para melhor UX
-                                await new Promise(resolve => setTimeout(resolve, 1000));
-                                
-                                // Sucesso
-                                buttonElement.innerHTML = '✅ Disponível!';
-                                buttonElement.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
-                                
-                                // Notificação de sucesso
-                                showSuccessNotification(`${moduleName} Verificado!`, `${moduleName} está funcionando corretamente!`);
-                                
-                                // Overlay de sucesso
-                                showSuccessOverlay(`${moduleName} OK! 🎉`, `O módulo ${moduleName} está operacional e pronto para uso.`);
-                                
-                                // Resetar botão após 3 segundos
-                                setTimeout(() => {
-                                    if (buttonElement) {
-                                        buttonElement.innerHTML = originalText;
-                                        buttonElement.style.background = '';
-                                        buttonElement.style.pointerEvents = 'auto';
-                                    }
-                                }, 3000);
-                                
-                            } else {
-                                // Tratar diferentes tipos de erro
-                                let errorMessage = `Erro ${response.status}`;
-                                if (response.status === 503) {
-                                    errorMessage = 'Módulo temporariamente indisponível';
-                                } else if (response.status === 404) {
-                                    errorMessage = 'Endpoint não encontrado';
-                                } else if (response.status >= 500) {
-                                    errorMessage = 'Erro interno do servidor';
-                                }
-                                
-                                // Estado de aviso para módulos não disponíveis
-                                buttonElement.innerHTML = '⚠️ Indisponível';
-                                buttonElement.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
-                                
-                                // Notificação de aviso
-                                showWarningNotification(`${moduleName} Indisponível`, errorMessage);
-                                
-                                // Resetar botão após 3 segundos
-                                setTimeout(() => {
-                                    if (buttonElement) {
-                                        buttonElement.innerHTML = originalText;
-                                        buttonElement.style.background = '';
-                                        buttonElement.style.pointerEvents = 'auto';
-                                    }
-                                }, 3000);
-                            }
-                            
-                        } catch (error) {
-                            console.error(`Erro na verificação do ${moduleName}:`, error);
-                            
-                            // Estado de erro
-                            if (buttonElement) {
-                                buttonElement.innerHTML = '❌ Erro';
-                                buttonElement.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
-                            }
-                            
-                            // Notificação de erro
-                            showErrorNotification(`Erro no ${moduleName}`, 'Não foi possível conectar ao módulo');
-                            
-                            // Resetar botão após 3 segundos
-                            setTimeout(() => {
-                                if (buttonElement) {
-                                    buttonElement.innerHTML = originalText;
-                                    buttonElement.style.background = '';
-                                    buttonElement.style.pointerEvents = 'auto';
-                                }
-                            }, 3000);
-                        }
-                    }
-
-                    function showSuccessNotification(title, message) {
-                        createNotification(title, message, 'success', '🎉');
-                    }
-
-                    function showWarningNotification(title, message) {
-                        createNotification(title, message, 'warning', '⚠️');
-                    }
-
-                    function showErrorNotification(title, message) {
-                        createNotification(title, message, 'error', '❌');
-                    }
-
-                    function createNotification(title, message, type, icon) {
-                        const container = getOrCreateNotificationContainer();
-                        const notification = document.createElement('div');
-                        notification.className = `notification ${type}`;
-                        
-                        notification.innerHTML = `
-                            <div class="notification-content">
-                                <div class="notification-header">
-                                    <span class="notification-icon">${icon}</span>
-                                    <h4 class="notification-title">${title}</h4>
-                                </div>
-                                <p class="notification-message">${message}</p>
-                                <div class="notification-progress"></div>
-                            </div>
-                        `;
-                        
-                        // Aplicar estilos diretamente
-                        notification.style.cssText = `
-                            background: white;
-                            border-radius: 12px;
-                            padding: 20px;
-                            margin-bottom: 15px;
-                            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-                            border-left: 5px solid ${type === 'success' ? '#28a745' : type === 'warning' ? '#f59e0b' : '#dc3545'};
-                            transform: translateX(400px);
-                            animation: slideIn 0.5s ease-out forwards;
-                            position: relative;
-                            overflow: hidden;
-                            max-width: 350px;
-                        `;
-                        
-                        const content = notification.querySelector('.notification-content');
-                        content.style.cssText = 'position: relative; z-index: 2;';
-                        
-                        const header = notification.querySelector('.notification-header');
-                        header.style.cssText = 'display: flex; align-items: center; margin-bottom: 8px;';
-                        
-                        const iconEl = notification.querySelector('.notification-icon');
-                        iconEl.style.cssText = 'font-size: 1.5rem; margin-right: 10px;';
-                        
-                        const titleEl = notification.querySelector('.notification-title');
-                        titleEl.style.cssText = 'font-weight: 600; color: #2c3e50; margin: 0; font-size: 1rem;';
-                        
-                        const messageEl = notification.querySelector('.notification-message');
-                        messageEl.style.cssText = 'color: #7f8c8d; margin: 0; font-size: 0.9rem; line-height: 1.4;';
-                        
-                        const progress = notification.querySelector('.notification-progress');
-                        progress.style.cssText = `
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            height: 3px;
-                            background: ${type === 'success' ? '#28a745' : type === 'warning' ? '#f59e0b' : '#dc3545'};
-                            animation: progressBar 4s linear forwards;
-                            transform-origin: left;
-                        `;
-                        
-                        container.appendChild(notification);
-                        
-                        // Remover após 4 segundos
-                        setTimeout(() => {
-                            notification.style.animation = 'slideOut 0.5s ease-in forwards';
-                            setTimeout(() => {
-                                if (container.contains(notification)) {
-                                    container.removeChild(notification);
-                                }
-                            }, 500);
-                        }, 4000);
-                    }
-
-                    function getOrCreateNotificationContainer() {
-                        let container = document.getElementById('notification-container');
-                        if (!container) {
-                            container = document.createElement('div');
-                            container.id = 'notification-container';
-                            container.style.cssText = `
-                                position: fixed;
-                                top: 20px;
-                                right: 20px;
-                                z-index: 10000;
-                                max-width: 400px;
-                            `;
-                            document.body.appendChild(container);
-                        }
-                        return container;
-                    }
-
-                    function showSuccessOverlay(title, message) {
-                        try {
-                            const overlay = getOrCreateSuccessOverlay();
-                            if (!overlay) {
-                                console.error('Não foi possível criar o overlay');
-                                return;
-                            }
-                            
-                            const titleEl = overlay.querySelector('#success-title');
-                            const messageEl = overlay.querySelector('#success-message');
-                            const contentEl = overlay.querySelector('.success-content');
-                            
-                            if (!titleEl || !messageEl || !contentEl) {
-                                console.error('Elementos do overlay não encontrados');
-                                return;
-                            }
-                            
-                            titleEl.textContent = title;
-                            messageEl.textContent = message;
-                            
-                            overlay.style.display = 'flex';
-                            overlay.offsetHeight; // Force reflow
-                            
-                            // Aplicar estilos de show manualmente
-                            overlay.style.opacity = '1';
-                            contentEl.style.transform = 'scale(1)';
-                            
-                            // Fechar automaticamente após 3 segundos
-                            setTimeout(() => {
-                                if (overlay && contentEl) {
-                                    // Aplicar estilos de hide manualmente
-                                    overlay.style.opacity = '0';
-                                    contentEl.style.transform = 'scale(0.7)';
-                                    setTimeout(() => {
-                                        if (overlay) {
-                                            overlay.style.display = 'none';
-                                        }
-                                    }, 300);
-                                }
-                            }, 3000);
-                            
-                            // Fechar ao clicar
-                            overlay.onclick = () => {
-                                if (overlay && contentEl) {
-                                    overlay.style.opacity = '0';
-                                    contentEl.style.transform = 'scale(0.7)';
-                                    setTimeout(() => {
-                                        if (overlay) {
-                                            overlay.style.display = 'none';
-                                        }
-                                    }, 300);
-                                }
-                            };
-                        } catch (error) {
-                            console.error('Erro ao mostrar overlay de sucesso:', error);
-                        }
-                    }
-
-                    function getOrCreateSuccessOverlay() {
-                        let overlay = document.getElementById('success-overlay');
-                        if (!overlay) {
-                            overlay = document.createElement('div');
-                            overlay.id = 'success-overlay';
-                            overlay.innerHTML = `
-                                <div class="success-content">
-                                    <div class="success-icon">✅</div>
-                                    <h3 id="success-title">Operação Concluída!</h3>
-                                    <p id="success-message">A execução foi realizada com sucesso.</p>
-                                    <div class="success-animation">
-                                        <div class="pulse-ring"></div>
-                                        <div class="pulse-ring delay-1"></div>
-                                        <div class="pulse-ring delay-2"></div>
-                                    </div>
-                                </div>
-                            `;
-                            
-                            overlay.style.cssText = `
-                                position: fixed;
-                                top: 0;
-                                left: 0;
-                                right: 0;
-                                bottom: 0;
-                                background: rgba(0, 0, 0, 0.8);
-                                backdrop-filter: blur(10px);
-                                display: none;
-                                align-items: center;
-                                justify-content: center;
-                                z-index: 10001;
-                                opacity: 0;
-                                transition: all 0.3s ease;
-                            `;
-                            
-                            const content = overlay.querySelector('.success-content');
-                            content.style.cssText = `
-                                background: white;
-                                border-radius: 20px;
-                                padding: 50px;
-                                text-align: center;
-                                max-width: 400px;
-                                position: relative;
-                                transform: scale(0.7);
-                                transition: transform 0.3s ease;
-                            `;
-                            
-                            const icon = overlay.querySelector('.success-icon');
-                            icon.style.cssText = `
-                                font-size: 4rem;
-                                margin-bottom: 20px;
-                                animation: bounce 0.6s ease-out;
-                            `;
-                            
-                            const title = overlay.querySelector('#success-title');
-                            title.style.cssText = `
-                                color: #28a745;
-                                margin-bottom: 15px;
-                                font-size: 1.5rem;
-                                font-weight: 600;
-                            `;
-                            
-                            const message = overlay.querySelector('#success-message');
-                            message.style.cssText = `
-                                color: #7f8c8d;
-                                margin-bottom: 30px;
-                                line-height: 1.5;
-                            `;
-                            
-                            const animation = overlay.querySelector('.success-animation');
-                            animation.style.cssText = `
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                transform: translate(-50%, -50%);
-                                pointer-events: none;
-                            `;
-                            
-                            document.body.appendChild(overlay);
-                        }
-                        
-                        return overlay;
-                    }
-
-                    // Adicionar CSS para animações
-                    const style = document.createElement('style');
-                    style.textContent = `
-                        @keyframes slideIn {
-                            to { transform: translateX(0); }
-                        }
-                        
-                        @keyframes slideOut {
-                            to { transform: translateX(400px); }
-                        }
-                        
-                        @keyframes progressBar {
-                            from { transform: scaleX(1); }
-                            to { transform: scaleX(0); }
-                        }
-                        
-                        @keyframes bounce {
-                            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
-                            40%, 43% { transform: translate3d(0,-30px,0); }
-                            70% { transform: translate3d(0,-15px,0); }
-                            90% { transform: translate3d(0,-4px,0); }
-                        }
-                        
-                        @keyframes pulse {
-                            0% {
-                                transform: translate(-50%, -50%) scale(0.5);
-                                opacity: 1;
-                            }
-                            100% {
-                                transform: translate(-50%, -50%) scale(2);
-                                opacity: 0;
-                            }
-                        }
-                        
-                        .pulse-ring {
-                            position: absolute;
-                            width: 100px;
-                            height: 100px;
-                            border: 3px solid #28a745;
-                            border-radius: 50%;
-                            opacity: 0;
-                            animation: pulse 2s ease-out infinite;
-                        }
-                        
-                        .pulse-ring.delay-1 {
-                            animation-delay: 0.5s;
-                        }
-                        
-                        .pulse-ring.delay-2 {
-                            animation-delay: 1s;
-                        }
-                        
-                        .execution-btn {
-                            transition: all 0.3s ease;
-                            padding: 12px 24px;
-                            border: none;
-                            border-radius: 8px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            font-size: 0.9rem;
-                            margin: 5px;
-                        }
-                        
-                        .execution-btn:hover {
-                            transform: translateY(-2px);
-                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                        }
-                    `;
-                    document.head.appendChild(style);
                 </script>
             </body>
         </html>
         """
         
-        return HTMLResponse(html_content)
+        return HTMLResponse(content=html_content)
         
     except Exception as e:
         logger.error(f"Erro no dashboard: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno do servidor: {str(e)}")
+        return JSONResponse({"error": "Erro interno do servidor"}, status_code=500)
 
 
 @app.get("/health")
