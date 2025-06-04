@@ -209,7 +209,15 @@ async def lifespan(app: FastAPI):
         if SCHEDULER_AVAILABLE:
             try:
                 global scheduler_manager
-                scheduler_manager = SchedulerManager()
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
                 scheduler_manager.start()
                 logger.info("⏰ Scheduler iniciado com sucesso")
             except Exception as e:
@@ -2909,15 +2917,28 @@ async def get_review_articles(status: str = None, limit: int = 50):
 @app.get("/review/{article_id}")
 async def review_article_view(article_id: int):
     """Visualizar artigo específico"""
+    
+    # Forçar Content-Type para JSON
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    
     if not REVIEW_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
+        return JSONResponse({
+            "success": False,
+            "error": "Módulo Review não disponível",
+            "status_code": 503
+        }, status_code=503, headers=headers)
     
     try:
         review_manager = ReviewManager()
         article = review_manager.get_article(article_id)
         
         if not article:
-            raise HTTPException(status_code=404, detail="Artigo não encontrado")
+            return JSONResponse({
+                "success": False,
+                "error": "Artigo não encontrado",
+                "status_code": 404,
+                "article_id": article_id
+            }, status_code=404, headers=headers)
         
         # Converter para dict simples
         article_dict = dict(article)
@@ -2930,14 +2951,27 @@ async def review_article_view(article_id: int):
         article_dict['slug'] = article_dict.get('slug') or ''
         article_dict['tags'] = article_dict.get('tags') or []
         
-        # Sempre retornar JSON para evitar problemas com templates
-        return JSONResponse(article_dict, media_type="application/json; charset=utf-8")
+        # Garantir que datas sejam strings
+        if 'data_criacao' in article_dict and article_dict['data_criacao']:
+            article_dict['data_criacao'] = str(article_dict['data_criacao'])
         
-    except HTTPException:
-        raise
+        if 'data_revisao' in article_dict and article_dict['data_revisao']:
+            article_dict['data_revisao'] = str(article_dict['data_revisao'])
+        
+        return JSONResponse({
+            "success": True,
+            "article": article_dict,
+            "article_id": article_id
+        }, headers=headers)
+        
     except Exception as e:
         logger.error(f"❌ Erro ao carregar artigo {article_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+        return JSONResponse({
+            "success": False,
+            "error": f"Erro interno: {str(e)}",
+            "status_code": 500,
+            "article_id": article_id
+        }, status_code=500, headers=headers)
 
 @app.get("/review/{article_id}/edit", response_class=HTMLResponse)
 async def review_article_edit(article_id: int):
@@ -2974,8 +3008,16 @@ async def review_article_edit(article_id: int):
 @app.post("/review/{article_id}/update")
 async def review_article_update(article_id: int, request: ReviewRequest):
     """Atualizar dados do artigo"""
+    
+    # Forçar Content-Type para JSON
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    
     if not REVIEW_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
+        return JSONResponse({
+            "success": False,
+            "error": "Módulo Review não disponível",
+            "status_code": 503
+        }, status_code=503, headers=headers)
     
     try:
         review_manager = ReviewManager()
@@ -2984,12 +3026,22 @@ async def review_article_update(article_id: int, request: ReviewRequest):
         updates = {k: v for k, v in request.dict().items() if v is not None}
         
         if not updates:
-            raise HTTPException(status_code=400, detail="Nenhum campo válido para atualizar")
+            return JSONResponse({
+                "success": False,
+                "error": "Nenhum campo válido para atualizar",
+                "status_code": 400,
+                "article_id": article_id
+            }, status_code=400, headers=headers)
         
         success = review_manager.update_article(article_id, updates, "API User")
         
         if not success:
-            raise HTTPException(status_code=404, detail="Artigo não encontrado")
+            return JSONResponse({
+                "success": False,
+                "error": "Artigo não encontrado",
+                "status_code": 404,
+                "article_id": article_id
+            }, status_code=404, headers=headers)
         
         # Retornar artigo atualizado
         updated_article = review_manager.get_article(article_id)
@@ -2997,22 +3049,38 @@ async def review_article_update(article_id: int, request: ReviewRequest):
         return JSONResponse({
             "success": True,
             "message": "Artigo atualizado com sucesso",
-            "article": updated_article
-        })
+            "article": dict(updated_article) if updated_article else None,
+            "article_id": article_id
+        }, headers=headers)
         
-    except HTTPException:
-        raise
     except Exception as e:
         logger.error(f"❌ Erro ao atualizar artigo {article_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+        return JSONResponse({
+            "success": False,
+            "error": f"Erro interno: {str(e)}",
+            "status_code": 500,
+            "article_id": article_id
+        }, status_code=500, headers=headers)
 
 @app.post("/review/{article_id}/approve")
-async def review_article_approve(article_id: int, request: ReviewActionRequest):
+async def review_article_approve(article_id: int, request: ReviewActionRequest = None):
     """Aprovar artigo para publicação"""
+    
+    # Forçar Content-Type para JSON
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    
     if not REVIEW_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
+        return JSONResponse({
+            "success": False,
+            "error": "Módulo Review não disponível",
+            "status_code": 503
+        }, status_code=503, headers=headers)
     
     try:
+        # Se request é None, criar um vazio
+        if not request:
+            request = ReviewActionRequest()
+        
         review_manager = ReviewManager()
         
         success = review_manager.approve_article(
@@ -3022,30 +3090,56 @@ async def review_article_approve(article_id: int, request: ReviewActionRequest):
         )
         
         if not success:
-            raise HTTPException(status_code=404, detail="Artigo não encontrado")
+            return JSONResponse({
+                "success": False,
+                "error": "Artigo não encontrado",
+                "status_code": 404,
+                "article_id": article_id
+            }, status_code=404, headers=headers)
         
         return JSONResponse({
             "success": True,
             "message": f"Artigo {article_id} aprovado com sucesso",
             "action": "approved",
-            "reviewer": request.reviewer
-        })
+            "reviewer": request.reviewer,
+            "article_id": article_id
+        }, headers=headers)
         
-    except HTTPException:
-        raise
     except Exception as e:
         logger.error(f"❌ Erro ao aprovar artigo {article_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+        return JSONResponse({
+            "success": False,
+            "error": f"Erro interno: {str(e)}",
+            "status_code": 500,
+            "article_id": article_id
+        }, status_code=500, headers=headers)
 
 @app.post("/review/{article_id}/reject")
-async def review_article_reject(article_id: int, request: ReviewActionRequest):
+async def review_article_reject(article_id: int, request: ReviewActionRequest = None):
     """Rejeitar artigo"""
+    
+    # Forçar Content-Type para JSON
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    
     if not REVIEW_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
+        return JSONResponse({
+            "success": False,
+            "error": "Módulo Review não disponível",
+            "status_code": 503
+        }, status_code=503, headers=headers)
     
     try:
+        # Se request é None, criar um vazio
+        if not request:
+            request = ReviewActionRequest()
+        
         if not request.comment:
-            raise HTTPException(status_code=400, detail="Motivo da rejeição é obrigatório")
+            return JSONResponse({
+                "success": False,
+                "error": "Motivo da rejeição é obrigatório",
+                "status_code": 400,
+                "article_id": article_id
+            }, status_code=400, headers=headers)
         
         review_manager = ReviewManager()
         
@@ -3056,45 +3150,71 @@ async def review_article_reject(article_id: int, request: ReviewActionRequest):
         )
         
         if not success:
-            raise HTTPException(status_code=404, detail="Artigo não encontrado")
+            return JSONResponse({
+                "success": False,
+                "error": "Artigo não encontrado",
+                "status_code": 404,
+                "article_id": article_id
+            }, status_code=404, headers=headers)
         
         return JSONResponse({
             "success": True,
             "message": f"Artigo {article_id} rejeitado",
             "action": "rejected",
             "reason": request.comment,
-            "reviewer": request.reviewer
-        })
+            "reviewer": request.reviewer,
+            "article_id": article_id
+        }, headers=headers)
         
-    except HTTPException:
-        raise
     except Exception as e:
         logger.error(f"❌ Erro ao rejeitar artigo {article_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+        return JSONResponse({
+            "success": False,
+            "error": f"Erro interno: {str(e)}",
+            "status_code": 500,
+            "article_id": article_id
+        }, status_code=500, headers=headers)
 
 @app.delete("/review/{article_id}")
 async def review_delete_article(article_id: int):
     """Remover artigo do sistema"""
+    
+    # Forçar Content-Type para JSON
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    
     if not REVIEW_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
+        return JSONResponse({
+            "success": False,
+            "error": "Módulo Review não disponível",
+            "status_code": 503
+        }, status_code=503, headers=headers)
     
     try:
         review_manager = ReviewManager()
         success = review_manager.delete_article(article_id, "API User")
         
         if not success:
-            raise HTTPException(status_code=404, detail="Artigo não encontrado")
+            return JSONResponse({
+                "success": False,
+                "error": "Artigo não encontrado",
+                "status_code": 404,
+                "article_id": article_id
+            }, status_code=404, headers=headers)
         
         return JSONResponse({
             "success": True,
-            "message": f"Artigo {article_id} removido com sucesso"
-        })
+            "message": f"Artigo {article_id} removido com sucesso",
+            "article_id": article_id
+        }, headers=headers)
         
-    except HTTPException:
-        raise
     except Exception as e:
         logger.error(f"❌ Erro ao remover artigo {article_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+        return JSONResponse({
+            "success": False,
+            "error": f"Erro interno: {str(e)}",
+            "status_code": 500,
+            "article_id": article_id
+        }, status_code=500, headers=headers)
 
 @app.post("/review/save-from-generator")
 async def review_save_from_generator(article_data: dict):
@@ -3711,6 +3831,75 @@ async def debug_env():
         }
     }
 
+@app.get("/debug/wordpress-auth")
+async def debug_wordpress_auth():
+    """Debug específico para autenticação WordPress"""
+    try:
+        from src.publisher.wordpress_client import WordPressClient
+        
+        # Obter credenciais das variáveis de ambiente
+        wp_site_url = os.getenv('WP_SITE_URL')
+        wp_username = os.getenv('WP_USERNAME') 
+        wp_password = os.getenv('WP_PASSWORD')
+        
+        if not all([wp_site_url, wp_username, wp_password]):
+            return {
+                "error": "Credenciais WordPress não configuradas",
+                "missing": {
+                    "WP_SITE_URL": not wp_site_url,
+                    "WP_USERNAME": not wp_username, 
+                    "WP_PASSWORD": not wp_password
+                }
+            }
+        
+        # Testar conexão
+        client = WordPressClient(wp_site_url, wp_username, wp_password)
+        test_result = client.test_connection()
+        
+        # Informações adicionais
+        debug_info = {
+            "credentials": {
+                "site_url": wp_site_url,
+                "username": wp_username,
+                "password_length": len(wp_password) if wp_password else 0,
+                "password_preview": f"{wp_password[:4]}..." if wp_password else None
+            },
+            "test_result": test_result
+        }
+        
+        # Testar criação de post de teste (se autenticado)
+        if test_result.get('authenticated'):
+            try:
+                test_post = {
+                    'title': 'Teste de Autenticação - Sistema SEO',
+                    'content': '<p>Este é um post de teste para verificar autenticação. Pode ser removido.</p>',
+                    'status': 'draft'  # Criar como rascunho
+                }
+                
+                create_result = client.create_post(test_post)
+                debug_info["create_test"] = {
+                    "success": create_result is not None,
+                    "post_id": create_result.get('id') if create_result else None
+                }
+                
+                # Remover o post de teste se foi criado
+                if create_result:
+                    client.delete_post(create_result['id'], force=True)
+                    debug_info["create_test"]["cleaned_up"] = True
+                    
+            except Exception as e:
+                debug_info["create_test"] = {
+                    "success": False,
+                    "error": str(e)
+                }
+        
+        return debug_info
+        
+    except Exception as e:
+        return {
+            "error": f"Erro no diagnóstico: {str(e)}"
+        }
+
 
 # =====================================================
 # ROTAS DO MÓDULO SCHEDULER
@@ -3718,47 +3907,51 @@ async def debug_env():
 
 @app.get("/scheduler")
 async def scheduler_status():
-    """Status detalhado do módulo de agendamento"""
-    if not SCHEDULER_AVAILABLE:
-        return {
-            "module": "scheduler",
-            "status": "not_available",
-            "message": "Módulo scheduler não foi importado corretamente",
-            "dependencies": ["APScheduler"]
-        }
-    
-    if 'scheduler_manager' not in globals():
-        return {
-            "module": "scheduler",
-            "status": "not_initialized",
-            "message": "Scheduler manager não foi inicializado"
-        }
-    
+    """Status do sistema de agendamento"""
     try:
+        if not SCHEDULER_AVAILABLE:
+            return {
+                "success": False,
+                "status": "disabled",
+                "message": "Scheduler não está disponível - APScheduler não instalado",
+                "available_jobs": [],
+                "next_executions": []
+            }
+        
+        if 'scheduler_manager' not in globals():
+            return {
+                "success": True,
+                "status": "not_initialized",
+                "message": "Scheduler ainda não foi inicializado",
+                "available_jobs": [],
+                "next_executions": []
+            }
+        
         status_data = scheduler_manager.get_status()
-        next_executions = scheduler_manager.get_next_executions(24)
+        
+        # Adicionar informações de configuração
+        status_data["configuration"] = {
+            "base_url": scheduler_manager.base_url,
+            "system_url": os.getenv('SYSTEM_BASE_URL', 'Não configurada'),
+            "scheduler_url": os.getenv('SCHEDULER_BASE_URL', 'Não configurada'),
+            "host": os.getenv('HOST', '0.0.0.0'),
+            "port": os.getenv('PORT', '3025')
+        }
         
         return {
-            "module": "scheduler",
-            "status": "operational" if status_data.get("is_running") else "stopped",
-            "description": "Módulo para agendamento automático de tarefas",
-            "data": status_data,
-            "next_24h": next_executions,
-            "actions": {
-                "get_status": "/scheduler/status",
-                "run_manual": "/scheduler/run",
-                "pause": "/scheduler/pause",
-                "resume": "/scheduler/resume",
-                "next_executions": "/scheduler/next"
-            }
+            "success": True,
+            "status": "operational" if status_data["is_running"] else "stopped",
+            "scheduler": status_data,
+            "message": f"Scheduler {'ativo' if status_data['is_running'] else 'parado'} com {len(status_data['active_jobs'])} jobs configurados"
         }
         
     except Exception as e:
         logger.error(f"❌ Erro ao obter status do scheduler: {e}")
         return {
-            "module": "scheduler",
+            "success": False,
             "status": "error",
-            "message": str(e)
+            "message": f"Erro ao obter status: {str(e)}",
+            "error": str(e)
         }
 
 @app.get("/scheduler/status")
@@ -4099,13 +4292,27 @@ async def config_interface():
 @app.exception_handler(404)
 async def not_found_handler(request, exc):
     """Tratamento de páginas não encontradas"""
+    
+    # Verificar se a requisição espera JSON
+    accept_header = request.headers.get("accept", "")
+    content_type = request.headers.get("content-type", "")
+    
+    if "application/json" in accept_header or "application/json" in content_type or request.url.path.startswith("/review/") or request.url.path.startswith("/api/"):
+        return JSONResponse({
+            "success": False,
+            "error": "Endpoint não encontrado",
+            "status_code": 404,
+            "path": str(request.url.path)
+        }, status_code=404, headers={"Content-Type": "application/json; charset=utf-8"})
+    
+    # Retornar HTML para requisições de browser
     return HTMLResponse(
         content="""
         <html>
-            <body style="font-family: Arial; text-align: center; margin-top: 50px;">
+            <body style="font-family: Arial; text-align: center; margin-top: 50px; background: #0a0a0a; color: white;">
                 <h1>404 - Página não encontrada</h1>
                 <p>A página que você procura não existe.</p>
-                <a href="/">Voltar ao Dashboard</a>
+                <a href="/" style="color: #007aff;">Voltar ao Dashboard</a>
             </body>
         </html>
         """,
@@ -4117,13 +4324,27 @@ async def not_found_handler(request, exc):
 async def internal_error_handler(request, exc):
     """Tratamento de erros internos"""
     logger.error(f"Erro interno: {exc}")
+    
+    # Verificar se a requisição espera JSON
+    accept_header = request.headers.get("accept", "")
+    content_type = request.headers.get("content-type", "")
+    
+    if "application/json" in accept_header or "application/json" in content_type or request.url.path.startswith("/review/") or request.url.path.startswith("/api/"):
+        return JSONResponse({
+            "success": False,
+            "error": "Erro interno do servidor",
+            "status_code": 500,
+            "path": str(request.url.path)
+        }, status_code=500, headers={"Content-Type": "application/json; charset=utf-8"})
+    
+    # Retornar HTML para requisições de browser
     return HTMLResponse(
         content="""
         <html>
-            <body style="font-family: Arial; text-align: center; margin-top: 50px;">
+            <body style="font-family: Arial; text-align: center; margin-top: 50px; background: #0a0a0a; color: white;">
                 <h1>500 - Erro interno do servidor</h1>
                 <p>Ocorreu um erro interno. Verifique os logs.</p>
-                <a href="/">Voltar ao Dashboard</a>
+                <a href="/" style="color: #007aff;">Voltar ao Dashboard</a>
             </body>
         </html>
         """,
@@ -4278,6 +4499,60 @@ async def test_wordpress_connection():
     except Exception as e:
         logger.error(f"❌ Erro no teste WordPress: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/test/review-api")
+async def test_review_api():
+    """Endpoint de teste para verificar se a API de review está funcionando corretamente"""
+    try:
+        # Testar se módulo review está disponível
+        if not REVIEW_AVAILABLE:
+            return JSONResponse({
+                "success": False,
+                "error": "Módulo Review não disponível",
+                "tests": {
+                    "module_available": False
+                }
+            }, headers={"Content-Type": "application/json; charset=utf-8"})
+        
+        # Testar listagem de artigos
+        review_manager = ReviewManager()
+        articles = review_manager.list_articles(limit=1)
+        
+        tests = {
+            "module_available": True,
+            "can_list_articles": True,
+            "articles_count": len(articles),
+            "first_article": articles[0] if articles else None
+        }
+        
+        # Se há artigos, testar visualização
+        if articles:
+            article_id = articles[0].get('id')
+            if article_id:
+                try:
+                    article = review_manager.get_article(article_id)
+                    tests["can_get_article"] = article is not None
+                    tests["test_article_id"] = article_id
+                except Exception as e:
+                    tests["can_get_article"] = False
+                    tests["get_article_error"] = str(e)
+        
+        return JSONResponse({
+            "success": True,
+            "message": "API de review testada com sucesso",
+            "tests": tests,
+            "timestamp": datetime.now().isoformat()
+        }, headers={"Content-Type": "application/json; charset=utf-8"})
+        
+    except Exception as e:
+        logger.error(f"❌ Erro no teste da API: {e}")
+        return JSONResponse({
+            "success": False,
+            "error": f"Erro no teste: {str(e)}",
+            "tests": {
+                "module_available": REVIEW_AVAILABLE
+            }
+        }, status_code=500, headers={"Content-Type": "application/json; charset=utf-8"})
 
 
 # =====================================================
