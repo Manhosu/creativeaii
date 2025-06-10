@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configuração de Categorias - Gerador Automático de Conteúdo SEO">
+    <title>Configuração de Categorias</title>
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="/static/styles.css" as="style">
+    
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234f46e5' d='M12 2L2 7v10c0 5.55 3.84 10 9 10s9-4.45 9-10V7L12 2z'/%3E%3C/svg%3E">
+    
+    <!-- CSS Crítico Inline -->
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgb(79 70 229 / 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-error {
+            background: var(--error);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .categories-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .category-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .category-item:hover {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-info {
+            flex: 1;
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .category-url {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .stat-badge {
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .category-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow-lg);
+            border-left: 4px solid var(--primary);
+            z-index: 1000;
+            max-width: 350px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left-color: var(--success);
+        }
+
+        .notification.error {
+            border-left-color: var(--error);
+        }
+
+        .notification.warning {
+            border-left-color: var(--warning);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: var(--success);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">⚙️ Configuração de Categorias</a>
+                <nav class="nav-links">
+                    <a href="/interface/scraper" class="nav-link">🔍 Scraper</a>
+                    <a href="/interface/generator" class="nav-link">✨ Gerador</a>
+                    <a href="/interface/review" class="nav-link">📝 Revisão</a>
+                    <a href="/interface/publisher" class="nav-link">🚀 Publicador</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Adicionar Nova Categoria -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>➕ Adicionar Nova Categoria</h2>
+                    <p>Adicione links de categorias para que o sistema possa buscar produtos automaticamente</p>
+                </div>
+                <div class="card-content">
+                    <form id="addCategoryForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="input-group">
+                                <label class="input-label" for="categoryName">📂 Nome da Categoria</label>
+                                <input type="text" id="categoryName" class="input-field" 
+                                       placeholder="Ex: IMPRESSORAS" required>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label" for="categoryKey">🔑 Chave da Categoria</label>
+                                <input type="text" id="categoryKey" class="input-field" 
+                                       placeholder="Ex: impressoras" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="categoryUrl">🔗 URL da Categoria</label>
+                            <input type="url" id="categoryUrl" class="input-field" 
+                                   placeholder="https://www.creativecopias.com.br/categoria-exemplo" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text">➕ Adicionar Categoria</span>
+                            <div class="loading" style="display: none;"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Categorias Existentes -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>📋 Categorias Configuradas</h2>
+                    <p>Gerencie as categorias existentes e veja estatísticas de produtos</p>
+                    <button onclick="updateAllCounts()" class="btn btn-secondary" style="margin-top: 10px;">
+                        🔄 Atualizar Contagens
+                    </button>
+                </div>
+                <div class="card-content">
+                    <div class="categories-grid" id="categoriesList">
+                        <!-- Categorias serão carregadas aqui -->
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <div class="loading"></div>
+                            <p style="margin-top: 10px;">Carregando categorias...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <div id="notificationContent"></div>
+    </div>
+
+    <script>
+        // Função para mostrar notificações
+        function showNotification(title, message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const content = document.getElementById('notificationContent');
+            
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : 'ℹ️';
+            
+            content.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 4px;">${icon} ${title}</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">${message}</div>
+            `;
+            
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.className = `notification ${type}`;
+            }, 5000);
+        }
+
+        // Função para carregar categorias
+        async function loadCategories() {
+            try {
+                const response = await fetch('/config/categories');
+                const data = await response.json();
+                
+                const container = document.getElementById('categoriesList');
+                
+                if (!data.success || !data.categories || data.categories.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <h3>📂 Nenhuma categoria encontrada</h3>
+                            <p>Adicione uma categoria usando o formulário acima</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                data.categories.forEach(categoria => {
+                    const isActive = categoria.is_active;
+                    const lastScraped = categoria.last_scraped ? 
+                        new Date(categoria.last_scraped).toLocaleDateString('pt-BR') : 'Nunca';
+                    
+                    html += `
+                        <div class="category-item">
+                            <div class="category-info">
+                                <div class="category-name">${categoria.category_name}</div>
+                                <div class="category-url">${categoria.category_url}</div>
+                                <div class="category-stats">
+                                    <span class="stat-badge">${categoria.products_count || 0} produtos</span>
+                                    <span class="stat-badge">Último: ${lastScraped}</span>
+                                    <span class="stat-badge">Prioridade: ${categoria.priority || 0}</span>
+                                </div>
+                            </div>
+                            <div class="category-actions">
+                                <div class="toggle-switch ${isActive ? 'active' : ''}" 
+                                     onclick="toggleCategory('${categoria.category_key}', ${!isActive})">
+                                </div>
+                                <button class="btn btn-secondary btn-small" 
+                                        onclick="testCategory('${categoria.category_key}')">
+                                    🔍 Testar
+                                </button>
+                                <button class="btn btn-error btn-small" 
+                                        onclick="removeCategory('${categoria.category_key}')">
+                                    🗑️ Remover
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Erro ao carregar categorias:', error);
+                document.getElementById('categoriesList').innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--error);">
+                        <h3>❌ Erro ao carregar categorias</h3>
+                        <p>Tente recarregar a página</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Função para adicionar categoria
+        async function addCategory(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const loading = submitBtn.querySelector('.loading');
+            
+            // Mostrar loading
+            btnText.style.display = 'none';
+            loading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            const formData = {
+                category_name: document.getElementById('categoryName').value,
+                category_key: document.getElementById('categoryKey').value,
+                category_url: document.getElementById('categoryUrl').value
+            };
+            
+            try {
+                const response = await fetch('/config/categories', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Categoria Adicionada', 'Nova categoria configurada com sucesso!', 'success');
+                    form.reset();
+                    loadCategories();
+                } else {
+                    showNotification('❌ Erro', data.error || 'Erro ao adicionar categoria', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro de conexão ao adicionar categoria', 'error');
+            } finally {
+                // Restaurar botão
+                btnText.style.display = 'inline';
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Função para ativar/desativar categoria
+        async function toggleCategory(categoryKey, isActive) {
+            try {
+                const response = await fetch(`/config/categories/${categoryKey}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ is_active: isActive })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Categoria Atualizada', 
+                        `Categoria ${isActive ? 'ativada' : 'desativada'} com sucesso!`, 'success');
+                    loadCategories();
+                } else {
+                    showNotification('❌ Erro', data.error || 'Erro ao atualizar categoria', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro de conexão ao atualizar categoria', 'error');
+            }
+        }
+
+        // Função para testar categoria
+        async function testCategory(categoryKey) {
+            showNotification('🔍 Testando', 'Verificando categoria...', 'info');
+            
+            try {
+                const response = await fetch(`/config/categories/${categoryKey}/test`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Teste Concluído', 
+                        `${data.products_found} produtos encontrados na categoria`, 'success');
+                } else {
+                    showNotification('❌ Teste Falhou', data.error || 'Erro ao testar categoria', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro de conexão ao testar categoria', 'error');
+            }
+        }
+
+        // Função para remover categoria
+        async function removeCategory(categoryKey) {
+            if (!confirm('Tem certeza que deseja remover esta categoria?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/config/categories/${categoryKey}`, {
+                    method: 'DELETE'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Categoria Removida', 'Categoria removida com sucesso!', 'success');
+                    loadCategories();
+                } else {
+                    showNotification('❌ Erro', data.error || 'Erro ao remover categoria', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro de conexão ao remover categoria', 'error');
+            }
+        }
+
+        // Função para atualizar contagens de produtos
+        async function updateAllCounts() {
+            showNotification('🔄 Atualizando', 'Contando produtos por categoria...', 'info');
+            
+            try {
+                const response = await fetch('/config/categories/update-counts', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Contagens Atualizadas', 
+                        `${data.total_products} produtos contados em ${data.categories.length} categorias`, 'success');
+                    loadCategories(); // Recarregar lista para mostrar novos números
+                } else {
+                    showNotification('❌ Erro', data.error || 'Erro ao atualizar contagens', 'error');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro de conexão ao atualizar contagens', 'error');
+            }
+        }
+
+        // Auto-gerar chave da categoria baseada no nome
+        document.getElementById('categoryName').addEventListener('input', function(e) {
+            const name = e.target.value;
+            const key = name.toLowerCase()
+                           .replace(/\s+/g, '-')
+                           .replace(/[^a-z0-9\-]/g, '')
+                           .replace(/\-+/g, '-')
+                           .replace(/^\-|\-$/g, '');
+            document.getElementById('categoryKey').value = key;
+        });
+
+        // Event Listeners
+        document.getElementById('addCategoryForm').addEventListener('submit', addCategory);
+
+        // Inicializar página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategories();
+        });
+    </script>
+</body>
+</html> 

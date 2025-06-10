@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação Comercial</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm 2cm;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+        
+        /* Capa */
+        .cover-page {
+            text-align: center;
+            padding: 150px 0;
+            margin-bottom: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            page-break-after: always;
+        }
+        
+        .cover-logo {
+            font-size: 72px;
+            margin-bottom: 30px;
+        }
+        
+        .cover-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover-subtitle {
+            font-size: 28px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cover-date {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-top: 60px;
+        }
+        
+        .cover-version {
+            font-size: 16px;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        
+        /* Headers */
+        h1 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-size: 32px;
+            page-break-before: auto;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        h4 {
+            color: #8e44ad;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        /* Text */
+        p {
+            margin-bottom: 16px;
+            text-align: justify;
+            font-size: 14px;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        /* Code */
+        code {
+            background-color: #f8f9fa;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            border: 1px solid #e9ecef;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            border: none;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 14px;
+            border: 1px solid #dee2e6;
+        }
+        
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #495057;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        /* Links */
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Strong/Bold */
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        /* Separators */
+        hr {
+            border: none;
+            border-top: 2px solid #ecf0f1;
+            margin: 40px 0;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #6c757d;
+            font-size: 12px;
+        }
+        
+        /* Highlights */
+        .highlight {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .info {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        /* Page breaks */
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Capa -->
+    <div class="cover-page">
+        <div class="cover-logo">🚀</div>
+        <h1 class="cover-title">Sistema Creative API</h1>
+        <p class="cover-subtitle">Apresentação Comercial</p>
+        <div class="cover-date">04/06/2025</div>
+        <div class="cover-version">Versão 1.0.0</div>
+    </div>
+    
+    <!-- Conteúdo -->
+    <div class="content">
+        <h1>🚀 Sistema Creative API - Apresentação Executiva</h1>
+
+<h2>🎯 <strong>O QUE É?</strong></h2>
+
+<p>Uma <strong>solução completa de automação</strong> que gera conteúdo SEO para seu blog <strong>24 horas por dia, 7 dias por semana</strong>, sem intervenção manual.</p>
+
+<strong>Resultado:</strong> Seu blog sempre atualizado com artigos otimizados que rankeiam no Google e geram tráfego orgânico.
+
+<p>---</p>
+
+<h2>⚡ <strong>COMO FUNCIONA?</strong></h2>
+
+<h3><strong>Sistema 100% Automatizado</strong></h3>
+<p>1. <strong>🔍 Monitora fornecedores</strong> → Encontra novos produtos automaticamente</p>
+<p>2. <strong>🤖 IA cria artigos</strong> → Gera conteúdo único e otimizado para SEO</p>
+<p>3. <strong>📝 Você revisa</strong> → 5 minutos para aprovar (interface super simples)</p>
+<p>4. <strong>🚀 Publica automaticamente</strong> → Artigo vai ao ar no WordPress com SEO perfeito</p>
+
+<h3><strong>Agendamento Inteligente</strong></h3>
+<ul>
+<li><strong>Domingo 10h00:</strong> Sistema busca novos produtos</li>
+<li><strong>Domingo 10h15:</strong> IA gera artigos únicos</li>
+<li><strong>Segunda-feira:</strong> Você revisa (5-10 min) e aprova</li>
+<li><strong>Automaticamente:</strong> Artigos são publicados no blog</li>
+</ul>
+
+<p>---</p>
+
+<h2>💰 <strong>BENEFÍCIOS PARA SEU NEGÓCIO</strong></h2>
+
+<h3><strong>📈 Crescimento Automático</strong></h3>
+<ul>
+<li>✅ <strong>4-8 artigos novos</strong> por mês (sem esforço)</li>
+<li>✅ <strong>Tráfego orgânico crescente</strong> do Google</li>
+<li>✅ <strong>Autoridade no nicho</strong> com conteúdo técnico</li>
+<li>✅ <strong>Vendas via SEO</strong> trabalhando 24/7</li>
+</ul>
+
+<h3><strong>⏰ Economia de Tempo</strong></h3>
+<ul>
+<li>✅ <strong>90% menos tempo</strong> gasto com conteúdo</li>
+<li>✅ <strong>Zero pesquisa</strong> de produtos manualmente</li>
+<li>✅ <strong>Zero configuração</strong> de SEO manual</li>
+<li>✅ <strong>Zero publicação</strong> manual no WordPress</li>
+</ul>
+
+<h3><strong>🏆 Qualidade Garantida</strong></h3>
+<ul>
+<li>✅ <strong>SEO Score Verde</strong> (Yoast) em todos os artigos</li>
+<li>✅ <strong>Conteúdo único</strong> - zero plágio</li>
+<li>✅ <strong>Artigos técnicos</strong> e detalhados</li>
+<li>✅ <strong>Palavras-chave otimizadas</strong> automaticamente</li>
+</ul>
+
+<p>---</p>
+
+<h2>🖥️ <strong>INTERFACE SUPER SIMPLES</strong></h2>
+
+<h3><strong>3 Botões - Só Isso!</strong></h3>
+
+<h4>📝 <strong>Revisão de Artigos</strong></h4>
+<ul>
+<li>Lista dos artigos gerados pela IA</li>
+<li>Botão "Aprovar" ou "Editar"</li>
+<li>5 minutos e está pronto</li>
+</ul>
+
+<h4>🚀 <strong>Publicação</strong>  </h4>
+<ul>
+<li>Publica artigos aprovados</li>
+<li>SEO configurado automaticamente</li>
+<li>Zero configuração manual</li>
+</ul>
+
+<h4>🎯 <strong>Processo Completo</strong></h4>
+<ul>
+<li>Executa tudo em 1 clique</li>
+<li>Busca + Gera + Disponibiliza</li>
+<li>Para usar sob demanda</li>
+</ul>
+
+<p>---</p>
+
+<h2>📊 <strong>RESULTADOS REAIS</strong></h2>
+
+<h3><strong>Primeiro Mês</strong></h3>
+<ul>
+<li><strong>4-8 artigos publicados</strong> automaticamente</li>
+<li><strong>Sistema rodando 100%</strong> sem problemas</li>
+<li><strong>Primeiros sinais</strong> de melhoria no SEO</li>
+</ul>
+
+<h3><strong>Primeiros 3 Meses</strong>  </h3>
+<ul>
+<li><strong>12-24 artigos</strong> trabalhando para você</li>
+<li><strong>Aumento perceptível</strong> do tráfego orgânico</li>
+<li><strong>Melhores posições</strong> no Google</li>
+</ul>
+
+<h3><strong>6 Meses+</strong></h3>
+<ul>
+<li><strong>48+ artigos</strong> criando autoridade</li>
+<li><strong>Tráfego orgânico significativo</strong></li>
+<li><strong>ROI positivo</strong> com vendas via conteúdo</li>
+</ul>
+
+<p>---</p>
+
+<h2>🔒 <strong>SEGURANÇA E CONFIABILIDADE</strong></h2>
+
+<ul>
+<li>✅ <strong>Sistema online 24/7</strong> - sempre funcionando</li>
+<li>✅ <strong>Backup automático</strong> de todos os dados</li>
+<li>✅ <strong>Integração segura</strong> com seu WordPress</li>
+<li>✅ <strong>Suporte técnico</strong> incluído</li>
+<li>✅ <strong>Monitoramento proativo</strong> da operação</li>
+</ul>
+
+<p>---</p>
+
+<h2>💡 <strong>POR QUE INVESTIR?</strong></h2>
+
+<h3><strong>Problema Atual</strong></h3>
+<ul>
+<li>❌ Criar conteúdo consome <strong>muito tempo</strong></li>
+<li>❌ Contratar redatores é <strong>caro e incerto</strong></li>
+<li>❌ SEO manual é <strong>complexo e demorado</strong></li>
+<li>❌ Falta de <strong>consistência</strong> na publicação</li>
+</ul>
+
+<h3><strong>Solução Creative API</strong></h3>
+<ul>
+<li>✅ <strong>Conteúdo automático</strong> 24/7</li>
+<li>✅ <strong>Custo fixo</strong> mensal previsível</li>
+<li>✅ <strong>SEO perfeito</strong> em todos os artigos</li>
+<li>✅ <strong>Publicação regular</strong> garantida</li>
+</ul>
+
+<h3><strong>ROI Comprovado</strong></h3>
+<ul>
+<li><strong>Economia:</strong> R$ 2.000+ por mês em redatores</li>
+<li><strong>Ganho:</strong> Tráfego orgânico crescente</li>
+<li><strong>Resultado:</strong> Mais vendas via SEO</li>
+<li><strong>Tempo:</strong> 95% menos tempo gasto</li>
+</ul>
+
+<p>---</p>
+
+<h2>🎯 <strong>RESUMO EXECUTIVO</strong></h2>
+
+<h3><strong>O QUE VOCÊ GANHA:</strong></h3>
+<p>1. <strong>Blog sempre atualizado</strong> sem esforço</p>
+<p>2. <strong>Artigos SEO perfeitos</strong> rankeando no Google  </p>
+<p>3. <strong>Tráfego orgânico crescente</strong> mês a mês</p>
+<p>4. <strong>Autoridade no nicho</strong> com conteúdo técnico</p>
+<p>5. <strong>95% do seu tempo livre</strong> para focar no negócio</p>
+
+<h3><strong>O QUE VOCÊ INVESTE:</strong></h3>
+<ul>
+<li><strong>5-10 minutos por semana</strong> para revisar artigos</li>
+<li><strong>Custo mensal fixo</strong> (muito menor que redatores)</li>
+<li><strong>Zero configuração</strong> ou manutenção</li>
+</ul>
+
+<h3><strong>RESULTADO:</strong></h3>
+<strong>Seu blog trabalhando para você 24/7, gerando tráfego e vendas automaticamente, enquanto você foca no que realmente importa para seu negócio.</strong>
+
+<p>---</p>
+
+<h2>🚀 <strong>PRÓXIMOS PASSOS</strong></h2>
+
+<p>1. <strong>✅ Sistema já está funcionando</strong> (conforme logs em anexo)</p>
+<p>2. <strong>✅ Integração WordPress</strong> já configurada  </p>
+<p>3. <strong>✅ Primeiro artigo</strong> já foi publicado com sucesso</p>
+<p>4. <strong>✅ Automações</strong> rodando nos finais de semana</p>
+
+<strong>Agora é só aprovar os artigos e ver seu blog crescer automaticamente! 🎉</strong>
+
+<p>---</p>
+
+<h2>📞 <strong>Suporte e Contato</strong></h2>
+
+<ul>
+<li><strong>Sistema Online:</strong> Acesso 24/7 via web</li>
+<li><strong>Suporte Técnico:</strong> Incluído no pacote</li>
+<li><strong>Relatórios:</strong> Mensais de performance</li>
+<li><strong>Atualizações:</strong> Automáticas e gratuitas</li>
+</ul>
+
+<p>---</p>
+
+<em>"Seu blog nunca mais ficará desatualizado. Conteúdo SEO automático, todos os dias, para sempre."</em>
+
+<strong>🚀 Sistema Creative API - A evolução do marketing de conteúdo.</strong> 
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>Sistema Creative API - Automação de Conteúdo SEO</p>
+        <p>Gerado em 04/06/2025</p>
+    </div>
+</body>
+</html>

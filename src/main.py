@@ -126,6 +126,25 @@ except ImportError as e:
     SCHEDULER_AVAILABLE = False
     logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
 
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
 # Configurações
 APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
 APP_VERSION = "1.0.0"
@@ -145,6 +164,8 @@ class GenerationRequest(BaseModel):
     custom_keywords: List[str] = None
     custom_instructions: str = None
     tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
 
 class ReviewRequest(BaseModel):
     titulo: str = None
@@ -153,10 +174,15 @@ class ReviewRequest(BaseModel):
     conteudo: str = None
     tags: List[str] = None
     comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
 
 class ReviewActionRequest(BaseModel):
     comment: str = ""
     reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
 
 class PublicationRequest(BaseModel):
     article_id: int
@@ -187,6 +213,15 @@ class TemplateAddRequest(BaseModel):
 
 class JobExecutionRequest(BaseModel):
     job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -252,6 +287,9 @@ app = FastAPI(
     redoc_url="/redoc",
     lifespan=lifespan
 )
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Customização do Swagger UI com CSS e JavaScript
 @app.get("/docs", include_in_schema=False)
@@ -717,201 +755,282 @@ async def dashboard():
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Sistema Creative API</title>
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="/static/css/_design_system.css">
                 <style>
-                    * {
-                        margin: 0;
-                        padding: 0;
-                        box-sizing: border-box;
+                    .page-wrapper {
+                        background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+                        position: relative;
+                        overflow: hidden;
                     }
                     
-                    :root {
-                        --primary: #6366f1;
-                        --primary-dark: #4f46e5;
-                        --success: #10b981;
-                        --warning: #f59e0b;
-                        --danger: #ef4444;
-                        --bg-primary: #0f172a;
-                        --bg-secondary: #1e293b;
-                        --bg-card: #334155;
-                        --text-primary: #f8fafc;
-                        --text-secondary: #cbd5e1;
+                    .page-wrapper::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: radial-gradient(circle at 20% 50%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
+                                    radial-gradient(circle at 80% 20%, rgba(48, 209, 88, 0.1) 0%, transparent 50%),
+                                    radial-gradient(circle at 40% 80%, rgba(255, 159, 10, 0.05) 0%, transparent 50%);
+                        pointer-events: none;
+                        z-index: 0;
                     }
                     
-                    body { 
-                        font-family: 'Inter', sans-serif; 
-                        background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
-                        color: var(--text-primary);
-                        min-height: 100vh;
-                        line-height: 1.6;
-                    }
-                    
-                    .container { 
-                        max-width: 900px; 
-                        margin: 0 auto; 
-                        padding: 20px;
+                    .content {
+                        position: relative;
+                        z-index: 1;
                     }
                     
                     .header {
                         text-align: center;
-                        margin-bottom: 50px;
-                        padding: 40px 20px;
+                        margin-bottom: var(--space-16);
+                        padding: var(--space-12) var(--space-6);
                     }
                     
                     .header h1 { 
-                        font-size: 3rem;
-                        font-weight: 700;
-                        margin-bottom: 15px;
+                        font-size: var(--text-6xl);
+                        font-weight: var(--font-bold);
+                        margin-bottom: var(--space-6);
                         background: linear-gradient(135deg, var(--primary), var(--success));
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         background-clip: text;
+                        animation: fadeInUp 0.8s ease-out;
                     }
                     
                     .header p {
-                        font-size: 1.25rem;
+                        font-size: var(--text-xl);
                         color: var(--text-secondary);
                         max-width: 600px;
                         margin: 0 auto;
+                        line-height: var(--leading-relaxed);
+                        animation: fadeInUp 0.8s ease-out 0.2s both;
                     }
                     
                     .status-banner {
-                        background: linear-gradient(135deg, var(--success), #059669);
-                        padding: 25px;
-                        border-radius: 20px;
+                        background: linear-gradient(135deg, var(--success), var(--success-dark));
+                        padding: var(--space-8);
+                        border-radius: var(--radius-3xl);
                         text-align: center;
-                        margin-bottom: 50px;
-                        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                        margin-bottom: var(--space-16);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-success);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        backdrop-filter: blur(20px);
+                        animation: fadeInUp 0.8s ease-out 0.4s both;
                     }
                     
                     .status-banner h3 {
-                        font-size: 1.6rem;
-                        margin-bottom: 10px;
-                        font-weight: 600;
+                        font-size: var(--text-2xl);
+                        margin-bottom: var(--space-3);
+                        font-weight: var(--font-semibold);
+                        color: white;
+                    }
+                    
+                    .status-banner p {
+                        color: rgba(255, 255, 255, 0.9);
+                        font-size: var(--text-lg);
                     }
                     
                     .main-actions {
                         display: grid;
                         grid-template-columns: 1fr;
-                        gap: 25px;
-                        margin-bottom: 50px;
+                        gap: var(--space-8);
+                        margin-bottom: var(--space-16);
                     }
                     
                     .action-card {
                         background: var(--bg-card);
-                        border-radius: 25px;
-                        padding: 40px;
+                        border: 1px solid var(--border-primary);
+                        border-radius: var(--radius-3xl);
+                        padding: var(--space-12);
                         text-align: center;
-                        transition: all 0.3s ease;
-                        border: 2px solid transparent;
-                        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+                        transition: all var(--transition-spring);
+                        position: relative;
+                        overflow: hidden;
+                        backdrop-filter: blur(20px);
+                        animation: fadeInUp 0.8s ease-out var(--delay, 0.6s) both;
+                    }
+                    
+                    .review-card {
+                        border: 2px solid var(--success);
+                        background: linear-gradient(135deg, var(--bg-card) 0%, rgba(48, 209, 88, 0.05) 100%);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-success);
+                    }
+                    
+                    .feature-badge {
+                        position: absolute;
+                        top: 15px;
+                        right: 15px;
+                        background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+                        color: white;
+                        padding: 5px 12px;
+                        border-radius: 15px;
+                        font-size: 0.75rem;
+                        font-weight: var(--font-bold);
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        box-shadow: 0 2px 8px rgba(255, 159, 10, 0.3);
+                        animation: pulse 2s infinite;
+                    }
+                    
+                    .action-card:nth-child(2) { --delay: 0.8s; }
+                    .action-card:nth-child(3) { --delay: 1.0s; }
+                    .action-card:nth-child(4) { --delay: 1.2s; }
+                    
+                    .action-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(135deg, transparent, rgba(0, 122, 255, 0.05));
+                        opacity: 0;
+                        transition: var(--transition-normal);
+                    }
+                    
+                    .action-card:hover::before {
+                        opacity: 1;
                     }
                     
                     .action-card:hover {
-                        transform: translateY(-8px);
-                        border-color: var(--primary);
-                        box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+                        transform: translateY(-8px) scale(1.02);
+                        border-color: var(--border-accent);
+                        box-shadow: var(--shadow-2xl), var(--shadow-glow);
                     }
                     
                     .action-icon {
-                        font-size: 5rem;
-                        margin-bottom: 25px;
+                        font-size: 4rem;
+                        margin-bottom: var(--space-8);
                         display: block;
+                        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
                     }
                     
                     .action-title {
-                        font-size: 2rem;
-                        font-weight: 700;
-                        margin-bottom: 15px;
+                        font-size: var(--text-3xl);
+                        font-weight: var(--font-bold);
+                        margin-bottom: var(--space-4);
                         color: var(--text-primary);
                     }
                     
                     .action-desc {
                         color: var(--text-secondary);
-                        margin-bottom: 30px;
-                        font-size: 1.2rem;
-                        line-height: 1.5;
+                        margin-bottom: var(--space-8);
+                        font-size: var(--text-lg);
+                        line-height: var(--leading-relaxed);
+                        max-width: 500px;
+                        margin-left: auto;
+                        margin-right: auto;
                     }
                     
                     .action-btn {
                         background: linear-gradient(135deg, var(--primary), var(--primary-dark));
                         color: white;
                         border: none;
-                        padding: 18px 40px;
-                        border-radius: 50px;
-                        font-size: 1.2rem;
-                        font-weight: 600;
+                        padding: var(--space-4) var(--space-8);
+                        border-radius: var(--radius-2xl);
+                        font-size: var(--text-lg);
+                        font-weight: var(--font-semibold);
                         cursor: pointer;
-                        transition: all 0.3s ease;
+                        transition: all var(--transition-spring);
                         text-decoration: none; 
-                        display: inline-block;
-                        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+                        display: inline-flex;
+                        align-items: center;
+                        gap: var(--space-2);
+                        box-shadow: var(--shadow-lg), var(--shadow-glow);
+                        position: relative;
+                        overflow: hidden;
                     }
                     
                     .action-btn:hover {
                         transform: translateY(-3px);
-                        box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow);
+                        background: linear-gradient(135deg, var(--primary-light), var(--primary));
                     }
                     
                     .action-btn.success-btn {
-                        background: linear-gradient(135deg, var(--success), #059669);
-                        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+                        background: linear-gradient(135deg, var(--success), var(--success-dark));
+                        box-shadow: var(--shadow-lg), var(--shadow-glow-success);
                     }
                     
                     .action-btn.success-btn:hover {
-                        box-shadow: 0 15px 35px rgba(16, 185, 129, 0.6);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-success);
+                        background: linear-gradient(135deg, var(--success-light), var(--success));
                     }
                     
                     .action-btn.warning-btn {
-                        background: linear-gradient(135deg, var(--warning), #d97706);
-                        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+                        background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+                        box-shadow: var(--shadow-lg), var(--shadow-glow-warning);
                     }
                     
                     .action-btn.warning-btn:hover {
-                        box-shadow: 0 15px 35px rgba(245, 158, 11, 0.6);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-warning);
+                        background: linear-gradient(135deg, var(--warning-light), var(--warning));
                     }
                     
                     .complete-workflow {
-                        background: var(--bg-secondary);
-                        border-radius: 25px;
-                        padding: 50px;
+                        background: var(--bg-elevated);
+                        border: 1px solid var(--border-success);
+                        border-radius: var(--radius-3xl);
+                        padding: var(--space-16);
                         text-align: center;
-                        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-                        border: 2px solid var(--success);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-success);
+                        backdrop-filter: blur(20px);
+                        animation: fadeInUp 0.8s ease-out 1.4s both;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .complete-workflow::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(135deg, transparent, rgba(48, 209, 88, 0.05));
+                        pointer-events: none;
                     }
                     
                     .complete-workflow h2 {
-                        font-size: 2.5rem;
-                        margin-bottom: 20px;
+                        font-size: var(--text-4xl);
+                        margin-bottom: var(--space-6);
                         color: var(--success);
+                        font-weight: var(--font-bold);
                     }
                     
                     .complete-workflow p {
-                        font-size: 1.3rem;
+                        font-size: var(--text-xl);
                         color: var(--text-secondary);
-                        margin-bottom: 40px;
+                        margin-bottom: var(--space-10);
                         max-width: 600px;
                         margin-left: auto;
                         margin-right: auto;
+                        line-height: var(--leading-relaxed);
                     }
                     
                     .complete-btn {
-                        background: linear-gradient(135deg, var(--success), #059669);
+                        background: linear-gradient(135deg, var(--success), var(--success-dark));
                         color: white;
                         border: none;
-                        padding: 25px 50px;
-                        border-radius: 50px;
-                        font-size: 1.4rem;
-                        font-weight: 700;
+                        padding: var(--space-5) var(--space-12);
+                        border-radius: var(--radius-2xl);
+                        font-size: var(--text-xl);
+                        font-weight: var(--font-bold);
                         cursor: pointer;
-                        transition: all 0.3s ease;
-                        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
-                        border: 3px solid rgba(255,255,255,0.1);
+                        transition: all var(--transition-spring);
+                        text-decoration: none; 
+                        display: inline-flex;
+                        align-items: center;
+                        gap: var(--space-2);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-success);
+                        border: 1px solid rgba(255,255,255,0.1);
                     }
                     
                     .complete-btn:hover {
-                        transform: translateY(-5px);
-                        box-shadow: 0 20px 45px rgba(16, 185, 129, 0.6);
+                        transform: translateY(-3px) scale(1.05);
+                        box-shadow: var(--shadow-2xl), var(--shadow-glow-success);
                         border-color: rgba(255,255,255,0.3);
                     }
                     
@@ -935,51 +1054,217 @@ async def dashboard():
                         transform: translateX(0);
                     }
                     
+                    .feature-highlight {
+                        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                        border-radius: var(--radius-3xl);
+                        padding: var(--space-16);
+                        margin-bottom: var(--space-16);
+                        text-align: center;
+                        color: white;
+                        position: relative;
+                        overflow: hidden;
+                        animation: fadeInUp 0.8s ease-out 1.3s both;
+                        box-shadow: var(--shadow-2xl), 0 0 50px rgba(0, 122, 255, 0.3);
+                    }
+                    
+                    .feature-highlight::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+                        pointer-events: none;
+                    }
+                    
+                    .feature-highlight-content {
+                        position: relative;
+                        z-index: 1;
+                    }
+                    
+                    .feature-icon {
+                        font-size: 3rem;
+                        margin-bottom: var(--space-6);
+                    }
+                    
+                    .feature-highlight h3 {
+                        font-size: var(--text-3xl);
+                        font-weight: var(--font-bold);
+                        margin-bottom: var(--space-6);
+                    }
+                    
+                    .feature-highlight p {
+                        font-size: var(--text-lg);
+                        margin-bottom: var(--space-8);
+                        opacity: 0.9;
+                        max-width: 600px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    
+                    .feature-list {
+                        list-style: none;
+                        padding: 0;
+                        margin-bottom: var(--space-10);
+                        text-align: left;
+                        max-width: 500px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    
+                    .feature-list li {
+                        padding: var(--space-3) 0;
+                        font-size: var(--text-lg);
+                        display: flex;
+                        align-items: center;
+                        gap: var(--space-3);
+                    }
+                    
+                    .feature-btn {
+                        background: white;
+                        color: var(--primary);
+                        border: none;
+                        padding: var(--space-4) var(--space-10);
+                        border-radius: var(--radius-2xl);
+                        font-size: var(--text-lg);
+                        font-weight: var(--font-bold);
+                        cursor: pointer;
+                        transition: all var(--transition-spring);
+                        text-decoration: none;
+                        display: inline-block;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                    }
+                    
+                    .feature-btn:hover {
+                        transform: translateY(-3px) scale(1.05);
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+                        background: rgba(255,255,255,0.95);
+                    }
+                    
                     @media (max-width: 768px) {
                         .header h1 { font-size: 2.5rem; }
                         .container { padding: 15px; }
                         .action-card { padding: 30px; }
                         .complete-workflow { padding: 30px; }
+                        .feature-highlight { padding: 30px; }
+                        .feature-list { text-align: center; }
                     }
                 </style>
             </head>
             <body>
-                <div class="container">
-                    <div class="header">
-                        <h1>Sistema Creative API</h1>
-                        <p>Geração Automática de Artigos com IA</p>
-                    </div>
-                    
-                    <div class="status-banner">
-                        <h3>✅ Sistema Operacional</h3>
-                        <p>Todos os módulos estão funcionando corretamente</p>
-                    </div>
-                    
-                    <div class="main-actions">
-                        <div class="action-card">
-                            <div class="action-icon">📝</div>
-                            <div class="action-title">Revisão de Artigos</div>
-                            <div class="action-desc">Revise, aprove ou rejeite artigos gerados pela IA</div>
-                            <a href="/interface/review" class="action-btn">Abrir Revisor</a>
+                <div class="page-wrapper">
+                    <div class="content">
+                        <div class="container">
+                            <div class="header">
+                                <h1>🚀 Creative API</h1>
+                                <p>Sistema Inteligente de Geração e Gerenciamento de Conteúdo</p>
+                            </div>
+                            
+                            <div class="status-banner">
+                                <h3>✅ Sistema Operacional</h3>
+                                <p>Todos os módulos estão funcionando perfeitamente</p>
+                            </div>
+                            
+                            <div class="main-actions">
+                                <div class="action-card">
+                                    <span class="action-icon">🔍</span>
+                                    <h3 class="action-title">Monitor de URLs</h3>
+                                    <p class="action-desc">Monitore e extraia produtos de sites e-commerce automaticamente com tecnologia avançada</p>
+                                    <a href="/interface/scraper" class="action-btn">
+                                        <span>Acessar Scraper</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="action-card">
+                                    <span class="action-icon">✍️</span>
+                                    <h3 class="action-title">Gerador de Conteúdo</h3>
+                                    <p class="action-desc">Crie artigos profissionais e envolventes com IA avançada e customização completa</p>
+                                    <a href="/interface/generator" class="action-btn">
+                                        <span>Gerar Artigos</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="action-card review-card">
+                                    <span class="action-icon">📝</span>
+                                    <div class="feature-badge">✨ NOVO</div>
+                                    <h3 class="action-title">Sistema de Revisão</h3>
+                                    <p class="action-desc">
+                                        Revise, edite e aprove artigos com <strong>seleção manual de categoria e produto</strong>. 
+                                        Interface moderna com controle total sobre publicação WordPress.
+                                    </p>
+                                    <a href="/interface/review" class="action-btn success-btn">
+                                        <span>Revisar Artigos</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="action-card">
+                                    <span class="action-icon">📤</span>
+                                    <h3 class="action-title">Publicador WordPress</h3>
+                                    <p class="action-desc">Publique automaticamente no seu site WordPress com controle total</p>
+                                    <a href="/interface/publisher" class="action-btn warning-btn">
+                                        <span>Gerenciar Publicações</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="action-card">
+                                    <span class="action-icon">⏰</span>
+                                    <h3 class="action-title">Agendador</h3>
+                                    <p class="action-desc">Configure execuções automáticas e workflows inteligentes</p>
+                                    <a href="/interface/scheduler" class="action-btn">
+                                        <span>Configurar Automação</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="action-card">
+                                    <span class="action-icon">⚙️</span>
+                                    <h3 class="action-title">Configurações</h3>
+                                    <p class="action-desc">Configure URLs, templates e todos os parâmetros do sistema</p>
+                                    <a href="/config" class="action-btn">
+                                        <span>Acessar Configurações</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-highlight">
+                                <div class="feature-highlight-content">
+                                    <div class="feature-icon">🎯</div>
+                                    <h3>Nova Funcionalidade: Seleção Manual</h3>
+                                    <p>
+                                        Agora você tem controle total sobre a categorização dos seus artigos! 
+                                        No painel de revisão você pode:
+                                    </p>
+                                    <ul class="feature-list">
+                                        <li>✅ <strong>Escolher manualmente a categoria WordPress</strong></li>
+                                        <li>✅ <strong>Especificar o produto associado</strong></li>
+                                        <li>✅ <strong>Ter prioridade sobre detecção automática</strong></li>
+                                        <li>✅ <strong>Garantir publicação na categoria correta</strong></li>
+                                    </ul>
+                                    <a href="/interface/review" class="feature-btn">
+                                        <span>🚀 Experimentar Agora</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="complete-workflow">
+                                <h2>🎯 Workflow Completo</h2>
+                                <p>
+                                    Execute o processo completo de automação: Scraping → Geração → Revisão → Publicação
+                                </p>
+                                
+                                <button onclick="runCompleteWorkflow()" class="complete-btn">
+                                    <span>🚀</span>
+                                    <span>Executar Processo Completo</span>
+                                    <span>→</span>
+                                </button>
+                            </div>
                         </div>
-                        
-                        <div class="action-card">
-                            <div class="action-icon">🚀</div>
-                            <div class="action-title">Publicação</div>
-                            <div class="action-desc">Publique artigos aprovados no WordPress</div>
-                            <a href="/interface/publisher" class="action-btn warning-btn">Publicar Artigos</a>
-                        </div>
-                    </div>
-                    
-                    <div class="complete-workflow">
-                        <h2>🎯 Processo Completo</h2>
-                        <p>
-                            Execute todo o fluxo automaticamente: buscar produtos → gerar artigos → disponibilizar para revisão
-                        </p>
-                        
-                        <button onclick="runCompleteWorkflow()" class="complete-btn">
-                            ✨ Executar Processo Completo
-                        </button>
                     </div>
                 </div>
                 
@@ -1656,13 +1941,7 @@ async def api_documentation():
                             <div class="endpoint-desc">Status do sistema com artigos pendentes/aprovados</div>
                         </div>
                         
-                        <div class="endpoint get" data-path="/review/list" data-description="Interface web listagem artigos">
-                            <div class="endpoint-header">
-                                <span class="method get">GET</span>
-                                <span class="endpoint-path">/review/list</span>
-                            </div>
-                            <div class="endpoint-desc">Interface web dark mode para listagem de artigos</div>
-                        </div>
+                        <!-- Endpoint removido - usar /interface/review -->
                         
                         <div class="endpoint get" data-path="/review/stats" data-description="Estatísticas sistema revisão">
                             <div class="endpoint-header">
@@ -2183,7 +2462,18 @@ async def run_full_scraping(background_tasks: BackgroundTasks):
         # Executar scraping em background para não bloquear a API
         def run_scraping():
             manager = ScraperManager()
-            return manager.run_full_scraping()
+            result = manager.run_full_scraping()
+            
+            # Atualizar contagens automaticamente após o scraping
+            try:
+                from .config.active_categories_manager import ActiveCategoriesManager
+                cat_manager = ActiveCategoriesManager()
+                cat_manager.update_products_count_from_scraper()
+                logger.info("✅ Contagens de produtos atualizadas automaticamente")
+            except Exception as e:
+                logger.warning(f"⚠️ Erro ao atualizar contagens automaticamente: {e}")
+            
+            return result
         
         background_tasks.add_task(run_scraping)
         
@@ -2232,6 +2522,307 @@ async def get_scraper_stats():
         logger.error(f"❌ Erro ao obter estatísticas: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/scraper/products")
+async def get_scraped_products(limit: int = 100, offset: int = 0, categoria: str = None, search: str = None):
+    """Retorna lista de produtos encontrados pelo scraper com pesquisa e filtros"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        import json
+        import os
+        import glob
+        from datetime import datetime
+        
+        # Buscar arquivos JSON de produtos
+        json_files = glob.glob("logs/products_*.json")
+        
+        if not json_files:
+            return {
+                "success": True,
+                "products": [],
+                "total": 0,
+                "message": "Nenhum produto encontrado ainda. Execute uma busca primeiro."
+            }
+        
+        all_products = []
+        
+        # Mapeamento de categorias conhecidas
+        categorias_mapeamento = {
+            'cartuchos-de-tinta': 'Cartuchos de Tinta',
+            'cartuchos-de-toner': 'Cartuchos de Toner', 
+            'refil-de-toner': 'Refil de Toner',
+            'impressoras': 'Impressoras',
+            'multifuncional': 'Multifuncionais',
+            'plotters': 'Plotters',
+            'suprimentos': 'Suprimentos'
+        }
+        
+        # Agrupar arquivos por categoria e pegar apenas o mais recente de cada uma
+        categoria_files = {}
+        for json_file in json_files:
+            filename = os.path.basename(json_file)
+            categoria_from_file = filename.replace('products_', '').split('_')[0]
+            
+            # Se não existe ou é mais recente, atualizar
+            if categoria_from_file not in categoria_files:
+                categoria_files[categoria_from_file] = json_file
+            else:
+                # Comparar timestamps nos nomes dos arquivos
+                current_timestamp = filename.split('_')[-1].replace('.json', '')
+                existing_filename = os.path.basename(categoria_files[categoria_from_file])
+                existing_timestamp = existing_filename.split('_')[-1].replace('.json', '')
+                
+                if current_timestamp > existing_timestamp:
+                    categoria_files[categoria_from_file] = json_file
+        
+        logger.info(f"🔍 Usando apenas arquivos mais recentes: {len(categoria_files)} categorias de {len(json_files)} arquivos totais")
+        
+        # Carregar produtos apenas dos arquivos mais recentes
+        for categoria_key, json_file in categoria_files.items():
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    
+                    # Usar categoria_key já extraída
+                    filename = os.path.basename(json_file)
+                    categoria_nome = categorias_mapeamento.get(categoria_key, categoria_key.title())
+                    
+                    # Adicionar produtos
+                    if isinstance(data, list):
+                        for product in data:
+                            product['categoria_key'] = categoria_key
+                            product['categoria_nome'] = categoria_nome
+                            product['source_file'] = filename
+                            all_products.append(product)
+                    elif isinstance(data, dict) and 'produtos' in data:
+                        for product in data['produtos']:
+                            product['categoria_key'] = categoria_key
+                            product['categoria_nome'] = categoria_nome
+                            product['source_file'] = filename
+                            all_products.append(product)
+            except Exception as e:
+                logger.warning(f"Erro ao carregar arquivo {json_file}: {e}")
+                continue
+        
+                # DEDUPLIFICAÇÃO COMPLETA - Remove produtos duplicados por nome/URL
+        unique_products = {}
+        for product in all_products:
+            # Usar nome + URL como chave única (nome pode ter variações pequenas)
+            nome = product.get('nome', '').strip()
+            url = product.get('url', '').strip()
+            
+            # Criar chave única baseada no nome (removendo espaços extras e normalizando)
+            key = nome.lower().replace('  ', ' ').strip()
+            
+            # Se não existe ou se tem URL (preferir produtos com URL)
+            if key not in unique_products or (url and not unique_products[key].get('url')):
+                unique_products[key] = product
+        
+        # Converter de volta para lista
+        all_products = list(unique_products.values())
+        logger.info(f"🔍 Deduplificação: {len(all_products)} produtos únicos de {len(unique_products)} processados")
+
+        # Aplicar filtro de pesquisa se especificado
+        if search:
+            search_lower = search.lower()
+            filtered_products = []
+            for product in all_products:
+                nome = product.get('nome', '').lower()
+                if search_lower in nome:
+                    filtered_products.append(product)
+            all_products = filtered_products
+
+        # Filtrar por categoria se especificado
+        if categoria and categoria.lower() != 'todas':
+            filtered_products = []
+            for product in all_products:
+                if (categoria.lower() in product.get('categoria_key', '').lower() or
+                    categoria.lower() in product.get('categoria_nome', '').lower()):
+                    filtered_products.append(product)
+            all_products = filtered_products
+
+        # Ordenar por nome
+        all_products.sort(key=lambda x: x.get('nome', ''))
+        
+        # Aplicar paginação
+        total_products = len(all_products)
+        start_idx = offset
+        end_idx = offset + limit
+        paginated_products = all_products[start_idx:end_idx]
+        
+        # Formatar produtos para resposta
+        products = []
+        for product in paginated_products:
+            products.append({
+                'id': product.get('id', product.get('nome', '')),
+                'nome': product.get('nome', ''),
+                'url': product.get('url', ''),
+                'categoria_key': product.get('categoria_key', ''),
+                'categoria_nome': product.get('categoria_nome', ''),
+                'categoria_url': product.get('categoria_url', ''),
+                'preco': product.get('preco', ''),
+                'disponivel': product.get('disponivel', True),
+                'source_file': product.get('source_file', ''),
+                'data_processed': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            })
+        
+        return {
+            "success": True,
+            "products": products,
+            "total": total_products,
+            "limit": limit,
+            "offset": offset,
+            "categoria_filtro": categoria,
+            "search_filtro": search,
+            "message": f"Encontrados {len(products)} produtos (de {total_products} total)"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao obter produtos: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/scraper/categories")
+async def get_scraper_categories():
+    """Retorna lista de categorias disponíveis nos produtos"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        from .config.active_categories_manager import ActiveCategoriesManager
+        
+        # Usar o manager para obter categorias ativas com contagens atualizadas
+        manager = ActiveCategoriesManager()
+        categories_data = manager.get_all_categories()
+        
+        # Transformar para o formato esperado pelo frontend
+        categorias_lista = []
+        for cat in categories_data:
+            if cat.get('is_active', True):  # Apenas categorias ativas
+                categorias_lista.append({
+                    'key': cat['category_key'],
+                    'name': cat['category_name'],
+                    'count': cat.get('products_count', 0),
+                    'url': cat['category_url']
+                })
+        
+        # Ordenar por nome
+        categorias_lista.sort(key=lambda x: x['name'])
+        
+        return {
+            "success": True,
+            "categories": categorias_lista,
+            "total": len(categorias_lista),
+            "message": f"Encontradas {len(categorias_lista)} categorias ativas"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao obter categorias: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scraper/generate-article")
+async def generate_article_from_product(product_data: dict):
+    """Gera artigo a partir de dados do produto e envia para revisão"""
+    if not GENERATOR_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo gerador não disponível")
+    
+    try:
+        from src.generator.generator_manager import GeneratorManager
+        from src.review.review_manager import ReviewManager
+        
+        # Criar instâncias dos managers
+        generator_manager = GeneratorManager()
+        review_manager = ReviewManager()
+        
+        logger.info(f"🤖 Gerando artigo para produto: {product_data.get('nome', 'N/A')}")
+        
+        # Preparar dados para geração
+        generation_request = {
+            'product_data': product_data,
+            'tone': 'profissional',
+            'wp_category': product_data.get('categoria_nome', ''),
+            'produto_original': product_data.get('nome', '')
+        }
+        
+        # Gerar o artigo
+        article_data = generator_manager.generate_article_from_product(product_data, 
+                                                                      tone=generation_request.get('tone', 'profissional'),
+                                                                      wp_category=generation_request.get('wp_category', ''),
+                                                                      produto_original=generation_request.get('produto_original', ''),
+                                                                      skip_availability_check=product_data.get('skip_availability_check', False))
+        
+        # Verificar se a geração foi bem-sucedida
+        if not article_data or article_data.get('status') == 'skipped':
+            error_msg = article_data.get('motivo', 'Erro na geração do artigo')
+            raise HTTPException(status_code=400, detail=error_msg)
+        
+        # Verificar se é um artigo válido
+        if not article_data.get('titulo') or not article_data.get('conteudo'):
+            raise HTTPException(status_code=500, detail="Artigo gerado está incompleto")
+        
+        review_data = {
+            'titulo': article_data.get('titulo', ''),
+            'slug': article_data.get('slug', ''),
+            'meta_descricao': article_data.get('meta_descricao', ''),
+            'conteudo': article_data.get('conteudo', ''),
+            'tags': article_data.get('tags', []),
+            'wp_category': product_data.get('categoria_nome', ''),
+            'produto_original': product_data.get('nome', ''),
+            'status': 'pending'
+        }
+        
+        # Salvar na revisão
+        article_id = review_manager.save_article_for_review(review_data)
+        review_result = {'success': True, 'article_id': article_id}
+        
+        if review_result.get('success'):
+            return {
+                "success": True,
+                "article_id": review_result.get('article_id'),
+                "message": f"Artigo gerado e enviado para revisão com sucesso!",
+                "produto": product_data.get('nome', ''),
+                "categoria": product_data.get('categoria_nome', '')
+            }
+        else:
+            raise HTTPException(status_code=500, detail="Erro ao salvar artigo para revisão")
+        
+    except HTTPException:
+        # Re-raise HTTPExceptions para que o FastAPI as trate corretamente
+        raise
+    except Exception as e:
+        logger.error(f"❌ Erro ao gerar artigo: {e}")
+        logger.error(f"❌ Tipo do erro: {type(e)}")
+        import traceback
+        logger.error(f"❌ Traceback: {traceback.format_exc()}")
+        error_detail = str(e) if str(e) else f"Erro interno: {type(e).__name__}"
+        raise HTTPException(status_code=500, detail=error_detail)
+
+@app.get("/scraper/products/export")
+async def export_scraped_products():
+    """Exporta todos os produtos encontrados pelo scraper"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        manager = ScraperManager()
+        filename = manager.url_manager.export_processed_products()
+        
+        if filename:
+            return {
+                "success": True,
+                "message": "Produtos exportados com sucesso",
+                "filename": filename
+            }
+        else:
+            return {
+                "success": False,
+                "message": "Erro ao exportar produtos"
+            }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao exportar produtos: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/scraper/cleanup")
 async def cleanup_scraper_data():
     """Limpa dados antigos do scraper"""
@@ -2247,6 +2838,166 @@ async def cleanup_scraper_data():
     except Exception as e:
         logger.error(f"❌ Erro na limpeza: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scraper/discover-categories")
+async def discover_categories(force_refresh: bool = False):
+    """Descobre automaticamente todas as categorias de produtos"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        manager = ScraperManager()
+        result = manager.url_manager.auto_discover_categories(force_refresh=force_refresh)
+        return result
+    except Exception as e:
+        logger.error(f"❌ Erro na descoberta de categorias: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scraper/update-urls-from-discovery")
+async def update_urls_from_discovery():
+    """Atualiza URLs de categorias com base na descoberta automática"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        manager = ScraperManager()
+        result = manager.url_manager.update_category_urls_from_discovery()
+        return result
+    except Exception as e:
+        logger.error(f"❌ Erro ao atualizar URLs: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/scraper/analyze-category/{category_url:path}")
+async def analyze_category(category_url: str):
+    """Analisa estrutura de uma categoria específica"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        manager = ScraperManager()
+        analysis = manager.scraper.analyze_category_structure(category_url)
+        return analysis
+    except Exception as e:
+        logger.error(f"❌ Erro ao analisar categoria: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scraper/validate-urls")
+async def validate_category_urls():
+    """Valida todas as URLs de categorias configuradas"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        manager = ScraperManager()
+        result = manager.url_manager.validate_all_category_urls()
+        return result
+    except Exception as e:
+        logger.error(f"❌ Erro ao validar URLs: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+@app.post("/scraper/run-enhanced")
+async def run_enhanced_scraping(use_pagination: bool = True, discover_categories: bool = False):
+    """Executa scraping com funcionalidades avançadas"""
+    if not SCRAPER_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
+    
+    try:
+        manager = ScraperManager()
+        result = manager.run_full_scraping(
+            use_pagination=use_pagination,
+            discover_categories=discover_categories
+        )
+        return result
+    except Exception as e:
+        logger.error(f"❌ Erro no scraping avançado: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/scraper/process-active-categories")
+async def process_active_categories(background_tasks: BackgroundTasks, max_articles: int = 10):
+    """Processa automaticamente: scraping + geração de artigos das categorias ativas"""
+    if not SCRAPER_AVAILABLE or not GENERATOR_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulos scraper/generator não disponíveis")
+    
+    def run_complete_process():
+        """Executa o processo completo em background"""
+        try:
+            logger.info("🚀 Iniciando processamento automático das categorias ativas")
+            
+            # Etapa 1: Verificar categorias ativas
+            if CATEGORIES_AVAILABLE:
+                from src.config.active_categories_manager import ActiveCategoriesManager
+                categories_manager = ActiveCategoriesManager()
+                active_categories = categories_manager.get_active_categories()
+                
+                if not active_categories:
+                    logger.warning("❌ Nenhuma categoria ativa encontrada")
+                    return
+                
+                logger.info(f"📋 {len(active_categories)} categorias ativas encontradas")
+            
+            # Etapa 2: Executar scraping
+            logger.info("📡 Executando scraping das categorias ativas...")
+            scraper_manager = ScraperManager()
+            scraping_result = scraper_manager.run_full_scraping(
+                use_pagination=True,
+                discover_categories=False
+            )
+            
+            logger.info(f"✅ Scraping concluído: {scraping_result.get('status', 'unknown')}")
+            
+            # Etapa 3: Buscar produtos recém-coletados
+            products_data = scraper_manager.get_scraped_products(limit=max_articles * 2)
+            
+            if not products_data.get('produtos'):
+                logger.warning("⚠️ Nenhum produto encontrado para gerar artigos")
+                return
+            
+            products = products_data['produtos'][:max_articles]  # Limitar quantidade
+            logger.info(f"📦 {len(products)} produtos selecionados para geração de artigos")
+            
+            # Etapa 4: Gerar artigos
+            logger.info("✍️ Iniciando geração de artigos...")
+            generator_manager = GeneratorManager()
+            generated_count = 0
+            
+            for i, product in enumerate(products):
+                try:
+                    logger.info(f"📝 Gerando artigo {i+1}/{len(products)}: {product.get('nome', 'Produto')[:50]}...")
+                    
+                    article = generator_manager.generate_article_from_product(
+                        product=product,
+                        tone='profissional',
+                        wp_category='geral'
+                    )
+                    
+                    if article:
+                        generated_count += 1
+                        logger.info(f"✅ Artigo gerado com sucesso: {article.get('titulo', 'Sem título')[:50]}...")
+                    else:
+                        logger.warning(f"⚠️ Falha ao gerar artigo para: {product.get('nome', 'Produto')[:30]}...")
+                        
+                except Exception as gen_error:
+                    logger.error(f"❌ Erro ao gerar artigo para {product.get('nome', 'Produto')[:30]}: {gen_error}")
+                    continue
+            
+            logger.info(f"🎉 Processamento automático concluído!")
+            logger.info(f"📊 Resumo: {generated_count} artigos gerados de {len(products)} produtos processados")
+            logger.info(f"📋 Verifique a página de Revisão para ver os artigos gerados")
+            
+        except Exception as e:
+            logger.error(f"❌ Erro no processamento automático: {e}")
+    
+    # Executar em background
+    background_tasks.add_task(run_complete_process)
+    
+    return {
+        "status": "success",
+        "message": "Processamento automático iniciado em segundo plano",
+        "max_articles": max_articles,
+        "note": "Acompanhe o progresso nos logs do sistema"
+    }
 
 
 # =====================================================
@@ -2336,7 +3087,9 @@ async def generate_article(request: GenerationRequest):
             product=request.product_data,
             custom_keywords=request.custom_keywords,
             custom_instructions=request.custom_instructions,
-            tone=request.tone
+            tone=request.tone,
+            wp_category=request.wp_category,
+            produto_original=request.produto_original
         )
         
         if article:
@@ -2352,6 +3105,42 @@ async def generate_article(request: GenerationRequest):
         
     except Exception as e:
         logger.error(f"❌ Erro na geração do artigo: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/generator/generate-random")
+async def generate_random_article():
+    """Gera artigo com produto aleatório respeitando filtros de preferências"""
+    if not GENERATOR_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo generator não disponível")
+    
+    try:
+        manager = GeneratorManager()
+        
+        # Gerar artigo com produto aleatório (aplica filtros automaticamente)
+        article = manager.content_generator.generate_article_from_random_product()
+        
+        if article:
+            return {
+                "status": "success",
+                "article": article,
+                "message": "Artigo gerado com produto aleatório respeitando filtros de preferências"
+            }
+        else:
+            return {
+                "status": "failed",
+                "message": "Falha na geração do artigo com produto aleatório"
+            }
+        
+    except ValueError as e:
+        # Erro específico de filtros (nenhum produto disponível)
+        return {
+            "status": "error",
+            "message": f"Erro de filtros: {str(e)}",
+            "suggestion": "Verifique as preferências de geração ou sincronize mais produtos"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na geração com produto aleatório: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/generator/stats")
@@ -2395,7 +3184,7 @@ async def review_status():
             "description": "Sistema de revisão de artigos com interface web",
             "data": status_data,
             "actions": {
-                "list_articles": "/review/list",
+                "list_articles": "/interface/review",
                 "view_article": "/review/{id}",
                 "edit_article": "/review/{id}/edit",
                 "approve_article": "/review/{id}/approve",
@@ -2413,36 +3202,7 @@ async def review_status():
             "message": str(e)
         }
 
-@app.get("/review/list", response_class=HTMLResponse)
-async def review_list_page(status: str = None):
-    """Interface web para listagem de artigos"""
-    if not REVIEW_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
-    
-    try:
-        review_manager = ReviewManager()
-        articles = review_manager.list_articles(status=status, limit=50)
-        stats = review_manager.get_statistics()
-        
-        if not templates:
-            # Fallback para JSON se templates não disponíveis
-            return JSONResponse({
-                "articles": articles,
-                "stats": stats,
-                "current_status": status
-            })
-        
-        return templates.TemplateResponse("review_list.html", {
-            "request": {},
-            "articles": articles,
-            "stats": stats,
-            "current_status": status,
-            "app_name": APP_NAME
-        })
-        
-    except Exception as e:
-        logger.error(f"❌ Erro na listagem de artigos: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+# Endpoint removido - usar /interface/review
 
 @app.get("/review/stats")
 async def review_statistics():
@@ -2584,6 +3344,38 @@ async def review_article_view(article_id: int):
             "article_id": article_id
         }, status_code=500, headers=headers)
 
+@app.get("/review/{article_id}/view", response_class=HTMLResponse)
+async def review_article_view_html(article_id: int):
+    """Interface de visualização de artigo (HTML)"""
+    if not REVIEW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
+    
+    try:
+        review_manager = ReviewManager()
+        article = review_manager.get_article(article_id)
+        
+        if not article:
+            raise HTTPException(status_code=404, detail="Artigo não encontrado")
+        
+        if not templates:
+            return JSONResponse({
+                "article": article,
+                "edit_mode": False,
+                "message": "Templates não disponíveis"
+            })
+        
+        return templates.TemplateResponse("review_article.html", {
+            "request": {},
+            "article": article,
+            "is_edit_mode": False
+        })
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Erro ao carregar visualização para artigo {article_id}: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
 @app.get("/review/{article_id}/edit", response_class=HTMLResponse)
 async def review_article_edit(article_id: int):
     """Interface de edição de artigo"""
@@ -2697,7 +3489,10 @@ async def review_article_approve(article_id: int, request: ReviewActionRequest =
         success = review_manager.approve_article(
             article_id, 
             request.reviewer, 
-            request.comment
+            request.comment,
+            wp_category=request.wp_category,
+            produto_original=request.produto_original,
+            skip_availability_check=request.skip_availability_check
         )
         
         if not success:
@@ -3221,6 +4016,121 @@ async def get_wordpress_tags():
         logger.error(f"❌ Erro ao buscar tags: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# ==================== ENDPOINTS DE INTELIGÊNCIA ====================
+
+@app.get("/intelligence")
+async def intelligence_status():
+    """Status dos sistemas de inteligência"""
+    if not INTELLIGENCE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulos de inteligência não disponíveis")
+    
+    try:
+        priority_manager = PriorityManager()
+        publication_monitor = PublicationMonitor()
+        
+        # Estatísticas de aprendizado
+        learning_stats = priority_manager.get_learning_stats()
+        
+        # Status de monitoramento
+        monitor_stats = publication_monitor.get_monitor_stats()
+        
+        # Verificação de configuração WordPress
+        wp_config = publication_monitor.check_wordpress_config()
+        
+        return {
+            "success": True,
+            "systems": {
+                "priority_learning": {
+                    "active": True,
+                    "stats": learning_stats
+                },
+                "publication_monitor": {
+                    "active": True,
+                    "stats": monitor_stats,
+                    "wp_config": wp_config
+                }
+            },
+            "message": "Sistemas de inteligência operacionais"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro no status de inteligência: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/intelligence/priority")
+async def get_priority_stats():
+    """Estatísticas do sistema de priorização"""
+    if not INTELLIGENCE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulos de inteligência não disponíveis")
+    
+    try:
+        priority_manager = PriorityManager()
+        
+        # Estatísticas completas
+        stats = priority_manager.get_learning_stats()
+        
+        # Produtos priorizados
+        prioritized = priority_manager.get_prioritized_products(limit=20)
+        
+        # Performance por categoria
+        category_performance = priority_manager.get_category_performance()
+        
+        return {
+            "success": True,
+            "learning_stats": stats,
+            "prioritized_products": prioritized,
+            "category_performance": category_performance
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao obter estatísticas de prioridade: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/intelligence/monitor")
+async def get_publication_monitor():
+    """Dashboard de monitoramento de publicações"""
+    if not INTELLIGENCE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulos de inteligência não disponíveis")
+    
+    try:
+        publication_monitor = PublicationMonitor()
+        
+        # Dashboard completo
+        dashboard = publication_monitor.get_pending_articles_dashboard()
+        
+        # Verificação de publicações pendentes
+        pending_check = publication_monitor.check_pending_publications()
+        
+        return {
+            "success": True,
+            "dashboard": dashboard,
+            "pending_check": pending_check
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro no monitor de publicações: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/intelligence/monitor/config")
+async def check_wordpress_publication_config():
+    """Verificar configuração de publicação WordPress"""
+    if not INTELLIGENCE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulos de inteligência não disponíveis")
+    
+    try:
+        publication_monitor = PublicationMonitor()
+        
+        config_check = publication_monitor.check_wordpress_config()
+        
+        return {
+            "success": True,
+            "config_check": config_check
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao verificar configuração: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/config", response_class=HTMLResponse)
 async def config_page():
     """Página principal de configurações"""
@@ -3427,6 +4337,140 @@ async def add_content_template(request: TemplateAddRequest):
         logger.error(f"❌ Erro ao adicionar template: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# =====================================================
+# ROTAS PARA PREFERÊNCIAS DE GERAÇÃO
+# =====================================================
+
+@app.get("/config/products")
+async def get_products(tipo: str = None, categoria: str = None):
+    """Lista produtos disponíveis"""
+    if not CONFIG_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo config não disponível")
+    
+    try:
+        manager = ConfigManager()
+        products = manager.get_products(tipo=tipo, categoria=categoria)
+        
+        return {
+            "success": True,
+            "products": products,
+            "count": len(products)
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao listar produtos: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/config/products/sync")
+async def sync_products():
+    """Sincroniza produtos do ProductDatabase"""
+    if not CONFIG_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo config não disponível")
+    
+    try:
+        manager = ConfigManager()
+        manager.sync_products_from_database()
+        
+        # Contar produtos sincronizados
+        products = manager.get_products()
+        
+        return {
+            "success": True,
+            "message": "Produtos sincronizados com sucesso",
+            "products_count": len(products)
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao sincronizar produtos: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/config/generation-preferences")
+async def get_generation_preferences():
+    """Retorna preferências de geração atuais"""
+    if not CONFIG_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo config não disponível")
+    
+    try:
+        manager = ConfigManager()
+        
+        preferences = {
+            "allowed_categories": manager.get_allowed_categories(),
+            "allowed_products": manager.get_allowed_products(),
+            "filter_mode": manager.get_filter_mode()
+        }
+        
+        return {
+            "success": True,
+            "preferences": preferences
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao obter preferências: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/config/generation-preferences/categories")
+async def set_allowed_categories(request: dict):
+    """Define categorias permitidas"""
+    if not CONFIG_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo config não disponível")
+    
+    try:
+        categories = request.get('categories', [])
+        
+        manager = ConfigManager()
+        manager.set_allowed_categories(categories)
+        
+        return {
+            "success": True,
+            "message": f"Categorias permitidas atualizadas: {len(categories)} categorias",
+            "categories": categories
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao definir categorias: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/config/generation-preferences/products")
+async def set_allowed_products(request: dict):
+    """Define produtos específicos permitidos"""
+    if not CONFIG_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo config não disponível")
+    
+    try:
+        product_ids = request.get('product_ids', [])
+        
+        manager = ConfigManager()
+        manager.set_allowed_products(product_ids)
+        
+        return {
+            "success": True,
+            "message": f"Produtos permitidos atualizados: {len(product_ids)} produtos",
+            "product_count": len(product_ids)
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao definir produtos: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/config/generation-preferences/clear")
+async def clear_generation_filters():
+    """Remove todos os filtros de geração"""
+    if not CONFIG_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo config não disponível")
+    
+    try:
+        manager = ConfigManager()
+        manager.clear_generation_filters()
+        
+        return {
+            "success": True,
+            "message": "Filtros de geração removidos com sucesso"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao limpar filtros: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/debug/env")
 async def debug_env():
     """Debug das variáveis de ambiente (remover em produção)"""
@@ -3553,7 +4597,7 @@ async def scheduler_status():
             "success": True,
             "status": "operational" if status_data["is_running"] else "stopped",
             "scheduler": status_data,
-            "message": f"Scheduler {'ativo' if status_data['is_running'] else 'parado'} com {len(status_data['active_jobs'])} jobs configurados"
+            "message": f"Scheduler {'ativo' if status_data['is_running'] else 'parado'} com {len(status_data.get('jobs', []))} jobs configurados"
         }
         
     except Exception as e:
@@ -3657,6 +4701,81 @@ async def get_next_executions(hours: int = 24):
         logger.error(f"❌ Erro ao obter próximas execuções: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/scheduler/stats")
+async def get_scheduler_stats():
+    """Retorna estatísticas do scheduler"""
+    if not SCHEDULER_AVAILABLE or 'scheduler_manager' not in globals():
+        raise HTTPException(status_code=503, detail="Módulo scheduler não disponível")
+    
+    try:
+        status = scheduler_manager.get_status()
+        jobs = status.get('jobs', [])
+        recent_executions = status.get('recent_executions', [])
+        
+        # Calcular estatísticas
+        active_jobs = len([j for j in jobs if j.get('id')])
+        executions_today = len([e for e in recent_executions 
+                              if e.get('execution_time', '').startswith(datetime.now().strftime('%Y-%m-%d'))])
+        success_rate = 0
+        if recent_executions:
+            successes = len([e for e in recent_executions if e.get('status') == 'success'])
+            success_rate = round((successes / len(recent_executions)) * 100, 1)
+        
+        # Próxima execução
+        next_execution = None
+        if jobs:
+            next_runs = [j.get('next_run') for j in jobs if j.get('next_run')]
+            if next_runs:
+                next_execution = min(next_runs)
+        
+        return {
+            "success": True,
+            "statistics": {
+                "active_jobs": active_jobs,
+                "executions_today": executions_today,
+                "success_rate": success_rate,
+                "next_execution": next_execution,
+                "total_jobs_configured": len(jobs),
+                "scheduler_running": status.get('is_running', False)
+            }
+        }
+    except Exception as e:
+        logger.error(f"❌ Erro ao obter estatísticas: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/scheduler/jobs")
+async def get_scheduler_jobs():
+    """Retorna lista de jobs do scheduler"""
+    if not SCHEDULER_AVAILABLE or 'scheduler_manager' not in globals():
+        raise HTTPException(status_code=503, detail="Módulo scheduler não disponível")
+    
+    try:
+        status = scheduler_manager.get_status()
+        jobs = status.get('jobs', [])
+        
+        # Formatar jobs para o frontend
+        formatted_jobs = []
+        for job in jobs:
+            formatted_jobs.append({
+                'id': job.get('id'),
+                'name': job.get('name'),
+                'status': 'active' if status.get('is_running') else 'paused',
+                'schedule': job.get('trigger', 'N/A'),
+                'next_run': job.get('next_run'),
+                'last_run': None,  # Podemos melhorar isso depois
+                'task_type': job.get('func_name', 'Unknown'),
+                'description': f"Job automático: {job.get('name', 'Sem nome')}"
+            })
+        
+        return {
+            "success": True,
+            "jobs": formatted_jobs,
+            "count": len(formatted_jobs)
+        }
+    except Exception as e:
+        logger.error(f"❌ Erro ao obter jobs: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/scheduler/history")
 async def get_scheduler_history():
     """Retorna histórico de execuções"""
@@ -3672,6 +4791,24 @@ async def get_scheduler_history():
     except Exception as e:
         logger.error(f"❌ Erro ao obter histórico: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/scheduler/debug")
+async def scheduler_debug():
+    """Debug completo do scheduler"""
+    if not SCHEDULER_AVAILABLE or 'scheduler_manager' not in globals():
+        return {"error": "Scheduler não disponível"}
+    
+    try:
+        status = scheduler_manager.get_status()
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "scheduler_available": SCHEDULER_AVAILABLE,
+            "scheduler_manager_exists": 'scheduler_manager' in globals(),
+            "status": status,
+            "raw_response": status
+        }
+    except Exception as e:
+        return {"error": str(e), "timestamp": datetime.now().isoformat()}
 
 @app.get("/scheduler/progress")
 async def get_workflow_progress():
@@ -3839,6 +4976,12 @@ async def scheduler_interface():
     try:
         with open("templates/scheduler_interface.html", "r", encoding="utf-8") as f:
             html_content = f.read()
+        
+        # Adicionar timestamp para evitar cache
+        from datetime import datetime
+        timestamp = int(datetime.now().timestamp())
+        html_content = html_content.replace("{{ timestamp }}", str(timestamp))
+        
         return HTMLResponse(html_content)
         
     except FileNotFoundError:
@@ -3886,14 +5029,223 @@ async def review_interface():
 
 @app.get("/interface/config", response_class=HTMLResponse)
 async def config_interface():
-    """Interface visual para o módulo Config"""
+    """Interface de configuração do sistema"""
     try:
-        # Servir interface de configuração (reutilizar a página de config existente)
-        return RedirectResponse(url="/config", status_code=302)
+        return templates.TemplateResponse("config_interface.html", {"request": {}})
+    except Exception as e:
+        logger.error(f"❌ Erro ao carregar interface de config: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/interface/categorias", response_class=HTMLResponse)
+async def categorias_config():
+    """Interface de configuração de categorias"""
+    try:
+        return templates.TemplateResponse("categoria_config.html", {"request": {}})
+    except Exception as e:
+        logger.error(f"❌ Erro ao carregar interface de categorias: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# === ROTAS DE API PARA GERENCIAMENTO DE CATEGORIAS ===
+
+@app.get("/config/categories")
+async def get_categories():
+    """Listar todas as categorias configuradas"""
+    try:
+        from .config.active_categories_manager import ActiveCategoriesManager
+        manager = ActiveCategoriesManager()
+        categories = manager.get_all_categories()
+        
+        return {
+            "success": True,
+            "categories": categories,
+            "total": len(categories)
+        }
+    except Exception as e:
+        logger.error(f"❌ Erro ao obter categorias: {e}")
+        return {"success": False, "error": str(e)}
+
+@app.post("/config/categories")
+async def add_category(category_data: dict):
+    """Adicionar nova categoria"""
+    try:
+        from .config.active_categories_manager import ActiveCategoriesManager
+        manager = ActiveCategoriesManager()
+        
+        # Validar dados
+        required_fields = ['category_name', 'category_key', 'category_url']
+        for field in required_fields:
+            if field not in category_data:
+                raise ValueError(f"Campo obrigatório: {field}")
+        
+        # Adicionar categoria
+        success = manager.add_category(
+            category_key=category_data['category_key'],
+            category_name=category_data['category_name'],
+            category_url=category_data['category_url']
+        )
+        
+        if success:
+            return {"success": True, "message": "Categoria adicionada com sucesso"}
+        else:
+            return {"success": False, "error": "Erro ao adicionar categoria"}
+            
+    except Exception as e:
+        logger.error(f"❌ Erro ao adicionar categoria: {e}")
+        return {"success": False, "error": str(e)}
+
+@app.patch("/config/categories/{category_key}")
+async def update_category(category_key: str, update_data: dict):
+    """Atualizar categoria existente"""
+    try:
+        from .config.active_categories_manager import ActiveCategoriesManager
+        manager = ActiveCategoriesManager()
+        
+        success = manager.update_category(category_key, update_data)
+        
+        if success:
+            return {"success": True, "message": "Categoria atualizada com sucesso"}
+        else:
+            return {"success": False, "error": "Categoria não encontrada"}
+            
+    except Exception as e:
+        logger.error(f"❌ Erro ao atualizar categoria: {e}")
+        return {"success": False, "error": str(e)}
+
+@app.delete("/config/categories/{category_key}")
+async def remove_category(category_key: str):
+    """Remover categoria"""
+    try:
+        from .config.active_categories_manager import ActiveCategoriesManager
+        manager = ActiveCategoriesManager()
+        
+        success = manager.remove_category(category_key)
+        
+        if success:
+            return {"success": True, "message": "Categoria removida com sucesso"}
+        else:
+            return {"success": False, "error": "Categoria não encontrada"}
+            
+    except Exception as e:
+        logger.error(f"❌ Erro ao remover categoria: {e}")
+        return {"success": False, "error": str(e)}
+
+@app.get("/config/categories/{category_key}/test")
+async def test_category(category_key: str):
+    """Testar categoria (verificar quantos produtos existem)"""
+    try:
+        from .config.active_categories_manager import ActiveCategoriesManager
+        manager = ActiveCategoriesManager()
+        
+        # Buscar categoria
+        category = manager.get_category(category_key)
+        if not category:
+            return {"success": False, "error": "Categoria não encontrada"}
+        
+        # Obter contagem real de produtos
+        products_found = manager.get_category_product_count(category_key)
+        
+        return {
+            "success": True,
+            "products_found": products_found,
+            "message": f"Categoria {category['category_name']} possui {products_found} produtos"
+        }
+            
+    except Exception as e:
+        logger.error(f"❌ Erro ao testar categoria: {e}")
+        return {"success": False, "error": str(e)}
+
+@app.post("/config/categories/update-counts")
+async def update_categories_counts():
+    """Atualizar contagem de produtos em todas as categorias"""
+    try:
+        from .config.active_categories_manager import ActiveCategoriesManager
+        manager = ActiveCategoriesManager()
+        
+        success = manager.update_products_count_from_scraper()
+        
+        if success:
+            # Retornar categorias atualizadas
+            categories = manager.get_all_categories()
+            total_products = sum(cat.get('products_count', 0) for cat in categories)
+            
+            return {
+                "success": True,
+                "message": "Contagens atualizadas com sucesso",
+                "total_products": total_products,
+                "categories": categories
+            }
+        else:
+            return {"success": False, "error": "Erro ao atualizar contagens"}
+            
+    except Exception as e:
+        logger.error(f"❌ Erro ao atualizar contagens: {e}")
+        return {"success": False, "error": str(e)}
+
+@app.get("/test-template", response_class=HTMLResponse)
+async def test_template():
+    """Endpoint de teste para verificar se os templates estão funcionando"""
+    try:
+        with open("templates/test_simple.html", "r", encoding="utf-8") as f:
+            html_content = f.read()
+        return HTMLResponse(html_content)
+        
+    except FileNotFoundError:
+        return HTMLResponse("""
+        <html><body style="text-align:center; font-family: Arial; padding: 50px; background: #0a0a0a; color: white;">
+        <h1>❌ Template de teste não encontrado</h1>
+        <p>O arquivo de template de teste não foi encontrado.</p>
+        <a href="/" style="color: #007aff;">← Voltar ao Dashboard</a>
+        </body></html>
+        """)
+    except Exception as e:
+        logger.error(f"Erro no template de teste: {e}")
+        return HTMLResponse(f"""
+        <html><body style="text-align:center; font-family: Arial; padding: 50px; background: #0a0a0a; color: white;">
+        <h1>❌ Erro no Template</h1>
+        <p>Erro: {str(e)}</p>
+        <a href="/" style="color: #007aff;">← Voltar ao Dashboard</a>
+        </body></html>
+        """)
+
+
+@app.get("/debug-scraper-template")
+async def debug_scraper_template():
+    """Debug do template do scraper"""
+    try:
+        import os
+        template_path = "templates/scraper_interface.html"
+        
+        # Verificar se arquivo existe
+        if not os.path.exists(template_path):
+            return JSONResponse({
+                "error": "Template não encontrado",
+                "path": template_path,
+                "exists": False
+            })
+        
+        # Verificar tamanho do arquivo
+        file_size = os.path.getsize(template_path)
+        
+        # Tentar ler o arquivo
+        with open(template_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        
+        return JSONResponse({
+            "success": True,
+            "path": template_path,
+            "exists": True,
+            "file_size": file_size,
+            "content_length": len(content),
+            "first_100_chars": content[:100],
+            "last_100_chars": content[-100:],
+            "scraper_available": SCRAPER_AVAILABLE
+        })
         
     except Exception as e:
-        logger.error(f"Erro na interface de config: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+        return JSONResponse({
+            "error": str(e),
+            "type": type(e).__name__
+        })
 
 
 # =====================================================
@@ -4164,6 +5516,266 @@ async def test_review_api():
                 "module_available": REVIEW_AVAILABLE
             }
         }, status_code=500, headers={"Content-Type": "application/json; charset=utf-8"})
+
+
+# ================================
+# CATEGORIAS ATIVAS - Endpoints
+# ================================
+
+@app.get("/categories/")
+async def get_all_categories():
+    """Retorna todas as categorias (ativas e inativas)"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        categories = categories_manager.get_all_categories()
+        summary = categories_manager.get_categories_summary()
+        
+        return {
+            "status": "success",
+            "categories": categories,
+            "summary": summary
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao buscar categorias: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/categories/active")
+async def get_active_categories():
+    """Retorna apenas categorias ativas ordenadas por prioridade"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        categories = categories_manager.get_active_categories()
+        
+        return {
+            "status": "success",
+            "active_categories": categories,
+            "count": len(categories)
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao buscar categorias ativas: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/categories/summary")
+async def get_categories_summary():
+    """Retorna resumo estatístico das categorias"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        summary = categories_manager.get_categories_summary()
+        
+        return {
+            "status": "success",
+            "summary": summary
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao gerar resumo: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/categories/{category_key}/status")
+async def update_category_status(category_key: str, request: CategoryUpdateRequest):
+    """Ativa ou desativa uma categoria específica"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        success = categories_manager.update_category_status(category_key, request.is_active)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail=f"Categoria '{category_key}' não encontrada")
+        
+        status_text = "ativada" if request.is_active else "desativada"
+        
+        return {
+            "status": "success",
+            "message": f"Categoria '{category_key}' {status_text} com sucesso",
+            "category_key": category_key,
+            "is_active": request.is_active
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Erro ao atualizar categoria '{category_key}': {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/categories/{category_key}/priority")
+async def update_category_priority(category_key: str, request: CategoryPriorityRequest):
+    """Atualiza a prioridade de processamento de uma categoria"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        success = categories_manager.update_category_priority(category_key, request.priority)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail=f"Categoria '{category_key}' não encontrada")
+        
+        return {
+            "status": "success",
+            "message": f"Prioridade da categoria '{category_key}' atualizada para {request.priority}",
+            "category_key": category_key,
+            "priority": request.priority
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Erro ao atualizar prioridade da categoria '{category_key}': {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/categories/batch")
+async def update_categories_batch(request: CategoriesBatchUpdateRequest):
+    """Atualiza status de múltiplas categorias em uma operação"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        success = categories_manager.update_categories_batch(request.categories)
+        
+        if not success:
+            raise HTTPException(status_code=500, detail="Erro na atualização em lote")
+        
+        active_count = sum(1 for active in request.categories.values() if active)
+        total_count = len(request.categories)
+        
+        return {
+            "status": "success",
+            "message": f"Atualização em lote concluída: {active_count}/{total_count} categorias ativas",
+            "updated_categories": request.categories,
+            "active_count": active_count,
+            "total_count": total_count
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Erro na atualização em lote: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/categories/discover")
+async def discover_categories_endpoint(background_tasks: BackgroundTasks):
+    """Descobre automaticamente novas categorias do site"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        new_categories = await categories_manager.discover_and_update_categories()
+        
+        return {
+            "status": "success",
+            "message": f"Descoberta concluída: {new_categories} novas categorias encontradas",
+            "new_categories_count": new_categories
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na descoberta de categorias: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/categories/{category_key}")
+async def get_category_details(category_key: str):
+    """Retorna detalhes de uma categoria específica"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        categories = categories_manager.get_all_categories()
+        category = next((cat for cat in categories if cat['category_key'] == category_key), None)
+        
+        if not category:
+            raise HTTPException(status_code=404, detail=f"Categoria '{category_key}' não encontrada")
+        
+        return {
+            "status": "success",
+            "category": category
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Erro ao buscar categoria '{category_key}': {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/categories/{category_key}/is-active")
+async def check_category_active(category_key: str):
+    """Verifica rapidamente se uma categoria está ativa"""
+    try:
+        if not CATEGORIES_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de categorias não disponível")
+        
+        categories_manager = ActiveCategoriesManager()
+        is_active = categories_manager.is_category_active(category_key)
+        
+        return {
+            "status": "success",
+            "category_key": category_key,
+            "is_active": is_active
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao verificar categoria '{category_key}': {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/review/clean-template-variables")
+async def clean_template_variables():
+    """Corrigir artigos existentes que ainda têm variáveis de template não substituídas"""
+    if not REVIEW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
+    
+    try:
+        review_manager = ReviewManager()
+        
+        # Buscar todos os artigos
+        articles = review_manager.list_articles(limit=100)
+        
+        cleaned_count = 0
+        template_manager = TemplateManager()
+        
+        for article in articles:
+            article_dict = dict(article)
+            content = article_dict.get('conteudo', '')
+            
+            # Verificar se contém variáveis não substituídas
+            if '{{ FEATURED_IMAGE_URL }}' in content or '{{{{ FEATURED_IMAGE_URL }}}}' in content:
+                # Aplicar limpeza
+                cleaned_content = template_manager._clean_template_variables(content)
+                
+                # Atualizar o artigo
+                success = review_manager.update_article(
+                    article_dict['id'], 
+                    {'conteudo': cleaned_content},
+                    "Sistema - Limpeza Automática"
+                )
+                
+                if success:
+                    cleaned_count += 1
+                    logger.info(f"✅ Artigo {article_dict['id']} corrigido - removidas variáveis de template")
+        
+        return JSONResponse({
+            "success": True,
+            "message": f"Limpeza concluída: {cleaned_count} artigos corrigidos",
+            "cleaned_count": cleaned_count,
+            "total_articles": len(articles)
+        })
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na limpeza de variáveis: {e}")
+        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
 
 
 # =====================================================
