@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🕷️ Buscar Produtos - Sistema SEO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzYzNjZmMSIvPgo8dGV4dCB4PSI1IiB5PSIyMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIj7wn5W3XHKYPC90ZXh0Pgo8L3N2Zz4K" type="image/svg+xml">
     <style>
         * {
             margin: 0;
@@ -33,6 +33,31 @@
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
+        }
+        
+        .page-wrapper {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
         }
         
         .container {
@@ -159,13 +184,23 @@
         .action-btn.warning:hover {
             box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
         }
+
+        .action-btn.info {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+        }
+        
+        .action-btn.info:hover {
+            box-shadow: 0 12px 35px rgba(33, 150, 243, 0.6);
+        }
         
         .progress-section {
             background: var(--bg-card);
             border-radius: 15px;
             padding: 25px;
-            margin-bottom: 30px;
+            margin-top: 30px;
             display: none;
+            text-align: center;
         }
         
         .progress-bar {
@@ -236,6 +271,148 @@
         .notification.warning {
             border-left-color: var(--warning);
         }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .category-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .category-card.active {
+            border-color: var(--success);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+        }
+
+        .category-card.inactive {
+            border-color: var(--border);
+            opacity: 0.6;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .category-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .category-toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--border);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .category-toggle.active {
+            background: var(--success);
+        }
+
+        .category-toggle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-toggle.active::after {
+            transform: translateX(24px);
+        }
+
+        .category-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .category-priority {
+            background: var(--primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .categories-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .spinner-border {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            vertical-align: text-bottom;
+            border: 0.25em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border 0.75s linear infinite;
+        }
+
+        @keyframes spinner-border {
+            to { transform: rotate(360deg); }
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
         
         .back-link {
             display: inline-flex;
@@ -257,11 +434,181 @@
             .action-buttons { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .text-success {
+            color: #10b981 !important;
+        }
+        
+        .text-warning {
+            color: #f59e0b !important;
+        }
+        
+        .text-info {
+            color: #2196F3 !important;
+        }
+
+        /* === NOVOS ESTILOS PARA INTERFACE SIMPLIFICADA === */
+        .mode-btn {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            color: var(--text-secondary);
+            border: 2px solid var(--border);
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        .mode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .simple-instructions {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--success);
+        }
+        
+        .steps {
+            margin-top: 20px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+        
+        .simple-actions {
+            display: grid;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .big-action-btn {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 25px 30px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .big-action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .big-action-btn:hover::before {
+            left: 100%;
+        }
+        
+        .big-action-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        .big-action-btn.secondary {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            border-color: var(--warning);
+            color: white;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+        }
+        
+        .big-action-btn.success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            border-color: var(--success);
+            color: white;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        .big-action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-description {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .mode-content {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="floating-nav">
+                <a href="javascript:history.back()" class="nav-btn" title="Voltar">←</a>
+                <a href="/" class="nav-btn" title="Dashboard">🏠</a>
+            </div>
+            
+            <div class="container">
         
         <div class="header">
             <h1>🕷️ Buscar Produtos</h1>
@@ -272,8 +619,121 @@
             <h3 id="statusTitle">🔍 Verificando status do sistema...</h3>
             <p id="statusMessage">Aguarde enquanto verificamos se tudo está funcionando</p>
         </div>
-        
-        <div class="workflow-section">
+
+        <!-- Modo Simplificado para Usuários Leigos -->
+        <div class="user-mode-toggle" style="text-align: center; margin-bottom: 30px;">
+            <button id="simpleModeBtn" class="mode-btn active" onclick="toggleMode('simple')">
+                🎯 Modo Simples
+            </button>
+            <button id="advancedModeBtn" class="mode-btn" onclick="toggleMode('advanced')">
+                ⚙️ Modo Avançado
+            </button>
+        </div>
+
+        <!-- MODO SIMPLES - Apenas 3 botões essenciais -->
+        <div id="simpleMode" class="mode-content">
+            <div class="simple-instructions">
+                <h3>🎯 Como usar (3 passos simples):</h3>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Clique em "Buscar Produtos" para encontrar todos os produtos do site</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Aguarde o processo terminar (pode demorar alguns minutos)</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Use o "Gerador" para criar artigos dos produtos encontrados</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="simple-actions">
+                <button class="big-action-btn primary" onclick="startFullScraping()" title="Busca todos os produtos automaticamente">
+                    🚀 Buscar Todos os Produtos
+                    <span class="btn-description">Encontra automaticamente todos os produtos do site</span>
+                </button>
+                
+                <button class="big-action-btn success" onclick="goToGenerator()" title="Ir para o gerador de artigos">
+                    ✨ Criar Artigos
+                    <span class="btn-description">Gerar artigos dos produtos encontrados</span>
+                </button>
+            </div>
+
+            <!-- Lista de Produtos Sempre Visível -->
+            <div class="simple-products-section">
+                <h3 style="color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    📦 <span>Produtos Encontrados</span>
+                    <span id="productCountBadge" class="badge" style="background: var(--success);">0</span>
+                </h3>
+                
+                <!-- Controles de Busca Simplificados -->
+                <div style="background: var(--bg-card); border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                    <div style="display: grid; grid-template-columns: 1fr auto 1fr auto auto; gap: 15px; align-items: end;">
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; color: var(--text-secondary); font-size: 0.9rem;">🔍 Pesquisar Produto</label>
+                            <input type="text" id="searchInput" placeholder="Digite o nome do produto..." 
+                                   style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; 
+                                          background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem;"
+                                   onkeyup="handleSearchKeyup(event)">
+                        </div>
+                        
+                        <div style="width: 20px;"></div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; color: var(--text-secondary); font-size: 0.9rem;">📂 Categoria</label>
+                            <select id="simpleCategoryFilter" onchange="filterSimpleProducts()" 
+                                    style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; 
+                                           background: var(--bg-secondary); color: var(--text-primary); font-size: 1rem; min-width: 200px;">
+                                <option value="todas">Todas as Categorias</option>
+                            </select>
+                        </div>
+                        
+                        <button class="action-btn success" onclick="searchProducts()" style="padding: 12px 20px; font-size: 0.9rem;">
+                            🔍 Buscar
+                        </button>
+                        
+                        <button class="action-btn info" onclick="clearSearch()" style="padding: 12px 20px; font-size: 0.9rem;">
+                            🧹 Limpar
+                        </button>
+                        
+                        <a href="/interface/categorias" class="action-btn" style="padding: 12px 20px; font-size: 0.9rem; background: #8b5cf6; color: white; text-decoration: none;">
+                            ⚙️ Configurar Categorias
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Container de Produtos Sempre Visível -->
+                <div id="simpleProductsContainer" style="border: 1px solid var(--border); border-radius: 15px; background: var(--bg-secondary); min-height: 400px;">
+                    <div id="productsEmptyState" style="text-align: center; padding: 60px 20px; color: var(--text-secondary);">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">📦</div>
+                        <h4 style="margin-bottom: 10px; color: var(--text-primary);">Nenhum produto encontrado ainda</h4>
+                        <p style="margin-bottom: 25px;">Clique em "🚀 Buscar Todos os Produtos" acima para começar a coleta</p>
+                        <button class="big-action-btn primary" onclick="startFullScraping()" style="max-width: 300px; margin: 0 auto;">
+                            🚀 Iniciar Busca
+                            <span class="btn-description">Encontrar produtos do site</span>
+                        </button>
+                    </div>
+                    
+                    <div id="productsLoading" style="display: none; text-align: center; padding: 40px; color: var(--text-secondary);">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">⏳</div>
+                        <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 10px;">Buscando produtos...</div>
+                        <div>Isso pode levar alguns minutos</div>
+                        <div class="progress-bar" style="margin-top: 20px; max-width: 300px; margin-left: auto; margin-right: auto;">
+                            <div class="progress-fill" id="simpleProgressFill"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="productsList" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODO AVANÇADO - Opções completas -->
+        <div id="advancedMode" class="mode-content" style="display: none;">
+            <div class="workflow-section">
             <h2 class="workflow-title">📋 Como Funciona</h2>
             
             <div class="instructions">
@@ -288,19 +748,9 @@
             </div>
             
             <div class="action-buttons">
-                <button class="action-btn success" onclick="testConnection()">
-                    🔗 Testar Conexão
-                    <span style="font-size: 0.9rem; opacity: 0.8;">Verificar se o site está acessível</span>
-                </button>
-                
                 <button class="action-btn" onclick="startFullScraping()">
                     🚀 Buscar Todos os Produtos
                     <span style="font-size: 0.9rem; opacity: 0.8;">Processo completo (pode demorar)</span>
-                </button>
-                
-                <button class="action-btn warning" onclick="viewStats()">
-                    📊 Ver Estatísticas
-                    <span style="font-size: 0.9rem; opacity: 0.8;">Produtos já encontrados</span>
                 </button>
                 
                 <button class="action-btn warning" onclick="cleanupData()">
@@ -339,6 +789,147 @@
                 </div>
             </div>
         </div>
+
+        <!-- Seção de Produtos Encontrados -->
+        <div class="workflow-section" id="productsSection" style="display: none;">
+            <h2 class="workflow-title">📦 Produtos Encontrados</h2>
+            
+            <!-- Controles de Busca e Filtros -->
+            <div style="background: var(--bg-card); border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr auto auto auto; gap: 15px; align-items: end;">
+                    <!-- Campo de Pesquisa -->
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; color: var(--text-secondary); font-size: 0.9rem;">🔍 Pesquisar Produto</label>
+                        <input type="text" id="searchInput" placeholder="Digite o nome do produto..." 
+                               style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; 
+                                      background: var(--bg-secondary); color: var(--text-primary); font-size: 0.9rem;"
+                               onkeyup="handleSearchKeyup(event)">
+                    </div>
+                    
+                    <!-- Filtro de Categoria -->
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; color: var(--text-secondary); font-size: 0.9rem;">📂 Categoria</label>
+                        <select id="categoryFilter" onchange="filterProducts()" 
+                                style="padding: 10px; border: 1px solid var(--border); border-radius: 8px; 
+                                       background: var(--bg-secondary); color: var(--text-primary); font-size: 0.9rem; min-width: 150px;">
+                            <option value="todas">Todas as Categorias</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Botão de Pesquisa -->
+                    <button class="action-btn success" onclick="searchProducts()" style="padding: 10px 20px; font-size: 0.9rem;">
+                        🔍 Buscar
+                    </button>
+                    
+                    <!-- Botão de Limpar -->
+                    <button class="action-btn info" onclick="clearSearch()" style="padding: 10px 20px; font-size: 0.9rem;">
+                        🧹 Limpar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Informações e Controles -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div style="color: var(--text-secondary);">
+                    <span id="productsCount">0</span> produtos encontrados
+                    <span id="searchInfo" style="margin-left: 10px; font-style: italic;"></span>
+                </div>
+                <div>
+                    <button class="action-btn success" onclick="loadProducts()" style="padding: 8px 16px; font-size: 0.9rem;">
+                        🔄 Atualizar Lista
+                    </button>
+                    <button class="action-btn warning" onclick="exportProducts()" style="padding: 8px 16px; font-size: 0.9rem;">
+                        📥 Exportar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Container de Produtos -->
+            <div id="productsContainer" style="max-height: 500px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-secondary);">
+                <div id="productsLoading" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">⏳</div>
+                    <div>Carregando produtos...</div>
+                </div>
+                
+                <div id="productsList" style="display: none;"></div>
+                
+                <div id="productsEmpty" style="display: none; text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">📭</div>
+                    <div>Nenhum produto encontrado</div>
+                    <div style="font-size: 0.9rem; margin-top: 5px;">Tente ajustar os filtros de pesquisa</div>
+                </div>
+            </div>
+            
+            <!-- Paginação -->
+            <div id="paginationContainer" style="display: none; margin-top: 20px; text-align: center;">
+                <div style="display: inline-flex; gap: 10px; align-items: center;">
+                    <button id="prevPageBtn" class="action-btn info" onclick="changePage(-1)" style="padding: 8px 16px; font-size: 0.9rem;">
+                        ← Anterior
+                    </button>
+                    <span id="pageInfo" style="color: var(--text-secondary); margin: 0 15px;">
+                        Página 1 de 1
+                    </span>
+                    <button id="nextPageBtn" class="action-btn info" onclick="changePage(1)" style="padding: 8px 16px; font-size: 0.9rem;">
+                        Próxima →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Categorias (Modo Avançado) -->
+        <div id="categoriesSection" class="workflow-section" style="display: none;">
+            <h2 class="workflow-title">📂 Gerenciar Categorias</h2>
+            <div class="text-center" style="color: #6c757d; padding: 20px;">
+                <div style="font-size: 2rem; margin-bottom: 10px;">⏳</div>
+                <div>Carregando categorias...</div>
+            </div>
+        </div>
+
+        <!-- Resumo das Categorias -->
+        <div id="categoriesSummary" class="stats-grid" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-number" id="totalCategoriesCount">0</div>
+                <div class="stat-label">Total de Categorias</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeCategoriesCount">0</div>
+                <div class="stat-label">Categorias Ativas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="inactiveCategoriesCount">0</div>
+                <div class="stat-label">Categorias Inativas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="estimatedProductsCount">0</div>
+                <div class="stat-label">Produtos Estimados</div>
+            </div>
+        </div>
+
+        <!-- Seção de Processamento -->
+        <div id="processingSection" class="workflow-section" style="display: none;">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">🚀 Processamento Automático</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Processa automaticamente todas as categorias ativas: faz scraping dos produtos e gera artigos.
+            </p>
+            <div style="text-align: center;">
+                <button id="processAutomaticBtn" class="action-btn success" onclick="processSelectedCategories()" 
+                        style="padding: 15px 30px; font-size: 1.1rem;">
+                    🚀 Processar Categorias Ativas
+                </button>
+                <div style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
+                    <span class="activeCategoriesCountSpan">0</span> categorias ativas serão processadas
+                </div>
+            </div>
+        </div>
+
+        <!-- Progresso das Categorias -->
+        <div id="categoriesProgress" class="progress-section" style="display: none;">
+            <h4 style="margin-bottom: 15px;">⏳ Processando Categorias</h4>
+            <div class="progress-bar">
+                <div class="progress-fill" id="categoriesProgressFill"></div>
+            </div>
+            <div id="categoriesProgressText" style="margin-top: 10px; text-align: center;">Iniciando...</div>
+        </div>
     </div>
     
     <div class="notification" id="notification">
@@ -351,7 +942,38 @@
         document.addEventListener('DOMContentLoaded', function() {
             checkScraperStatus();
             loadStats();
+            loadProductCategories(); // Carregar categorias de produtos
+            
+            // Só carregar categorias do sistema se o elemento existir (modo avançado)
+            if (document.getElementById('categoriesSection')) {
+                loadCategories();
+            }
         });
+
+        async function loadProductCategories() {
+            try {
+                const response = await fetch('/scraper/categories');
+                const data = await response.json();
+                
+                if (data.success && data.categories) {
+                    const selectEl = document.getElementById('categoryFilter');
+                    
+                    // Limpar opções existentes (exceto "Todas")
+                    selectEl.innerHTML = '<option value="todas">Todas as Categorias</option>';
+                    
+                    // Adicionar categorias
+                    data.categories.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.key;
+                        option.textContent = `${category.nome} (${category.count})`;
+                        selectEl.appendChild(option);
+                    });
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar categorias de produtos:', error);
+            }
+        }
         
         function showNotification(title, message, type = 'success') {
             const notification = document.getElementById('notification');
@@ -409,7 +1031,8 @@
                 const response = await fetch('/scraper/stats');
                 const data = await response.json();
                 
-                document.getElementById('totalProducts').textContent = data.produtos_processados || '0';
+                const totalProducts = data.produtos_processados || 0;
+                document.getElementById('totalProducts').textContent = totalProducts;
                 document.getElementById('categoriesCount').textContent = data.urls_configuradas || '0';
                 
                 if (data.ultima_execucao && data.ultima_execucao.data_scraping) {
@@ -424,6 +1047,12 @@
                 
                 document.getElementById('systemStatus').textContent = 
                     data.scraper_status === 'ready' ? '✅' : '❌';
+                
+                // Mostrar seção de produtos se houver produtos
+                if (totalProducts > 0) {
+                    document.getElementById('productsSection').style.display = 'block';
+                    loadProducts();
+                }
             } catch (error) {
                 console.error('Erro ao carregar estatísticas:', error);
                 document.getElementById('lastUpdate').textContent = 'Erro';
@@ -461,6 +1090,45 @@
             }
         }
         
+        // Sobrescrever função startFullScraping para funcionar com interface simples
+        const originalStartFullScraping = startFullScraping;
+        function startFullScraping() {
+            const isSimpleMode = document.getElementById('simpleMode').style.display !== 'none';
+            
+            if (isSimpleMode) {
+                // Mostrar loading no modo simples
+                document.getElementById('productsEmptyState').style.display = 'none';
+                document.getElementById('productsLoading').style.display = 'block';
+                document.getElementById('productsList').style.display = 'none';
+                
+                showNotification('🚀 Iniciando Busca', 'Coletando produtos do site...', 'info');
+            }
+            
+            // Chamar função original
+            originalStartFullScraping();
+            
+            // Verificar progresso no modo simples
+            if (isSimpleMode) {
+                const checkInterval = setInterval(async () => {
+                    try {
+                        const response = await fetch('/scraper/products');
+                        const data = await response.json();
+                        
+                        if (data.success && data.products && data.products.length > 0) {
+                            clearInterval(checkInterval);
+                            loadSimpleProducts();
+                            showNotification('✅ Busca Concluída', `${data.products.length} produtos encontrados!`, 'success');
+                        }
+                    } catch (error) {
+                        console.error('Erro ao verificar progresso:', error);
+                    }
+                }, 3000);
+                
+                // Parar verificação após 5 minutos
+                setTimeout(() => clearInterval(checkInterval), 300000);
+            }
+        }
+        
         async function startFullScraping() {
             if (!confirm('Isso vai buscar TODOS os produtos do site. Pode demorar vários minutos. Continuar?')) {
                 return;
@@ -480,45 +1148,75 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    // Simular progresso da busca
-                    let progress = 15;
-                    const progressInterval = setInterval(() => {
-                        progress += Math.random() * 10;
-                        if (progress > 90) progress = 90;
+                    // Verificar se estamos no modo simples
+                    const isSimpleMode = document.getElementById('simpleMode').style.display !== 'none';
+                    
+                    if (isSimpleMode) {
+                        // Mostrar loading no modo simples
+                        document.getElementById('productsEmptyState').style.display = 'none';
+                        document.getElementById('productsLoading').style.display = 'block';
+                        document.getElementById('productsList').style.display = 'none';
                         
-                        updateProgress(progress, 'Buscando produtos... Isso pode demorar alguns minutos.');
-                    }, 2000);
-                    
-                    // Verificar status periodicamente
-                    const statusInterval = setInterval(async () => {
-                        try {
-                            const statusResponse = await fetch('/scraper/stats');
-                            const statusData = await statusResponse.json();
-                            
-                            if (statusData.produtos_processados > 0) {
-                                clearInterval(progressInterval);
-                                clearInterval(statusInterval);
+                        // Verificar progresso no modo simples
+                        const checkInterval = setInterval(async () => {
+                            try {
+                                const response = await fetch('/scraper/products');
+                                const data = await response.json();
                                 
-                                updateProgress(100, 'Busca concluída!');
-                                setTimeout(() => {
-                                    showProgress(false);
-                                    showNotification('🎉 Sucesso!', `${statusData.produtos_processados} produtos encontrados e salvos!`);
-                                    loadStats();
-                                }, 1500);
+                                if (data.success && data.products && data.products.length > 0) {
+                                    clearInterval(checkInterval);
+                                    loadSimpleProducts();
+                                    showNotification('✅ Busca Concluída', `${data.products.length} produtos encontrados!`, 'success');
+                                }
+                            } catch (error) {
+                                console.error('Erro ao verificar progresso:', error);
                             }
-                        } catch (error) {
-                            console.error('Erro ao verificar status:', error);
-                        }
-                    }, 5000);
-                    
-                    // Timeout de segurança (5 minutos)
-                    setTimeout(() => {
-                        clearInterval(progressInterval);
-                        clearInterval(statusInterval);
-                        showProgress(false);
-                        showNotification('⏰ Processo em Andamento', 'A busca ainda está rodando. Verifique as estatísticas em alguns minutos.', 'warning');
-                    }, 300000);
-                    
+                        }, 3000);
+                        
+                        // Parar verificação após 5 minutos
+                        setTimeout(() => clearInterval(checkInterval), 300000);
+                    } else {
+                        // Modo avançado original
+                        let progress = 15;
+                        const progressInterval = setInterval(() => {
+                            progress += Math.random() * 10;
+                            if (progress > 90) progress = 90;
+                            
+                            updateProgress(progress, 'Buscando produtos... Isso pode demorar alguns minutos.');
+                        }, 2000);
+                        
+                        // Verificar status periodicamente
+                        const statusInterval = setInterval(async () => {
+                            try {
+                                const statusResponse = await fetch('/scraper/stats');
+                                const statusData = await statusResponse.json();
+                                
+                                if (statusData.produtos_processados > 0) {
+                                    clearInterval(progressInterval);
+                                    clearInterval(statusInterval);
+                                    
+                                    updateProgress(100, 'Busca concluída!');
+                                    setTimeout(() => {
+                                        showProgress(false);
+                                        showNotification('🎉 Sucesso!', `${statusData.produtos_processados} produtos encontrados e salvos!`);
+                                        loadStats();
+                                        document.getElementById('productsSection').style.display = 'block';
+                                        loadProducts();
+                                    }, 1500);
+                                }
+                            } catch (error) {
+                                console.error('Erro ao verificar status:', error);
+                            }
+                        }, 5000);
+                        
+                        // Timeout de segurança (5 minutos)
+                        setTimeout(() => {
+                            clearInterval(progressInterval);
+                            clearInterval(statusInterval);
+                            showProgress(false);
+                            showNotification('⏰ Processo em Andamento', 'A busca ainda está rodando. Verifique as estatísticas em alguns minutos.', 'warning');
+                        }, 300000);
+                    }
                 } else {
                     throw new Error(data.detail || 'Erro desconhecido');
                 }
@@ -529,9 +1227,27 @@
             }
         }
         
+        // Inicializar interface simples por padrão
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar produtos automaticamente no início
+            loadSimpleProducts();
+        });
+
         function viewStats() {
             loadStats();
             showNotification('📊 Estatísticas', 'Estatísticas atualizadas!');
+        }
+
+        function toggleProductsList() {
+            const productsSection = document.getElementById('productsSection');
+            
+            if (productsSection.style.display === 'none' || !productsSection.style.display) {
+                productsSection.style.display = 'block';
+                loadProducts();
+                showNotification('📦 Lista de Produtos', 'Carregando produtos encontrados...');
+            } else {
+                productsSection.style.display = 'none';
+            }
         }
         
         async function cleanupData() {
@@ -559,6 +1275,844 @@
                 showNotification('❌ Erro', 'Erro na limpeza: ' + error.message, 'error');
             }
         }
+
+        // Variáveis globais para paginação e filtros
+        let currentPage = 1;
+        let totalPages = 1;
+        let currentSearch = '';
+        let currentCategory = 'todas';
+        const productsPerPage = 20;
+
+        async function loadProducts(page = 1, search = '', categoria = 'todas') {
+            const loadingEl = document.getElementById('productsLoading');
+            const listEl = document.getElementById('productsList');
+            const emptyEl = document.getElementById('productsEmpty');
+            const countEl = document.getElementById('productsCount');
+            const searchInfoEl = document.getElementById('searchInfo');
+            const paginationEl = document.getElementById('paginationContainer');
+            
+            // Mostrar loading
+            loadingEl.style.display = 'block';
+            listEl.style.display = 'none';
+            emptyEl.style.display = 'none';
+            paginationEl.style.display = 'none';
+            
+            try {
+                const offset = (page - 1) * productsPerPage;
+                let url = `/scraper/products?limit=${productsPerPage}&offset=${offset}`;
+                
+                if (search) {
+                    url += `&search=${encodeURIComponent(search)}`;
+                }
+                
+                if (categoria && categoria !== 'todas') {
+                    url += `&categoria=${encodeURIComponent(categoria)}`;
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                loadingEl.style.display = 'none';
+                
+                if (data.success && data.products && data.products.length > 0) {
+                    countEl.textContent = data.total;
+                    displayProducts(data.products);
+                    listEl.style.display = 'block';
+                    
+                    // Configurar paginação
+                    totalPages = Math.ceil(data.total / productsPerPage);
+                    currentPage = page;
+                    
+                    if (totalPages > 1) {
+                        updatePagination();
+                        paginationEl.style.display = 'block';
+                    }
+                    
+                    // Atualizar info de pesquisa
+                    let searchText = '';
+                    if (search) searchText += `Pesquisa: "${search}"`;
+                    if (categoria && categoria !== 'todas') {
+                        if (searchText) searchText += ' | ';
+                        searchText += `Categoria: ${categoria}`;
+                    }
+                    searchInfoEl.textContent = searchText;
+                    
+                } else {
+                    countEl.textContent = '0';
+                    emptyEl.style.display = 'block';
+                    searchInfoEl.textContent = '';
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+                loadingEl.style.display = 'none';
+                emptyEl.style.display = 'block';
+                showNotification('❌ Erro', 'Erro ao carregar produtos: ' + error.message, 'error');
+            }
+        }
+        
+        function displayProducts(products) {
+            const listEl = document.getElementById('productsList');
+            
+            let html = '<div style="padding: 0;">';
+            
+            products.forEach((product, index) => {
+                const dataProcessed = new Date(product.data_processed).toLocaleDateString('pt-BR');
+                const categoria = product.categoria_nome || 'N/A';
+                
+                html += `
+                    <div style="padding: 15px; border-bottom: 1px solid var(--border); ${index % 2 === 0 ? 'background-color: var(--bg-card);' : ''}">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; cursor: pointer;"
+                                     onclick="selectProduct('${encodeURIComponent(JSON.stringify(product))}')"
+                                     title="Clique para selecionar este produto">
+                                    ${product.nome}
+                                </div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 3px;">
+                                    📂 Categoria: ${categoria}
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                                    🗓️ Encontrado em: ${dataProcessed}
+                                </div>
+                            </div>
+                            <div style="margin-left: 15px; display: flex; gap: 8px; flex-direction: column;">
+                                ${product.url ? `<a href="${product.url}" target="_blank" 
+                                    style="background: var(--success); color: white; text-decoration: none; 
+                                           padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; text-align: center;">
+                                    🔗 Ver Produto
+                                </a>` : ''}
+                                <button onclick="generateArticle('${encodeURIComponent(JSON.stringify(product))}')"
+                                        style="background: var(--primary); color: white; border: none;
+                                               padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;">
+                                    ✍️ Gerar Artigo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            listEl.innerHTML = html;
+        }
+
+        function handleSearchKeyup(event) {
+            if (event.key === 'Enter') {
+                searchProducts();
+            }
+        }
+
+        function searchProducts() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            
+            currentSearch = searchInput.value.trim();
+            currentCategory = categoryFilter.value;
+            currentPage = 1;
+            
+            loadProducts(currentPage, currentSearch, currentCategory);
+        }
+
+        function filterProducts() {
+            const categoryFilter = document.getElementById('categoryFilter');
+            const searchInput = document.getElementById('searchInput');
+            
+            currentCategory = categoryFilter.value;
+            currentSearch = searchInput.value.trim();
+            currentPage = 1;
+            
+            loadProducts(currentPage, currentSearch, currentCategory);
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = 'todas';
+            
+            currentSearch = '';
+            currentCategory = 'todas';
+            currentPage = 1;
+            
+            loadProducts(currentPage, currentSearch, currentCategory);
+        }
+
+        function changePage(direction) {
+            const newPage = currentPage + direction;
+            
+            if (newPage >= 1 && newPage <= totalPages) {
+                loadProducts(newPage, currentSearch, currentCategory);
+            }
+        }
+
+        function updatePagination() {
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            const pageInfo = document.getElementById('pageInfo');
+            
+            prevBtn.disabled = currentPage <= 1;
+            nextBtn.disabled = currentPage >= totalPages;
+            pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+        }
+
+        function selectProduct(productJson) {
+            try {
+                const product = JSON.parse(decodeURIComponent(productJson));
+                showNotification('📦 Produto Selecionado', `"${product.nome}" foi selecionado. Use o botão "Gerar Artigo" para criar um artigo sobre este produto.`);
+            } catch (error) {
+                console.error('Erro ao selecionar produto:', error);
+            }
+        }
+
+        async function generateArticle(productJson) {
+            try {
+                const product = JSON.parse(decodeURIComponent(productJson));
+                
+                const confirmMsg = `Gerar artigo para o produto:\n\n"${product.nome}"\n\nCategoria: ${product.categoria_nome}\n\nO artigo será gerado automaticamente e enviado para revisão. Continuar?`;
+                
+                if (!confirm(confirmMsg)) {
+                    return;
+                }
+                
+                showNotification('🤖 Gerando Artigo', `Gerando artigo para "${product.nome}"...`);
+                
+                const response = await fetch('/scraper/generate-article', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(product)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    showNotification('✅ Artigo Gerado!', 
+                        `Artigo para "${data.produto}" foi gerado e enviado para revisão (ID: ${data.article_id}). ` +
+                        `Verifique a área de revisão para aprovar o artigo.`);
+                } else {
+                    throw new Error(data.detail || data.message || 'Erro ao gerar artigo');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao gerar artigo:', error);
+                showNotification('❌ Erro', 'Erro ao gerar artigo: ' + error.message, 'error');
+            }
+        }
+        
+        async function exportProducts() {
+            showNotification('📥 Exportando', 'Preparando arquivo de exportação...');
+            
+            try {
+                const response = await fetch('/scraper/products/export');
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Exportado!', `Produtos exportados para: ${data.filename}`);
+                } else {
+                    throw new Error(data.message || 'Erro na exportação');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao exportar: ' + error.message, 'error');
+            }
+        }
+
+        // =====================================================
+        // FUNÇÕES DE CATEGORIAS
+        // =====================================================
+
+        async function loadCategories() {
+            try {
+                const response = await fetch('/categories/');
+                const data = await response.json();
+                
+                // A API retorna um objeto com as categorias em uma propriedade
+                const categories = data.categories || [];
+                
+                if (!Array.isArray(categories)) {
+                    throw new Error('Formato de resposta inválido da API');
+                }
+                
+                displayCategories(categories);
+                updateCategoriesSummary(categories);
+                
+            } catch (error) {
+                console.error('Erro ao carregar categorias:', error);
+                const categoriesSection = document.getElementById('categoriesSection');
+                if (categoriesSection) {
+                    categoriesSection.innerHTML = `
+                        <div class="text-center" style="color: #dc3545; padding: 20px;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">❌</div>
+                            <div>Erro ao carregar categorias</div>
+                            <div style="font-size: 0.9rem; margin-top: 5px;">Erro: ${error.message}</div>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function displayCategories(categories) {
+            const container = document.getElementById('categoriesSection');
+            
+            if (!container) {
+                console.warn('Elemento categoriesSection não encontrado');
+                return;
+            }
+            
+            if (!categories || categories.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center" style="color: #6c757d; padding: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📭</div>
+                        <div>Nenhuma categoria encontrada</div>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">Configure as categorias primeiro</div>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<div class="categories-grid">';
+            
+            categories.forEach(category => {
+                const isActive = category.is_active;
+                const cardClass = isActive ? 'category-card active' : 'category-card inactive';
+                const toggleClass = isActive ? 'category-toggle active' : 'category-toggle';
+                
+                html += `
+                    <div class="${cardClass}" data-category-key="${category.category_key}">
+                        <div class="category-header">
+                            <div class="category-name">${category.category_name}</div>
+                            <div class="${toggleClass}" onclick="toggleCategory('${category.category_key}', this)"></div>
+                        </div>
+                        <div class="category-info">
+                            🔗 ${category.category_key}
+                        </div>
+                        <div class="category-info">
+                            📊 ${category.products_count || 0} produtos encontrados
+                        </div>
+                        <div class="category-priority">Prioridade: ${category.priority}</div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            
+            html += `
+                <div class="categories-actions">
+                    <div>
+                        <button class="action-btn success" onclick="selectAll()" style="padding: 8px 16px; font-size: 0.9rem; margin-right: 10px;">
+                            ✅ Selecionar Todas
+                        </button>
+                        <button class="action-btn" onclick="deselectAll()" style="padding: 8px 16px; font-size: 0.9rem;">
+                            ❌ Desmarcar Todas
+                        </button>
+                    </div>
+                    <div>
+                        <button class="action-btn info" onclick="refreshCategories()" style="padding: 8px 16px; font-size: 0.9rem;">
+                            🔄 Atualizar
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+            
+            // Mostrar seções relacionadas
+            const categoriesSummary = document.getElementById('categoriesSummary');
+            const processingSection = document.getElementById('processingSection');
+            
+            if (categoriesSummary) categoriesSummary.style.display = 'grid';
+            if (processingSection) processingSection.style.display = 'grid';
+        }
+
+        async function toggleCategory(categoryKey, toggleElement) {
+            const card = toggleElement.closest('.category-card');
+            const isCurrentlyActive = card.classList.contains('active');
+            const newStatus = !isCurrentlyActive;
+            
+            try {
+                const response = await fetch(`/categories/${categoryKey}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        is_active: newStatus
+                    })
+                });
+                
+                if (response.ok) {
+                    // Atualizar interface
+                    if (newStatus) {
+                        card.classList.remove('inactive');
+                        card.classList.add('active');
+                        toggleElement.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                        card.classList.add('inactive');
+                        toggleElement.classList.remove('active');
+                    }
+                    
+                    // Recarregar dados
+                    loadCategories();
+                    
+                    showNotification('✅ Atualizado!', `Categoria ${newStatus ? 'ativada' : 'desativada'} com sucesso`);
+                } else {
+                    throw new Error('Erro ao atualizar categoria');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao alterar categoria:', error);
+                showNotification('❌ Erro', 'Erro ao alterar categoria: ' + error.message, 'error');
+            }
+        }
+
+        function updateCategoriesSummary(categories) {
+            const total = categories.length;
+            const active = categories.filter(cat => cat.is_active).length;
+            const inactive = total - active;
+            const estimatedProducts = categories.reduce((sum, cat) => sum + (cat.products_count || 0), 0);
+            
+            // Verificar se os elementos existem antes de tentar acessá-los
+            const totalEl = document.getElementById('totalCategoriesCount');
+            const activeEl = document.getElementById('activeCategoriesCount');
+            const inactiveEl = document.getElementById('inactiveCategoriesCount');
+            const estimatedEl = document.getElementById('estimatedProductsCount');
+            
+            if (totalEl) totalEl.textContent = total;
+            if (activeEl) activeEl.textContent = active;  
+            if (inactiveEl) inactiveEl.textContent = inactive;
+            if (estimatedEl) estimatedEl.textContent = estimatedProducts;
+            
+            // Atualizar também os spans que mostram contador de categorias ativas
+            const activeCountSpans = document.querySelectorAll('.activeCategoriesCountSpan');
+            activeCountSpans.forEach(span => span.textContent = active);
+        }
+
+        async function selectAll() {
+            try {
+                const categories = {};
+                const cards = document.querySelectorAll('.category-card');
+                
+                cards.forEach(card => {
+                    const categoryKey = card.dataset.categoryKey;
+                    categories[categoryKey] = true;
+                });
+                
+                const response = await fetch('/categories/batch', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ categories })
+                });
+                
+                if (response.ok) {
+                    loadCategories();
+                    showNotification('✅ Sucesso!', 'Todas as categorias foram ativadas');
+                } else {
+                    throw new Error('Erro ao ativar categorias');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao ativar todas as categorias: ' + error.message, 'error');
+            }
+        }
+
+        async function deselectAll() {
+            try {
+                const categories = {};
+                const cards = document.querySelectorAll('.category-card');
+                
+                cards.forEach(card => {
+                    const categoryKey = card.dataset.categoryKey;
+                    categories[categoryKey] = false;
+                });
+                
+                const response = await fetch('/categories/batch', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ categories })
+                });
+                
+                if (response.ok) {
+                    loadCategories();
+                    showNotification('⚠️ Atenção', 'Todas as categorias foram desativadas');
+                } else {
+                    throw new Error('Erro ao desativar categorias');
+                }
+                
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro ao desativar todas as categorias: ' + error.message, 'error');
+            }
+        }
+
+        function refreshCategories() {
+            loadCategories();
+            showNotification('🔄 Atualizado', 'Lista de categorias recarregada');
+        }
+
+        async function saveCategories() {
+            showNotification('💾 Salvando', 'Salvando configurações de categorias...');
+            // As categorias já são salvas automaticamente quando alteradas
+            setTimeout(() => {
+                showNotification('✅ Salvo!', 'Configurações de categorias salvas com sucesso');
+            }, 1000);
+        }
+
+        async function processSelectedCategories() {
+            const processBtn = document.getElementById('processAutomaticBtn');
+            const originalText = processBtn.innerHTML;
+            
+            // Verificar se há categorias ativas
+            const activeCategoriesCountEl = document.getElementById('activeCategoriesCount');
+            const activeCategoriesCount = activeCategoriesCountEl ? parseInt(activeCategoriesCountEl.textContent) || 0 : 0;
+            
+            if (activeCategoriesCount === 0) {
+                showNotification('⚠️ Atenção', 'Selecione pelo menos uma categoria para processar', 'warning');
+                return;
+            }
+            
+            if (!confirm(`Isso vai processar ${activeCategoriesCount} categoria(s) ativa(s): fazer scraping dos produtos e gerar artigos automaticamente. Continuar?`)) {
+                return;
+            }
+            
+            // Desabilitar botão e mostrar progresso
+            processBtn.disabled = true;
+            processBtn.innerHTML = '⏳ Processando...';
+            
+            showCategoriesProgress(true);
+            updateCategoriesProgress(10, 'Iniciando processamento das categorias ativas...');
+            
+            try {
+                const response = await fetch('/scraper/process-active-categories', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        max_articles: 10
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Simular progresso
+                    updateCategoriesProgress(30, 'Fazendo scraping dos produtos...');
+                    
+                    setTimeout(() => {
+                        updateCategoriesProgress(50, 'Gerando artigos com IA...');
+                    }, 2000);
+                    
+                    setTimeout(() => {
+                        updateCategoriesProgress(70, 'Salvando artigos para revisão...');
+                    }, 4000);
+                    
+                    setTimeout(() => {
+                        updateCategoriesProgress(100, 'Processamento concluído!');
+                        
+                        setTimeout(() => {
+                            showCategoriesProgress(false);
+                            showNotification('🎉 Sucesso!', `Processamento concluído! Verifique a área de revisão.`);
+                        }, 1500);
+                        
+                    }, 6000);
+                    
+                } else {
+                    throw new Error(data.detail || 'Erro no processamento');
+                }
+                
+            } catch (error) {
+                showCategoriesProgress(false);
+                showNotification('❌ Erro', 'Erro no processamento: ' + error.message, 'error');
+            } finally {
+                // Reabilitar botão
+                processBtn.disabled = false;
+                processBtn.innerHTML = originalText;
+            }
+        }
+
+        function showCategoriesProgress(show = true) {
+            const progressSection = document.getElementById('categoriesProgress');
+            if (progressSection) {
+                progressSection.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        function updateCategoriesProgress(percent, text) {
+            const progressFill = document.getElementById('categoriesProgressFill');
+            const progressText = document.getElementById('categoriesProgressText');
+            
+            if (progressFill) progressFill.style.width = percent + '%';
+            if (progressText) progressText.textContent = text;
+        }
+
+        // === FUNÇÕES PARA INTERFACE SIMPLIFICADA ===
+        function toggleMode(mode) {
+            const simpleMode = document.getElementById('simpleMode');
+            const advancedMode = document.getElementById('advancedMode');
+            const simpleModeBtn = document.getElementById('simpleModeBtn');
+            const advancedModeBtn = document.getElementById('advancedModeBtn');
+            const categoriesSection = document.getElementById('categoriesSection');
+            
+            if (mode === 'simple') {
+                simpleMode.style.display = 'block';
+                advancedMode.style.display = 'none';
+                if (categoriesSection) categoriesSection.style.display = 'none';
+                simpleModeBtn.classList.add('active');
+                advancedModeBtn.classList.remove('active');
+                
+                // Carregar produtos automaticamente no modo simples
+                loadSimpleProducts();
+                showNotification('🎯 Modo Simples Ativado', 'Perfeito para usuários iniciantes', 'success');
+            } else {
+                simpleMode.style.display = 'none';
+                advancedMode.style.display = 'block';
+                if (categoriesSection) categoriesSection.style.display = 'block';
+                simpleModeBtn.classList.remove('active');
+                advancedModeBtn.classList.add('active');
+                
+                // Carregar categorias quando entrar no modo avançado
+                loadCategories();
+                showNotification('⚙️ Modo Avançado Ativado', 'Todas as opções disponíveis', 'info');
+            }
+        }
+        
+        async function loadSimpleProducts() {
+            const emptyState = document.getElementById('productsEmptyState');
+            const loading = document.getElementById('productsLoading');
+            const productsList = document.getElementById('productsList');
+            const productCountBadge = document.getElementById('productCountBadge');
+            
+            try {
+                const response = await fetch('/scraper/products');
+                const data = await response.json();
+                
+                if (data.success && data.products && data.products.length > 0) {
+                    // Armazenar produtos globalmente para filtragem
+                    window.allSimpleProducts = data.products;
+                    
+                    // Carregar categorias no seletor
+                    loadSimpleCategories(data.products);
+                    
+                    // Esconder estado vazio e mostrar produtos
+                    emptyState.style.display = 'none';
+                    loading.style.display = 'none';
+                    productsList.style.display = 'block';
+                    
+                    // Atualizar contador
+                    productCountBadge.textContent = data.products.length;
+                    
+                    // Renderizar produtos
+                    renderSimpleProducts(data.products);
+                } else {
+                    // Mostrar estado vazio se não há produtos
+                    emptyState.style.display = 'block';
+                    loading.style.display = 'none';
+                    productsList.style.display = 'none';
+                    productCountBadge.textContent = '0';
+                    
+                    // Limpar array de produtos
+                    window.allSimpleProducts = [];
+                }
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+                emptyState.style.display = 'block';
+                loading.style.display = 'none';
+                productsList.style.display = 'none';
+                productCountBadge.textContent = '0';
+                window.allSimpleProducts = [];
+            }
+        }
+        
+        async function loadSimpleCategories(products) {
+            const categorySelect = document.getElementById('simpleCategoryFilter');
+            
+            try {
+                // Buscar categorias configuradas do sistema
+                const response = await fetch('/config/categories');
+                const data = await response.json();
+                
+                // Limpar opções existentes
+                categorySelect.innerHTML = '<option value="todas">Todas as Categorias</option>';
+                
+                if (data.success && data.categories) {
+                    // Adicionar categorias do sistema
+                    data.categories
+                        .filter(cat => cat.is_active)
+                        .sort((a, b) => a.priority - b.priority)
+                        .forEach(categoria => {
+                            const option = document.createElement('option');
+                            option.value = categoria.category_key;
+                            option.textContent = `${categoria.category_name} (${categoria.products_count || 0})`;
+                            categorySelect.appendChild(option);
+                        });
+                }
+                
+                // Fallback: extrair categorias dos produtos se não há configuradas
+                if (categorySelect.children.length === 1 && products && products.length > 0) {
+                    const categories = {};
+                    products.forEach(product => {
+                        const categoria = product.categoria_nome || 'Sem categoria';
+                        if (categories[categoria]) {
+                            categories[categoria]++;
+                        } else {
+                            categories[categoria] = 1;
+                        }
+                    });
+                    
+                    Object.keys(categories)
+                        .sort()
+                        .forEach(categoria => {
+                            const option = document.createElement('option');
+                            option.value = categoria;
+                            option.textContent = `${categoria} (${categories[categoria]})`;
+                            categorySelect.appendChild(option);
+                        });
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar categorias:', error);
+                
+                // Fallback para categorias dos produtos
+                if (products && products.length > 0) {
+                    const categories = {};
+                    products.forEach(product => {
+                        const categoria = product.categoria_nome || 'Sem categoria';
+                        categories[categoria] = (categories[categoria] || 0) + 1;
+                    });
+                    
+                    categorySelect.innerHTML = '<option value="todas">Todas as Categorias</option>';
+                    Object.keys(categories)
+                        .sort()
+                        .forEach(categoria => {
+                            const option = document.createElement('option');
+                            option.value = categoria;
+                            option.textContent = `${categoria} (${categories[categoria]})`;
+                            categorySelect.appendChild(option);
+                        });
+                }
+            }
+        }
+        
+        function filterSimpleProducts() {
+            const selectedCategory = document.getElementById('simpleCategoryFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const productCountBadge = document.getElementById('productCountBadge');
+            
+            if (!window.allSimpleProducts) {
+                return;
+            }
+            
+            let filteredProducts = window.allSimpleProducts;
+            
+            // Filtrar por categoria
+            if (selectedCategory !== 'todas') {
+                filteredProducts = filteredProducts.filter(product => 
+                    (product.categoria_nome || 'Sem categoria') === selectedCategory
+                );
+            }
+            
+            // Filtrar por termo de busca
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(product =>
+                    (product.nome || '').toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Atualizar contador
+            productCountBadge.textContent = filteredProducts.length;
+            
+            // Renderizar produtos filtrados
+            renderSimpleProducts(filteredProducts);
+            
+            // Mostrar notificação se necessário
+            if (filteredProducts.length === 0 && (selectedCategory !== 'todas' || searchTerm)) {
+                showNotification('🔍 Filtros Aplicados', 'Nenhum produto encontrado com os filtros selecionados', 'info');
+            }
+        }
+        
+        function renderSimpleProducts(products) {
+            const container = document.getElementById('productsList');
+            
+            if (!products || products.length === 0) {
+                container.innerHTML = '<div style="padding: 20px;"><p style="text-align: center; color: var(--text-secondary);">Nenhum produto encontrado com os filtros selecionados</p></div>';
+                return;
+            }
+            
+            let html = '<div style="display: grid; gap: 15px; padding: 20px;">';
+            
+            products.forEach(product => {
+                const categoria = product.categoria_nome || 'Sem categoria';
+                const preco = product.preco || 'Preço não informado';
+                const url = product.url || '#';
+                
+                html += `
+                    <div style="background: var(--bg-card); border-radius: 12px; padding: 20px; border-left: 4px solid var(--primary);">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                            <h4 style="margin: 0; color: var(--text-primary); font-size: 1.1rem;">${product.nome || 'Produto sem nome'}</h4>
+                            <span style="background: var(--primary); color: white; padding: 4px 8px; border-radius: 8px; font-size: 0.8rem;">${categoria}</span>
+                        </div>
+                        <p style="color: var(--text-secondary); margin: 8px 0; font-size: 0.9rem;">${preco}</p>
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button onclick="generateArticleFromProduct('${product.id || ''}')" 
+                                    style="background: var(--success); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                                ✨ Gerar Artigo
+                            </button>
+                            <a href="${url}" target="_blank" 
+                               style="background: var(--primary); color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-size: 0.8rem;">
+                                🔗 Ver Produto
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        
+        async function generateArticleFromProduct(productId) {
+            if (!productId) {
+                showNotification('❌ Erro', 'ID do produto não encontrado', 'error');
+                return;
+            }
+            
+            showNotification('✨ Gerando Artigo', 'Criando artigo do produto selecionado...', 'info');
+            
+            try {
+                const response = await fetch('/scraper/generate-article', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ product_id: productId })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('🎉 Artigo Criado!', `Artigo ID ${data.article_id} criado com sucesso`, 'success');
+                    setTimeout(() => {
+                        window.location.href = '/interface/review';
+                    }, 2000);
+                } else {
+                    showNotification('❌ Erro', data.error || 'Erro ao gerar artigo', 'error');
+                }
+            } catch (error) {
+                showNotification('❌ Erro', 'Erro de conexão ao gerar artigo', 'error');
+            }
+        }
+        
+        function goToGenerator() {
+            showNotification('✨ Redirecionando', 'Indo para o gerador de artigos...', 'success');
+            setTimeout(() => {
+                window.location.href = '/interface/generator';
+            }, 1000);
+        }
     </script>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 
