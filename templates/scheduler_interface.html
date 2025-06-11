@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⏰ Agendamento - Sistema SEO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="/static/css/_design_system.css?v={{ timestamp }}">
     <style>
         * {
             margin: 0;
@@ -27,12 +27,29 @@
             --shadow: rgba(0, 0, 0, 0.25);
         }
         
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
-            color: var(--text-primary);
+        .page-wrapper {
             min-height: 100vh;
-            line-height: 1.6;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
         }
         
         .container {
@@ -443,8 +460,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="floating-nav">
+                <a href="javascript:history.back()" class="nav-btn" title="Voltar">←</a>
+                <a href="/" class="nav-btn" title="Dashboard">🏠</a>
+            </div>
+            
+            <div class="container">
         
         <div class="header">
             <h1>⏰ Agendamento</h1>
@@ -477,10 +500,15 @@
                     <div class="btn-subtitle">Agendamentos configurados</div>
                 </button>
                 
-                <button class="action-btn" onclick="loadHistory()">
-                    📊 Histórico
-                    <div class="btn-subtitle">Últimas execuções</div>
-                </button>
+                                    <button class="action-btn" onclick="loadHistory()">
+                        📊 Histórico
+                        <div class="btn-subtitle">Últimas execuções</div>
+                    </button>
+                    
+                    <button class="action-btn info" onclick="refreshStatus()">
+                        🔄 Atualizar
+                        <div class="btn-subtitle">Recarregar status</div>
+                    </button>
                 
                 <button class="action-btn warning" onclick="pauseAllJobs()">
                     ⏸️ Pausar Tudo
@@ -543,8 +571,12 @@
     <script>
         // Verificar status do scheduler ao carregar a página
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Scheduler interface carregada');
             checkSchedulerStatus();
             loadStats();
+            
+            // Recarregar status a cada 30 segundos
+            setInterval(checkSchedulerStatus, 30000);
         });
         
         function showNotification(title, message, type = 'success') {
@@ -565,18 +597,28 @@
         
         async function checkSchedulerStatus() {
             try {
-                const response = await fetch('/scheduler');
+                const response = await fetch('/scheduler?t=' + Date.now(), {
+                    cache: 'no-cache',
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                });
                 const data = await response.json();
                 
                 const statusTitle = document.getElementById('schedulerStatusTitle');
                 const statusMessage = document.getElementById('schedulerStatusMessage');
                 
-                if (data.status === 'ready' && data.scheduler_running) {
+                console.log('Status do scheduler:', data); // Debug
+                
+                if (data.success && data.status === 'operational' && data.scheduler?.is_running) {
                     statusTitle.textContent = '✅ Scheduler Ativo!';
-                    statusMessage.textContent = 'O agendador está funcionando e executando tarefas automaticamente.';
-                } else {
+                    statusMessage.textContent = `O agendador está funcionando e executando tarefas automaticamente. ${data.message}`;
+                } else if (data.success && data.status === 'stopped') {
                     statusTitle.textContent = '⚠️ Scheduler Parado';
                     statusMessage.textContent = 'O agendador não está ativo. As tarefas não serão executadas automaticamente.';
+                } else {
+                    statusTitle.textContent = '⚠️ Status Indeterminado';
+                    statusMessage.textContent = `Status: ${data.status || 'Desconhecido'}. Verifique se o sistema está funcionando corretamente.`;
                 }
             } catch (error) {
                 console.error('Erro ao verificar status:', error);
@@ -587,7 +629,12 @@
         
         async function loadStats() {
             try {
-                const response = await fetch('/scheduler/stats');
+                const response = await fetch('/scheduler/stats?t=' + Date.now(), {
+                    cache: 'no-cache',
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                });
                 const data = await response.json();
                 
                 if (data.success) {
@@ -712,21 +759,21 @@
                 const historySection = document.getElementById('historySection');
                 const historyContainer = document.getElementById('historyContainer');
                 
-                if (data.success && data.history.length > 0) {
+                if (data.recent_executions && data.recent_executions.length > 0) {
                     let historyHTML = '';
                     
-                    data.history.forEach(execution => {
+                    data.recent_executions.forEach(execution => {
                         const statusClass = execution.status === 'success' ? 'success' : 'error';
                         const statusText = execution.status === 'success' ? '✅ Sucesso' : '❌ Falha';
                         
                         historyHTML += `
                             <div class="history-item ${statusClass}">
                                 <div class="history-info">
-                                    <div class="history-title">${execution.job_name || 'Tarefa'}</div>
+                                    <div class="history-title">${execution.job_id || 'Tarefa'}</div>
                                     <div class="history-details">
-                                        ${new Date(execution.executed_at).toLocaleString('pt-BR')} | 
+                                        ${new Date(execution.execution_time).toLocaleString('pt-BR')} | 
                                         Duração: ${execution.duration || '0'}s
-                                        ${execution.result ? ` | ${execution.result}` : ''}
+                                        ${execution.error ? ` | Erro: ${execution.error}` : ''}
                                     </div>
                                 </div>
                                 <div class="history-status ${statusClass}">
@@ -737,7 +784,7 @@
                     });
                     
                     historyContainer.innerHTML = historyHTML;
-                    showNotification('📊 Histórico Carregado', `${data.history.length} execuções encontradas!`);
+                    showNotification('📊 Histórico Carregado', `${data.recent_executions.length} execuções encontradas!`);
                 } else {
                     historyContainer.innerHTML = `
                         <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
@@ -890,6 +937,23 @@
                 showNotification('❌ Erro', 'Erro ao retomar: ' + error.message, 'error');
             }
         }
+        
+        function refreshStatus() {
+            showNotification('🔄 Atualizando', 'Recarregando status do scheduler...');
+            
+            // Limpar cache forçando reload dos dados
+            Promise.all([
+                checkSchedulerStatus(),
+                loadStats()
+            ]).then(() => {
+                showNotification('✅ Atualizado!', 'Status recarregado com sucesso!');
+            }).catch(error => {
+                showNotification('❌ Erro', 'Erro ao atualizar: ' + error.message, 'error');
+            });
+        }
     </script>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 

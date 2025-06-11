@@ -10,7 +10,16 @@ from typing import Dict, List, Any, Optional
 from datetime import datetime
 from loguru import logger
 
-from .content_generator import ContentGenerator
+try:
+    from .content_generator import ContentGenerator
+    from ..scraper.availability_checker import AvailabilityChecker
+except ImportError:
+    # Fallback para imports absolutos quando executado diretamente
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from generator.content_generator import ContentGenerator
+    from scraper.availability_checker import AvailabilityChecker
 
 class GeneratorManager:
     """Gerenciador principal do módulo de geração de conteúdo"""
@@ -29,11 +38,13 @@ class GeneratorManager:
             temperature=temperature,
             max_tokens=max_tokens
         )
+        self.availability_checker = AvailabilityChecker()
         self.generated_articles = []
         self.stats = {
             'total_generated': 0,
             'successful_generations': 0,
             'failed_generations': 0,
+            'skipped_unavailable': 0,
             'simulation_mode': self.content_generator.simulation_mode
         }
         
@@ -42,10 +53,34 @@ class GeneratorManager:
     def generate_article_from_product(self, product: Dict[str, Any], **kwargs) -> Dict[str, Any]:
         """Gera artigo completo a partir de dados de produto"""
         try:
-            logger.info(f"🎨 Iniciando geração para: {product.get('nome', 'Produto')}")
+            produto_nome = product.get('nome', 'Produto')
+            logger.info(f"🎨 Iniciando geração para: {produto_nome}")
+            
+            # Verificar disponibilidade do produto antes de gerar (se não foi verificado recentemente)
+            if not kwargs.get('skip_availability_check', False):
+                logger.info(f"🔍 Verificando disponibilidade do produto: {produto_nome}")
+                availability_result = self.availability_checker.check_product_availability(product)
+                
+                if not availability_result.get('disponivel', False):
+                    motivo = availability_result.get('motivo', 'Motivo desconhecido')
+                    logger.warning(f"⚠️ Produto indisponível, pulando geração: {produto_nome} - {motivo}")
+                    self.stats['skipped_unavailable'] += 1
+                    return {
+                        'status': 'skipped',
+                        'motivo': f'Produto indisponível: {motivo}',
+                        'produto': produto_nome,
+                        'verificacao_disponibilidade': availability_result,
+                        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    }
+                else:
+                    logger.info(f"✅ Produto disponível, prosseguindo com geração: {produto_nome}")
+                    # Adicionar info de verificação ao produto
+                    product['verificacao_disponibilidade'] = availability_result
             
             start_time = time.time()
-            article = self.content_generator.generate_article(product, **kwargs)
+            # Remover skip_availability_check dos kwargs antes de passar para generate_article
+            generator_kwargs = {k: v for k, v in kwargs.items() if k != 'skip_availability_check'}
+            article = self.content_generator.generate_article(product, **generator_kwargs)
             
             if article:
                 generation_time = time.time() - start_time
@@ -72,10 +107,20 @@ class GeneratorManager:
             'nome': 'Impressora HP LaserJet Pro M404n',
             'marca': 'HP',
             'preco': {'texto': 'R$ 899,99'},
-            'categoria_url': 'https://www.creativecopias.com.br/impressoras'
+            'categoria_url': 'https://www.creativecopias.com.br/impressoras',
+            'url': 'https://www.creativecopias.com.br/impressora-hp-laserjet-pro-m404n',
+            'disponivel': True,
+            'especificacoes': {
+                'velocidade': '38 ppm',
+                'conectividade': 'USB, Ethernet',
+                'resolucao': '1200 x 1200 dpi'
+            },
+            'categoria': 'Impressoras Laser',
+            'tipo': 'impressora'
         }
         
-        return self.generate_article_from_product(mock_product)
+        # Forçar skip da verificação de disponibilidade para teste
+        return self.generate_article_from_product(mock_product, skip_availability_check=True)
     
     def get_stats(self) -> Dict[str, Any]:
         """Retorna estatísticas do gerador incluindo dados do banco"""
@@ -107,6 +152,7 @@ class GeneratorManager:
                 'total_generated': total_articles_db,
                 'successful_generations': approved_articles + pending_articles,  # Gerados com sucesso
                 'failed_generations': rejected_articles,
+                'skipped_unavailable': self.stats['skipped_unavailable'],
                 'simulation_mode': self.content_generator.simulation_mode,
                 'success_rate': success_rate,
                 'average_words': average_words
@@ -135,7 +181,12 @@ class GeneratorManager:
                 'status': 'ready',
                 'simulation_mode': self.content_generator.simulation_mode,
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            } 
- 
- 
- 
+            }
+    
+    def close(self):
+        """Fecha recursos do gerador"""
+        try:
+            self.availability_checker.close()
+            logger.debug("🔒 Generator Manager recursos fechados")
+        except:
+            pass

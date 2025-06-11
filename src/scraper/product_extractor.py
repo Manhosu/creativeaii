@@ -232,8 +232,38 @@ class ProductExtractor:
         return url
     
     def _normalize_image_url(self, image_url: str) -> str:
-        """Normaliza URL da imagem"""
-        return self._normalize_url(image_url)
+        """
+        Normaliza URL da imagem com validação avançada
+        
+        Args:
+            image_url: URL da imagem original
+            
+        Returns:
+            URL normalizada ou None se inválida
+        """
+        if not image_url:
+            return None
+        
+        # Limpar espaços
+        image_url = image_url.strip()
+        
+        # Verificar se é URL válida
+        if not image_url.startswith(('http://', 'https://')):
+            logger.warning(f"⚠️ URL de imagem inválida: {image_url}")
+            return None
+        
+        # Verificar se é arquivo de imagem válido
+        valid_extensions = ('.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp')
+        if not any(image_url.lower().endswith(ext) for ext in valid_extensions):
+            # Se não tem extensão, mas pode ser uma URL dinâmica válida
+            if '?' in image_url or 'image' in image_url.lower() or 'img' in image_url.lower():
+                logger.debug(f"📸 URL de imagem sem extensão, mas parece válida: {image_url}")
+            else:
+                logger.warning(f"⚠️ URL não parece ser de imagem: {image_url}")
+                return None
+        
+        logger.debug(f"📸 Imagem normalizada: {image_url}")
+        return image_url
     
     def _normalize_availability(self, availability: Any) -> bool:
         """Normaliza disponibilidade do produto"""

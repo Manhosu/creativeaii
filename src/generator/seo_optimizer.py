@@ -6,8 +6,12 @@ OTIMIZADO PARA YOAST SEO - PONTUAÇÃO VERDE
 
 import re
 import unicodedata
+import hashlib
+import sqlite3
 from typing import Dict, List, Optional, Any
 from loguru import logger
+from datetime import datetime
+import os
 
 class SEOOptimizer:
     """Otimizador de SEO para artigos - Compatível com Yoast SEO"""
@@ -20,6 +24,9 @@ class SEOOptimizer:
         self.max_title_length = 60
         self.min_title_length = 30
         self.max_slug_length = 50
+        
+        # Banco de dados para verificar duplicatas
+        self.db_path = "data/review_articles.db"
         
         # Palavras de transição para melhorar legibilidade
         self.transition_words = [
@@ -40,6 +47,52 @@ class SEOOptimizer:
             'estes', 'ela', 'ele', 'elas', 'eles', 'ser', 'ter', 'estar'
         ]
         
+        # Templates de títulos diferenciados por tipo
+        self.title_templates = {
+            'impressora': [
+                "{produto}: Análise Completa e Especificações",
+                "{produto}: Review Detalhado {ano}",
+                "{produto}: Características e Performance",
+                "{produto}: Vale a Pena? Análise Técnica",
+                "{produto}: Especificações e Comparativo"
+            ],
+            'multifuncional': [
+                "{produto}: Multifuncional Completa - Review",
+                "{produto}: All-in-One para Escritório",
+                "{produto}: Análise da Multifuncional {marca}",
+                "{produto}: 3 em 1 - Vale a Pena?",
+                "{produto}: Multifuncional Profissional"
+            ],
+            'toner': [
+                "{produto}: Toner Original - Rendimento",
+                "{produto}: Análise do Toner {marca}",
+                "{produto}: Rendimento e Qualidade",
+                "{produto}: Cartucho Original vs Compatível",
+                "{produto}: Toner de Alta Performance"
+            ],
+            'scanner': [
+                "{produto}: Scanner Profissional Review",
+                "{produto}: Digitalização de Alta Qualidade",
+                "{produto}: Scanner {marca} - Análise",
+                "{produto}: Especificações de Escaneamento",
+                "{produto}: Scanner para Escritório"
+            ],
+            'papel': [
+                "{produto}: Papel de Qualidade Superior",
+                "{produto}: Análise do Papel {marca}",
+                "{produto}: Especificações Técnicas",
+                "{produto}: Papel para Impressora Laser",
+                "{produto}: Qualidade Profissional"
+            ],
+            'suprimento': [
+                "{produto}: Suprimento Original {marca}",
+                "{produto}: Análise de Qualidade",
+                "{produto}: Especificações do Suprimento",
+                "{produto}: Original vs Compatível",
+                "{produto}: Suprimento Profissional"
+            ]
+        }
+        
         logger.info("🔍 SEO Optimizer inicializado - Compatível com Yoast SEO")
     
     def optimize_article(self, article_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -59,12 +112,16 @@ class SEOOptimizer:
             primary_keyword = self._extract_primary_keyword(optimized)
             optimized['primary_keyword'] = primary_keyword
             
-            # Otimizar título SEO (máx 60 chars + keyword)
+            # NOVO: Gerar título único e descritivo
             if 'titulo' in optimized:
-                optimized['titulo'] = self.optimize_title_yoast(optimized['titulo'], primary_keyword)
+                # Usar nova função de título único
+                optimized['titulo'] = self.generate_unique_title(optimized)
+            else:
+                # Fallback se não tem título
+                optimized['titulo'] = self.generate_unique_title(optimized)
             
-            # Gerar/otimizar slug com keyword
-            optimized['slug'] = self.generate_seo_slug(optimized.get('titulo', ''), primary_keyword)
+            # NOVO: Gerar slug único baseado no título
+            optimized['slug'] = self.generate_unique_slug(optimized['titulo'], optimized)
             
             # Otimizar meta descrição (120-155 chars + keyword)
             if 'meta_descricao' in optimized:
@@ -88,6 +145,10 @@ class SEOOptimizer:
             
             # Adicionar dados estruturados
             optimized['seo_data'] = self.generate_structured_data_yoast(optimized)
+            
+            # NOVO: Gerar alt tag automática para imagem destacada
+            if 'produto_imagem' in optimized or 'imagem' in optimized:
+                optimized['imagem_alt'] = self.generate_automatic_alt_tag(optimized)
             
             # Validar pontuação Yoast
             optimized['yoast_score'] = self.calculate_yoast_score(optimized)
@@ -122,6 +183,7 @@ class SEOOptimizer:
     def optimize_title_yoast(self, title: str, keyword: str) -> str:
         """
         Otimiza título para Yoast SEO (máx 60 chars + keyword)
+        ATUALIZADO: Agora usa geração de título único
         
         Args:
             title: Título original
@@ -130,8 +192,9 @@ class SEOOptimizer:
         Returns:
             Título otimizado para Yoast
         """
+        # Se título vier vazio, usar keyword
         if not title:
-            return f"{keyword.title()}: Características e Benefícios"
+            title = f"{keyword.title()}: Características e Benefícios"
         
         # Garantir que a keyword está no título
         if keyword.lower() not in title.lower():
@@ -165,6 +228,7 @@ class SEOOptimizer:
     def generate_seo_slug(self, text: str, keyword: str) -> str:
         """
         Gera slug otimizado com palavra-chave
+        ATUALIZADO: Agora usa geração de slug único
         
         Args:
             text: Texto para converter em slug
@@ -173,56 +237,14 @@ class SEOOptimizer:
         Returns:
             Slug otimizado para SEO
         """
-        if not text and not keyword:
-            return "produto"
+        # Criar dados simulados para compatibilidade
+        product_data = {
+            'produto_nome': text or keyword,
+            'nome': text or keyword
+        }
         
-        # Usar keyword como base se texto não disponível
-        if not text:
-            text = keyword
-        
-        # Converter para minúsculas
-        slug = text.lower()
-        
-        # Remover acentos
-        slug = unicodedata.normalize('NFD', slug)
-        slug = ''.join(char for char in slug if unicodedata.category(char) != 'Mn')
-        
-        # Substituir espaços e caracteres especiais por hífens
-        slug = re.sub(r'[^\w\s-]', '', slug)
-        slug = re.sub(r'[\s_-]+', '-', slug)
-        
-        # Garantir que keyword está no slug
-        keyword_slug = re.sub(r'[^\w\s-]', '', keyword.lower())
-        keyword_slug = re.sub(r'[\s_-]+', '-', keyword_slug)
-        
-        if keyword_slug not in slug:
-            # Adicionar keyword no início
-            slug = f"{keyword_slug}-{slug}"
-        
-        # Remover palavras irrelevantes (mas manter keyword)
-        words = slug.split('-')
-        meaningful_words = []
-        keyword_words = keyword_slug.split('-')
-        
-        for word in words:
-            if word in keyword_words or (word not in self.stop_words and len(word) > 2):
-                meaningful_words.append(word)
-        
-        if meaningful_words:
-            slug = '-'.join(meaningful_words[:6])  # Máximo 6 palavras
-        
-        # Limitar tamanho
-        if len(slug) > self.max_slug_length:
-            words = slug.split('-')
-            # Manter keyword no início
-            keyword_count = len(keyword_words)
-            remaining_words = words[keyword_count:keyword_count+3]  # 3 palavras extras
-            slug = '-'.join(keyword_words + remaining_words)
-        
-        # Limpar início e fim
-        slug = slug.strip('-')
-        
-        return slug or "produto"
+        # Usar a nova função de slug único
+        return self.generate_unique_slug(text or keyword, product_data)
     
     def optimize_meta_description_yoast(self, meta_desc: str, keyword: str) -> str:
         """
@@ -361,6 +383,9 @@ class SEOOptimizer:
             
             # 7. Garantir keyword nos primeiros 100 caracteres
             content = self._ensure_keyword_in_intro(content, keyword)
+            
+            # 8. CRÍTICO: Limpar URLs malformadas como último passo
+            content = self._clean_urls_final(content)
             
             logger.debug("✅ Otimizações avançadas de legibilidade aplicadas")
             return content
@@ -722,6 +747,39 @@ class SEOOptimizer:
         
         return content
     
+    def _clean_urls_final(self, content: str) -> str:
+        """
+        Limpeza FINAL de URLs - Remove espaços que podem ter sido inseridos
+        
+        Args:
+            content: Conteúdo HTML
+            
+        Returns:
+            Conteúdo com URLs limpas
+        """
+        if not content:
+            return content
+        
+        # Função para corrigir URLs
+        def fix_url_spaces(match):
+            url = match.group(1)
+            
+            # Remover TODOS os espaços da URL
+            fixed_url = re.sub(r'\s+', '', url)
+            
+            # Garantir que pontos não tenham espaços
+            fixed_url = re.sub(r'\s*\.\s*', '.', fixed_url)
+            
+            # Garantir que barras não tenham espaços
+            fixed_url = re.sub(r'\s*/\s*', '/', fixed_url)
+            
+            return f'href="{fixed_url}"'
+        
+        # Aplicar correção em TODAS as URLs
+        cleaned_content = re.sub(r'href="([^"]*)"', fix_url_spaces, content)
+        
+        return cleaned_content
+
     def optimize_tags_yoast(self, tags: List[str], keyword: str) -> List[str]:
         """
         Otimiza tags incluindo palavra-chave
@@ -900,6 +958,599 @@ class SEOOptimizer:
             'readability_status': 'green' if readability_score >= 70 else 'orange' if readability_score >= 50 else 'red',
             'details': details
         }
+
+    def generate_unique_title(self, product_data: Dict[str, Any]) -> str:
+        """
+        Gera título único e descritivo evitando duplicação
+        
+        Args:
+            product_data: Dados do produto
+            
+        Returns:
+            Título otimizado e único
+        """
+        try:
+            produto_nome = product_data.get('produto_nome') or product_data.get('nome', '')
+            tipo_produto = product_data.get('tipo_produto', 'produto')
+            marca = self._extract_brand(produto_nome)
+            ano_atual = datetime.now().year
+            
+            # Extrair características diferenciadoras
+            caracteristicas = self._extract_product_features(produto_nome)
+            
+            # Selecionar template baseado no tipo
+            templates = self.title_templates.get(tipo_produto, self.title_templates['impressora'])
+            
+            # Gerar variações de título
+            title_candidates = []
+            
+            for template in templates:
+                # Substituir variáveis no template
+                title = template.format(
+                    produto=produto_nome,
+                    marca=marca,
+                    ano=ano_atual
+                )
+                
+                # Adicionar características se o título for muito curto
+                if len(title) < 45 and caracteristicas:
+                    title = f"{title} {caracteristicas[0]}"
+                
+                # Limitar tamanho
+                if len(title) > self.max_title_length:
+                    title = title[:57] + "..."
+                
+                title_candidates.append(title)
+            
+            # Verificar unicidade e selecionar o primeiro disponível
+            for title in title_candidates:
+                if self.is_title_unique(title):
+                    logger.debug(f"✅ Título único gerado: {title}")
+                    return title
+            
+            # Se nenhum for único, adicionar identificador
+            base_title = title_candidates[0]
+            unique_title = self._make_title_unique(base_title, product_data)
+            
+            logger.debug(f"✅ Título com identificador único: {unique_title}")
+            return unique_title
+            
+        except Exception as e:
+            logger.error(f"❌ Erro na geração de título único: {e}")
+            # Fallback
+            produto = product_data.get('nome', 'produto')
+            return f"{produto}: Review Completo {datetime.now().year}"
+
+    def _extract_brand(self, product_name: str) -> str:
+        """Extrai marca do nome do produto"""
+        if not product_name:
+            return "Marca"
+        
+        # Marcas conhecidas
+        brands = ['HP', 'Canon', 'Epson', 'Brother', 'Samsung', 'Xerox', 'Ricoh', 'Kyocera']
+        
+        for brand in brands:
+            if brand.lower() in product_name.lower():
+                return brand
+        
+        # Se não encontrar marca conhecida, usar primeira palavra
+        words = product_name.split()
+        return words[0] if words else "Marca"
+
+    def _extract_product_features(self, product_name: str) -> List[str]:
+        """Extrai características do produto para diferenciar título"""
+        features = []
+        
+        if not product_name:
+            return features
+        
+        name_lower = product_name.lower()
+        
+        # Características técnicas
+        if 'laser' in name_lower:
+            features.append('Laser')
+        if 'jato de tinta' in name_lower or 'inkjet' in name_lower:
+            features.append('Jato de Tinta')
+        if 'multifuncional' in name_lower:
+            features.append('All-in-One')
+        if 'wifi' in name_lower or 'wireless' in name_lower:
+            features.append('WiFi')
+        if 'duplex' in name_lower:
+            features.append('Frente e Verso')
+        if 'colorida' in name_lower or 'color' in name_lower:
+            features.append('Colorida')
+        if 'monocromática' in name_lower or 'mono' in name_lower:
+            features.append('Monocromática')
+        
+        # Modelos específicos
+        if re.search(r'[mp]\d+', name_lower):
+            model_match = re.search(r'([mp]\d+[a-z]*)', name_lower)
+            if model_match:
+                features.append(model_match.group(1).upper())
+        
+        return features
+
+    def _make_title_unique(self, base_title: str, product_data: Dict[str, Any]) -> str:
+        """Torna título único adicionando identificador"""
+        produto_id = product_data.get('produto_id', '')
+        codigo = product_data.get('codigo', '')
+        
+        # Tentar com código do produto
+        if codigo:
+            unique_title = f"{base_title} ({codigo})"
+            if len(unique_title) <= self.max_title_length and self.is_title_unique(unique_title):
+                return unique_title
+        
+        # Tentar com ID do produto
+        if produto_id:
+            unique_title = f"{base_title} (ID: {produto_id})"
+            if len(unique_title) <= self.max_title_length and self.is_title_unique(unique_title):
+                return unique_title
+        
+        # Usar hash curto como último recurso
+        hash_short = hashlib.md5(base_title.encode()).hexdigest()[:6]
+        unique_title = f"{base_title} (#{hash_short})"
+        
+        return unique_title
+
+    def is_title_unique(self, title: str) -> bool:
+        """
+        Verifica se o título é único no banco de dados
+        
+        Args:
+            title: Título a verificar
+            
+        Returns:
+            True se for único
+        """
+        try:
+            if not os.path.exists(self.db_path):
+                return True  # Se não existe DB, é único
+            
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT id FROM articles WHERE titulo = ?", (title,))
+                result = cursor.fetchone()
+                
+                return result is None
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao verificar unicidade do título: {e}")
+            return True  # Em caso de erro, assumir que é único
+
+    def generate_unique_slug(self, title: str, product_data: Dict[str, Any]) -> str:
+        """
+        Gera slug único e descritivo
+        
+        Args:
+            title: Título do artigo
+            product_data: Dados do produto
+            
+        Returns:
+            Slug único e otimizado
+        """
+        try:
+            # Gerar slug base a partir do título
+            base_slug = self._create_base_slug(title)
+            
+            # Verificar se é único
+            if self.is_slug_unique(base_slug):
+                logger.debug(f"✅ Slug único gerado: {base_slug}")
+                return base_slug
+            
+            # Se não for único, adicionar identificadores
+            unique_slug = self._make_slug_unique(base_slug, product_data)
+            
+            logger.debug(f"✅ Slug com identificador único: {unique_slug}")
+            return unique_slug
+            
+        except Exception as e:
+            logger.error(f"❌ Erro na geração de slug único: {e}")
+            # Fallback
+            fallback_slug = f"produto-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+            return fallback_slug
+
+    def _create_base_slug(self, title: str) -> str:
+        """Cria slug base a partir do título"""
+        if not title:
+            return "produto"
+        
+        # Converter para minúsculas
+        slug = title.lower()
+        
+        # Remover acentos
+        slug = unicodedata.normalize('NFD', slug)
+        slug = ''.join(char for char in slug if unicodedata.category(char) != 'Mn')
+        
+        # Substituir caracteres especiais por hífens
+        slug = re.sub(r'[^\w\s-]', '', slug)
+        slug = re.sub(r'[\s_-]+', '-', slug)
+        
+        # Remover palavras irrelevantes mantendo as importantes
+        words = slug.split('-')
+        meaningful_words = []
+        
+        for word in words:
+            if (word not in self.stop_words and 
+                len(word) > 2 and 
+                word.isalpha()):
+                meaningful_words.append(word)
+        
+        # Manter máximo 6 palavras para não ficar muito longo
+        if len(meaningful_words) > 6:
+            meaningful_words = meaningful_words[:6]
+        
+        slug = '-'.join(meaningful_words) if meaningful_words else 'produto'
+        
+        # Limitar tamanho
+        if len(slug) > self.max_slug_length:
+            words = slug.split('-')
+            truncated_words = []
+            current_length = 0
+            
+            for word in words:
+                if current_length + len(word) + 1 <= self.max_slug_length:
+                    truncated_words.append(word)
+                    current_length += len(word) + 1
+                else:
+                    break
+            
+            slug = '-'.join(truncated_words)
+        
+        return slug.strip('-')
+
+    def _make_slug_unique(self, base_slug: str, product_data: Dict[str, Any]) -> str:
+        """Torna slug único adicionando identificadores"""
+        # Estratégia 1: Adicionar código do produto
+        codigo = product_data.get('codigo', '')
+        if codigo:
+            # Limpar código para slug
+            codigo_clean = re.sub(r'[^\w-]', '', codigo.lower())
+            unique_slug = f"{base_slug}-{codigo_clean}"
+            
+            if len(unique_slug) <= self.max_slug_length and self.is_slug_unique(unique_slug):
+                return unique_slug
+        
+        # Estratégia 2: Adicionar ID do produto
+        produto_id = product_data.get('produto_id', '')
+        if produto_id:
+            id_clean = str(produto_id).replace('/', '-').replace(' ', '-').lower()
+            unique_slug = f"{base_slug}-{id_clean}"
+            
+            if len(unique_slug) <= self.max_slug_length and self.is_slug_unique(unique_slug):
+                return unique_slug
+        
+        # Estratégia 3: Adicionar timestamp
+        timestamp = datetime.now().strftime('%Y%m%d')
+        unique_slug = f"{base_slug}-{timestamp}"
+        
+        if len(unique_slug) <= self.max_slug_length and self.is_slug_unique(unique_slug):
+            return unique_slug
+        
+        # Estratégia 4: Hash curto como último recurso
+        hash_short = hashlib.md5(base_slug.encode()).hexdigest()[:6]
+        unique_slug = f"{base_slug}-{hash_short}"
+        
+        # Se ainda for muito longo, truncar base_slug
+        if len(unique_slug) > self.max_slug_length:
+            max_base_length = self.max_slug_length - len(f"-{hash_short}")
+            base_truncated = base_slug[:max_base_length]
+            unique_slug = f"{base_truncated}-{hash_short}"
+        
+        return unique_slug
+
+    def is_slug_unique(self, slug: str) -> bool:
+        """
+        Verifica se o slug é único no banco de dados
+        
+        Args:
+            slug: Slug a verificar
+            
+        Returns:
+            True se for único
+        """
+        try:
+            if not os.path.exists(self.db_path):
+                return True  # Se não existe DB, é único
+            
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT id FROM articles WHERE slug = ?", (slug,))
+                result = cursor.fetchone()
+                
+                return result is None
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao verificar unicidade do slug: {e}")
+            return True  # Em caso de erro, assumir que é único
+
+    def generate_automatic_alt_tag(self, product_data: Dict[str, Any]) -> str:
+        """
+        Gera alt tag automática baseada no produto
+        
+        Args:
+            product_data: Dados do produto
+            
+        Returns:
+            Alt tag otimizada para SEO
+        """
+        try:
+            # Extrair informações básicas
+            nome = product_data.get('produto_nome', '') or product_data.get('titulo', '')
+            tipo = self._extract_product_type(nome)
+            marca = self._extract_brand(nome)
+            
+            # Construir alt tag
+            alt_parts = []
+            
+            # Adicionar tipo se identificado
+            if tipo and tipo not in ['produto', 'generico']:
+                alt_parts.append(tipo.title())
+            
+            # Adicionar marca se identificada
+            if marca and marca != 'Genérica':
+                alt_parts.append(marca)
+            
+            # Adicionar nome limpo (sem marca/tipo já incluídos)
+            nome_limpo = nome
+            if marca:
+                nome_limpo = nome_limpo.replace(marca, '').strip()
+            if tipo:
+                nome_limpo = nome_limpo.replace(tipo.title(), '').replace(tipo.lower(), '').strip()
+            
+            # Limpar caracteres extras
+            nome_limpo = re.sub(r'\s+', ' ', nome_limpo).strip()
+            
+            if nome_limpo:
+                alt_parts.append(nome_limpo)
+            
+            # Se ainda não temos nada, usar nome completo
+            if not alt_parts:
+                alt_parts = [nome or 'Produto']
+            
+            # Construir alt tag final
+            alt_tag = ' '.join(alt_parts)
+            
+            # Limitar tamanho (125 caracteres é ideal para SEO)
+            if len(alt_tag) > 125:
+                alt_tag = alt_tag[:122] + "..."
+            
+            # Garantir que termina sem pontuação desnecessária
+            alt_tag = alt_tag.rstrip('.,;:')
+            
+            logger.debug(f"🖼️ Alt tag gerada: '{alt_tag}'")
+            return alt_tag
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao gerar alt tag: {e}")
+            # Fallback básico
+            nome = product_data.get('produto_nome', '') or product_data.get('titulo', '') or 'Produto'
+            return nome[:125]
+    
+    def _extract_product_type(self, product_name: str) -> str:
+        """
+        Extrai tipo do produto baseado no nome
+        
+        Args:
+            product_name: Nome do produto
+            
+        Returns:
+            Tipo identificado
+        """
+        if not product_name:
+            return 'produto'
+        
+        name_lower = product_name.lower()
+        
+        # Tipos específicos com alta prioridade
+        type_patterns = {
+            'impressora': ['impressora', 'printer'],
+            'multifuncional': ['multifuncional', 'multifuncion', 'all-in-one', 'all in one'],
+            'scanner': ['scanner', 'digitalizador'],
+            'toner': ['toner', 'cartucho'],
+            'papel': ['papel', 'sulfite', 'folha'],
+            'copiadora': ['copiadora', 'copiador'],
+            'suprimento': ['suprimento', 'consumivel'],
+            'fax': ['fax'],
+            'plotter': ['plotter']
+        }
+        
+        for tipo, patterns in type_patterns.items():
+            if any(pattern in name_lower for pattern in patterns):
+                return tipo
+        
+        return 'produto'
+    
+    def validate_readability_score(self, content: str, keyword: str = None) -> Dict[str, Any]:
+        """
+        Valida pontuação de legibilidade Yoast SEO
+        
+        Args:
+            content: Conteúdo HTML a ser validado
+            keyword: Palavra-chave principal (opcional)
+            
+        Returns:
+            Dicionário com pontuação e detalhes de legibilidade
+        """
+        try:
+            # Extrair texto puro
+            text_content = re.sub(r'<[^>]+>', '', content)
+            words = text_content.split()
+            sentences = re.split(r'[.!?]+', text_content)
+            sentences = [s.strip() for s in sentences if s.strip()]
+            
+            # Critérios de validação
+            validation_results = {}
+            
+            # 1. VALIDAR PARÁGRAFOS CURTOS (máx 120 palavras)
+            paragraphs = re.findall(r'<p>(.*?)</p>', content, re.DOTALL)
+            paragraph_scores = []
+            
+            for para in paragraphs:
+                para_text = re.sub(r'<[^>]+>', '', para)
+                para_words = len(para_text.split())
+                paragraph_scores.append(para_words <= 120)
+            
+            validation_results['short_paragraphs'] = {
+                'score': sum(paragraph_scores) / len(paragraph_scores) * 100 if paragraph_scores else 100,
+                'total_paragraphs': len(paragraphs),
+                'compliant_paragraphs': sum(paragraph_scores),
+                'passed': all(paragraph_scores) if paragraph_scores else True
+            }
+            
+            # 2. VALIDAR FRASES CURTAS (máx 20 palavras)
+            sentence_scores = []
+            for sentence in sentences:
+                sentence_words = len(sentence.split())
+                sentence_scores.append(sentence_words <= 20)
+            
+            validation_results['short_sentences'] = {
+                'score': sum(sentence_scores) / len(sentence_scores) * 100 if sentence_scores else 100,
+                'total_sentences': len(sentences),
+                'compliant_sentences': sum(sentence_scores),
+                'passed': sum(sentence_scores) / len(sentence_scores) >= 0.75 if sentence_scores else True
+            }
+            
+            # 3. VALIDAR PALAVRAS DE TRANSIÇÃO (mín 30%)
+            transition_count = 0
+            for word in self.transition_words:
+                transition_count += text_content.lower().count(word.lower())
+            
+            total_sentences = len(sentences)
+            transition_percentage = (transition_count / total_sentences * 100) if total_sentences > 0 else 0
+            
+            validation_results['transition_words'] = {
+                'score': min(transition_percentage * 3.33, 100),  # 30% = 100 pontos
+                'transition_count': transition_count,
+                'total_sentences': total_sentences,
+                'percentage': transition_percentage,
+                'passed': transition_percentage >= 30
+            }
+            
+            # 4. VALIDAR VOZ ATIVA (mín 60%)
+            passive_indicators = [
+                'foi', 'foram', 'são', 'é', 'está', 'estão', 'sendo', 'sido',
+                'foi feito', 'foi realizado', 'foi desenvolvido', 'é considerado'
+            ]
+            
+            passive_count = 0
+            for indicator in passive_indicators:
+                passive_count += text_content.lower().count(indicator)
+            
+            active_voice_percentage = max(0, 100 - (passive_count / total_sentences * 100)) if total_sentences > 0 else 100
+            
+            validation_results['active_voice'] = {
+                'score': active_voice_percentage,
+                'passive_indicators': passive_count,
+                'total_sentences': total_sentences,
+                'percentage': active_voice_percentage,
+                'passed': active_voice_percentage >= 60
+            }
+            
+            # 5. VALIDAR SUBTÍTULOS (a cada 300 palavras)
+            total_words = len(words)
+            headings = len(re.findall(r'<h[2-6][^>]*>', content))
+            expected_headings = max(1, total_words // 300)
+            
+            validation_results['heading_distribution'] = {
+                'score': min(headings / expected_headings * 100, 100) if expected_headings > 0 else 100,
+                'total_headings': headings,
+                'expected_headings': expected_headings,
+                'total_words': total_words,
+                'passed': headings >= expected_headings
+            }
+            
+            # 6. VALIDAR DENSIDADE DE PALAVRA-CHAVE (0.5-2.5%)
+            keyword_density = 0
+            if keyword:
+                keyword_count = text_content.lower().count(keyword.lower())
+                keyword_density = (keyword_count / len(words) * 100) if words else 0
+            
+            validation_results['keyword_density'] = {
+                'score': 100 if 0.5 <= keyword_density <= 2.5 else max(0, 100 - abs(keyword_density - 1.5) * 20),
+                'keyword_count': text_content.lower().count(keyword.lower()) if keyword else 0,
+                'total_words': len(words),
+                'density_percentage': keyword_density,
+                'passed': 0.5 <= keyword_density <= 2.5 if keyword else True
+            }
+            
+            # CALCULAR PONTUAÇÃO GERAL
+            all_scores = [
+                validation_results['short_paragraphs']['score'],
+                validation_results['short_sentences']['score'],
+                validation_results['transition_words']['score'],
+                validation_results['active_voice']['score'],
+                validation_results['heading_distribution']['score'],
+                validation_results['keyword_density']['score']
+            ]
+            
+            overall_score = sum(all_scores) / len(all_scores)
+            all_passed = all([
+                validation_results['short_paragraphs']['passed'],
+                validation_results['short_sentences']['passed'],
+                validation_results['transition_words']['passed'],
+                validation_results['active_voice']['passed'],
+                validation_results['heading_distribution']['passed'],
+                validation_results['keyword_density']['passed']
+            ])
+            
+            # Determinar nível Yoast
+            if overall_score >= 90 and all_passed:
+                yoast_level = 'GREEN'
+                yoast_message = 'Excelente legibilidade!'
+            elif overall_score >= 70:
+                yoast_level = 'ORANGE'
+                yoast_message = 'Boa legibilidade, mas pode melhorar.'
+            else:
+                yoast_level = 'RED'
+                yoast_message = 'Legibilidade precisa de melhorias.'
+            
+            return {
+                'overall_score': round(overall_score, 1),
+                'yoast_level': yoast_level,
+                'yoast_message': yoast_message,
+                'all_criteria_passed': all_passed,
+                'detailed_results': validation_results,
+                'recommendations': self._generate_readability_recommendations(validation_results)
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Erro na validação de legibilidade: {e}")
+            return {
+                'overall_score': 0,
+                'yoast_level': 'ERROR',
+                'yoast_message': 'Erro na validação',
+                'all_criteria_passed': False,
+                'detailed_results': {},
+                'recommendations': ['Erro na análise de legibilidade']
+            }
+    
+    def _generate_readability_recommendations(self, results: Dict[str, Any]) -> List[str]:
+        """Gera recomendações baseadas nos resultados"""
+        recommendations = []
+        
+        if not results['short_paragraphs']['passed']:
+            recommendations.append(f"Reduza parágrafos longos: {results['short_paragraphs']['total_paragraphs'] - results['short_paragraphs']['compliant_paragraphs']} parágrafos têm mais de 120 palavras")
+        
+        if not results['short_sentences']['passed']:
+            recommendations.append(f"Encurte frases longas: {results['short_sentences']['total_sentences'] - results['short_sentences']['compliant_sentences']} frases têm mais de 20 palavras")
+        
+        if not results['transition_words']['passed']:
+            recommendations.append(f"Adicione mais palavras de transição: apenas {results['transition_words']['percentage']:.1f}% das frases as usam (mínimo 30%)")
+        
+        if not results['active_voice']['passed']:
+            recommendations.append(f"Use mais voz ativa: apenas {results['active_voice']['percentage']:.1f}% do texto está em voz ativa (mínimo 60%)")
+        
+        if not results['heading_distribution']['passed']:
+            recommendations.append(f"Adicione mais subtítulos: {results['heading_distribution']['total_headings']} encontrados, {results['heading_distribution']['expected_headings']} esperados")
+        
+        if not results['keyword_density']['passed']:
+            if results['keyword_density']['density_percentage'] < 0.5:
+                recommendations.append("Aumente a densidade da palavra-chave (mínimo 0.5%)")
+            elif results['keyword_density']['density_percentage'] > 2.5:
+                recommendations.append("Reduza a densidade da palavra-chave (máximo 2.5%)")
+        
+        return recommendations
 
     # ... resto dos métodos existentes ...
  

@@ -6,6 +6,8 @@ OTIMIZADO PARA YOAST SEO - ESTRUTURA HTML E LINKS
 
 from typing import Dict, Any, List
 from loguru import logger
+import re
+import random
 
 class TemplateManager:
     """Gerenciador de templates para diferentes tipos de produtos - Otimizado para Yoast"""
@@ -34,26 +36,34 @@ class TemplateManager:
         return {
             'impressora': {
                 'structure_guide': """
-                1. Introdução (1 parágrafo de 50-100 palavras)
-                   - Por que uma boa impressora é essencial
-                   - Mencionar marca/modelo específico
-                   - Link externo obrigatório para Creative Cópias
+                1. Introdução (1 parágrafo de 60-80 palavras, frases curtas)
+                   - "A [KEYWORD] é uma solução ideal para escritórios modernos."
+                   - "Além disso, oferece qualidade profissional a preço justo."
+                   - "Portanto, representa um investimento inteligente."
+                   - Link para Creative Cópias no primeiro parágrafo
                 
-                2. H2: "Principais Características da [KEYWORD]" (lista com 4-6 benefícios)
-                   - Itens com máximo 15 palavras cada
-                   - Use palavras de transição: "Além disso", "Também", "Principalmente"
+                2. H2: "Principais Benefícios da [KEYWORD]" (lista com transições)
+                   - "Em primeiro lugar, garante impressões nítidas."
+                   - "Além disso, economiza tinta significativamente."
+                   - "Também oferece conectividade wireless."
+                   - "Finalmente, possui design compacto."
                    
-                3. H2: "Ideal para Qual Ambiente" (1-2 parágrafos de 80-120 palavras)
-                   - Descrição de uso específico
-                   - Voz ativa: "oferece", "proporciona", "garante"
+                3. H2: "Para Quem é Indicada" (2 parágrafos de 80-100 palavras cada)
+                   - Primeiro parágrafo: uso empresarial
+                   - "Esta impressora atende empresas pequenas e médias."
+                   - "No entanto, também funciona bem em home offices."
+                   - Segundo parágrafo: especificações técnicas
+                   - "Por outro lado, oferece velocidade superior."
                    
-                4. H3: "Vantagens Técnicas da [KEYWORD]" (especificações em lista)
-                   - Máximo 150 palavras total
-                   - Sentenças de 10-18 palavras
+                4. H3: "Recursos que Fazem a Diferença" (lista técnica simplificada)
+                   - Frases máximo 15 palavras
+                   - "Consequentemente, você economiza tempo e dinheiro."
+                   - "Assim sendo, a produtividade aumenta."
                    
-                5. Conclusão e Call-to-Action (1 parágrafo de 60-100 palavras)
-                   - Reforce palavra-chave
-                   - Link interno ou externo
+                5. Conclusão (1 parágrafo de 70-90 palavras)
+                   - "Em suma, a [KEYWORD] é uma escolha acertada."
+                   - "Por isso, recomendamos esta impressora."
+                   - Call-to-action claro e direto
                 """,
                 'key_topics': [
                     'qualidade_impressao',
@@ -84,26 +94,34 @@ class TemplateManager:
             
             'multifuncional': {
                 'structure_guide': """
-                1. Introdução - Versatilidade da multifuncional (1 parágrafo)
-                   - Máximo 100 palavras
-                   - Link externo obrigatório no primeiro parágrafo
+                1. Introdução - Versatilidade simplificada (1 parágrafo, 70-90 palavras)
+                   - "A [KEYWORD] combina múltiplas funções em um só equipamento."
+                   - "Além disso, economiza espaço e dinheiro."
+                   - "Portanto, é perfeita para escritórios eficientes."
+                   - Link Creative Cópias no primeiro parágrafo
                    
-                2. H2: "Múltiplas Funções em Um Só [KEYWORD]" (lista)
-                   - 4-6 itens em lista HTML <ul>
-                   - Cada item: máximo 12 palavras
+                2. H2: "Três Funções em Uma Máquina" (lista clara)
+                   - "Primeiro, imprime com qualidade profissional."
+                   - "Segundo, digitaliza documentos rapidamente."
+                   - "Terceiro, copia páginas com nitidez."
+                   - "Assim, você tem tudo em um aparelho."
                    
-                3. H2: "Economia de Espaço e Recursos" (2 parágrafos)
-                   - Primeiro parágrafo: 80-120 palavras
-                   - Segundo parágrafo: 60-100 palavras
-                   - Use transições: "Além disso", "Portanto"
+                3. H2: "Economia Inteligente" (2 parágrafos curtos, 80-100 palavras cada)
+                   - Primeiro: economia de espaço
+                   - "Esta multifuncional ocupa pouco espaço na mesa."
+                   - "Consequentemente, libera área para outras atividades."
+                   - Segundo: economia financeira
+                   - "Por outro lado, reduz custos de manutenção."
                    
-                4. H3: "Conectividade e Facilidade de Uso" (recursos)
-                   - Lista de recursos técnicos
-                   - Voz ativa predominante
+                4. H3: "Fácil de Usar e Conectar" (recursos simples)
+                   - "Conecta facilmente via Wi-Fi."
+                   - "Também funciona com cabo USB."
+                   - "Dessa forma, atende diferentes necessidades."
                    
-                5. Conclusão - Solução Completa (1 parágrafo)
-                   - Reforce keyword principal
-                   - Call-to-action final
+                5. Conclusão (1 parágrafo, 70-90 palavras)
+                   - "Em resumo, a [KEYWORD] oferece versatilidade total."
+                   - "Por isso, é um investimento inteligente."
+                   - "Portanto, recomendamos esta solução completa."
                 """,
                 'key_topics': [
                     'versatilidade',
@@ -557,7 +575,6 @@ class TemplateManager:
         content_score = 0
         if content:
             # Verificar headings
-            import re
             h2_count = len(re.findall(r'<h2[^>]*>', content, re.IGNORECASE))
             h3_count = len(re.findall(r'<h3[^>]*>', content, re.IGNORECASE))
             
@@ -631,6 +648,546 @@ class TemplateManager:
             validation_results['message'] = "Precisa de melhorias significativas para Yoast"
         
         return validation_results
+
+    def _clean_template_variables(self, content: str) -> str:
+        """
+        Remove variáveis de template não substituídas que causam erro 404
+        
+        Args:
+            content: Conteúdo HTML
+            
+        Returns:
+            Conteúdo limpo sem variáveis não substituídas
+        """
+        try:
+            # Remover tags <img> com {{ FEATURED_IMAGE_URL }}
+            content = re.sub(r'<figure[^>]*>.*?{{ FEATURED_IMAGE_URL }}.*?</figure>', '', content, flags=re.DOTALL)
+            content = re.sub(r'<img[^>]*{{ FEATURED_IMAGE_URL }}[^>]*>', '', content)
+            
+            # Remover outras variáveis de template não substituídas
+            template_patterns = [
+                r'{{ FEATURED_IMAGE_URL }}',
+                r'{{{{ FEATURED_IMAGE_URL }}}}',
+                r'{{ [A-Z_]+ }}',
+                r'{{{{ [A-Z_]+ }}}}'
+            ]
+            
+            for pattern in template_patterns:
+                content = re.sub(pattern, '', content, flags=re.IGNORECASE)
+            
+            # Limpar tags vazias resultantes
+            content = re.sub(r'<figure[^>]*>\s*</figure>', '', content)
+            content = re.sub(r'<figcaption[^>]*>\s*</figcaption>', '', content)
+            
+            # Limpar linhas em branco extras
+            content = re.sub(r'\n\s*\n\s*\n', '\n\n', content)
+            
+            logger.debug("🧹 Variáveis de template não substituídas removidas")
+            return content
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao limpar variáveis de template: {e}")
+            return content
+
+    def apply_yoast_html_structure(self, content: str, product_name: str) -> str:
+        """
+        Aplica estrutura HTML semântica otimizada para Yoast SEO
+        
+        Args:
+            content: Conteúdo HTML original
+            product_name: Nome do produto para alt tags
+            
+        Returns:
+            Conteúdo com estrutura HTML otimizada
+        """
+        try:
+            logger.debug("🎯 Aplicando estrutura HTML para Yoast...")
+            
+            # 1. Garantir H1 como título principal
+            content = self._ensure_h1_structure(content, product_name)
+            
+            # 2. Adicionar imagem destacada (se disponível)
+            # Não adicionar imagem automática - apenas se fornecida explicitamente
+            # content = self._add_featured_image(content, product_name, image_url=None)
+            
+            # 3. Otimizar parágrafos (máx 3-4 linhas)
+            content = self._optimize_paragraph_structure(content)
+            
+            # 4. Adicionar subtítulos a cada 300 palavras
+            content = self._add_headings_by_word_count(content, product_name)
+            
+            # 5. Converter listas simples em HTML semântico
+            content = self._enhance_lists_semantic(content)
+            
+            # 6. Adicionar tags <strong> e <em> estratégicas
+            content = self._add_emphasis_tags(content, product_name)
+            
+            # 7. Inserir palavras de transição quando faltarem
+            content = self._inject_transition_words(content)
+            
+            # 8. Adicionar alt tags automáticas em imagens
+            content = self._add_automatic_alt_tags(content, product_name)
+            
+            # 9. Garantir sentenças simples (máx 20 palavras)
+            content = self._simplify_sentences(content)
+            
+            # 10. Limpar variáveis de template não substituídas
+            content = self._clean_template_variables(content)
+            
+            logger.debug("✅ Estrutura HTML Yoast aplicada")
+            return content
+            
+        except Exception as e:
+            logger.error(f"❌ Erro na estrutura HTML Yoast: {e}")
+            return content
+    
+    def _ensure_h1_structure(self, content: str, product_name: str) -> str:
+        """Garante que existe um H1 como título principal"""
+        if '<h1>' not in content:
+            # Se não tem H1, converter primeiro H2 em H1
+            content = re.sub(r'<h2([^>]*)>(.*?)</h2>', r'<h1\1>\2</h1>', content, count=1)
+        return content
+    
+    def _add_featured_image(self, content: str, product_name: str, image_url: str = None) -> str:
+        """
+        Adiciona imagem destacada no início do conteúdo
+        
+        Args:
+            content: Conteúdo HTML
+            product_name: Nome do produto para alt tag
+            image_url: URL real da imagem (opcional)
+            
+        Returns:
+            Conteúdo com imagem destacada ou conteúdo original se não houver imagem
+        """
+        try:
+            # Verificar se já existe uma imagem no início
+            if re.match(r'^\s*<img[^>]*>', content.strip()):
+                logger.debug("📸 Imagem já presente no início do conteúdo")
+                return content
+            
+            # Se não há URL de imagem, não adicionar placeholder
+            if not image_url or image_url.strip() == "":
+                logger.debug("📸 Nenhuma URL de imagem fornecida, pulando imagem destacada")
+                return content
+            
+            # Gerar alt tag baseada no produto
+            alt_tag = self._generate_alt_tag_from_product(product_name)
+            
+            # Criar HTML da imagem destacada com URL REAL
+            featured_image_html = f'''<figure class="featured-image">
+    <img src="{image_url}" alt="{alt_tag}" title="{product_name}" class="wp-image-featured" loading="lazy" />
+    <figcaption>{product_name}</figcaption>
+</figure>
+
+'''
+            
+            # Inserir logo após o H1
+            h1_pattern = r'(<h1[^>]*>.*?</h1>)'
+            if re.search(h1_pattern, content, re.DOTALL):
+                content = re.sub(h1_pattern, r'\1\n' + featured_image_html, content, count=1, flags=re.DOTALL)
+            else:
+                # Se não tem H1, inserir no início
+                content = featured_image_html + content
+            
+            logger.debug(f"📸 Imagem destacada adicionada com URL: '{image_url}' e alt: '{alt_tag}'")
+            return content
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao adicionar imagem destacada: {e}")
+            return content
+    
+    def _generate_alt_tag_from_product(self, product_name: str) -> str:
+        """Gera alt tag otimizada baseada no nome do produto"""
+        if not product_name:
+            return "Produto de escritório"
+        
+        # Extrair informações do nome
+        name_lower = product_name.lower()
+        
+        # Identificar tipo
+        tipo = 'Produto'
+        if 'impressora' in name_lower:
+            tipo = 'Impressora'
+        elif 'multifuncional' in name_lower:
+            tipo = 'Multifuncional'
+        elif 'scanner' in name_lower:
+            tipo = 'Scanner'
+        elif 'toner' in name_lower:
+            tipo = 'Toner'
+        elif 'papel' in name_lower:
+            tipo = 'Papel'
+        
+        # Identificar marca
+        marcas = ['HP', 'Canon', 'Epson', 'Brother', 'Samsung', 'Xerox', 'Ricoh', 'Lexmark']
+        marca_encontrada = None
+        for marca in marcas:
+            if marca.lower() in name_lower:
+                marca_encontrada = marca
+                break
+        
+        # Construir alt tag evitando duplicação
+        alt_parts = []
+        
+        if tipo != 'Produto':
+            alt_parts.append(tipo)
+        
+        if marca_encontrada:
+            alt_parts.append(marca_encontrada)
+        
+        # Adicionar nome limpo (sem tipo e marca já incluídos)
+        nome_limpo = product_name
+        if marca_encontrada:
+            nome_limpo = nome_limpo.replace(marca_encontrada, '').strip()
+        if tipo != 'Produto':
+            nome_limpo = nome_limpo.replace(tipo, '').replace(tipo.lower(), '').strip()
+        
+        # Limpar espaços extras
+        nome_limpo = re.sub(r'\s+', ' ', nome_limpo).strip()
+        
+        if nome_limpo:
+            alt_parts.append(nome_limpo)
+        elif not alt_parts:  # Se não temos nada, usar nome completo
+            alt_parts.append(product_name)
+        
+        alt_tag = ' '.join(alt_parts)
+        
+        # Limitar tamanho (125 caracteres é ideal)
+        if len(alt_tag) > 125:
+            alt_tag = alt_tag[:122] + "..."
+        
+        return alt_tag
+    
+    def _optimize_paragraph_structure(self, content: str) -> str:
+        """Otimiza parágrafos para máximo 3-4 linhas (aproximadamente 150 palavras) preservando URLs"""
+        def split_long_paragraph(match):
+            paragraph_content = match.group(1)
+            
+            # Verificar se há URLs no parágrafo - se sim, não processar para evitar quebrar links
+            if 'href=' in paragraph_content or 'http' in paragraph_content:
+                return match.group(0)  # Manter original
+            
+            words = paragraph_content.split()
+            
+            if len(words) > 150:  # Parágrafo muito longo
+                # Dividir em parágrafos menores
+                chunks = []
+                current_chunk = []
+                
+                for word in words:
+                    current_chunk.append(word)
+                    if len(current_chunk) >= 75:  # Ponto de divisão
+                        # Procurar ponto final próximo
+                        chunk_text = ' '.join(current_chunk)
+                        last_period = chunk_text.rfind('.')
+                        if last_period > 50:  # Se tem ponto final decente
+                            chunks.append(chunk_text[:last_period+1])
+                            current_chunk = chunk_text[last_period+1:].split()
+                        else:
+                            chunks.append(chunk_text)
+                            current_chunk = []
+                
+                if current_chunk:
+                    chunks.append(' '.join(current_chunk))
+                
+                return '</p>\n<p>'.join(f'<p>{chunk.strip()}' for chunk in chunks if chunk.strip()) + '</p>'
+            
+            return match.group(0)  # Manter original se não for muito longo
+        
+        return re.sub(r'<p>(.*?)</p>', split_long_paragraph, content, flags=re.DOTALL)
+    
+    def _add_headings_by_word_count(self, content: str, product_name: str) -> str:
+        """Adiciona subtítulos a cada 300 palavras aproximadamente"""
+        # Contar palavras no texto
+        text_only = re.sub(r'<[^>]+>', '', content)
+        word_count = len(text_only.split())
+        
+        if word_count > 300:
+            # Calcular onde inserir headings
+            paragraphs = re.findall(r'<p>(.*?)</p>', content, re.DOTALL)
+            current_words = 0
+            heading_suggestions = [
+                f"Características Avançadas do {product_name}",
+                f"Benefícios Práticos da {product_name}",
+                f"Aplicações Recomendadas",
+                f"Vantagens Competitivas",
+                f"Especificações Técnicas Detalhadas"
+            ]
+            
+            modified_content = content
+            heading_index = 0
+            
+            for i, paragraph in enumerate(paragraphs):
+                paragraph_words = len(re.sub(r'<[^>]+>', '', paragraph).split())
+                current_words += paragraph_words
+                
+                if current_words >= 300 and heading_index < len(heading_suggestions):
+                    # Inserir heading após este parágrafo
+                    heading = f"<h3>{heading_suggestions[heading_index]}</h3>"
+                    old_p = f"<p>{paragraph}</p>"
+                    new_p = f"<p>{paragraph}</p>\n{heading}"
+                    modified_content = modified_content.replace(old_p, new_p, 1)
+                    current_words = 0
+                    heading_index += 1
+            
+            return modified_content
+        
+        return content
+    
+    def _enhance_lists_semantic(self, content: str) -> str:
+        """Converte listas simples em HTML semântico com <ul> e <ol>"""
+        # Detectar listas de traços/números e converter
+        lines = content.split('\n')
+        enhanced_lines = []
+        in_list = False
+        list_items = []
+        list_type = None
+        
+        for line in lines:
+            stripped = line.strip()
+            
+            # Detectar início de lista
+            if re.match(r'^[-•*]\s+', stripped) or re.match(r'^\d+[.)]\s+', stripped):
+                if not in_list:
+                    in_list = True
+                    list_type = 'ol' if re.match(r'^\d+[.)]\s+', stripped) else 'ul'
+                    list_items = []
+                
+                # Extrair item da lista
+                item_text = re.sub(r'^[-•*\d+.)]\s+', '', stripped)
+                list_items.append(f"<li>{item_text}</li>")
+            
+            elif in_list and stripped == '':
+                # Linha vazia pode continuar lista
+                continue
+            
+            elif in_list:
+                # Fim da lista
+                list_html = f"<{list_type}>\n" + '\n'.join(list_items) + f"\n</{list_type}>"
+                enhanced_lines.append(list_html)
+                enhanced_lines.append(line)
+                in_list = False
+                list_items = []
+            
+            else:
+                enhanced_lines.append(line)
+        
+        # Finalizar lista se terminou no final
+        if in_list and list_items:
+            list_html = f"<{list_type}>\n" + '\n'.join(list_items) + f"\n</{list_type}>"
+            enhanced_lines.append(list_html)
+        
+        return '\n'.join(enhanced_lines)
+    
+    def _add_emphasis_tags(self, content: str, product_name: str) -> str:
+        """Adiciona tags <strong> e <em> para termos importantes"""
+        # Palavras-chave para destacar com <strong>
+        strong_keywords = [
+            product_name.lower(),
+            'qualidade',
+            'economia',
+            'produtividade',
+            'eficiência',
+            'tecnologia',
+            'performance',
+            'rendimento'
+        ]
+        
+        # Palavras para <em> (ênfase)
+        em_keywords = [
+            'ideal',
+            'perfeito',
+            'excelente',
+            'superior',
+            'avançado',
+            'inovador'
+        ]
+        
+        # Aplicar <strong> (máximo 3 por parágrafo)
+        def add_strong_tags(match):
+            paragraph = match.group(1)
+            strong_count = 0
+            
+            for keyword in strong_keywords:
+                if strong_count >= 3:
+                    break
+                if keyword in paragraph.lower() and f'<strong>{keyword}' not in paragraph.lower():
+                    # Encontrar primeira ocorrência e substituir
+                    pattern = re.compile(re.escape(keyword), re.IGNORECASE)
+                    if pattern.search(paragraph):
+                        paragraph = pattern.sub(f'<strong>{keyword}</strong>', paragraph, count=1)
+                        strong_count += 1
+            
+            return f'<p>{paragraph}</p>'
+        
+        content = re.sub(r'<p>(.*?)</p>', add_strong_tags, content, flags=re.DOTALL)
+        
+        # Aplicar <em> de forma mais seletiva
+        em_count = 0
+        for keyword in em_keywords:
+            if keyword in content.lower() and em_count < 2:  # Limitar uso de <em>
+                pattern = re.compile(r'\b' + re.escape(keyword) + r'\b', re.IGNORECASE)
+                if pattern.search(content):
+                    content = pattern.sub(f'<em>{keyword}</em>', content, count=1)
+                    em_count += 1
+        
+        return content
+    
+    def _inject_transition_words(self, content: str) -> str:
+        """Adiciona palavras de transição onde necessário"""
+        transition_words = [
+            'Além disso',
+            'Portanto',
+            'Consequentemente',
+            'Por exemplo',
+            'Em primeiro lugar',
+            'Finalmente',
+            'Dessa forma',
+            'Assim sendo'
+        ]
+        
+        paragraphs = content.split('</p>')
+        enhanced_paragraphs = []
+        
+        for i, paragraph in enumerate(paragraphs):
+            if '<p>' in paragraph and i > 0:  # Não modificar primeiro parágrafo
+                # Verificar se já tem palavra de transição
+                paragraph_text = re.sub(r'<[^>]+>', '', paragraph).strip()
+                has_transition = any(tw.lower() in paragraph_text.lower() for tw in transition_words)
+                
+                if not has_transition and len(paragraph_text) > 50:  # Só em parágrafos substanciais
+                    # Adicionar palavra de transição aleatória
+                    transition = random.choice(transition_words)
+                    paragraph = paragraph.replace('<p>', f'<p>{transition}, ', 1)
+            
+            enhanced_paragraphs.append(paragraph)
+        
+        return '</p>'.join(enhanced_paragraphs)
+    
+    def _add_automatic_alt_tags(self, content: str, product_name: str) -> str:
+        """Adiciona automaticamente alt tags em todas as imagens"""
+        def add_alt_tag(match):
+            img_tag = match.group(0)
+            
+            # Verificar se já tem alt tag
+            if 'alt=' in img_tag:
+                return img_tag  # Manter existente
+            
+            # Gerar alt tag baseado no produto
+            alt_text = f"{product_name} - Equipamento de alta qualidade"
+            
+            # Inserir alt tag antes do fechamento da tag
+            if img_tag.endswith('/>'):
+                return img_tag[:-2] + f' alt="{alt_text}" />'
+            elif img_tag.endswith('>'):
+                return img_tag[:-1] + f' alt="{alt_text}">'
+            
+            return img_tag
+        
+        # Aplicar em todas as tags <img>
+        return re.sub(r'<img[^>]*>', add_alt_tag, content, flags=re.IGNORECASE)
+    
+    def _simplify_sentences(self, content: str) -> str:
+        """Simplifica sentenças muito longas (máximo 20 palavras) preservando URLs"""
+        def simplify_paragraph(match):
+            paragraph = match.group(1)
+            
+            # Verificar se há URLs no parágrafo - se sim, não processar para evitar quebrar links
+            if 'href=' in paragraph or 'http' in paragraph:
+                return f'<p>{paragraph}</p>'
+            
+            sentences = re.split(r'([.!?]+)', paragraph)
+            simplified_sentences = []
+            
+            for i in range(0, len(sentences), 2):  # Pegar frases e pontuação
+                sentence = sentences[i].strip()
+                punctuation = sentences[i+1] if i+1 < len(sentences) else '.'
+                
+                if sentence:
+                    words = sentence.split()
+                    if len(words) > 20:
+                        # Dividir frase longa
+                        mid_point = len(words) // 2
+                        part1 = ' '.join(words[:mid_point])
+                        part2 = ' '.join(words[mid_point:])
+                        simplified_sentences.append(f"{part1}. {part2}{punctuation}")
+                    else:
+                        simplified_sentences.append(f"{sentence}{punctuation}")
+            
+            return f'<p>{" ".join(simplified_sentences)}</p>'
+        
+        return re.sub(r'<p>(.*?)</p>', simplify_paragraph, content, flags=re.DOTALL)
+    
+    def generate_yoast_optimized_content(self, product_type: str, product_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Gera estrutura de conteúdo completamente otimizada para Yoast verde
+        
+        Args:
+            product_type: Tipo do produto
+            product_data: Dados do produto
+            
+        Returns:
+            Estrutura HTML otimizada para Yoast
+        """
+        template = self.get_template(product_type)
+        product_name = product_data.get('nome', 'produto')
+        
+        # Estrutura base otimizada
+        content_structure = {
+            'titulo': f"{product_name}: Análise Completa e Review",
+            'meta_descricao': f"{product_name}: características, especificações, preços e onde comprar. Confira nossa análise detalhada e avaliação completa.",
+            'focus_keyword': product_name.split()[0].lower() if product_name else 'produto',
+            'conteudo': self._generate_optimized_html_content(product_name, template),
+            'html_structure': {
+                'headings_count': 4,
+                'paragraphs_optimized': True,
+                'lists_semantic': True,
+                'images_with_alt': True,
+                'transition_words': True,
+                'emphasis_tags': True
+            }
+        }
+        
+        return content_structure
+    
+    def _generate_optimized_html_content(self, product_name: str, template: Dict[str, Any]) -> str:
+        """Gera conteúdo HTML seguindo exatamente os critérios do Yoast"""
+        content = f"""
+<h1>{product_name}: Guia Completo de Características e Benefícios</h1>
+
+<p>O <strong>{product_name}</strong> representa uma solução avançada para ambientes profissionais. Além disso, oferece características técnicas que garantem produtividade e economia. Portanto, é uma escolha inteligente para empresas que buscam <em>eficiência</em> e qualidade superior.</p>
+
+<h2>Principais Características do {product_name}</h2>
+<ul>
+    <li>Tecnologia de impressão de <strong>alta resolução</strong></li>
+    <li>Velocidade otimizada para volumes médios e altos</li>
+    <li>Conectividade USB e rede para máxima flexibilidade</li>
+    <li>Interface intuitiva para operação simplificada</li>
+    <li>Ciclo de trabalho robusto para uso intensivo</li>
+</ul>
+
+<p>Consequentemente, estas características fazem do <strong>{product_name}</strong> uma opção <em>ideal</em> para escritórios modernos. Em primeiro lugar, a qualidade de impressão atende aos padrões mais exigentes.</p>
+
+<h3>Benefícios Práticos para Seu Escritório</h3>
+<p>O equipamento proporciona economia significativa de tempo e recursos. Dessa forma, sua empresa ganha em produtividade diária. Finalmente, o custo-benefício torna-se evidente no médio prazo.</p>
+
+<h2>Aplicações Recomendadas</h2>
+<ol>
+    <li>Impressão de documentos corporativos</li>
+    <li>Relatórios financeiros e apresentações</li>
+    <li>Material promocional de alta qualidade</li>
+    <li>Documentação técnica e manuais</li>
+</ol>
+
+<p>Por exemplo, em ambientes onde a <strong>qualidade</strong> é fundamental, o {product_name} demonstra sua superioridade. Assim sendo, atende desde pequenas empresas até corporações de grande porte.</p>
+
+<h3>Especificações Técnicas Avançadas</h3>
+<p>As especificações técnicas incluem conectividade universal e compatibilidade abrangente. Além disso, os recursos de segurança garantem proteção dos dados corporativos. Portanto, oferece tranquilidade total para o ambiente empresarial.</p>
+
+        <p>Para adquirir o <strong>{product_name}</strong>, consulte nossa <a href="https://www.creativecopias.com.br/impressoras" target="_blank" rel="noopener">seleção completa de equipamentos</a> e encontre a melhor opção para sua empresa.</p>
+"""
+        
+        return content.strip()
 
     # ... resto dos métodos existentes ...
  

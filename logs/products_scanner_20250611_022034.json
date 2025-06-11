@@ -1,0 +1,425 @@
+{
+  "metadata": {
+    "total_produtos": 16,
+    "data_export": "2025-06-11 02:20:34",
+    "resumo": {
+      "total_produtos": 16,
+      "com_preco": 16,
+      "disponiveis": 16,
+      "sem_preco": 0,
+      "indisponiveis": 0,
+      "marcas_encontradas": 3,
+      "marcas": [
+        "Brother",
+        "Canon",
+        "Epson"
+      ],
+      "categorias_processadas": 0,
+      "taxa_preco": 100.0,
+      "taxa_disponibilidade": 100.0,
+      "data_processamento": "2025-06-11 02:20:34"
+    }
+  },
+  "produtos": [
+    {
+      "nome": "Scanner Kodak E1030 8011876I  Conexão Usb Adf Para 80 Folhas Duplex 30Ppm",
+      "url": "https://www.creativecopias.com.br/scanner-kodak-e1030-8011876i-conexao-usb-adf-para-80-folhas-duplex-30ppm.html",
+      "preco": {
+        "valor": 2999.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.999,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10075_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Brother Ads1800W Ads-1800W Portátil Conexão Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-brother-ads-1800w-portatil-conexao-wireless-e-duplex.html",
+      "preco": {
+        "valor": 2249.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.249,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10529_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Portátil Canon Imageformula P208Ii  Conexão Usb Até Tamanho A4 Adf Para 10 Folhas Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-portatil-canon-imageformula-p208-conexao-usb-ate-tamanho-a4-adf-para-10-folhas-com-duplex.html",
+      "preco": {
+        "valor": 999.0,
+        "moeda": "BRL",
+        "texto": "R$ 999,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/2/4286_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Brother Ads3100 Ads-3100 Portátil Conexão Usb Até Tamanho A4 Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-brother-ads3100-ads-3100-portatil-conexao-usb-e-ethernet-ate-tamanho-a4-duplex.html",
+      "preco": {
+        "valor": 2380.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.380,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9095_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Brother Ads4700W Ads-4700W Portátil Conexão Usb E Wireless Até Tamanho A4",
+      "url": "https://www.creativecopias.com.br/scanner-brother-ads4700w-ads-4700w-portatil-conexao-usb-e-wireless-ate-tamanho-a4.html",
+      "preco": {
+        "valor": 3980.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.980,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9195_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Chicote De Contato Do Chip Pantum M6700 M6800 M7100 M7200 M7300  301022283001  Original",
+      "url": "https://www.creativecopias.com.br/chicote-de-contato-do-chip-pantum-m6700-m6800-m7100-m7200-m7300-301022283001-original.html",
+      "preco": {
+        "valor": 60.0,
+        "moeda": "BRL",
+        "texto": "R$ 60,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10659_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Correia Scan Pantum M6700 M6800 M7100 M7200 M7300  301022303001  Original",
+      "url": "https://www.creativecopias.com.br/correia-scan-pantum-m6700-m6800-m7100-m7200-m7300-3010223030011-original.html",
+      "preco": {
+        "valor": 36.0,
+        "moeda": "BRL",
+        "texto": "R$ 36,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10660_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Brother Ads4900W Ads-4900W Portátil Conexão Usb E Wireless Até Tamanho A4 Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-brother-ads4900dw-ads-4900dw-portatil-conexao-usb-e-wireless-ate-tamanho-a4-duplex.html",
+      "preco": {
+        "valor": 6112.5,
+        "moeda": "BRL",
+        "texto": "R$ 6.112,50"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9098_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Canon Imageformula Dr-C240  Conexão Usb Até Tamanho Ofício Adf Para 60 Folhas Com Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-canon-imageformula-dr-c240-conexao-usb-ate-tamanho-oficio-adf-para-60-folhas-com-duplex.html",
+      "preco": {
+        "valor": 2149.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.149,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5155_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Canon Imageformula R10 4861C001Aa  Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-canon-imageformula-r10-4861c001aa-vr-duplex.html",
+      "preco": {
+        "valor": 1718.37,
+        "moeda": "BRL",
+        "texto": "R$ 1.718,37"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9371-frente-fechada-jpg_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cabo Do Painel De Controle Pantum M6800 M7100 M7200  301022274001  Original",
+      "url": "https://www.creativecopias.com.br/cabo-do-painel-de-controle-pantum-m6800-m7100-m7200-301022274001-original.html",
+      "preco": {
+        "valor": 40.0,
+        "moeda": "BRL",
+        "texto": "R$ 40,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11689_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Epson Workforce Gt-S55 Gts55  Conexão Usb Até Tamanho A4 Adf Para 75 Folhas  Com Defeito",
+      "url": "https://www.creativecopias.com.br/scanner-epson-workforce-gt-s55-gts55-conexao-usb-ate-tamanho-a4-adf-para-75-folhas-com-defeito.html",
+      "preco": {
+        "valor": 411.05,
+        "moeda": "BRL",
+        "texto": "R$ 411,05"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8700_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cabo Flat 5 Linhas Pantum M6700 M6800 M7100 M7200 M7300  301022266001  Original",
+      "url": "https://www.creativecopias.com.br/cabo-flat-5-linhas-pantum-m6700-m6800-m7100-m7200-m7300-301022266001-original.html",
+      "preco": {
+        "valor": 40.0,
+        "moeda": "BRL",
+        "texto": "R$ 40,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10665_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Brother Ads-1350W Portátil Conexão Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-brother-ads-1350w-portatil-conexao-wireless-e-duplex.html",
+      "preco": {
+        "valor": 1870.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.870,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10528_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Brother Ds-740D Ds740 Portátil Conexão Usb Até Tamanho A4 Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-brother-ds-740s-portatil-conexao-usb-ate-tamanho-a4-duplex.html",
+      "preco": {
+        "valor": 1241.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.241,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9094_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Scanner Portátil Canon Imageformula Dr-C230  Conexão Usb Até Tamanho A4 Adf Para 30 Folhas Duplex",
+      "url": "https://www.creativecopias.com.br/scanner-portatil-canon-imageformula-dr-c230-conexao-usb-ate-tamanho-a4-adf-para-30-folhas.html",
+      "preco": {
+        "valor": 1981.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.981,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9197_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-11 02:20:20",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    }
+  ]
+}

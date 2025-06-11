@@ -14,6 +14,15 @@ import re
 
 from .wordpress_client import WordPressClient
 
+# Importar utilitários de URL
+try:
+    from ..utils.url_utils import URLUtils
+except ImportError:
+    # Fallback para imports absolutos
+    import sys
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from utils.url_utils import URLUtils
+
 class PublicationManager:
     """Gerenciador de publicação de artigos no WordPress"""
     
@@ -27,6 +36,10 @@ class PublicationManager:
         self.wp_site_url = os.getenv('WP_SITE_URL')
         self.wp_username = os.getenv('WP_USERNAME')
         self.wp_password = os.getenv('WP_PASSWORD')
+        
+        # Configurações de publicação
+        self.wp_auto_publish = os.getenv('WP_AUTO_PUBLISH', 'true').lower() == 'true'
+        self.wp_default_status = os.getenv('WP_DEFAULT_STATUS', 'publish')
         
         # Cliente WordPress
         self.wp_client = None
@@ -182,7 +195,7 @@ class PublicationManager:
             validation = self._validate_yoast_green_criteria(optimized_content, focus_keyphrase, seo_title, meta_desc)
             
             # 📂 Preparar categorias WordPress
-            wp_category_name = self.category_mapping.get(tipo_produto.lower(), 'Impressoras')
+            wp_category_name = self.category_mapping.get(tipo_produto.lower() if tipo_produto else 'produto_generico', 'Impressoras')
             
             prepared_data = {
                 'article_id': article_id,
@@ -692,9 +705,8 @@ class PublicationManager:
                         if not product_name or len(product_name.strip()) < 3:
                             product_name = "equipamento multifuncional"
                         
-                        # Gerar link de compra do produto
-                        product_slug = re.sub(r'[^a-z0-9]+', '-', product_name.lower()).strip('-')
-                        buy_link = f'<a href="https://creativecopias.com.br/produto/{product_slug}" target="_blank" rel="noopener"><strong>Comprar {product_name}</strong></a>'
+                        # Gerar link de compra do produto usando URLUtils
+                        buy_link = URLUtils.generate_buy_link(product_name, validate=True)
                         
                         paragraphs[0] = f"{article} {product_name} é uma excelente opção para quem busca qualidade e eficiência. {paragraphs[0]} Para adquirir este produto, acesse: {buy_link}."
                 logger.info("✅ Keyphrase adicionada ao primeiro parágrafo")
@@ -1026,12 +1038,19 @@ class PublicationManager:
             # Preparar conteúdo otimizado para WordPress
             wp_content = self._prepare_wordpress_content(prepared)
             
-            # Configurar post data
+            # Configurar post data - definir status baseado nas configurações
+            if publish_immediately and self.wp_auto_publish:
+                initial_status = self.wp_default_status  # 'publish' por padrão
+            elif publish_immediately:
+                initial_status = 'publish'  # Forçar publish se solicitado
+            else:
+                initial_status = 'draft'
+            
             post_data = {
                 'title': prepared['title'],
                 'content': wp_content,
                 'excerpt': prepared.get('excerpt', '')[:160],
-                'status': 'draft',  # Criar como rascunho primeiro
+                'status': initial_status,  # Publicar diretamente se requested
                 'author': 1,
                 'comment_status': 'open',
                 'ping_status': 'open'
@@ -1047,25 +1066,15 @@ class PublicationManager:
             wp_post_id = wp_post['id']
             logger.info(f"✅ Post criado no WordPress com ID: {wp_post_id}")
             
-            # Se deve publicar imediatamente, alterar status
-            final_status = 'draft'
+            # Determinar status final baseado na resposta do WordPress
+            wp_status = wp_post.get('status', 'draft')
+            final_status = 'published' if wp_status == 'publish' else 'draft'
             wp_url = wp_post.get('link', f"{self.wp_site_url}/?p={wp_post_id}")
             
-            if publish_immediately:
-                try:
-                    logger.info("📢 Publicando post imediatamente...")
-                    update_result = self.wp_client.update_post(wp_post_id, {'status': 'publish'})
-                    
-                    if update_result and update_result.get('status') == 'publish':
-                        final_status = 'published'
-                        wp_url = update_result.get('link', wp_url)
-                        logger.info(f"🎉 Post publicado com sucesso: {wp_url}")
-                    else:
-                        logger.warning("⚠️ Post criado mas não foi possível publicar - mantido como rascunho")
-                        
-                except Exception as publish_error:
-                    logger.error(f"❌ Erro ao publicar post: {publish_error}")
-                    # Manter como rascunho se não conseguir publicar
+            if publish_immediately and final_status == 'published':
+                logger.info(f"🎉 Post publicado diretamente com sucesso: {wp_url}")
+            elif publish_immediately and final_status != 'published':
+                logger.warning("⚠️ Post criado mas status não é 'publish' - verificar configurações WordPress")
                     
             elif scheduled_date:
                 try:

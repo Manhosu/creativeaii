@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✍️ Gerar Artigos - Sistema SEO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/_design_system.css">
     <style>
         * {
             margin: 0;
@@ -27,12 +27,29 @@
             --shadow: rgba(0, 0, 0, 0.25);
         }
         
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
-            color: var(--text-primary);
+        .page-wrapper {
             min-height: 100vh;
-            line-height: 1.6;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
         }
         
         .container {
@@ -358,8 +375,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="floating-nav">
+                <a href="javascript:history.back()" class="nav-btn" title="Voltar">←</a>
+                <a href="/" class="nav-btn" title="Dashboard">🏠</a>
+            </div>
+            
+            <div class="container">
         
         <div class="header">
             <h1>✍️ Gerar Artigos</h1>
@@ -439,6 +462,33 @@
                     <label class="form-label">Instruções Especiais</label>
                     <textarea class="form-textarea" id="customInstructions" placeholder="Ex: Foque em economia de tinta, mencione uso doméstico..."></textarea>
                     <div class="form-help">Instruções específicas para a IA sobre o que destacar</div>
+                </div>
+                
+                <div style="border-top: 1px solid var(--border); margin: 30px 0; padding-top: 30px;">
+                    <h4 style="margin-bottom: 20px; color: var(--success); display: flex; align-items: center; gap: 8px;">
+                        🎯 <span>Categorização Manual</span>
+                        <span style="font-size: 0.75rem; background: var(--warning); color: white; padding: 2px 8px; border-radius: 10px;">NOVO</span>
+                    </h4>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Categoria WordPress</label>
+                        <select class="form-select" id="wpCategory">
+                            <option value="">🤖 Detectar automaticamente</option>
+                            <option value="geral">📄 Geral</option>
+                            <option value="tecnologia">💻 Tecnologia</option>
+                            <option value="impressoras">🖨️ Impressoras</option>
+                            <option value="multifuncionais">⚙️ Multifuncionais</option>
+                            <option value="suprimentos">📦 Suprimentos</option>
+                            <option value="dicas">💡 Dicas</option>
+                        </select>
+                        <div class="form-help">Escolha a categoria específica ou deixe em branco para detecção automática</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Produto Original Associado</label>
+                        <input type="text" class="form-input" id="produtoOriginal" placeholder="Ex: HP LaserJet Pro M428fdw">
+                        <div class="form-help">Nome exato do produto para otimização SEO. Deixe vazio para detecção automática</div>
+                    </div>
                 </div>
                 
                 <button class="action-btn" onclick="generateCustomArticle()" style="width: 100%; margin-top: 20px;">
@@ -679,6 +729,8 @@
             const customKeywords = document.getElementById('customKeywords').value.trim();
             const tone = document.getElementById('articleTone').value;
             const customInstructions = document.getElementById('customInstructions').value.trim();
+            const wpCategory = document.getElementById('wpCategory').value.trim();
+            const produtoOriginal = document.getElementById('produtoOriginal').value.trim();
             
             showNotification('✨ Gerando Artigo', 'A IA está criando seu artigo personalizado...');
             showProgress();
@@ -696,6 +748,15 @@
                 
                 if (customInstructions) {
                     requestBody.custom_instructions = customInstructions;
+                }
+                
+                // Adicionar campos de categorização manual
+                if (wpCategory) {
+                    requestBody.wp_category = wpCategory;
+                }
+                
+                if (produtoOriginal) {
+                    requestBody.produto_original = produtoOriginal;
                 }
                 
                 updateProgress(30, 'Enviando para IA...');
@@ -737,11 +798,27 @@
             
             showNotification('📝 Enviando', 'Salvando artigo para revisão...');
             
+            // Incluir campos de categorização manual se preenchidos
+            const wpCategory = document.getElementById('wpCategory').value.trim();
+            const produtoOriginal = document.getElementById('produtoOriginal').value.trim();
+            
+            const articleToSend = {
+                ...currentArticle
+            };
+            
+            if (wpCategory) {
+                articleToSend.wp_category = wpCategory;
+            }
+            
+            if (produtoOriginal) {
+                articleToSend.produto_original = produtoOriginal;
+            }
+            
             try {
                 const response = await fetch('/review/save-from-generator', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(currentArticle)
+                    body: JSON.stringify(articleToSend)
                 });
                 
                 const data = await response.json();
@@ -775,5 +852,8 @@
             showNotification('📊 Estatísticas', 'Estatísticas atualizadas!');
         }
     </script>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 

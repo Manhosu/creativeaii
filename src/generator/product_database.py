@@ -8,6 +8,16 @@ import random
 from typing import Dict, List, Any
 from loguru import logger
 
+# Importar utilitários de URL
+try:
+    from ..utils.url_utils import URLUtils
+except ImportError:
+    # Fallback para imports absolutos
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from utils.url_utils import URLUtils
+
 class ProductDatabase:
     """Base de dados de produtos para geração variada de artigos"""
     
@@ -260,13 +270,15 @@ class ProductDatabase:
         # ADICIONAR IDS ÚNICOS
         for i, product in enumerate(products, 1):
             product['id'] = f"prod_{i:03d}"
-            product['url'] = f"https://www.creativecopias.com.br/produto/{product['id']}"
+            # Gerar URL válida usando URLUtils
+            product_name = product.get('nome', f"produto-{product['id']}")
+            product['url'] = URLUtils.generate_product_url(product_name, product['id'])
         
         return products
     
     def get_random_product(self, exclude_used: bool = True) -> Dict[str, Any]:
         """
-        Retorna produto aleatório
+        Retorna produto aleatório aplicando filtros de preferências
         
         Args:
             exclude_used: Se deve excluir produtos já usados
@@ -274,19 +286,39 @@ class ProductDatabase:
         Returns:
             Produto aleatório
         """
-        available_products = []
+        available_products = self.products.copy()
+        
+        # APLICAR FILTROS DE PREFERÊNCIAS DE GERAÇÃO
+        try:
+            from ..config.config_manager import ConfigManager
+            config_manager = ConfigManager()
+            available_products = config_manager.apply_generation_filters(available_products)
+            
+            if len(available_products) != len(self.products):
+                logger.info(f"🔍 Filtros aplicados: {len(available_products)}/{len(self.products)} produtos disponíveis")
+        except ImportError:
+            logger.debug("⚠️ ConfigManager não disponível, usando todos os produtos")
+        except Exception as e:
+            logger.warning(f"⚠️ Erro ao aplicar filtros: {e}, usando todos os produtos")
+        
+        # Se não há produtos disponíveis após filtros, retornar erro
+        if not available_products:
+            logger.error("❌ Nenhum produto disponível após aplicar filtros de preferências")
+            raise ValueError("Nenhum produto disponível após aplicar filtros")
         
         if exclude_used:
             # Filtrar produtos não usados
-            available_products = [p for p in self.products if p['id'] not in self.used_products]
+            filtered_products = [p for p in available_products if p['id'] not in self.used_products]
             
-            # Se todos foram usados, resetar
-            if not available_products:
-                logger.info("🔄 Todos os produtos foram usados, resetando lista")
-                self.used_products.clear()
-                available_products = self.products.copy()
-        else:
-            available_products = self.products.copy()
+            # Se todos foram usados, resetar apenas os produtos filtrados
+            if not filtered_products:
+                logger.info("🔄 Todos os produtos filtrados foram usados, resetando lista")
+                # Reset apenas dos IDs que estão nos produtos disponíveis
+                available_ids = {p['id'] for p in available_products}
+                self.used_products = self.used_products - available_ids
+                filtered_products = available_products.copy()
+                
+            available_products = filtered_products
         
         # Selecionar produto aleatório
         product = random.choice(available_products)
@@ -295,7 +327,7 @@ class ProductDatabase:
         if exclude_used:
             self.used_products.add(product['id'])
         
-        logger.debug(f"📦 Produto selecionado: {product['nome']}")
+        logger.debug(f"📦 Produto selecionado: {product['nome']} (de {len(available_products)} disponíveis)")
         return product.copy()
     
     def get_products_by_type(self, product_type: str) -> List[Dict[str, Any]]:

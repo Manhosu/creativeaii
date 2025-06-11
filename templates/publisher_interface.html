@@ -4,35 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📤 Publicar no Blog - Sistema SEO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/_design_system.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #334155;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --border: #475569;
-            --shadow: rgba(0, 0, 0, 0.25);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #1e293b 100%);
-            color: var(--text-primary);
+        .page-wrapper {
             min-height: 100vh;
-            line-height: 1.6;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
         }
         
         .container {
@@ -372,8 +369,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="/" class="back-link">← Voltar ao Dashboard</a>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="floating-nav">
+                <a href="javascript:history.back()" class="nav-btn" title="Voltar">←</a>
+                <a href="/" class="nav-btn" title="Dashboard">🏠</a>
+            </div>
+            
+            <div class="container">
         
         <div class="header">
             <h1>📤 Publicar no Blog</h1>
@@ -588,7 +591,7 @@
                             <h4>📝 Nenhum artigo aprovado</h4>
                             <p>Não há artigos prontos para publicação no momento.</p>
                             <p style="margin-top: 10px;">
-                                <a href="/review/list" style="color: var(--primary);">Ver sistema de revisão</a>
+                                <a href="/interface/review" style="color: var(--primary);">Ver sistema de revisão</a>
                             </p>
                         </div>
                     `;
@@ -769,5 +772,8 @@
             showNotification('📈 Estatísticas', 'Estatísticas atualizadas!');
         }
     </script>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 

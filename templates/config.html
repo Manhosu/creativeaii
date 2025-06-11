@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⚙️ Configurações - Sistema de Geração SEO</title>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/_design_system.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -457,6 +457,248 @@
         }
         
         .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--glass-border-hover);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        /* Estilos para seções específicas */
+        .schedule-status .status-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        
+        .schedule-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .schedule-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .schedule-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .preview-text {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        /* Estilos para categorias */
+        .add-category-form {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .add-btn, .action-btn, .test-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .add-btn:hover, .action-btn:hover, .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .action-btn.secondary {
+            background: var(--gradient-secondary);
+        }
+        
+        .action-btn.danger {
+            background: var(--gradient-danger);
+        }
+        
+        .category-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .categories-list {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .category-item {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .category-item:hover {
+            background: var(--bg-card);
+            border-color: var(--glass-border-hover);
+            transform: translateY(-1px);
+        }
+        
+        .category-item.inactive {
+            opacity: 0.6;
+            background: var(--bg-secondary);
+        }
+        
+        .category-info h4 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-info p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 6px;
+        }
+        
+        .category-info small {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+        
+        .category-actions-item {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--glass-border);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: var(--accent-green);
+        }
+        
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active::before {
+            transform: translateX(30px);
+        }
+        
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 14px;
+            color: var(--text-muted);
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        .toggle-password:hover {
+            color: var(--accent-blue);
+        }
+        
+        .with-icon {
+            padding-right: 45px !important;
+        }
+        
+        .loading-placeholder {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .add-category-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .category-actions {
+                justify-content: center;
+            }
+            
+            .category-item {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+            
+            .category-actions-item {
+                justify-content: space-between;
+            }
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+        }
+        
+        .stat-card:hover {
             background: var(--glass-bg-hover);
             transform: translateY(-2px);
         }
@@ -629,9 +871,314 @@
         .config-input.with-icon {
             padding-right: 48px;
         }
+        
+        /* Estilos para Preferências de Geração */
+        .preference-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .status-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .preference-actions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .preference-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .preference-btn.primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .preference-btn.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .preference-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .preference-section {
+            margin-bottom: 40px;
+            padding: 24px;
+            background: var(--bg-tertiary);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .preference-section h4 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .section-desc {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+        
+        .selector-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .selector-btn {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .selector-btn:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-item:hover {
+            background: var(--bg-card);
+        }
+        
+        .category-item.selected {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+        
+        .category-checkbox {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--glass-border);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .category-checkbox:checked {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        
+        .category-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 1px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-search {
+            margin-bottom: 16px;
+        }
+        
+        .product-filters {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        
+        .filter-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .product-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .product-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-item:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .product-item.selected {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .product-checkbox {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--glass-border);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .product-checkbox:checked {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        
+        .product-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 1px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            flex: 1;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .product-details {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .product-tag {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .loading-placeholder {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+        
+        .loading-placeholder i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .preference-actions {
+                flex-direction: column;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-filters {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-actions {
+                justify-content: stretch;
+            }
+            
+            .selector-actions {
+                justify-content: stretch;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="floating-nav">
+        <a href="javascript:history.back()" class="nav-btn" title="Voltar">←</a>
+        <a href="/" class="nav-btn" title="Dashboard">🏠</a>
+    </div>
+    
     <div class="header">
         <div class="container">
             <h1><i class="fas fa-cogs"></i>Configurações</h1>
@@ -640,10 +1187,6 @@
                     <i class="fas fa-circle"></i>
                     Sistema Online
                 </div>
-                <a href="/" class="back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    Dashboard
-                </a>
             </div>
         </div>
     </div>
@@ -674,40 +1217,56 @@
             </div>
             
             <div class="tabs">
-                <button class="tab active" data-tab="general">
+                <button class="tab active" data-tab="api">
+                    <i class="fas fa-robot"></i>
+                    API
+                </button>
+                <button class="tab" data-tab="wordpress">
+                    <i class="fab fa-wordpress"></i>
+                    WordPress
+                </button>
+                <button class="tab" data-tab="geral">
                     <i class="fas fa-sliders-h"></i>
                     Geral
                 </button>
-                <button class="tab" data-tab="urls">
-                    <i class="fas fa-link"></i>
-                    URLs
+                <button class="tab" data-tab="agenda">
+                    <i class="fas fa-calendar-alt"></i>
+                    Agenda
                 </button>
-                <button class="tab" data-tab="templates">
-                    <i class="fas fa-file-code"></i>
-                    Templates
-                </button>
-                <button class="tab" data-tab="backup">
-                    <i class="fas fa-shield-alt"></i>
-                    Backup
-                </button>
-                <button class="tab" data-tab="stats">
-                    <i class="fas fa-chart-bar"></i>
-                    Stats
+                <button class="tab" data-tab="categorias">
+                    <i class="fas fa-tags"></i>
+                    Categorias
                 </button>
             </div>
             
-            <!-- Configurações Gerais -->
-            <div class="tab-content active" id="general">
+            <!-- API -->
+            <div class="tab-content active" id="api">
                 <div class="config-section">
-                    <h3><i class="fas fa-robot"></i>Configurações do Generator</h3>
+                    <h3><i class="fas fa-robot"></i>Configurações da API</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Configure a chave da API, modelo utilizado e temperatura para geração de conteúdo</p>
                     <div class="config-grid">
+                        <div class="config-item" style="grid-column: 1 / -1;">
+                            <label class="config-label">
+                                <i class="fas fa-key"></i>
+                                Chave da API OpenAI
+                            </label>
+                            <div class="input-group">
+                                <input type="password" class="config-input with-icon" id="openai_api_key" placeholder="sk-proj-...">
+                                <i class="fas fa-eye-slash input-icon toggle-password" onclick="togglePassword('openai_api_key')"></i>
+                            </div>
+                            <small style="color: var(--text-muted); margin-top: 4px;">
+                                <i class="fas fa-info-circle"></i>
+                                Sua chave da API OpenAI para geração de conteúdo
+                            </small>
+                        </div>
                         <div class="config-item">
                             <label class="config-label">
                                 <i class="fas fa-brain"></i>
-                                Modelo OpenAI
+                                Modelo Utilizado
                             </label>
                             <select class="config-input config-select" id="openai_model">
                                 <option value="gpt-4o-mini">GPT-4o Mini (Recomendado)</option>
+                                <option value="gpt-4o">GPT-4o (Avançado)</option>
                                 <option value="gpt-4">GPT-4 (Premium)</option>
                                 <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Econômico)</option>
                             </select>
@@ -715,44 +1274,34 @@
                         <div class="config-item">
                             <label class="config-label">
                                 <i class="fas fa-thermometer-half"></i>
-                                Temperatura
+                                Temperatura (0.0 - 2.0)
                             </label>
                             <div class="input-group">
                                 <input type="number" class="config-input with-icon" id="temperature" min="0" max="2" step="0.1" placeholder="0.7">
                                 <i class="fas fa-fire input-icon"></i>
                             </div>
+                            <small style="color: var(--text-muted); margin-top: 4px;">
+                                Controla a criatividade: 0.0 = mais preciso, 2.0 = mais criativo
+                            </small>
                         </div>
-                        <div class="config-item">
-                            <label class="config-label">
-                                <i class="fas fa-coins"></i>
-                                Máximo de Tokens
-                            </label>
-                            <div class="input-group">
-                                <input type="number" class="config-input with-icon" id="max_tokens" placeholder="2000">
-                                <i class="fas fa-hashtag input-icon"></i>
                             </div>
-                        </div>
-                        <div class="config-item">
-                            <label class="config-label">
-                                <i class="fas fa-comment-dots"></i>
-                                Prompt Base
-                            </label>
-                            <textarea class="config-input config-textarea" id="base_prompt" placeholder="Prompt base para geração de conteúdo..."></textarea>
-                        </div>
-                    </div>
-                    <button class="save-btn" onclick="saveGeneratorConfig()">
+                    <button class="save-btn" onclick="saveAPIConfig()">
                         <i class="fas fa-save"></i>
-                        Salvar Configurações IA
+                        Salvar Configurações da API
                     </button>
                 </div>
+                </div>
                 
+            <!-- WordPress -->
+            <div class="tab-content" id="wordpress">
                 <div class="config-section">
                     <h3><i class="fab fa-wordpress"></i>Configurações do WordPress</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Configure a conexão com seu blog WordPress</p>
                     <div class="config-grid">
-                        <div class="config-item">
+                        <div class="config-item" style="grid-column: 1 / -1;">
                             <label class="config-label">
                                 <i class="fas fa-globe"></i>
-                                URL do Site
+                                URL do Site WordPress
                             </label>
                             <div class="input-group">
                                 <input type="url" class="config-input with-icon" id="wp_site_url" placeholder="https://blog.creativecopias.com.br">
@@ -762,7 +1311,7 @@
                         <div class="config-item">
                             <label class="config-label">
                                 <i class="fas fa-user"></i>
-                                Usuário
+                                Usuário do App
                             </label>
                             <div class="input-group">
                                 <input type="text" class="config-input with-icon" id="wp_username" placeholder="api_seo_bot">
@@ -772,23 +1321,20 @@
                         <div class="config-item">
                             <label class="config-label">
                                 <i class="fas fa-lock"></i>
-                                Senha
+                                Senha do App
                             </label>
                             <div class="input-group">
                                 <input type="password" class="config-input with-icon" id="wp_password" placeholder="••••••••">
-                                <i class="fas fa-key input-icon"></i>
+                                <i class="fas fa-eye-slash input-icon toggle-password" onclick="togglePassword('wp_password')"></i>
                             </div>
                         </div>
-                        <div class="config-item">
-                            <label class="config-label">
-                                <i class="fas fa-tags"></i>
-                                Categoria Padrão
-                            </label>
-                            <div class="input-group">
-                                <input type="text" class="config-input with-icon" id="wp_default_category" placeholder="geral">
-                                <i class="fas fa-folder input-icon"></i>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="connection-test" style="margin-top: 24px;">
+                        <button class="test-btn" onclick="testWordPressConnection()">
+                            <i class="fas fa-plug"></i>
+                            Testar Conexão
+                        </button>
+                        <div id="connection-status" style="margin-top: 12px;"></div>
                     </div>
                     <button class="save-btn" onclick="saveWordPressConfig()">
                         <i class="fas fa-save"></i>
@@ -797,25 +1343,272 @@
                 </div>
             </div>
             
-            <!-- URLs Monitoradas -->
-            <div class="tab-content" id="urls">
+                        <!-- Geral -->
+            <div class="tab-content" id="geral">
                 <div class="config-section">
-                    <h3><i class="fas fa-link"></i>URLs Monitoradas</h3>
-                    <div id="urlStats" class="stats-grid">
-                        <!-- Stats dinamicamente inseridas aqui -->
+                    <h3><i class="fas fa-sliders-h"></i>Configurações Gerais</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Configure idioma, tom do conteúdo e parâmetros de texto</p>
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label class="config-label">
+                                <i class="fas fa-language"></i>
+                                Linguagem
+                            </label>
+                            <select class="config-input config-select" id="linguagem">
+                                <option value="pt-BR">Português (Brasil)</option>
+                                <option value="pt-PT">Português (Portugal)</option>
+                                <option value="en-US">English (US)</option>
+                                <option value="es-ES">Español</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <i class="fas fa-palette"></i>
+                                Tom do Conteúdo
+                            </label>
+                            <select class="config-input config-select" id="tom_conteudo">
+                                <option value="profissional">Profissional</option>
+                                <option value="amigavel">Amigável</option>
+                                <option value="tecnico">Técnico</option>
+                                <option value="informal">Informal</option>
+                                <option value="comercial">Comercial</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <i class="fas fa-sort-numeric-down"></i>
+                                Quantidade Mínima de Palavras
+                            </label>
+                            <div class="input-group">
+                                <input type="number" class="config-input with-icon" id="palavras_min" min="100" max="5000" placeholder="500">
+                                <i class="fas fa-minus input-icon"></i>
+                            </div>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <i class="fas fa-sort-numeric-up"></i>
+                                Quantidade Máxima de Palavras
+                            </label>
+                            <div class="input-group">
+                                <input type="number" class="config-input with-icon" id="palavras_max" min="500" max="10000" placeholder="1500">
+                                <i class="fas fa-plus input-icon"></i>
                     </div>
-                    <div id="urlList" class="url-list">
-                        <!-- URLs dinamicamente inseridas aqui -->
+                        </div>
+                    </div>
+                    <button class="save-btn" onclick="saveGeralConfig()">
+                        <i class="fas fa-save"></i>
+                        Salvar Configurações Gerais
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Agenda -->
+            <div class="tab-content" id="agenda">
+                <div class="config-section">
+                    <h3><i class="fas fa-calendar-alt"></i>Agenda de Execução Automática</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Configure quando o sistema executará automaticamente</p>
+                    
+                    <div class="schedule-status" style="margin-bottom: 32px;">
+                        <div class="status-card">
+                            <h4><i class="fas fa-clock"></i> Status Atual</h4>
+                            <div id="current-schedule" class="schedule-info">
+                                <div class="schedule-item">
+                                    <span class="schedule-label">Próxima Execução:</span>
+                                    <span class="schedule-value" id="next-execution">Carregando...</span>
+                    </div>
+                                <div class="schedule-item">
+                                    <span class="schedule-label">Última Execução:</span>
+                                    <span class="schedule-value" id="last-execution">Carregando...</span>
+                                </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Templates -->
-            <div class="tab-content" id="templates">
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label class="config-label">
+                                <i class="fas fa-calendar-day"></i>
+                                Dia da Semana
+                            </label>
+                            <select class="config-input config-select" id="dia_execucao">
+                                <option value="0">Domingo</option>
+                                <option value="1">Segunda-feira</option>
+                                <option value="2">Terça-feira</option>
+                                <option value="3">Quarta-feira</option>
+                                <option value="4">Quinta-feira</option>
+                                <option value="5">Sexta-feira</option>
+                                <option value="6">Sábado</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <i class="fas fa-clock"></i>
+                                Horário de Execução
+                            </label>
+                            <div class="input-group">
+                                <input type="time" class="config-input with-icon" id="horario_execucao" value="10:00">
+                                <i class="fas fa-clock input-icon"></i>
+                    </div>
+                </div>
+            </div>
+            
+                    <div class="schedule-preview" style="margin-top: 24px;">
+                        <h4 style="color: var(--text-primary); margin-bottom: 12px;">
+                            <i class="fas fa-eye"></i> Prévia da Programação
+                        </h4>
+                        <div id="schedule-preview" class="preview-text">
+                            Configuração será exibida aqui conforme você seleciona as opções
+                        </div>
+                    </div>
+
+                    <button class="save-btn" onclick="saveAgendaConfig()">
+                        <i class="fas fa-save"></i>
+                        Salvar Configurações da Agenda
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Categorias -->
+            <div class="tab-content" id="categorias">
                 <div class="config-section">
-                    <h3><i class="fas fa-file-code"></i>Templates de Conteúdo</h3>
-                    <div id="templateList">
-                        <!-- Templates dinamicamente inseridos aqui -->
+                    <h3><i class="fas fa-tags"></i>Gerenciamento de Categorias</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 32px;">
+                        Gerencie as categorias do sistema. Categorias desativadas não aparecerão no filtro do scraper.
+                    </p>
+                    
+                    <!-- Status das Categorias -->
+                    <div class="category-stats" style="margin-bottom: 32px;">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-number" id="total-categories">0</span>
+                                <div class="stat-label">Total de Categorias</div>
+                        </div>
+                            <div class="stat-card">
+                                <span class="stat-number" id="active-categories">0</span>
+                                <div class="stat-label">Categorias Ativas</div>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number" id="inactive-categories">0</span>
+                                <div class="stat-label">Categorias Inativas</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Adicionar Nova Categoria -->
+                    <div class="add-category-section" style="margin-bottom: 32px;">
+                        <h4><i class="fas fa-plus-circle"></i> Adicionar Nova Categoria</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                            Insira o link da categoria para incluí-la automaticamente no sistema
+                        </p>
+                        <div class="add-category-form">
+                            <div class="input-group" style="flex: 1;">
+                                <input type="url" class="config-input with-icon" id="new-category-url" 
+                                       placeholder="https://creativecopias.com.br/categoria/impressoras">
+                                <i class="fas fa-link input-icon"></i>
+                            </div>
+                            <button class="add-btn" onclick="addNewCategory()">
+                                <i class="fas fa-plus"></i>
+                                Adicionar Categoria
+                        </button>
+                        </div>
+                        <div id="add-category-status" style="margin-top: 12px;"></div>
+                    </div>
+                    
+                    <!-- Ações Rápidas -->
+                    <div class="category-actions" style="margin-bottom: 32px;">
+                        <button class="action-btn primary" onclick="syncAllCategories()">
+                            <i class="fas fa-sync"></i>
+                            Sincronizar Todas
+                                </button>
+                        <button class="action-btn secondary" onclick="enableAllCategories()">
+                                    <i class="fas fa-check-double"></i>
+                            Ativar Todas
+                                </button>
+                        <button class="action-btn danger" onclick="disableAllCategories()">
+                                    <i class="fas fa-times"></i>
+                            Desativar Todas
+                                </button>
+                            </div>
+                            
+                    <!-- Lista de Categorias -->
+                    <div class="categories-section">
+                        <h4><i class="fas fa-list"></i> Lista de Categorias</h4>
+                        <div class="category-filter" style="margin-bottom: 20px;">
+                            <input type="text" class="config-input" id="category-search" 
+                                   placeholder="Buscar categorias..." onkeyup="filterCategories()">
+                        </div>
+                        
+                        <div id="categories-list" class="categories-list">
+                                <div class="loading-placeholder">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    Carregando categorias...
+                                </div>
+                            </div>
+                        </div>
+                        
+                    <button class="save-btn" onclick="saveCategoriesConfig()">
+                            <i class="fas fa-save"></i>
+                        Salvar Configurações de Categorias
+                        </button>
+                    </div>
+                    
+                    <!-- Configuração de Produtos -->
+                    <div class="preference-section">
+                        <h4><i class="fas fa-box"></i> Produtos Específicos</h4>
+                        <p class="section-desc">Selecione produtos específicos para geração de conteúdo</p>
+                        
+                        <div class="product-selector">
+                            <div class="product-search">
+                                <div class="input-group">
+                                    <input type="text" class="config-input with-icon" id="productSearch" 
+                                           placeholder="Buscar produtos por nome, marca ou tipo..." 
+                                           onkeyup="filterProducts()">
+                                    <i class="fas fa-search input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="product-filters">
+                                <select class="config-select" id="productTypeFilter" onchange="filterProducts()">
+                                    <option value="">Todos os tipos</option>
+                                    <option value="impressora">Impressoras</option>
+                                    <option value="multifuncional">Multifuncionais</option>
+                                    <option value="toner">Toners</option>
+                                    <option value="cartucho">Cartuchos</option>
+                                    <option value="tinta">Tintas</option>
+                                </select>
+                                
+                                <select class="config-select" id="productBrandFilter" onchange="filterProducts()">
+                                    <option value="">Todas as marcas</option>
+                                    <option value="HP">HP</option>
+                                    <option value="Canon">Canon</option>
+                                    <option value="Epson">Epson</option>
+                                    <option value="Brother">Brother</option>
+                                </select>
+                                
+                                <div class="filter-actions">
+                                    <button class="selector-btn" onclick="selectAllVisibleProducts()">
+                                        <i class="fas fa-check"></i>
+                                        Selecionar Visíveis
+                                    </button>
+                                    <button class="selector-btn" onclick="clearProductSelection()">
+                                        <i class="fas fa-times"></i>
+                                        Limpar Seleção
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="product-list" id="productList">
+                                <div class="loading-placeholder">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    Carregando produtos...
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="save-btn" onclick="saveProductPreferences()">
+                            <i class="fas fa-save"></i>
+                            Salvar Produtos
+                        </button>
                     </div>
                 </div>
             </div>
@@ -894,20 +1687,56 @@
                 input.addEventListener('input', () => {
                     hasUnsavedChanges = true;
                     document.getElementById('floatingSave').classList.add('visible');
+                    
+                    // Atualizar preview da agenda em tempo real
+                    if (input.id === 'dia_execucao' || input.id === 'horario_execucao') {
+                        updateSchedulePreview();
+                    }
                 });
             });
+        }
+
+        // Função para mostrar/ocultar senha
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = field.nextElementSibling;
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+
+        // Atualizar preview da agenda
+        function updateSchedulePreview() {
+            const dia = document.getElementById('dia_execucao').value;
+            const horario = document.getElementById('horario_execucao').value;
+            
+            const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const diaTexto = dias[dia] || 'Não selecionado';
+            
+            const preview = document.getElementById('schedule-preview');
+            preview.innerHTML = `
+                <i class="fas fa-calendar-check"></i>
+                O sistema executará automaticamente toda <strong>${diaTexto}</strong> às <strong>${horario}</strong>
+            `;
         }
         
         async function loadConfigData() {
             try {
-                const response = await fetch('/config/data');
-                if (!response.ok) throw new Error('Failed to load config');
-                
-                configData = await response.json();
-                populateConfigForms();
-                populateURLList();
-                populateTemplateList();
-                populateStats();
+                // Carregar dados básicos
+                await Promise.all([
+                    loadAPIConfig(),
+                    loadWordPressConfig(),
+                    loadGeralConfig(),
+                    loadAgendaConfig(),
+                    loadCategoriesData()
+                ]);
                 
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
@@ -915,6 +1744,75 @@
             } catch (error) {
                 console.error('Error loading config:', error);
                 showAlert('Erro ao carregar configurações: ' + error.message, 'error');
+            }
+        }
+
+        // Carregar configurações da API
+        async function loadAPIConfig() {
+            try {
+                const response = await fetch('/config/api');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('openai_api_key').value = data.api_key || '';
+                    document.getElementById('openai_model').value = data.model || 'gpt-4o-mini';
+                    document.getElementById('temperature').value = data.temperature || '0.7';
+                }
+            } catch (error) {
+                console.log('API config not found, using defaults');
+            }
+        }
+
+        // Carregar configurações do WordPress
+        async function loadWordPressConfig() {
+            try {
+                const response = await fetch('/config/wordpress');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('wp_site_url').value = data.site_url || '';
+                    document.getElementById('wp_username').value = data.username || '';
+                    document.getElementById('wp_password').value = data.password || '';
+                }
+            } catch (error) {
+                console.log('WordPress config not found, using defaults');
+            }
+        }
+
+        // Carregar configurações gerais
+        async function loadGeralConfig() {
+            try {
+                const response = await fetch('/config/geral');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('linguagem').value = data.linguagem || 'pt-BR';
+                    document.getElementById('tom_conteudo').value = data.tom_conteudo || 'profissional';
+                    document.getElementById('palavras_min').value = data.palavras_min || '500';
+                    document.getElementById('palavras_max').value = data.palavras_max || '1500';
+                }
+            } catch (error) {
+                console.log('Geral config not found, using defaults');
+            }
+        }
+
+        // Carregar configurações da agenda
+        async function loadAgendaConfig() {
+            try {
+                const response = await fetch('/config/agenda');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('dia_execucao').value = data.dia_execucao || '0';
+                    document.getElementById('horario_execucao').value = data.horario_execucao || '10:00';
+                    
+                    // Atualizar status da agenda
+                    if (data.next_execution) {
+                        document.getElementById('next-execution').textContent = data.next_execution;
+                    }
+                    if (data.last_execution) {
+                        document.getElementById('last-execution').textContent = data.last_execution;
+                    }
+                }
+                updateSchedulePreview();
+            } catch (error) {
+                console.log('Agenda config not found, using defaults');
             }
         }
         
@@ -1158,6 +2056,661 @@
                 e.preventDefault();
                 e.returnValue = '';
             }
+        });
+        
+        // =====================================================
+        // FUNÇÕES PARA PREFERÊNCIAS DE GERAÇÃO
+        // =====================================================
+        
+        let availableCategories = [];
+        let availableProducts = [];
+        let selectedCategories = [];
+        let selectedProducts = [];
+        let currentPreferences = {};
+        
+        async function loadPreferences() {
+            try {
+                // Carregar preferências atuais
+                const prefsResponse = await fetch('/config/generation-preferences');
+                if (prefsResponse.ok) {
+                    const prefsData = await prefsResponse.json();
+                    currentPreferences = prefsData.preferences;
+                    selectedCategories = currentPreferences.allowed_categories || [];
+                    selectedProducts = currentPreferences.allowed_products || [];
+                    updatePreferenceStatus();
+                }
+                
+                // Carregar produtos disponíveis
+                await loadProducts();
+                
+            } catch (error) {
+                console.error('Erro ao carregar preferências:', error);
+                showAlert('Erro ao carregar preferências: ' + error.message, 'error');
+            }
+        }
+        
+        function updatePreferenceStatus() {
+            const filterMode = currentPreferences.filter_mode || 'none';
+            const totalFilters = selectedCategories.length + selectedProducts.length;
+            
+            document.getElementById('currentFilterMode').textContent = {
+                'none': 'Sem filtros (todos os produtos)',
+                'categories': `Filtro por categorias (${selectedCategories.length} selecionadas)`,
+                'products': `Filtro por produtos (${selectedProducts.length} selecionados)`
+            }[filterMode] || 'Desconhecido';
+            
+            document.getElementById('activeFiltersCount').textContent = `${totalFilters} filtros ativos`;
+        }
+        
+        async function syncProducts() {
+            try {
+                showAlert('Sincronizando produtos...', 'info');
+                
+                const response = await fetch('/config/products/sync', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (!response.ok) throw new Error('Falha na sincronização');
+                
+                const result = await response.json();
+                showAlert(`${result.products_count} produtos sincronizados com sucesso!`, 'success');
+                
+                // Recarregar lista de produtos
+                await loadProducts();
+                
+            } catch (error) {
+                showAlert('Erro ao sincronizar produtos: ' + error.message, 'error');
+            }
+        }
+        
+        async function clearAllFilters() {
+            if (!confirm('Tem certeza que deseja remover todos os filtros de geração?')) return;
+            
+            try {
+                const response = await fetch('/config/generation-preferences/clear', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (!response.ok) throw new Error('Falha ao limpar filtros');
+                
+                selectedCategories = [];
+                selectedProducts = [];
+                currentPreferences.filter_mode = 'none';
+                
+                updatePreferenceStatus();
+                updateCategoryDisplay();
+                updateProductDisplay();
+                
+                showAlert('Todos os filtros foram removidos!', 'success');
+                
+            } catch (error) {
+                showAlert('Erro ao limpar filtros: ' + error.message, 'error');
+            }
+        }
+        
+        async function loadWordPressCategories() {
+            try {
+                const response = await fetch('/publisher/categories');
+                if (!response.ok) throw new Error('Falha ao carregar categorias');
+                
+                const result = await response.json();
+                availableCategories = result.categories || [];
+                
+                updateCategoryDisplay();
+                showAlert(`${availableCategories.length} categorias carregadas do WordPress!`, 'success');
+                
+            } catch (error) {
+                console.error('Erro ao carregar categorias:', error);
+                showAlert('Erro ao carregar categorias: ' + error.message, 'error');
+                
+                // Fallback para categorias padrão
+                availableCategories = [
+                    { id: 1, name: 'Impressoras', slug: 'impressoras' },
+                    { id: 2, name: 'Multifuncionais', slug: 'multifuncionais' },
+                    { id: 3, name: 'Toners', slug: 'toners' },
+                    { id: 4, name: 'Scanners', slug: 'scanners' },
+                    { id: 5, name: 'Papéis', slug: 'papeis' },
+                    { id: 6, name: 'Suprimentos', slug: 'suprimentos' }
+                ];
+                updateCategoryDisplay();
+            }
+        }
+        
+        function updateCategoryDisplay() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            
+            if (availableCategories.length === 0) {
+                categoryGrid.innerHTML = '<div class="loading-placeholder"><i class="fas fa-info-circle"></i> Clique em "Carregar do WordPress" para buscar categorias</div>';
+                return;
+            }
+            
+            categoryGrid.innerHTML = availableCategories.map(category => {
+                const isSelected = selectedCategories.includes(category.name);
+                return `
+                    <div class="category-item ${isSelected ? 'selected' : ''}" onclick="toggleCategory('${category.name}')">
+                        <input type="checkbox" class="category-checkbox" ${isSelected ? 'checked' : ''} readonly>
+                        <span>${category.name}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function toggleCategory(categoryName) {
+            const index = selectedCategories.indexOf(categoryName);
+            if (index === -1) {
+                selectedCategories.push(categoryName);
+            } else {
+                selectedCategories.splice(index, 1);
+            }
+            updateCategoryDisplay();
+        }
+        
+        function selectAllCategories() {
+            selectedCategories = availableCategories.map(cat => cat.name);
+            updateCategoryDisplay();
+        }
+        
+        function clearCategorySelection() {
+            selectedCategories = [];
+            updateCategoryDisplay();
+        }
+        
+        async function saveCategoryPreferences() {
+            try {
+                const response = await fetch('/config/generation-preferences/categories', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ categories: selectedCategories })
+                });
+                
+                if (!response.ok) throw new Error('Falha ao salvar categorias');
+                
+                const result = await response.json();
+                showAlert(result.message, 'success');
+                
+                // Atualizar preferências
+                await loadPreferences();
+                
+            } catch (error) {
+                showAlert('Erro ao salvar categorias: ' + error.message, 'error');
+            }
+        }
+        
+        async function loadProducts() {
+            try {
+                const response = await fetch('/config/products');
+                if (!response.ok) throw new Error('Falha ao carregar produtos');
+                
+                const result = await response.json();
+                availableProducts = result.products || [];
+                
+                updateProductDisplay();
+                
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+                // Exibir placeholder de erro
+                document.getElementById('productList').innerHTML = `
+                    <div class="loading-placeholder">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Erro ao carregar produtos. 
+                        <button onclick="syncProducts()" style="margin-left: 8px; padding: 4px 8px; border: none; background: var(--accent-blue); color: white; border-radius: 4px; cursor: pointer;">
+                            Sincronizar
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateProductDisplay() {
+            const productList = document.getElementById('productList');
+            
+            if (availableProducts.length === 0) {
+                productList.innerHTML = `
+                    <div class="loading-placeholder">
+                        <i class="fas fa-box-open"></i>
+                        Nenhum produto encontrado. 
+                        <button onclick="syncProducts()" style="margin-left: 8px; padding: 4px 8px; border: none; background: var(--accent-blue); color: white; border-radius: 4px; cursor: pointer;">
+                            Sincronizar Produtos
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Aplicar filtros
+            let filteredProducts = availableProducts;
+            
+            const searchTerm = document.getElementById('productSearch')?.value.toLowerCase() || '';
+            const typeFilter = document.getElementById('productTypeFilter')?.value || '';
+            const brandFilter = document.getElementById('productBrandFilter')?.value || '';
+            
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.nome.toLowerCase().includes(searchTerm) ||
+                    (product.marca && product.marca.toLowerCase().includes(searchTerm)) ||
+                    (product.tipo && product.tipo.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            if (typeFilter) {
+                filteredProducts = filteredProducts.filter(product => product.tipo === typeFilter);
+            }
+            
+            if (brandFilter) {
+                filteredProducts = filteredProducts.filter(product => product.marca === brandFilter);
+            }
+            
+            productList.innerHTML = filteredProducts.map(product => {
+                const isSelected = selectedProducts.includes(product.id);
+                return `
+                    <div class="product-item ${isSelected ? 'selected' : ''}" onclick="toggleProduct('${product.id}')">
+                        <input type="checkbox" class="product-checkbox" ${isSelected ? 'checked' : ''} readonly>
+                        <div class="product-info">
+                            <div class="product-name">${product.nome}</div>
+                            <div class="product-details">
+                                ${product.marca ? `<span class="product-tag">${product.marca}</span>` : ''}
+                                ${product.tipo ? `<span class="product-tag">${product.tipo}</span>` : ''}
+                                ${product.preco ? `<span class="product-tag">${product.preco}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = '<div class="loading-placeholder"><i class="fas fa-search"></i> Nenhum produto encontrado com os filtros aplicados</div>';
+            }
+        }
+        
+        function toggleProduct(productId) {
+            const index = selectedProducts.indexOf(productId);
+            if (index === -1) {
+                selectedProducts.push(productId);
+            } else {
+                selectedProducts.splice(index, 1);
+            }
+            updateProductDisplay();
+        }
+        
+        function filterProducts() {
+            updateProductDisplay();
+        }
+        
+        function selectAllVisibleProducts() {
+            const visibleProducts = document.querySelectorAll('.product-item:not(.selected)');
+            visibleProducts.forEach(item => {
+                const productId = item.onclick.toString().match(/'([^']+)'/)[1];
+                if (!selectedProducts.includes(productId)) {
+                    selectedProducts.push(productId);
+                }
+            });
+            updateProductDisplay();
+        }
+        
+        function clearProductSelection() {
+            selectedProducts = [];
+            updateProductDisplay();
+        }
+        
+        async function saveProductPreferences() {
+            try {
+                const response = await fetch('/config/generation-preferences/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ product_ids: selectedProducts })
+                });
+                
+                if (!response.ok) throw new Error('Falha ao salvar produtos');
+                
+                const result = await response.json();
+                showAlert(result.message, 'success');
+                
+                // Atualizar preferências
+                await loadPreferences();
+                
+            } catch (error) {
+                showAlert('Erro ao salvar produtos: ' + error.message, 'error');
+            }
+        }
+        
+        // Carregar dados das categorias
+        async function loadCategoriesData() {
+            try {
+                const response = await fetch('/api/categories');
+                if (response.ok) {
+                    const categories = await response.json();
+                    populateCategoriesList(categories);
+                    updateCategoriesStats(categories);
+                }
+            } catch (error) {
+                console.log('Categories not found, using empty list');
+                populateCategoriesList([]);
+            }
+        }
+
+        // Popular lista de categorias
+        function populateCategoriesList(categories) {
+            const list = document.getElementById('categories-list');
+            
+            if (categories.length === 0) {
+                list.innerHTML = `
+                    <div class="loading-placeholder">
+                        <i class="fas fa-folder-open"></i>
+                        <p>Nenhuma categoria encontrada. Adicione a primeira categoria!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = categories.map(category => `
+                <div class="category-item ${category.active ? '' : 'inactive'}" data-category-id="${category.id}">
+                    <div class="category-info">
+                        <h4>
+                            <i class="fas fa-tag"></i>
+                            ${category.name}
+                        </h4>
+                        <p>${category.url}</p>
+                        <small>
+                            <i class="fas fa-box"></i> ${category.products_count || 0} produtos | 
+                            <i class="fas fa-calendar"></i> Adicionado em ${new Date(category.created_at).toLocaleDateString('pt-BR')}
+                        </small>
+                    </div>
+                    <div class="category-actions-item">
+                        <div class="toggle-switch ${category.active ? 'active' : ''}" 
+                             onclick="toggleCategoryState('${category.id}', ${!category.active})">
+                        </div>
+                        <button class="btn-sm btn-danger" onclick="removeCategory('${category.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Atualizar estatísticas das categorias
+        function updateCategoriesStats(categories) {
+            const total = categories.length;
+            const active = categories.filter(c => c.active).length;
+            const inactive = total - active;
+
+            document.getElementById('total-categories').textContent = total;
+            document.getElementById('active-categories').textContent = active;
+            document.getElementById('inactive-categories').textContent = inactive;
+        }
+
+        // Funções de salvamento
+        async function saveAPIConfig() {
+            const config = {
+                api_key: document.getElementById('openai_api_key').value,
+                model: document.getElementById('openai_model').value,
+                temperature: parseFloat(document.getElementById('temperature').value)
+            };
+
+            await saveConfigSection('/config/api', config, 'Configurações da API salvas com sucesso!');
+        }
+
+        async function saveWordPressConfig() {
+            const config = {
+                site_url: document.getElementById('wp_site_url').value,
+                username: document.getElementById('wp_username').value,
+                password: document.getElementById('wp_password').value
+            };
+
+            await saveConfigSection('/config/wordpress', config, 'Configurações do WordPress salvas com sucesso!');
+        }
+
+        async function saveGeralConfig() {
+            const config = {
+                linguagem: document.getElementById('linguagem').value,
+                tom_conteudo: document.getElementById('tom_conteudo').value,
+                palavras_min: parseInt(document.getElementById('palavras_min').value),
+                palavras_max: parseInt(document.getElementById('palavras_max').value)
+            };
+
+            await saveConfigSection('/config/geral', config, 'Configurações gerais salvas com sucesso!');
+        }
+
+        async function saveAgendaConfig() {
+            const config = {
+                dia_execucao: parseInt(document.getElementById('dia_execucao').value),
+                horario_execucao: document.getElementById('horario_execucao').value
+            };
+
+            await saveConfigSection('/config/agenda', config, 'Configurações da agenda salvas com sucesso!');
+        }
+
+        // Função genérica para salvar configurações
+        async function saveConfigSection(endpoint, config, successMessage) {
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+
+                if (response.ok) {
+                    showAlert(successMessage, 'success');
+                    hasUnsavedChanges = false;
+                    document.getElementById('floatingSave').classList.remove('visible');
+                } else {
+                    throw new Error('Falha ao salvar configurações');
+                }
+            } catch (error) {
+                showAlert('Erro ao salvar: ' + error.message, 'error');
+            }
+        }
+
+        // Testar conexão WordPress
+        async function testWordPressConnection() {
+            const button = event.target;
+            const status = document.getElementById('connection-status');
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testando...';
+            button.disabled = true;
+
+            try {
+                const config = {
+                    site_url: document.getElementById('wp_site_url').value,
+                    username: document.getElementById('wp_username').value,
+                    password: document.getElementById('wp_password').value
+                };
+
+                const response = await fetch('/config/wordpress/test', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    status.innerHTML = '<span style="color: var(--accent-green);"><i class="fas fa-check-circle"></i> Conexão bem-sucedida!</span>';
+                } else {
+                    status.innerHTML = '<span style="color: var(--accent-red);"><i class="fas fa-times-circle"></i> Falha na conexão: ' + (result.message || 'Erro desconhecido') + '</span>';
+                }
+            } catch (error) {
+                status.innerHTML = '<span style="color: var(--accent-red);"><i class="fas fa-times-circle"></i> Erro: ' + error.message + '</span>';
+            } finally {
+                button.innerHTML = '<i class="fas fa-plug"></i> Testar Conexão';
+                button.disabled = false;
+            }
+        }
+
+        // Gerenciamento de categorias
+        async function addNewCategory() {
+            const url = document.getElementById('new-category-url').value;
+            const status = document.getElementById('add-category-status');
+            
+            if (!url) {
+                status.innerHTML = '<span style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> Por favor, insira uma URL</span>';
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/categories', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    status.innerHTML = '<span style="color: var(--accent-green);"><i class="fas fa-check-circle"></i> Categoria adicionada com sucesso!</span>';
+                    document.getElementById('new-category-url').value = '';
+                    await loadCategoriesData(); // Recarregar lista
+                } else {
+                    status.innerHTML = '<span style="color: var(--accent-red);"><i class="fas fa-times-circle"></i> ' + (result.message || 'Erro ao adicionar categoria') + '</span>';
+                }
+            } catch (error) {
+                status.innerHTML = '<span style="color: var(--accent-red);"><i class="fas fa-times-circle"></i> Erro: ' + error.message + '</span>';
+            }
+        }
+
+        async function toggleCategoryState(categoryId, newState) {
+            try {
+                const response = await fetch(`/api/categories/${categoryId}/toggle`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ active: newState })
+                });
+
+                if (response.ok) {
+                    await loadCategoriesData(); // Recarregar lista
+                    showAlert(newState ? 'Categoria ativada!' : 'Categoria desativada!', 'success');
+                } else {
+                    throw new Error('Falha ao alterar status da categoria');
+                }
+            } catch (error) {
+                showAlert('Erro: ' + error.message, 'error');
+            }
+        }
+
+        async function removeCategory(categoryId) {
+            if (!confirm('Tem certeza que deseja remover esta categoria? Esta ação não pode ser desfeita.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/categories/${categoryId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    await loadCategoriesData(); // Recarregar lista
+                    showAlert('Categoria removida com sucesso!', 'success');
+                } else {
+                    throw new Error('Falha ao remover categoria');
+                }
+            } catch (error) {
+                showAlert('Erro: ' + error.message, 'error');
+            }
+        }
+
+        async function syncAllCategories() {
+            try {
+                const response = await fetch('/api/categories/sync', { method: 'POST' });
+                
+                if (response.ok) {
+                    await loadCategoriesData();
+                    showAlert('Categorias sincronizadas com sucesso!', 'success');
+                } else {
+                    throw new Error('Falha na sincronização');
+                }
+            } catch (error) {
+                showAlert('Erro: ' + error.message, 'error');
+            }
+        }
+
+        async function enableAllCategories() {
+            try {
+                const response = await fetch('/api/categories/enable-all', { method: 'PUT' });
+                
+                if (response.ok) {
+                    await loadCategoriesData();
+                    showAlert('Todas as categorias foram ativadas!', 'success');
+                } else {
+                    throw new Error('Falha ao ativar categorias');
+                }
+            } catch (error) {
+                showAlert('Erro: ' + error.message, 'error');
+            }
+        }
+
+        async function disableAllCategories() {
+            if (!confirm('Tem certeza que deseja desativar todas as categorias?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/categories/disable-all', { method: 'PUT' });
+                
+                if (response.ok) {
+                    await loadCategoriesData();
+                    showAlert('Todas as categorias foram desativadas!', 'success');
+                } else {
+                    throw new Error('Falha ao desativar categorias');
+                }
+            } catch (error) {
+                showAlert('Erro: ' + error.message, 'error');
+            }
+        }
+
+        function filterCategories() {
+            const search = document.getElementById('category-search').value.toLowerCase();
+            const items = document.querySelectorAll('.category-item');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(search) ? 'flex' : 'none';
+            });
+        }
+
+        function saveCategoriesConfig() {
+            showAlert('Configurações de categorias salvas automaticamente!', 'success');
+        }
+
+        // Função genérica para mostrar alertas
+        function showAlert(message, type = 'info') {
+            console.log(`[${type.toUpperCase()}] ${message}`);
+            
+            // Criar notificação visual temporária
+            const alert = document.createElement('div');
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 16px 24px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+                background: ${type === 'success' ? 'var(--accent-green)' : type === 'error' ? 'var(--accent-red)' : 'var(--accent-blue)'};
+            `;
+            alert.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}-circle"></i> ${message}`;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+
+        // Carregar quando a aba de categorias for ativada
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    if (tab.dataset.tab === 'categorias') {
+                        setTimeout(() => {
+                            loadCategoriesData();
+                        }, 100);
+                    }
+                });
+            });
         });
     </script>
 </body>

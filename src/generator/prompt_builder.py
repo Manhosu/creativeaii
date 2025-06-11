@@ -68,9 +68,10 @@ class PromptBuilder:
             preco = self._format_price(product.get('preco'))
             descricao = product.get('descricao', '')
             categoria_url = product.get('categoria_url', '')
+            url_do_produto = product.get('url', '')  # URL REAL do produto extraída pelo scraper
             
-            # Determinar categoria
-            categoria = self._extract_category_from_url(categoria_url)
+            # Inferir categoria se não estiver disponível
+            categoria = product.get('categoria', '') or self._extract_category_from_url(categoria_url) or "produto"
             
             # Obter configurações de tom
             tone_config = self.tone_variations.get(tone, self.tone_variations["profissional"])
@@ -106,6 +107,15 @@ class PromptBuilder:
 - Preço: {preco}
 - Descrição: {descricao if descricao else 'N/A'}
 - Categoria: {categoria}
+- URL do Produto: {url_do_produto}
+
+**IMPORTANTE: Use sempre a URL REAL do produto ({url_do_produto}) nos links de compra. NUNCA gere URLs genéricas.**
+
+**REGRA CRÍTICA PARA LINKS DE PRODUTOS:**
+- SEMPRE use a URL REAL do produto fornecida nos dados: {url_do_produto}
+- NUNCA gere URLs genéricas como https://www.creativecopias.com.br/produto/equipamento
+- EXEMPLO CORRETO: Se URL real é "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-m404n.html", use exatamente essa URL
+- Links de compra devem usar: <a href="{url_do_produto}" target="_blank">Comprar {nome}</a>
 
 IMPORTANTE: Retorne APENAS um JSON válido com a estrutura especificada, sem texto adicional antes ou depois.
             """
@@ -227,7 +237,7 @@ A categoria do produto é: {categoria}
 ```html
 <h1>[TÍTULO EXATO COM KEYWORD NO INÍCIO]</h1>
 
-<p>Escolha o artigo correto (A/O) baseado no produto. [PRODUTO] é uma excelente opção para [contexto]. [Continuação com benefício principal]. Além disso, [benefício secundário]. Para mais opções, <a href="https://blog.creativecopias.com.br/categoria/impressoras/" target="_blank">confira nossa seleção completa de impressoras</a>. Mais informações técnicas estão disponíveis no <a href="[SITE_OFICIAL_MARCA]" target="_blank" rel="nofollow">site oficial da [MARCA]</a>.</p>
+<p>Escolha o artigo correto (A/O) baseado no produto. [PRODUTO] é uma excelente opção para [contexto]. [Continuação com benefício principal]. Além disso, [benefício secundário]. Para mais opções, <a href="https://blog.creativecopias.com.br/categoria/impressoras/" target="_blank">confira nossa seleção completa de impressoras</a>. Para comprar este produto, <a href="{url_do_produto}" target="_blank">clique aqui</a>. Mais informações técnicas estão disponíveis no <a href="[SITE_OFICIAL_MARCA]" target="_blank" rel="nofollow">site oficial da [MARCA]</a>.</p>
 
 <h2>Principais Características do [KEYWORD]</h2>
 <!-- Imagem removida conforme solicitação -->
@@ -280,6 +290,12 @@ A categoria do produto é: {categoria}
 - JAMAIS: https://blog. creativecopias. com. br/categoria/impressoras/
 - JAMAIS: https://www. hp. com/br-pt/
 - SEMPRE: https://www.hp.com/br-pt/
+
+**REGRA CRÍTICA PARA LINKS DE PRODUTOS:**
+- SEMPRE use a URL REAL do produto fornecida nos dados: {url_do_produto}
+- NUNCA gere URLs genéricas como https://www.creativecopias.com.br/produto/equipamento
+- EXEMPLO CORRETO: Se URL real é "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-m404n.html", use exatamente essa URL
+- Links de compra devem usar: <a href="{url_do_produto}" target="_blank">Comprar {nome}</a>
 
 ### ESTRUTURA OBRIGATÓRIA:
         """

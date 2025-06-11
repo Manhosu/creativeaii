@@ -91,6 +91,23 @@ class ConfigManager:
                     )
                 """)
                 
+                # Tabela de produtos disponíveis para geração
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS products (
+                        id TEXT PRIMARY KEY,
+                        nome TEXT NOT NULL,
+                        marca TEXT,
+                        preco TEXT,
+                        descricao TEXT,
+                        tipo TEXT,
+                        categoria TEXT,
+                        url TEXT,
+                        ativo BOOLEAN DEFAULT 1,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                """)
+                
                 conn.commit()
                 logger.info("✅ Banco de dados de configurações inicializado")
                 
@@ -221,6 +238,23 @@ class ConfigManager:
                         'value': '50',
                         'type': 'integer',
                         'description': 'Máximo de artigos gerados por dia'
+                    }
+                },
+                'generation_preferences': {
+                    'allowed_categories': {
+                        'value': '[]',
+                        'type': 'json',
+                        'description': 'Categorias permitidas para geração (JSON array)'
+                    },
+                    'allowed_products': {
+                        'value': '[]',
+                        'type': 'json',
+                        'description': 'Produtos específicos permitidos (JSON array)'
+                    },
+                    'filter_mode': {
+                        'value': 'none',
+                        'type': 'string',
+                        'description': 'Modo de filtro: none, categories, products'
                     }
                 }
             }
@@ -685,10 +719,238 @@ class ConfigManager:
                 return float(value)
             elif data_type == 'boolean':
                 return value.lower() in ('true', '1', 'yes', 'on')
+            elif data_type == 'json':
+                return json.loads(value) if value else []
             elif data_type in ('text', 'password'):
                 return value
             else:  # string
                 return value
-        except ValueError:
-            logger.warning(f"⚠️ Erro ao converter valor '{value}' para {data_type}, retornando string")
-            return value 
+        except (ValueError, json.JSONDecodeError):
+            logger.warning(f"⚠️ Erro ao converter valor '{value}' para {data_type}, retornando valor padrão")
+            return [] if data_type == 'json' else value
+    
+    # =====================================================
+    # MÉTODOS PARA GERENCIAR PRODUTOS
+    # =====================================================
+    
+    def add_product(self, id: str, nome: str, marca: str = None, preco: str = None, 
+                   descricao: str = None, tipo: str = None, categoria: str = None, 
+                   url: str = None, ativo: bool = True):
+        """Adiciona ou atualiza produto"""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT OR REPLACE INTO products 
+                    (id, nome, marca, preco, descricao, tipo, categoria, url, ativo, updated_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                """, (id, nome, marca, preco, descricao, tipo, categoria, url, ativo))
+                conn.commit()
+                logger.debug(f"📦 Produto adicionado/atualizado: {nome}")
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao adicionar produto: {e}")
+            raise
+    
+    def get_products(self, tipo: str = None, categoria: str = None, 
+                    ativo_only: bool = True) -> List[Dict[str, Any]]:
+        """Lista produtos disponíveis"""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                
+                query = "SELECT * FROM products"
+                params = []
+                conditions = []
+                
+                if ativo_only:
+                    conditions.append("ativo = 1")
+                
+                if tipo:
+                    conditions.append("tipo = ?")
+                    params.append(tipo)
+                
+                if categoria:
+                    conditions.append("categoria = ?")
+                    params.append(categoria)
+                
+                if conditions:
+                    query += " WHERE " + " AND ".join(conditions)
+                
+                query += " ORDER BY nome"
+                
+                cursor.execute(query, params)
+                rows = cursor.fetchall()
+                
+                return [dict(row) for row in rows]
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao listar produtos: {e}")
+            return []
+    
+    def sync_products_from_database(self, products_data: List[Dict[str, Any]] = None):
+        """Sincroniza produtos do ProductDatabase para a tabela de configurações"""
+        try:
+            # Importar produtos do ProductDatabase se necessário
+            if not products_data:
+                try:
+                    from ..generator.product_database import ProductDatabase
+                    product_db = ProductDatabase()
+                    products_data = product_db.products
+                except ImportError:
+                    logger.warning("⚠️ ProductDatabase não disponível, pulando sincronização")
+                    return
+            
+            for product in products_data:
+                self.add_product(
+                    id=product.get('id', ''),
+                    nome=product.get('nome', ''),
+                    marca=product.get('marca', ''),
+                    preco=product.get('preco', ''),
+                    descricao=product.get('descricao', ''),
+                    tipo=product.get('tipo', ''),
+                    categoria=product.get('categoria', ''),
+                    url=product.get('url', ''),
+                    ativo=True
+                )
+            
+            logger.info(f"✅ {len(products_data)} produtos sincronizados")
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao sincronizar produtos: {e}")
+    
+    # =====================================================
+    # MÉTODOS PARA PREFERÊNCIAS DE GERAÇÃO
+    # =====================================================
+    
+    def set_allowed_categories(self, categories: List[str]):
+        """Define categorias permitidas para geração"""
+        try:
+            self.set_config(
+                section='generation_preferences',
+                key='allowed_categories',
+                value=json.dumps(categories),
+                data_type='json',
+                description='Categorias permitidas para geração'
+            )
+            
+            # Atualizar modo de filtro
+            if categories:
+                self.set_config(
+                    section='generation_preferences',
+                    key='filter_mode',
+                    value='categories',
+                    data_type='string'
+                )
+            
+            logger.info(f"📂 Categorias permitidas atualizadas: {categories}")
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao definir categorias permitidas: {e}")
+            raise
+    
+    def set_allowed_products(self, product_ids: List[str]):
+        """Define produtos específicos permitidos para geração"""
+        try:
+            self.set_config(
+                section='generation_preferences',
+                key='allowed_products',
+                value=json.dumps(product_ids),
+                data_type='json',
+                description='Produtos específicos permitidos'
+            )
+            
+            # Atualizar modo de filtro
+            if product_ids:
+                self.set_config(
+                    section='generation_preferences',
+                    key='filter_mode',
+                    value='products',
+                    data_type='string'
+                )
+            
+            logger.info(f"📦 Produtos permitidos atualizados: {len(product_ids)} produtos")
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao definir produtos permitidos: {e}")
+            raise
+    
+    def get_allowed_categories(self) -> List[str]:
+        """Retorna categorias permitidas"""
+        return self.get_config('generation_preferences', 'allowed_categories', [])
+    
+    def get_allowed_products(self) -> List[str]:
+        """Retorna produtos permitidos"""
+        return self.get_config('generation_preferences', 'allowed_products', [])
+    
+    def get_filter_mode(self) -> str:
+        """Retorna modo de filtro atual"""
+        return self.get_config('generation_preferences', 'filter_mode', 'none')
+    
+    def clear_generation_filters(self):
+        """Remove todos os filtros de geração"""
+        try:
+            self.set_config('generation_preferences', 'allowed_categories', '[]', 'json')
+            self.set_config('generation_preferences', 'allowed_products', '[]', 'json')
+            self.set_config('generation_preferences', 'filter_mode', 'none', 'string')
+            
+            logger.info("🧹 Filtros de geração removidos")
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao limpar filtros: {e}")
+            raise
+    
+    def apply_generation_filters(self, products: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Aplica filtros de geração aos produtos
+        
+        Args:
+            products: Lista de produtos disponíveis
+            
+        Returns:
+            Lista filtrada de produtos
+        """
+        try:
+            filter_mode = self.get_filter_mode()
+            
+            if filter_mode == 'none':
+                return products
+            
+            elif filter_mode == 'products':
+                allowed_products = self.get_allowed_products()
+                if allowed_products:
+                    filtered = [p for p in products if p.get('id') in allowed_products]
+                    logger.info(f"🔍 Filtro por produtos: {len(filtered)}/{len(products)} produtos")
+                    return filtered
+            
+            elif filter_mode == 'categories':
+                allowed_categories = self.get_allowed_categories()
+                if allowed_categories:
+                    # Mapear categorias WordPress para tipos de produtos
+                    category_mapping = {
+                        'impressoras': 'impressora',
+                        'multifuncionais': 'multifuncional',
+                        'toners': 'toner',
+                        'scanners': 'scanner',
+                        'papéis': 'papel',
+                        'copiadoras': 'copiadora',
+                        'suprimentos': 'suprimento'
+                    }
+                    
+                    allowed_types = []
+                    for cat in allowed_categories:
+                        mapped_type = category_mapping.get(cat.lower())
+                        if mapped_type:
+                            allowed_types.append(mapped_type)
+                    
+                    if allowed_types:
+                        filtered = [p for p in products if p.get('tipo') in allowed_types]
+                        logger.info(f"🔍 Filtro por categorias: {len(filtered)}/{len(products)} produtos")
+                        return filtered
+            
+            return products
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao aplicar filtros: {e}")
+            return products 

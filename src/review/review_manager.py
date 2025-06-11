@@ -9,6 +9,8 @@ import json
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 from loguru import logger
+from ..scraper.availability_checker import AvailabilityChecker
+from ..intelligence.priority_manager import PriorityManager
 from pathlib import Path
 import threading
 
@@ -19,6 +21,8 @@ class ReviewManager:
         """Inicializa o gerenciador de revisão"""
         self.db_path = db_path
         self.lock = threading.Lock()
+        self.availability_checker = AvailabilityChecker()
+        self.priority_manager = PriorityManager()
         
         # Garantir que o diretório existe
         Path(self.db_path).parent.mkdir(parents=True, exist_ok=True)
@@ -28,6 +32,9 @@ class ReviewManager:
         
         # Inicializar banco
         self._init_database()
+        
+        # Executar migrações
+        self._run_migrations()
         
         # Configurar logging
         logger.add(
@@ -125,14 +132,40 @@ class ReviewManager:
                 count = cursor.fetchone()[0]
                 
                 if count == 0:
-                    logger.info("📝 Banco vazio, criando artigos de exemplo...")
-                    self._create_sample_articles()
+                    logger.info("📝 Banco vazio, pronto para novos artigos")
+                    # self._create_sample_articles()  # Desabilitado para sistema zerado
                 else:
                     logger.info(f"📊 Banco inicializado com {count} artigos")
                     
         except Exception as e:
             logger.error(f"❌ Erro ao inicializar banco: {e}")
             raise
+    
+    def _run_migrations(self):
+        """Executa migrações do banco de dados"""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                
+                # Verificar se existem as novas colunas
+                cursor.execute("PRAGMA table_info(articles)")
+                columns = [column[1] for column in cursor.fetchall()]
+                
+                # Adicionar coluna wp_category se não existir
+                if 'wp_category' not in columns:
+                    cursor.execute("ALTER TABLE articles ADD COLUMN wp_category TEXT")
+                    logger.info("✅ Coluna 'wp_category' adicionada")
+                
+                # Adicionar coluna produto_original se não existir
+                if 'produto_original' not in columns:
+                    cursor.execute("ALTER TABLE articles ADD COLUMN produto_original TEXT")
+                    logger.info("✅ Coluna 'produto_original' adicionada")
+                
+                conn.commit()
+                logger.info("🔄 Migrações de banco executadas com sucesso")
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao executar migrações: {e}")
     
     def _create_sample_articles(self):
         """Cria artigos de exemplo para teste"""
@@ -249,8 +282,8 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                     INSERT INTO articles (
                         titulo, slug, meta_descricao, conteudo, tags,
                         produto_id, produto_nome, tipo_produto, tom_usado,
-                        score_seo, generation_data, content_hash
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        score_seo, generation_data, content_hash, wp_category, produto_original
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     article_data.get('titulo', ''),
                     article_data.get('slug', ''),
@@ -263,7 +296,9 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                     article_data.get('tom_usado'),
                     article_data.get('seo_score', 0),
                     generation_json,
-                    content_hash
+                    content_hash,
+                    article_data.get('wp_category'),
+                    article_data.get('produto_original')
                 ))
                 
                 article_id = cursor.lastrowid
@@ -468,6 +503,41 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                     return False
                 
                 conn.commit()
+                
+                # REGISTRAR FEEDBACK NO SISTEMA DE APRENDIZADO (se status mudou)
+                if 'status' in valid_updates:
+                    try:
+                        # Buscar dados do artigo atualizado
+                        article = self.get_article(article_id)
+                        if article:
+                            new_status = valid_updates['status']
+                            
+                            # Só registrar feedback para mudanças de status significativas
+                            if new_status in ['aprovado', 'rejeitado']:
+                                product_category = self._extract_category_from_tipo(article.get('tipo_produto', 'produto_generico'))
+                                product_brand = self._extract_brand_from_name(article.get('produto_nome', ''))
+                                
+                                # Calcular qualidade baseada no comentário e dados do artigo
+                                quality_score = self._calculate_article_quality(article, valid_updates.get('comentario_revisor', ''))
+                                
+                                # Determinar ação
+                                action = 'approved' if new_status == 'aprovado' else 'rejected'
+                                
+                                # Registrar feedback
+                                self.priority_manager.record_feedback(
+                                    product_name=article.get('produto_nome', ''),
+                                    product_category=product_category,
+                                    action=action,
+                                    product_brand=product_brand,
+                                    user_comments=valid_updates.get('comentario_revisor', ''),
+                                    quality_score=quality_score
+                                )
+                                
+                                logger.info(f"🧠 Feedback registrado: {article.get('produto_nome', '')} → {action} (Qualidade: {quality_score:.1f})")
+                                
+                    except Exception as e:
+                        logger.error(f"❌ Erro ao registrar feedback: {e}")
+                
                 logger.info(f"✅ Artigo atualizado: ID {article_id} por {revisor}")
                 return True
                 
@@ -475,7 +545,9 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
             logger.error(f"❌ Erro ao atualizar artigo {article_id}: {e}")
             return False
     
-    def approve_article(self, article_id: int, revisor: str = "Sistema", comentario: str = "") -> bool:
+    def approve_article(self, article_id: int, revisor: str = "Sistema", comentario: str = "", 
+                       wp_category: str = None, produto_original: str = None, 
+                       skip_availability_check: bool = False) -> bool:
         """
         Aprova artigo para publicação
         
@@ -483,19 +555,68 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
             article_id: ID do artigo
             revisor: Nome do revisor
             comentario: Comentário opcional
+            wp_category: Categoria WordPress selecionada manualmente
+            produto_original: Nome do produto original associado
+            skip_availability_check: Pular verificação de disponibilidade
             
         Returns:
             True se aprovado com sucesso
         """
+        # Verificar disponibilidade do produto antes de aprovar (se não foi pulado)
+        if not skip_availability_check:
+            article = self.get_article(article_id)
+            if article and article.get('generation_data'):
+                try:
+                    generation_data = json.loads(article['generation_data'])
+                    produto_data = generation_data.get('produto', {})
+                    
+                    if produto_data.get('url'):
+                        logger.info(f"🔍 Verificando disponibilidade antes de aprovar artigo {article_id}")
+                        availability_result = self.availability_checker.check_product_availability(produto_data)
+                        
+                        if not availability_result.get('disponivel', False):
+                            motivo = availability_result.get('motivo', 'Motivo desconhecido')
+                            logger.warning(f"⚠️ Produto indisponível, rejeitando artigo {article_id}: {motivo}")
+                            
+                            # Rejeitar automaticamente por indisponibilidade
+                            return self.reject_article(
+                                article_id, 
+                                f"Produto indisponível: {motivo}", 
+                                "Sistema de Verificação"
+                            )
+                        else:
+                            logger.info(f"✅ Produto disponível, prosseguindo com aprovação do artigo {article_id}")
+                    else:
+                        logger.info(f"⚠️ Artigo {article_id} não possui URL do produto, pulando verificação de disponibilidade")
+                            
+                except Exception as e:
+                    logger.warning(f"⚠️ Erro ao verificar disponibilidade para artigo {article_id}: {e}")
+                    logger.debug(f"Generation data: {article.get('generation_data')}")
+                    # Continuar com aprovação mesmo com erro na verificação
+            else:
+                logger.info(f"⚠️ Artigo {article_id} não possui dados de geração, pulando verificação de disponibilidade")
+        
         updates = {
             'status': 'aprovado',
             'comentario_revisor': comentario
         }
         
+        # Adicionar categoria WordPress se especificada
+        if wp_category:
+            updates['wp_category'] = wp_category
+            
+        # Adicionar produto original se especificado
+        if produto_original:
+            updates['produto_original'] = produto_original
+        
         success = self.update_article(article_id, updates, revisor)
         
         if success:
             logger.info(f"✅ Artigo aprovado: ID {article_id} por {revisor}")
+            if wp_category:
+                logger.info(f"📂 Categoria WP selecionada: {wp_category}")
+            if produto_original:
+                logger.info(f"🔗 Produto associado: {produto_original}")
         
         return success
     
@@ -679,7 +800,88 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                 
         except Exception as e:
             logger.error(f"❌ Erro na limpeza de artigos antigos: {e}")
-            return 0 
+            return 0
+    
+    def _extract_category_from_tipo(self, tipo_produto: str) -> str:
+        """Extrai categoria padrão do tipo de produto"""
+        category_mapping = {
+            'impressora': 'impressora',
+            'multifuncional': 'multifuncional', 
+            'toner': 'toner',
+            'scanner': 'scanner',
+            'papel': 'papel',
+            'copiadora': 'copiadora',
+            'suprimento': 'suprimento'
+        }
+        return category_mapping.get(tipo_produto.lower() if tipo_produto else 'produto_generico', 'produto_generico')
+    
+    def _extract_brand_from_name(self, product_name: str) -> str:
+        """Extrai marca do nome do produto"""
+        brands = ['HP', 'Canon', 'Brother', 'Epson', 'Samsung', 'Xerox', 'Ricoh', 'Lexmark']
+        
+        for brand in brands:
+            if brand.lower() in product_name.lower():
+                return brand
+        
+        return 'Genérica'
+    
+    def _calculate_article_quality(self, article: Dict[str, Any], comentario: str) -> float:
+        """Calcula qualidade do artigo baseado em critérios"""
+        quality_score = 5.0  # Base média
+        
+        try:
+            # Fatores de qualidade
+            titulo_len = len(article.get('titulo', ''))
+            conteudo_len = len(article.get('conteudo', ''))
+            meta_len = len(article.get('meta_descricao', ''))
+            
+            # Título otimizado (30-60 chars)
+            if 30 <= titulo_len <= 60:
+                quality_score += 1.0
+            elif titulo_len > 60:
+                quality_score -= 0.5
+            
+            # Conteúdo substantivo (>500 chars)
+            if conteudo_len > 1500:
+                quality_score += 1.5
+            elif conteudo_len > 500:
+                quality_score += 0.5
+            else:
+                quality_score -= 1.0
+            
+            # Meta description otimizada (120-155 chars)
+            if 120 <= meta_len <= 155:
+                quality_score += 1.0
+            elif meta_len > 155:
+                quality_score -= 0.5
+            
+            # Analisar comentário do revisor
+            if comentario:
+                positive_words = ['bom', 'ótimo', 'excelente', 'aprovado', 'qualidade']
+                negative_words = ['ruim', 'problema', 'erro', 'inadequado', 'falta']
+                
+                comentario_lower = comentario.lower()
+                if any(word in comentario_lower for word in positive_words):
+                    quality_score += 0.5
+                elif any(word in comentario_lower for word in negative_words):
+                    quality_score -= 1.0
+            
+            # Garantir range válido (0-10)
+            quality_score = max(0.0, min(10.0, quality_score))
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao calcular qualidade: {e}")
+            quality_score = 5.0
+        
+        return quality_score
+
+    def close(self):
+        """Fecha recursos do review manager"""
+        try:
+            self.availability_checker.close()
+            logger.debug("🔒 Review Manager recursos fechados")
+        except:
+            pass
  
  
  

@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📝 Revisão de Artigo - SEO Content Generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>📝 {{ article.titulo or 'Artigo' }} - Revisão</title>
+    
+    <!-- Meta Description Dinâmica -->
+    <meta name="description" content="{{ article.meta_descricao or 'Artigo em revisão no sistema de geração automática de conteúdo SEO' }}">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="{{ article.titulo or 'Artigo' }} - Sistema SEO">
+    <meta property="og:description" content="{{ article.meta_descricao or 'Artigo em revisão no sistema de geração automática de conteúdo SEO' }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ article.titulo or 'Artigo' }} - Sistema SEO">
+    <meta name="twitter:description" content="{{ article.meta_descricao or 'Artigo em revisão' }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzYzNjZmMSIvPgo8dGV4dCB4PSI4IiB5PSIyMyIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIj7wn5OdPC90ZXh0Pgo8L3N2Zz4K" type="image/svg+xml">
+    
+    <!-- CSS Inline Crítico para Performance -->
+    <link rel="preload" href="/static/css/_design_system.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/static/css/_design_system.css"></noscript>
     <style>
         * {
             margin: 0;
@@ -12,53 +32,41 @@
             box-sizing: border-box;
         }
         
+        /* Variáveis específicas desta página */
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #2a2a2a;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --accent-blue: #007aff;
-            --accent-green: #34c759;
-            --accent-orange: #ff9500;
-            --accent-red: #ff3b30;
-            --accent-purple: #af52de;
-            --border-color: #333333;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
             --editor-bg: rgba(255, 255, 255, 0.03);
         }
         
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+        .page-wrapper {
             min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
         }
         
-        .background-animation {
-            position: fixed;
+        .page-wrapper::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            animation: backgroundFlow 25s ease-in-out infinite;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(48, 209, 88, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(255, 159, 10, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
         
-        @keyframes backgroundFlow {
-            0%, 100% { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%); }
-            33% { background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #2a2a2a 100%); }
-            66% { background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%); }
+        .content {
+            position: relative;
+            z-index: 1;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: var(--space-10) var(--space-5);
             position: relative;
             z-index: 1;
         }
@@ -74,8 +82,8 @@
         .header-info h1 {
             font-size: clamp(1.8rem, 3vw, 2.5rem);
             font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            margin-bottom: var(--space-2);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -574,22 +582,256 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* WordPress Preview Styles */
+        .wordpress-preview-container {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wordpress-preview {
+            background: #ffffff;
+            color: #333333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        .wp-post-header {
+            border-bottom: 1px solid #e1e5e9;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .wp-post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        
+        .wp-post-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #757575;
+        }
+        
+        .wp-post-date {
+            font-weight: 500;
+        }
+        
+        .wp-post-tags {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .wp-tag {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .wp-post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+        
+        .wp-post-content h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 32px 0 16px 0;
+            line-height: 1.3;
+        }
+        
+        .wp-post-content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 28px 0 14px 0;
+            line-height: 1.4;
+            border-bottom: 2px solid #e1e5e9;
+            padding-bottom: 8px;
+        }
+        
+        .wp-post-content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 24px 0 12px 0;
+            line-height: 1.5;
+        }
+        
+        .wp-post-content h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 20px 0 10px 0;
+        }
+        
+        .wp-post-content p {
+            margin-bottom: 20px;
+            color: #374151;
+        }
+        
+        .wp-post-content ul,
+        .wp-post-content ol {
+            margin: 20px 0 20px 20px;
+            color: #374151;
+        }
+        
+        .wp-post-content li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+        
+        .wp-post-content strong {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .wp-post-content em {
+            font-style: italic;
+        }
+        
+        .wp-post-content a {
+            color: #0073aa;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+        
+        .wp-post-content a:hover {
+            color: #005177;
+        }
+        
+        .wp-post-content blockquote {
+            border-left: 4px solid #0073aa;
+            margin: 20px 0;
+            padding: 16px 20px;
+            background: #f8f9fa;
+            font-style: italic;
+            color: #555555;
+        }
+        
+        .wp-post-content code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+        
+        .wp-post-content pre {
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .wp-post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid #e1e5e9;
+        }
+        
+        .wp-post-content th,
+        .wp-post-content td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        .wp-post-content th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .wp-seo-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f0f9ff;
+            border: 1px solid #0284c7;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        
+        .wp-seo-info h4 {
+            margin: 0 0 12px 0;
+            color: #0284c7;
+            font-size: 1rem;
+        }
+        
+        .wp-seo-info p {
+            margin: 8px 0;
+            color: #1e40af;
+        }
+        
+        .wp-seo-info strong {
+            color: #1e3a8a;
+        }
+        
+        /* Responsividade para WordPress Preview */
+        @media (max-width: 768px) {
+            .wordpress-preview {
+                padding: 20px;
+            }
+            
+            .wp-post-title {
+                font-size: 2rem;
+            }
+            
+            .wp-post-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .wp-post-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .wp-post-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .wp-post-content {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="background-animation"></div>
-    
-    <div class="floating-nav">
-        <a href="/review/list" class="nav-btn" title="Voltar à Lista">←</a>
-        <a href="/" class="nav-btn" title="Dashboard">🏠</a>
-    </div>
-    
-    <div class="container">
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="floating-nav">
+                <a href="javascript:history.back()" class="nav-btn" title="Voltar">←</a>
+                <a href="/" class="nav-btn" title="Dashboard">🏠</a>
+            </div>
+            
+            <div class="container">
         <div class="header">
             <div class="header-info">
                 <h1>{{ article.titulo or 'Artigo sem título' }}</h1>
                 <div class="header-meta">
-                    <span>📅 {{ article.data_criacao.strftime('%d/%m/%Y %H:%M') if article.data_criacao else 'Data não informada' }}</span>
+                    <span>📅 {{ article.data_criacao[:19] if article.data_criacao else 'Data não informada' }}</span>
                     {% if article.revisor %}
                     <span>👤 {{ article.revisor }}</span>
                     {% endif %}
@@ -605,6 +847,9 @@
             <div class="tabs">
                 <div class="tab active" onclick="switchTab('preview')">
                     👁️ Preview
+                </div>
+                <div class="tab" onclick="switchTab('wordpress')">
+                    🌐 Prévia WordPress
                 </div>
                 <div class="tab" onclick="switchTab('seo')">
                     📊 SEO
@@ -626,25 +871,59 @@
                 </div>
             </div>
             
+            <!-- Tab WordPress Preview -->
+            <div id="wordpress-tab" class="tab-content">
+                <div class="wordpress-preview-container">
+                    <div class="wordpress-preview">
+                        <div class="wp-post-header">
+                            <h1 class="wp-post-title">{{ article.titulo or 'Título do Artigo' }}</h1>
+                            <div class="wp-post-meta">
+                                <span class="wp-post-date">📅 {{ article.data_criacao[:10] if article.data_criacao else 'Data não disponível' }}</span>
+                                {% if article.tags %}
+                                <div class="wp-post-tags">
+                                    🏷️ Tags: 
+                                    {% for tag in article.tags %}
+                                    <span class="wp-tag">{{ tag }}</span>{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="wp-post-content">
+                            {{ article.conteudo | safe if article.conteudo else '<p>Conteúdo não disponível</p>' }}
+                        </div>
+                        
+                        {% if article.meta_descricao %}
+                        <div class="wp-seo-info">
+                            <h4>📊 Informações SEO (visível apenas aqui)</h4>
+                            <p><strong>Meta Description:</strong> {{ article.meta_descricao }}</p>
+                            <p><strong>Slug:</strong> {{ article.slug or 'slug-automatico' }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
             <!-- Tab SEO -->
             <div id="seo-tab" class="tab-content">
                 <div class="seo-metrics">
                     <div class="metric-card">
-                        <div class="metric-value metric-{{ 'good' if article.titulo and len(article.titulo) <= 60 else 'warning' if article.titulo and len(article.titulo) <= 70 else 'bad' }}">
+                        <div class="metric-value metric-{{ 'good' if article.titulo and article.titulo|length <= 60 else 'warning' if article.titulo and article.titulo|length <= 70 else 'bad' }}">
                             {{ article.titulo|length if article.titulo else 0 }}
                         </div>
                         <div class="metric-label">Caracteres do Título (máx 60)</div>
                     </div>
                     
                     <div class="metric-card">
-                        <div class="metric-value metric-{{ 'good' if article.meta_descricao and len(article.meta_descricao) <= 160 else 'warning' if article.meta_descricao and len(article.meta_descricao) <= 170 else 'bad' }}">
+                        <div class="metric-value metric-{{ 'good' if article.meta_descricao and article.meta_descricao|length <= 160 else 'warning' if article.meta_descricao and article.meta_descricao|length <= 170 else 'bad' }}">
                             {{ article.meta_descricao|length if article.meta_descricao else 0 }}
                         </div>
                         <div class="metric-label">Caracteres da Meta (máx 160)</div>
                     </div>
                     
                     <div class="metric-card">
-                        <div class="metric-value metric-{{ 'good' if article.tags and len(article.tags) >= 3 else 'warning' if article.tags and len(article.tags) >= 1 else 'bad' }}">
+                        <div class="metric-value metric-{{ 'good' if article.tags and article.tags|length >= 3 else 'warning' if article.tags and article.tags|length >= 1 else 'bad' }}">
                             {{ article.tags|length if article.tags else 0 }}
                         </div>
                         <div class="metric-label">Tags (mín 3)</div>
@@ -663,7 +942,7 @@
                         <label class="form-label">Meta Description</label>
                         <div style="position: relative;">
                             <textarea class="form-textarea" readonly>{{ article.meta_descricao or 'Meta description não definida' }}</textarea>
-                            <div class="char-counter {{ 'error' if article.meta_descricao and len(article.meta_descricao) > 160 else 'warning' if article.meta_descricao and len(article.meta_descricao) > 150 else '' }}">
+                            <div class="char-counter {{ 'error' if article.meta_descricao and article.meta_descricao|length > 160 else 'warning' if article.meta_descricao and article.meta_descricao|length > 150 else '' }}">
                                 {{ article.meta_descricao|length if article.meta_descricao else 0 }}/160
                             </div>
                         </div>
@@ -697,7 +976,30 @@
                     
                     <div class="form-group">
                         <label class="form-label">Data de Criação</label>
-                        <input type="text" class="form-input" value="{{ article.data_criacao.strftime('%d/%m/%Y %H:%M:%S') if article.data_criacao else 'Não informado' }}" readonly>
+                        <input type="text" class="form-input" value="{{ article.data_criacao[:19] if article.data_criacao else 'Não informado' }}" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Categoria WordPress</label>
+                        <select class="form-input" id="wp_category" {{ 'disabled' if article.status != 'pendente' else '' }}>
+                            <option value="">📂 Detecção Automática</option>
+                            <option value="geral" {{ 'selected' if article.wp_category == 'geral' else '' }}>📝 Geral</option>
+                            <option value="tecnologia" {{ 'selected' if article.wp_category == 'tecnologia' else '' }}>💻 Tecnologia</option>
+                            <option value="impressoras" {{ 'selected' if article.wp_category == 'impressoras' else '' }}>🖨️ Impressoras</option>
+                            <option value="multifuncionais" {{ 'selected' if article.wp_category == 'multifuncionais' else '' }}>🖨️ Multifuncionais</option>
+                            <option value="suprimentos" {{ 'selected' if article.wp_category == 'suprimentos' else '' }}>🔋 Suprimentos</option>
+                            <option value="dicas" {{ 'selected' if article.wp_category == 'dicas' else '' }}>💡 Dicas</option>
+                        </select>
+                        <div class="form-help">Categoria onde o artigo será publicado no WordPress</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Produto Associado</label>
+                        <input type="text" class="form-input" id="produto_original" 
+                               value="{{ article.produto_original or '' }}" 
+                               placeholder="Ex: HP DeskJet 3776, Brother L2540DW..."
+                               {{ 'readonly' if article.status != 'pendente' else '' }}>
+                        <div class="form-help">Nome do produto específico para associar ao artigo</div>
                     </div>
                     
                     {% if article.revisor %}
@@ -778,6 +1080,28 @@
                         </div>
                         
                         <div class="form-group">
+                            <label class="form-label">Categoria WordPress</label>
+                            <select class="form-input" id="edit_wp_category">
+                                <option value="">📂 Detecção Automática</option>
+                                <option value="geral" {{ 'selected' if article.wp_category == 'geral' else '' }}>📝 Geral</option>
+                                <option value="tecnologia" {{ 'selected' if article.wp_category == 'tecnologia' else '' }}>💻 Tecnologia</option>
+                                <option value="impressoras" {{ 'selected' if article.wp_category == 'impressoras' else '' }}>🖨️ Impressoras</option>
+                                <option value="multifuncionais" {{ 'selected' if article.wp_category == 'multifuncionais' else '' }}>🖨️ Multifuncionais</option>
+                                <option value="suprimentos" {{ 'selected' if article.wp_category == 'suprimentos' else '' }}>🔋 Suprimentos</option>
+                                <option value="dicas" {{ 'selected' if article.wp_category == 'dicas' else '' }}>💡 Dicas</option>
+                            </select>
+                            <div class="form-help">Categoria onde o artigo será publicado no WordPress</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Produto Associado</label>
+                            <input type="text" class="form-input" id="edit_produto_original" 
+                                   value="{{ article.produto_original or '' }}" 
+                                   placeholder="Ex: HP DeskJet 3776, Brother L2540DW...">
+                            <div class="form-help">Nome do produto específico para associar ao artigo</div>
+                        </div>
+                        
+                        <div class="form-group">
                             <label class="form-label">Conteúdo</label>
                             <textarea class="form-textarea content-editor" id="conteudo">{{ article.conteudo or '' }}</textarea>
                         </div>
@@ -813,7 +1137,7 @@
             </button>
             {% endif %}
             
-            <a href="/review/list" class="action-btn btn-secondary">
+                                    <a href="/interface/review" class="action-btn btn-secondary">
                 📋 Voltar à Lista
             </a>
         </div>
@@ -878,8 +1202,9 @@
         
         // Funções de ação
         async function approveArticle() {
-            const comment = prompt('Comentário de aprovação (opcional):');
-            if (comment === null) return;
+            // Coletar dados da categoria e produto
+            const wpCategory = document.getElementById('wp_category').value;
+            const produtoOriginal = document.getElementById('produto_original').value.trim();
             
             showLoading(true);
             try {
@@ -887,8 +1212,10 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        comment: comment || '',
-                        reviewer: 'Revisor Web'
+                        comment: 'Aprovado via interface web',
+                        reviewer: 'Revisor Web',
+                        wp_category: wpCategory || null,
+                        produto_original: produtoOriginal || null
                     })
                 });
                 
@@ -939,7 +1266,9 @@
                 slug: document.getElementById('slug').value,
                 meta_descricao: document.getElementById('meta_descricao').value,
                 conteudo: document.getElementById('conteudo').value,
-                tags: Array.from(document.querySelectorAll('#tags-container .tag')).map(tag => tag.textContent.replace('×', '').trim())
+                tags: Array.from(document.querySelectorAll('#tags-container .tag')).map(tag => tag.textContent.replace('×', '').trim()),
+                wp_category: document.getElementById('edit_wp_category').value || null,
+                produto_original: document.getElementById('edit_produto_original').value.trim() || null
             };
             
             showLoading(true);
@@ -958,6 +1287,42 @@
                 }
             } catch (error) {
                 showNotification('❌ Erro de conexão', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function publishArticle() {
+            if (!confirm('Tem certeza que deseja publicar este artigo no WordPress?')) {
+                return;
+            }
+            
+            showLoading(true);
+            try {
+                const articleId = {{ article.id }};
+                const response = await fetch('/publisher/publish', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        article_id: articleId,
+                        publish_immediately: true
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('🎉 Artigo publicado com sucesso no WordPress!', 'success');
+                    if (data.wp_url) {
+                        setTimeout(() => {
+                            showNotification(`🔗 <a href="${data.wp_url}" target="_blank" style="color: white; text-decoration: underline;">Ver artigo publicado</a>`, 'info');
+                        }, 2000);
+                    }
+                } else {
+                    showNotification('❌ Erro ao publicar: ' + (data.error || 'Erro desconhecido'), 'error');
+                }
+            } catch (error) {
+                showNotification('❌ Erro de conexão: ' + error.message, 'error');
             } finally {
                 showLoading(false);
             }
@@ -1009,13 +1374,6 @@
             overlay.classList.toggle('active', show);
         }
         
-        // Efeito parallax suave
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.2;
-            document.querySelector('.background-animation').style.transform = `translateY(${rate}px)`;
-        });
-        
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
             // Atualizar contadores iniciais
@@ -1025,6 +1383,8 @@
             {% endif %}
         });
     </script>
+        </div>
+    </div>
 </body>
 </html> 
  

@@ -17,8 +17,4 @@ __all__ = [
     'CreativeScraper',
     'ProductExtractor', 
     'URLManager'
-]
-
-
-
-
+] 

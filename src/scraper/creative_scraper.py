@@ -9,6 +9,7 @@ import requests
 import re
 from loguru import logger
 from .scraper_base import ScraperBase
+from .pagination_handler import PaginationHandler
 
 class CreativeScraper(ScraperBase):
     """Scraper específico para Creative Cópias"""
@@ -37,6 +38,9 @@ class CreativeScraper(ScraperBase):
             'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1',
         })
+        
+        # Inicializar handler de paginação
+        self.pagination_handler = PaginationHandler(delay_range=(1, 2))
         
         logger.info("🚀 Creative Scraper inicializado")
     
@@ -108,10 +112,11 @@ class CreativeScraper(ScraperBase):
             
             # Se não encontrou, tenta seletores específicos
             selectors = [
+                '.item',  # Priorizar .item que funciona para cartuchos/toners
                 '.products-grid .item',  # Magento products grid items
                 '.category-products .item',  # Magento category products
-                '.product-item',  # Padrão Magento 2
                 '.item .product-name',  # Items com product name dentro
+                '.product-item',  # Padrão Magento 2
                 '.product',
                 '.item-product',
                 '[data-product]',
@@ -255,23 +260,27 @@ class CreativeScraper(ScraperBase):
     def _extract_product_name(self, element: Any) -> Optional[str]:
         """Extrai nome do produto"""
         selectors = [
-            'h3', 'h2', 'h4',
-            '.product-name', '.nome-produto', '.title',
-            '[data-name]', '.product-title',
-            'a[title]'
+            '.product-name', '.nome-produto', '.title',  # Seletores específicos primeiro
+            'a[title]',  # Links com título
+            'a',  # Qualquer link (para elementos .item)
+            'h3', 'h2', 'h4',  # Headers
+            '[data-name]', '.product-title'
         ]
         
         for selector in selectors:
             try:
                 found = element.select_one(selector)
                 if found:
+                    # Primeiro tentar atributo title
+                    if hasattr(found, 'get') and found.get('title'):
+                        title = found.get('title').strip()
+                        if len(title) > 3:
+                            return title
+                    
+                    # Depois tentar texto do elemento
                     text = found.get_text(strip=True)
                     if len(text) > 3:  # Nome válido deve ter mais de 3 caracteres
                         return text
-                    
-                # Tentar atributo title
-                if hasattr(found, 'get') and found.get('title'):
-                    return found.get('title').strip()
             except:
                 continue
         
@@ -282,7 +291,7 @@ class CreativeScraper(ScraperBase):
             lines = text.split('\n')
             for line in lines:
                 line = line.strip()
-                if len(line) > 10 and not line.startswith('R$'):
+                if len(line) > 10 and not line.startswith('R$') and not line.lower().startswith('marca'):
                     return line
         
         return None
@@ -440,7 +449,126 @@ class CreativeScraper(ScraperBase):
             pass
         
         # Assumir disponível por padrão
-        return True 
+        return True
+    
+    def scrape_category_with_pagination(self, category_url: str, max_pages: int = 50) -> List[Dict[str, Any]]:
+        """
+        Scraping de categoria com paginação automática
+        
+        Args:
+            category_url: URL da categoria
+            max_pages: Máximo de páginas para processar
+            
+        Returns:
+            Lista de produtos de todas as páginas
+        """
+        logger.info(f"🕷️ Iniciando scraping com paginação: {category_url}")
+        
+        all_products = []
+        
+        try:
+            # Usar pagination handler para obter todas as páginas
+            pages_data = self.pagination_handler.get_all_pages_from_category(
+                category_url, 
+                category_name=category_url.split('/')[-1]
+            )
+            
+            for page_data in pages_data:
+                page_num = page_data['page_number']
+                logger.info(f"📄 Processando página {page_num}...")
+                
+                # Carregar a página para extrair dados completos
+                soup = self.load_page(page_data['url'])
+                if not soup:
+                    logger.warning(f"⚠️ Não foi possível carregar página {page_num}")
+                    continue
+                
+                # Extrair produtos da página atual
+                product_elements = self.parse_product_list(soup)
+                
+                if product_elements:
+                    logger.info(f"📦 Encontrados {len(product_elements)} produtos na página {page_num}")
+                    
+                    # Extrair dados de cada produto
+                    for i, element in enumerate(product_elements):
+                        try:
+                            product_data = self.extract_product_data(element)
+                            if product_data and product_data.get('nome'):
+                                # Adicionar informações da página
+                                product_data['page_number'] = page_num
+                                product_data['page_url'] = page_data['url']
+                                all_products.append(product_data)
+                                logger.debug(f"✅ Produto {i+1} extraído: {product_data['nome'][:50]}...")
+                        except Exception as e:
+                            logger.warning(f"⚠️ Erro ao extrair produto {i+1}: {e}")
+                            continue
+                else:
+                    logger.warning(f"⚠️ Nenhum produto encontrado na página {page_num}")
+                
+                # Delay entre páginas
+                self._apply_delay()
+            
+            logger.info(f"🎯 Scraping com paginação concluído: {len(all_products)} produtos "
+                       f"encontrados em {len(pages_data)} páginas")
+            
+            return all_products
+            
+        except Exception as e:
+            logger.error(f"❌ Erro no scraping com paginação: {e}")
+            return all_products
+    
+    def analyze_category_structure(self, category_url: str) -> Dict[str, Any]:
+        """
+        Analisa a estrutura de uma categoria (paginação, produtos, etc.)
+        
+        Args:
+            category_url: URL da categoria para analisar
+            
+        Returns:
+            Análise detalhada da categoria
+        """
+        logger.info(f"🔍 Analisando estrutura da categoria: {category_url}")
+        
+        try:
+            # Analisar paginação
+            pagination_analysis = self.pagination_handler.analyze_pagination_structure(category_url)
+            
+            # Carregar primeira página para análise de produtos
+            soup = self.load_page(category_url)
+            if not soup:
+                return {'error': 'Não foi possível carregar a página'}
+            
+            # Analisar produtos na primeira página
+            product_elements = self.parse_product_list(soup)
+            
+            analysis = {
+                'category_url': category_url,
+                'pagination': pagination_analysis,
+                'products_on_first_page': len(product_elements),
+                'has_products': len(product_elements) > 0,
+                'estimated_total_products': None
+            }
+            
+            # Estimar total de produtos
+            if pagination_analysis.get('has_pagination') and pagination_analysis.get('total_pages'):
+                estimated_total = len(product_elements) * pagination_analysis['total_pages']
+                analysis['estimated_total_products'] = estimated_total
+                logger.info(f"📊 Estimativa: ~{estimated_total} produtos em {pagination_analysis['total_pages']} páginas")
+            else:
+                analysis['estimated_total_products'] = len(product_elements)
+                logger.info(f"📊 Categoria sem paginação: {len(product_elements)} produtos")
+            
+            return analysis
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao analisar categoria: {e}")
+            return {'error': str(e)}
+    
+    def close(self):
+        """Fecha conexões"""
+        super().close()
+        if hasattr(self, 'pagination_handler'):
+            self.pagination_handler.close() 
  
  
  

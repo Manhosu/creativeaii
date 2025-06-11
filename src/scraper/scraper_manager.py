@@ -11,6 +11,7 @@ from loguru import logger
 from .creative_scraper import CreativeScraper
 from .product_extractor import ProductExtractor  
 from .url_manager import URLManager
+from .availability_checker import AvailabilityChecker
 
 class ScraperManager:
     """Gerenciador principal do módulo de scraping"""
@@ -20,13 +21,18 @@ class ScraperManager:
         self.scraper = CreativeScraper()
         self.extractor = ProductExtractor()
         self.url_manager = URLManager()
+        self.availability_checker = AvailabilityChecker()
         
         logger.info("🚀 Scraper Manager inicializado com sucesso")
     
-    def run_full_scraping(self) -> Dict[str, Any]:
+    def run_full_scraping(self, use_pagination: bool = True, discover_categories: bool = False, max_products_per_category: int = 0) -> Dict[str, Any]:
         """
         Executa scraping completo de todas as categorias configuradas
         
+        Args:
+            use_pagination: Se deve usar paginação automática
+            discover_categories: Se deve descobrir categorias automaticamente antes do scraping
+            
         Returns:
             Relatório completo do processo
         """
@@ -39,6 +45,20 @@ class ScraperManager:
         errors = []
         
         try:
+            # Atualizar URLs das configurações antes de começar
+            logger.info("🔄 Atualizando URLs das configurações...")
+            self.url_manager.refresh_category_urls()
+            
+            # Descobrir categorias automaticamente se solicitado
+            if discover_categories:
+                logger.info("🔍 Descobrindo categorias automaticamente...")
+                discovery_result = self.url_manager.auto_discover_categories()
+                if discovery_result['status'] == 'success':
+                    self.url_manager.update_category_urls_from_discovery()
+                    logger.info(f"✅ {discovery_result['total_discovered']} categorias descobertas e adicionadas")
+                else:
+                    logger.warning(f"⚠️ Erro na descoberta: {discovery_result.get('message', '')}")
+            
             # Obter URLs de categorias
             category_urls = self.url_manager.get_category_urls()
             
@@ -56,13 +76,22 @@ class ScraperManager:
             
             # Processar cada categoria
             for i, url in enumerate(category_urls, 1):
+                # Verificar timeout global (30 minutos máximo)
+                elapsed_time = time.time() - start_time
+                if elapsed_time > 1800:  # 30 minutos
+                    logger.warning(f"⏰ TIMEOUT: Processo interrompido após {elapsed_time/60:.1f} minutos")
+                    break
+                
                 try:
                     logger.info(f"🕷️ Processando categoria {i}/{len(category_urls)}: {url}")
                     
                     category_start = time.time()
                     
-                    # Fazer scraping da categoria
-                    raw_products = self.scraper.scrape_category(url)
+                    # Fazer scraping da categoria (com ou sem paginação)
+                    if use_pagination:
+                        raw_products = self.scraper.scrape_category_with_pagination(url)
+                    else:
+                        raw_products = self.scraper.scrape_category(url)
                     
                     if not raw_products:
                         logger.warning(f"⚠️ Nenhum produto encontrado em: {url}")
@@ -77,39 +106,59 @@ class ScraperManager:
                     # Normalizar produtos
                     normalized_products = self.extractor.normalize_products_batch(raw_products)
                     
-                    # Filtrar apenas produtos novos
-                    new_products = self.url_manager.filter_new_products(normalized_products)
+                    # PROTEÇÃO CONTRA LOOP: Limite máximo absoluto de 300 produtos por categoria
+                    if len(normalized_products) > 300:
+                        logger.warning(f"⚠️ LIMITE MÁXIMO: Reduzindo de {len(normalized_products)} para 300 produtos (proteção contra loop)")
+                        normalized_products = normalized_products[:300]
+                    elif max_products_per_category > 0 and len(normalized_products) > max_products_per_category:
+                        logger.info(f"⚡ LIMITANDO produtos de {len(normalized_products)} para {max_products_per_category} (modo teste)")
+                        normalized_products = normalized_products[:max_products_per_category]
+                    else:
+                        logger.info(f"📦 Processando TODOS os {len(normalized_products)} produtos encontrados (busca completa)")
+                    
+                    # Verificar disponibilidade dos produtos
+                    logger.info(f"🔍 Verificando disponibilidade de {len(normalized_products)} produtos")
+                    available_products = self.availability_checker.check_products_batch(
+                        normalized_products, 
+                        delay=0.1,  # Reduzido de 0.5s para 0.1s
+                        max_workers=15,  # Aumentado para 15 workers
+                        use_parallel=True  # Forçar modo paralelo
+                    )
+                    
+                    # Filtrar apenas produtos novos (agora já com verificação de disponibilidade)
+                    new_products = self.url_manager.filter_new_products(available_products)
                     
                     # Marcar produtos como processados
                     if new_products:
                         self.url_manager.mark_products_as_processed(new_products)
                     
-                    # Exportar produtos da categoria
-                    if normalized_products:
+                    # Exportar produtos da categoria (apenas os disponíveis)
+                    if available_products:
                         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
                         filename = f"logs/products_{url.split('/')[-1]}_{timestamp}.json"
-                        self.extractor.export_to_json(normalized_products, filename)
+                        self.extractor.export_to_json(available_products, filename)
                     
                     # Registrar estatísticas
                     category_time = time.time() - category_start
                     self.url_manager.record_scraping_stats(
-                        url, len(normalized_products), len(new_products), 
+                        url, len(available_products), len(new_products), 
                         category_time, "success"
                     )
                     
                     # Atualizar contadores
-                    total_products_found += len(normalized_products)
+                    total_products_found += len(available_products)
                     total_new_products += len(new_products)
                     
                     processed_categories.append({
                         'url': url,
-                        'total_products': len(normalized_products),
+                        'total_products_found': len(normalized_products),
+                        'available_products': len(available_products),
                         'new_products': len(new_products),
                         'execution_time': category_time,
                         'status': 'success'
                     })
                     
-                    logger.info(f"✅ Categoria processada: {len(new_products)}/{len(normalized_products)} produtos novos")
+                    logger.info(f"✅ Categoria processada: {len(available_products)}/{len(normalized_products)} produtos disponíveis, {len(new_products)} novos")
                     
                     # Delay entre categorias para não sobrecarregar o servidor
                     if i < len(category_urls):
@@ -170,6 +219,7 @@ class ScraperManager:
         finally:
             # Fechar conexões
             self.scraper.close()
+            self.availability_checker.close()
     
     def run_single_category_scraping(self, url: str) -> Dict[str, Any]:
         """
@@ -201,40 +251,53 @@ class ScraperManager:
             # Normalizar produtos
             normalized_products = self.extractor.normalize_products_batch(raw_products)
             
-            # Filtrar novos produtos
-            new_products = self.url_manager.filter_new_products(normalized_products)
+            # Sem limitação para categoria única - processar todos os produtos
+            logger.info(f"📦 Processando TODOS os {len(normalized_products)} produtos da categoria")
+            
+            # Verificar disponibilidade dos produtos
+            logger.info(f"🔍 Verificando disponibilidade de {len(normalized_products)} produtos")
+            available_products = self.availability_checker.check_products_batch(
+                normalized_products, 
+                delay=0.1,  # Reduzido de 0.5s para 0.1s
+                max_workers=15,  # Aumentado para 15 workers
+                use_parallel=True  # Forçar modo paralelo
+            )
+            
+            # Filtrar novos produtos (agora já com verificação de disponibilidade)
+            new_products = self.url_manager.filter_new_products(available_products)
             
             # Marcar como processados
             if new_products:
                 self.url_manager.mark_products_as_processed(new_products)
             
-            # Exportar resultados
-            if normalized_products:
+            # Exportar resultados (apenas produtos disponíveis)
+            if available_products:
                 timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
                 filename = f"logs/products_single_{timestamp}.json"
-                exported_file = self.extractor.export_to_json(normalized_products, filename)
+                exported_file = self.extractor.export_to_json(available_products, filename)
             else:
                 exported_file = ""
             
             # Registrar estatísticas
             execution_time = time.time() - start_time
             self.url_manager.record_scraping_stats(
-                url, len(normalized_products), len(new_products), 
+                url, len(available_products), len(new_products), 
                 execution_time, "success"
             )
             
             report = {
                 'status': 'success',
                 'url': url,
-                'total_products': len(normalized_products),
+                'total_products_found': len(normalized_products),
+                'available_products': len(available_products),
                 'new_products': len(new_products),
                 'execution_time': execution_time,
                 'exported_file': exported_file,
-                'summary': self.extractor.generate_summary(normalized_products),
+                'summary': self.extractor.generate_summary(available_products),
                 'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             }
             
-            logger.info(f"✅ Categoria processada: {len(new_products)}/{len(normalized_products)} produtos novos")
+            logger.info(f"✅ Categoria processada: {len(available_products)}/{len(normalized_products)} produtos disponíveis, {len(new_products)} novos")
             
             return report
             
@@ -252,6 +315,7 @@ class ScraperManager:
             }
         finally:
             self.scraper.close()
+            self.availability_checker.close()
     
     def get_scraping_status(self) -> Dict[str, Any]:
         """

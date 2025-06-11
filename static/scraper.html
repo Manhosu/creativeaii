@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraper - Creative API</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.95);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 15px 20px;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+        }
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+        }
+        .stats-card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+        .stats-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .progress {
+            height: 10px;
+            border-radius: 10px;
+        }
+        .category-item {
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #4a90e2;
+            transition: all 0.3s ease;
+        }
+        .category-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .category-item.inactive {
+            border-left-color: #dc3545;
+            opacity: 0.7;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4a90e2;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .priority-badge {
+            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .auto-detected {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1 class="mb-0"><i class="fas fa-spider"></i> Creative API - Scraper</h1>
+                        <p class="text-muted mb-0">Sistema de Coleta e Análise de Produtos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegação -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="/static/dashboard.html" class="btn btn-outline-primary">
+                                <i class="fas fa-dashboard"></i> Dashboard
+                            </a>
+                            <a href="/static/scraper.html" class="btn btn-primary">
+                                <i class="fas fa-spider"></i> Scraper
+                            </a>
+                            <a href="/static/generator.html" class="btn btn-outline-primary">
+                                <i class="fas fa-pen"></i> Generator
+                            </a>
+                            <a href="/static/review.html" class="btn btn-outline-primary">
+                                <i class="fas fa-check"></i> Review
+                            </a>
+                            <a href="/static/publisher.html" class="btn btn-outline-primary">
+                                <i class="fas fa-share"></i> Publisher
+                            </a>
+                            <a href="/static/config.html" class="btn btn-outline-primary">
+                                <i class="fas fa-cog"></i> Config
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Categorias Ativas -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-tags"></i> Categorias Ativas para Scraping
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <p class="text-muted mb-0">
+                                    <i class="fas fa-info-circle"></i> 
+                                    Selecione quais categorias devem ser monitoradas durante o scraping. 
+                                    Apenas produtos dessas categorias serão coletados e processados.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-success btn-sm" onclick="discoverCategories()">
+                                    <i class="fas fa-search"></i> Descobrir Novas
+                                </button>
+                                <button class="btn btn-primary btn-sm" onclick="saveCategories()">
+                                    <i class="fas fa-save"></i> Salvar Alterações
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Resumo das Categorias -->
+                        <div class="row mb-4" id="categoriesSummary">
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number" id="totalCategories">-</div>
+                                    <div class="stats-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number text-success" id="activeCategories">-</div>
+                                    <div class="stats-label">Ativas</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number text-warning" id="inactiveCategories">-</div>
+                                    <div class="stats-label">Inativas</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number text-info" id="totalProducts">-</div>
+                                    <div class="stats-label">Produtos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lista de Categorias -->
+                        <div id="categoriesList">
+                            <div class="text-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Carregando categorias...</span>
+                                </div>
+                                <p class="mt-2">Carregando categorias...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Categorias Ativas -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-tags"></i> Categorias Ativas para Scraping
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <p class="text-muted mb-0">
+                                    <i class="fas fa-info-circle"></i> 
+                                    Selecione quais categorias devem ser monitoradas durante o scraping. 
+                                    Apenas produtos dessas categorias serão coletados e processados.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-success btn-sm" onclick="discoverCategories()">
+                                    <i class="fas fa-search"></i> Descobrir Novas
+                                </button>
+                                <button class="btn btn-primary btn-sm" onclick="saveCategories()">
+                                    <i class="fas fa-save"></i> Salvar Alterações
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Resumo das Categorias -->
+                        <div class="row mb-4" id="categoriesSummary">
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number" id="totalCategories">-</div>
+                                    <div class="stats-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number text-success" id="activeCategories">-</div>
+                                    <div class="stats-label">Ativas</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number text-warning" id="inactiveCategories">-</div>
+                                    <div class="stats-label">Inativas</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-number text-info" id="totalProducts">-</div>
+                                    <div class="stats-label">Produtos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lista de Categorias -->
+                        <div id="categoriesList">
+                            <div class="text-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Carregando categorias...</span>
+                                </div>
+                                <p class="mt-2">Carregando categorias...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processamento Automático -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0">
+                            <i class="fas fa-magic"></i> Processamento Automático
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="text-primary mb-2">🚀 Scraping + Geração Automática</h6>
+                                <p class="text-muted mb-0">
+                                    <i class="fas fa-info-circle"></i> 
+                                    Processa automaticamente todas as categorias ativas: faz scraping dos produtos, 
+                                    gera artigos SEO e envia para revisão em uma única operação.
+                                </p>
+                                <div class="mt-2">
+                                    <small class="text-success">
+                                        <i class="fas fa-check-circle"></i> 
+                                        <span id="activeCategoriesCount">0</span> categorias ativas serão processadas
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-warning btn-lg" onclick="processSelectedCategories()" id="processBtn">
+                                    <i class="fas fa-rocket"></i> Processar Tudo
+                                </button>
+                                <div class="mt-2">
+                                    <div id="processProgress" class="progress" style="display: none;">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                             role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatísticas do Scraper -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="scraperStatus">-</div>
+                    <div class="stats-label">Status</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="urlsConfiguradas">-</div>
+                    <div class="stats-label">URLs Configuradas</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="produtosProcessados">-</div>
+                    <div class="stats-label">Produtos Processados</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="stats-number" id="ultimaExecucao">-</div>
+                    <div class="stats-label">Última Execução</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles do Scraper -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-play"></i> Controles do Scraper</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center gap-3">
+                            <button class="btn btn-success" onclick="runScraper()">
+                                <i class="fas fa-play"></i> Executar Scraping
+                            </button>
+                            <button class="btn btn-warning" onclick="checkScraperStatus()">
+                                <i class="fas fa-refresh"></i> Verificar Status
+                            </button>
+                            <button class="btn btn-info" onclick="loadScraperStats()">
+                                <i class="fas fa-chart-bar"></i> Atualizar Stats
+                            </button>
+                            <button class="btn btn-secondary" onclick="exportProducts()">
+                                <i class="fas fa-download"></i> Exportar Produtos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logs e Progresso -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-terminal"></i> Logs do Sistema</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="logs" style="height: 300px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace;">
+                            <p class="text-muted">Aguardando execução...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modais -->
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Ação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="confirmModalBody">
+                    Deseja realmente executar esta ação?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmModalAction">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Estado global das categorias
+        let categoriesData = [];
+        let originalCategoriesState = {};
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategories();
+            loadScraperStats();
+            
+            // Auto-atualizar a cada 30 segundos
+            setInterval(() => {
+                loadScraperStats();
+            }, 30000);
+        });
+
+        // Funções de Categorias
+        async function loadCategories() {
+            try {
+                const response = await fetch('/categories/');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    categoriesData = data.categories;
+                    updateCategoriesSummary(data.summary);
+                    renderCategoriesList(data.categories);
+                    
+                    // Salvar estado original para detectar mudanças
+                    originalCategoriesState = {};
+                    data.categories.forEach(cat => {
+                        originalCategoriesState[cat.category_key] = cat.is_active;
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao carregar categorias:', error);
+                addLog('Erro ao carregar categorias: ' + error.message, 'error');
+            }
+        }
+
+        function updateCategoriesSummary(summary) {
+            document.getElementById('totalCategories').textContent = summary.total_categories;
+            document.getElementById('activeCategories').textContent = summary.active_categories;
+            document.getElementById('inactiveCategories').textContent = summary.inactive_categories;
+            document.getElementById('totalProducts').textContent = summary.total_products;
+        }
+
+        function renderCategoriesList(categories) {
+            const container = document.getElementById('categoriesList');
+            
+            if (categories.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted">
+                        <i class="fas fa-inbox fa-3x mb-3"></i>
+                        <p>Nenhuma categoria encontrada.</p>
+                        <button class="btn btn-primary" onclick="discoverCategories()">
+                            <i class="fas fa-search"></i> Descobrir Categorias
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            categories.forEach(category => {
+                html += `
+                    <div class="category-item ${!category.is_active ? 'inactive' : ''}">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <label class="switch me-3">
+                                        <input type="checkbox" ${category.is_active ? 'checked' : ''} 
+                                               onchange="toggleCategory('${category.category_key}', this.checked)">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <div>
+                                        <h6 class="mb-1">${category.category_name}</h6>
+                                        <small class="text-muted">${category.category_key}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <small class="text-muted">URL:</small><br>
+                                <a href="${category.category_url}" target="_blank" class="text-decoration-none">
+                                    ${category.category_url.replace('https://www.creativecopias.com.br', '')}
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-end">
+                                <div class="d-flex flex-column align-items-end gap-1">
+                                    <span class="priority-badge">Prioridade: ${category.priority}</span>
+                                    ${category.auto_detected ? '<span class="auto-detected">Auto-Detectada</span>' : ''}
+                                    <div class="text-muted">
+                                        <small>
+                                            <i class="fas fa-box"></i> ${category.products_count || 0} produtos
+                                            ${category.last_scraped ? `<br><i class="fas fa-clock"></i> ${formatDate(category.last_scraped)}` : ''}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function toggleCategory(categoryKey, isActive) {
+            // Atualizar estado local
+            const category = categoriesData.find(cat => cat.category_key === categoryKey);
+            if (category) {
+                category.is_active = isActive;
+            }
+
+            // Verificar se há mudanças para mostrar botão de salvar
+            checkForChanges();
+            
+            addLog(`Categoria '${categoryKey}' ${isActive ? 'ativada' : 'desativada'} (aguardando salvar)`, 'info');
+        }
+
+        function checkForChanges() {
+            let hasChanges = false;
+            categoriesData.forEach(cat => {
+                if (originalCategoriesState[cat.category_key] !== cat.is_active) {
+                    hasChanges = true;
+                }
+            });
+
+            // Destacar botão salvar se há mudanças
+            const saveBtn = document.querySelector('button[onclick="saveCategories()"]');
+            if (hasChanges) {
+                saveBtn.classList.add('btn-warning');
+                saveBtn.classList.remove('btn-primary');
+                saveBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Salvar Alterações';
+            } else {
+                saveBtn.classList.add('btn-primary');
+                saveBtn.classList.remove('btn-warning');
+                saveBtn.innerHTML = '<i class="fas fa-save"></i> Salvar Alterações';
+            }
+        }
+
+        async function saveCategories() {
+            try {
+                // Preparar dados para envio
+                const categoriesToUpdate = {};
+                categoriesData.forEach(cat => {
+                    categoriesToUpdate[cat.category_key] = cat.is_active;
+                });
+
+                const response = await fetch('/categories/batch', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        categories: categoriesToUpdate
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addLog(data.message, 'success');
+                    
+                    // Atualizar estado original
+                    categoriesData.forEach(cat => {
+                        originalCategoriesState[cat.category_key] = cat.is_active;
+                    });
+                    
+                    // Recarregar para atualizar estatísticas
+                    await loadCategories();
+                    checkForChanges();
+                } else {
+                    addLog('Erro ao salvar categorias: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao salvar categorias:', error);
+                addLog('Erro ao salvar categorias: ' + error.message, 'error');
+            }
+        }
+
+        async function discoverCategories() {
+            try {
+                addLog('Iniciando descoberta de novas categorias...', 'info');
+                
+                const response = await fetch('/categories/discover', {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addLog(data.message, 'success');
+                    
+                    // Recarregar categorias
+                    await loadCategories();
+                } else {
+                    addLog('Erro na descoberta: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Erro na descoberta:', error);
+                addLog('Erro na descoberta: ' + error.message, 'error');
+            }
+        }
+
+        // Funções de Categorias
+        async function loadCategories() {
+            try {
+                const response = await fetch('/categories/');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    categoriesData = data.categories;
+                    updateCategoriesSummary(data.summary);
+                    renderCategoriesList(data.categories);
+                    
+                    // Salvar estado original para detectar mudanças
+                    originalCategoriesState = {};
+                    data.categories.forEach(cat => {
+                        originalCategoriesState[cat.category_key] = cat.is_active;
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao carregar categorias:', error);
+                addLog('Erro ao carregar categorias: ' + error.message, 'error');
+            }
+        }
+
+        function updateCategoriesSummary(summary) {
+            document.getElementById('totalCategories').textContent = summary.total_categories;
+            document.getElementById('activeCategories').textContent = summary.active_categories;
+            document.getElementById('inactiveCategories').textContent = summary.inactive_categories;
+            document.getElementById('totalProducts').textContent = summary.total_products;
+        }
+
+        function renderCategoriesList(categories) {
+            const container = document.getElementById('categoriesList');
+            
+            if (categories.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted">
+                        <i class="fas fa-inbox fa-3x mb-3"></i>
+                        <p>Nenhuma categoria encontrada.</p>
+                        <button class="btn btn-primary" onclick="discoverCategories()">
+                            <i class="fas fa-search"></i> Descobrir Categorias
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            categories.forEach(category => {
+                html += `
+                    <div class="category-item ${!category.is_active ? 'inactive' : ''}">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <label class="switch me-3">
+                                        <input type="checkbox" ${category.is_active ? 'checked' : ''} 
+                                               onchange="toggleCategory('${category.category_key}', this.checked)">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <div>
+                                        <h6 class="mb-1">${category.category_name}</h6>
+                                        <small class="text-muted">${category.category_key}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <small class="text-muted">URL:</small><br>
+                                <a href="${category.category_url}" target="_blank" class="text-decoration-none">
+                                    ${category.category_url.replace('https://www.creativecopias.com.br', '')}
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-end">
+                                <div class="d-flex flex-column align-items-end gap-1">
+                                    <span class="priority-badge">Prioridade: ${category.priority}</span>
+                                    ${category.auto_detected ? '<span class="auto-detected">Auto-Detectada</span>' : ''}
+                                    <div class="text-muted">
+                                        <small>
+                                            <i class="fas fa-box"></i> ${category.products_count || 0} produtos
+                                            ${category.last_scraped ? `<br><i class="fas fa-clock"></i> ${formatDate(category.last_scraped)}` : ''}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Funções do Scraper (mantidas da versão original)
+        async function loadScraperStats() {
+            try {
+                const response = await fetch('/scraper/stats');
+                const data = await response.json();
+                
+                document.getElementById('scraperStatus').textContent = data.scraper_status || '-';
+                document.getElementById('urlsConfiguradas').textContent = data.urls_configuradas || '-';
+                document.getElementById('produtosProcessados').textContent = data.produtos_processados || '-';
+                document.getElementById('ultimaExecucao').textContent = data.ultima_execucao || 'Nunca';
+                
+            } catch (error) {
+                console.error('Erro ao carregar stats:', error);
+                addLog('Erro ao carregar estatísticas: ' + error.message, 'error');
+            }
+        }
+
+        async function runScraper() {
+            try {
+                addLog('Iniciando execução do scraper...', 'info');
+                
+                const response = await fetch('/scraper/run', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                addLog('Scraper iniciado: ' + JSON.stringify(data), 'success');
+                
+                // Atualizar stats após iniciar
+                setTimeout(loadScraperStats, 2000);
+                
+            } catch (error) {
+                console.error('Erro ao executar scraper:', error);
+                addLog('Erro ao executar scraper: ' + error.message, 'error');
+            }
+        }
+
+        async function checkScraperStatus() {
+            await loadScraperStats();
+            addLog('Status do scraper atualizado', 'info');
+        }
+
+        async function exportProducts() {
+            try {
+                addLog('Exportando produtos...', 'info');
+                
+                const response = await fetch('/scraper/export');
+                const blob = await response.blob();
+                
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'produtos_' + new Date().toISOString().split('T')[0] + '.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                addLog('Produtos exportados com sucesso', 'success');
+                
+            } catch (error) {
+                console.error('Erro ao exportar:', error);
+                addLog('Erro ao exportar produtos: ' + error.message, 'error');
+            }
+        }
+
+        // Nova função: Processamento Automático
+        async function processSelectedCategories() {
+            try {
+                const activeCategories = categoriesData.filter(cat => cat.is_active);
+                
+                if (activeCategories.length === 0) {
+                    addLog('❌ Nenhuma categoria ativa selecionada', 'error');
+                    return;
+                }
+                
+                // Desabilitar botão e mostrar progresso
+                const processBtn = document.getElementById('processBtn');
+                const progressBar = document.getElementById('processProgress');
+                const progressBarFill = progressBar.querySelector('.progress-bar');
+                
+                processBtn.disabled = true;
+                processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+                progressBar.style.display = 'block';
+                progressBarFill.style.width = '0%';
+                
+                addLog(`🚀 Iniciando processamento automático de ${activeCategories.length} categorias ativas`, 'info');
+                
+                // Etapa 1: Scraping (30% do progresso)
+                addLog('📡 Etapa 1/3: Executando scraping das categorias ativas...', 'info');
+                progressBarFill.style.width = '10%';
+                
+                                 // Chamar o novo endpoint que faz tudo automaticamente
+                 const processResponse = await fetch('/scraper/process-active-categories', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({
+                         max_articles: 10
+                     })
+                 });
+                 
+                 if (!processResponse.ok) {
+                     throw new Error('Erro no processamento automático');
+                 }
+                 
+                 const processData = await processResponse.json();
+                 progressBarFill.style.width = '30%';
+                 addLog('✅ Processamento automático iniciado em segundo plano', 'success');
+                 addLog('📊 ' + processData.message, 'info');
+                 
+                 // Simular progresso enquanto o backend processa
+                 addLog('📡 Executando scraping das categorias ativas...', 'info');
+                 await new Promise(resolve => setTimeout(resolve, 3000));
+                 progressBarFill.style.width = '50%';
+                 
+                 addLog('✍️ Gerando artigos para produtos encontrados...', 'info');
+                 await new Promise(resolve => setTimeout(resolve, 3000));
+                 progressBarFill.style.width = '70%';
+                 
+                 addLog('📝 Salvando artigos na revisão...', 'info');
+                 await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Etapa 3: Finalização (100% do progresso)
+                addLog('🏁 Etapa 3/3: Finalizando processo...', 'info');
+                progressBarFill.style.width = '80%';
+                
+                // Atualizar estatísticas
+                await loadScraperStats();
+                await loadCategories();
+                
+                progressBarFill.style.width = '100%';
+                addLog('🎉 Processamento automático concluído com sucesso!', 'success');
+                addLog('📋 Verifique a página de Revisão para ver os artigos gerados', 'info');
+                
+                // Resetar interface após 3 segundos
+                setTimeout(() => {
+                    processBtn.disabled = false;
+                    processBtn.innerHTML = '<i class="fas fa-rocket"></i> Processar Tudo';
+                    progressBar.style.display = 'none';
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Erro no processamento automático:', error);
+                addLog(`❌ Erro no processamento: ${error.message}`, 'error');
+                
+                // Resetar interface em caso de erro
+                const processBtn = document.getElementById('processBtn');
+                const progressBar = document.getElementById('processProgress');
+                
+                processBtn.disabled = false;
+                processBtn.innerHTML = '<i class="fas fa-rocket"></i> Processar Tudo';
+                progressBar.style.display = 'none';
+            }
+        }
+
+        // Atualizar contagem de categorias ativas
+        function updateActiveCategoriesCount() {
+            const activeCount = categoriesData.filter(cat => cat.is_active).length;
+            const countElement = document.getElementById('activeCategoriesCount');
+            if (countElement) {
+                countElement.textContent = activeCount;
+            }
+        }
+
+        // Atualizar a função loadCategories para incluir a contagem
+        const originalLoadCategories = loadCategories;
+        loadCategories = async function() {
+            await originalLoadCategories();
+            updateActiveCategoriesCount();
+        };
+
+        // Atualizar a função updateCategoriesSummary para incluir a contagem
+        const originalUpdateCategoriesSummary = updateCategoriesSummary;
+        updateCategoriesSummary = function(summary) {
+            originalUpdateCategoriesSummary(summary);
+            updateActiveCategoriesCount();
+        };
+
+        // Funções utilitárias
+        function addLog(message, type = 'info') {
+            const logsContainer = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            const icons = {
+                info: 'fas fa-info-circle text-info',
+                success: 'fas fa-check-circle text-success',
+                error: 'fas fa-exclamation-circle text-danger',
+                warning: 'fas fa-exclamation-triangle text-warning'
+            };
+            
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `
+                <span class="text-muted">[${timestamp}]</span>
+                <i class="${icons[type] || icons.info}"></i>
+                ${message}
+            `;
+            
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'Nunca';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR');
+        }
+    </script>
+</body>
+</html> 

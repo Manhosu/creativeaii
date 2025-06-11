@@ -245,20 +245,19 @@ class WordPressClient:
                     'file': (filename, f, mime_type)
                 }
                 
-                headers = {
-                    'Content-Disposition': f'attachment; filename="{filename}"'
-                }
-                
+                # Preparar dados adicionais
+                data = {}
                 if title:
-                    headers['Content-Title'] = title
+                    data['title'] = title
                 if alt_text:
-                    headers['Content-Alt-Text'] = alt_text
+                    data['alt_text'] = alt_text
+                    data['caption'] = alt_text  # Também usar como caption
                 
                 # Fazer upload
                 response = self.session.post(
                     f"{self.api_base}/media",
                     files=files,
-                    headers=headers
+                    data=data
                 )
             
             if response.status_code == 201:
