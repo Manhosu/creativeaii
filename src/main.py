@@ -2084,7 +2084,7 @@ async def run_full_scraping(background_tasks: BackgroundTasks):
             
             # Atualizar contagens automaticamente após o scraping
             try:
-                from .config.active_categories_manager import ActiveCategoriesManager
+                from src.config.active_categories_manager import ActiveCategoriesManager
                 cat_manager = ActiveCategoriesManager()
                 cat_manager.update_products_count_from_scraper()
                 logger.info("✅ Contagens de produtos atualizadas automaticamente")
@@ -2307,7 +2307,7 @@ async def get_scraper_categories():
         raise HTTPException(status_code=503, detail="Módulo scraper não disponível")
     
     try:
-        from .config.active_categories_manager import ActiveCategoriesManager
+        from src.config.active_categories_manager import ActiveCategoriesManager
         
         # Usar o manager para obter categorias ativas com contagens atualizadas
         manager = ActiveCategoriesManager()
@@ -4770,7 +4770,7 @@ async def categorias_config():
 async def get_categories():
     """Listar todas as categorias configuradas"""
     try:
-        from .config.active_categories_manager import ActiveCategoriesManager
+        from src.config.active_categories_manager import ActiveCategoriesManager
         manager = ActiveCategoriesManager()
         categories = manager.get_all_categories()
         
@@ -4787,7 +4787,7 @@ async def get_categories():
 async def add_category(category_data: dict):
     """Adicionar nova categoria"""
     try:
-        from .config.active_categories_manager import ActiveCategoriesManager
+        from src.config.active_categories_manager import ActiveCategoriesManager
         manager = ActiveCategoriesManager()
         
         # Validar dados
@@ -4816,7 +4816,7 @@ async def add_category(category_data: dict):
 async def update_category(category_key: str, update_data: dict):
     """Atualizar categoria existente"""
     try:
-        from .config.active_categories_manager import ActiveCategoriesManager
+        from src.config.active_categories_manager import ActiveCategoriesManager
         manager = ActiveCategoriesManager()
         
         success = manager.update_category(category_key, update_data)
@@ -4834,7 +4834,7 @@ async def update_category(category_key: str, update_data: dict):
 async def remove_category(category_key: str):
     """Remover categoria"""
     try:
-        from .config.active_categories_manager import ActiveCategoriesManager
+        from src.config.active_categories_manager import ActiveCategoriesManager
         manager = ActiveCategoriesManager()
         
         success = manager.remove_category(category_key)
@@ -4852,7 +4852,7 @@ async def remove_category(category_key: str):
 async def test_category(category_key: str):
     """Testar categoria (verificar quantos produtos existem)"""
     try:
-        from .config.active_categories_manager import ActiveCategoriesManager
+        from src.config.active_categories_manager import ActiveCategoriesManager
         manager = ActiveCategoriesManager()
         
         # Buscar categoria
@@ -4877,7 +4877,7 @@ async def test_category(category_key: str):
 async def update_categories_counts():
     """Atualizar contagem de produtos em todas as categorias"""
     try:
-        from .config.active_categories_manager import ActiveCategoriesManager
+        from src.config.active_categories_manager import ActiveCategoriesManager
         manager = ActiveCategoriesManager()
         
         success = manager.update_products_count_from_scraper()

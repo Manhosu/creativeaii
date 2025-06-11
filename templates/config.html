@@ -1552,64 +1552,7 @@
                         </button>
                     </div>
                     
-                    <!-- Configuração de Produtos -->
-                    <div class="preference-section">
-                        <h4><i class="fas fa-box"></i> Produtos Específicos</h4>
-                        <p class="section-desc">Selecione produtos específicos para geração de conteúdo</p>
-                        
-                        <div class="product-selector">
-                            <div class="product-search">
-                                <div class="input-group">
-                                    <input type="text" class="config-input with-icon" id="productSearch" 
-                                           placeholder="Buscar produtos por nome, marca ou tipo..." 
-                                           onkeyup="filterProducts()">
-                                    <i class="fas fa-search input-icon"></i>
-                                </div>
-                            </div>
-                            
-                            <div class="product-filters">
-                                <select class="config-select" id="productTypeFilter" onchange="filterProducts()">
-                                    <option value="">Todos os tipos</option>
-                                    <option value="impressora">Impressoras</option>
-                                    <option value="multifuncional">Multifuncionais</option>
-                                    <option value="toner">Toners</option>
-                                    <option value="cartucho">Cartuchos</option>
-                                    <option value="tinta">Tintas</option>
-                                </select>
-                                
-                                <select class="config-select" id="productBrandFilter" onchange="filterProducts()">
-                                    <option value="">Todas as marcas</option>
-                                    <option value="HP">HP</option>
-                                    <option value="Canon">Canon</option>
-                                    <option value="Epson">Epson</option>
-                                    <option value="Brother">Brother</option>
-                                </select>
-                                
-                                <div class="filter-actions">
-                                    <button class="selector-btn" onclick="selectAllVisibleProducts()">
-                                        <i class="fas fa-check"></i>
-                                        Selecionar Visíveis
-                                    </button>
-                                    <button class="selector-btn" onclick="clearProductSelection()">
-                                        <i class="fas fa-times"></i>
-                                        Limpar Seleção
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="product-list" id="productList">
-                                <div class="loading-placeholder">
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                    Carregando produtos...
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="save-btn" onclick="saveProductPreferences()">
-                            <i class="fas fa-save"></i>
-                            Salvar Produtos
-                        </button>
-                    </div>
+
                 </div>
             </div>
             
