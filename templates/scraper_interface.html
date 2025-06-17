@@ -809,29 +809,67 @@
                 // Mostrar loading
                 showNotification('⚡ Gerando Artigo', `Gerando artigo automaticamente para "${product.nome}"...`, 'info');
                 
-                // Gerar artigo automaticamente usando endpoint AVANÇADO
-                const response = await fetch('/scraper/generate-article-advanced', {
+                console.log('🔍 Dados do produto:', product);
+                
+                // Tentar primeiro o endpoint AVANÇADO
+                let response = await fetch('/scraper/generate-article-advanced', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(product)
                 });
                 
+                // Se falhar, tentar endpoint simples como fallback
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.detail || 'Falha ao gerar artigo');
+                    console.warn('⚠️ Endpoint avançado falhou, tentando endpoint simples...');
+                    showNotification('🔄 Tentando Alternativa', 'Tentando método alternativo de geração...', 'warning');
+                    
+                    response = await fetch('/scraper/generate-article', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(product)
+                    });
+                }
+                
+                if (!response.ok) {
+                    let errorMessage = 'Falha ao gerar artigo';
+                    try {
+                        const errorData = await response.json();
+                        errorMessage = errorData.detail || errorData.message || errorData.error || errorMessage;
+                        
+                        // Se for um objeto de erro estruturado
+                        if (typeof errorData.detail === 'object') {
+                            errorMessage = errorData.detail.message || JSON.stringify(errorData.detail);
+                        }
+                    } catch (e) {
+                        // Se não conseguir fazer parse do JSON de erro
+                        errorMessage = `Erro HTTP ${response.status}: ${response.statusText}`;
+                    }
+                    throw new Error(errorMessage);
                 }
                 
                 const result = await response.json();
+                console.log('📝 Resultado da geração:', result);
                 
-                if (result.success && result.article_id) {
+                // Verificar diferentes formatos de resposta de sucesso
+                const articleId = result.article_id || result.id;
+                const success = result.success !== false; // Considerar sucesso se não for explicitamente false
+                
+                if (success && articleId) {
                     showNotification('✅ Artigo Gerado', 'Redirecionando para revisão...', 'success');
                     
                     // Redirecionar automaticamente para a revisão com o artigo gerado
                     setTimeout(() => {
-                        window.location.href = `/review/${result.article_id}/view`;
+                        window.location.href = `/review/${articleId}/view`;
+                    }, 1500);
+                } else if (result.redirect_to) {
+                    // Caso de redirecionamento (artigo já existe)
+                    showNotification('📋 Artigo Existente', 'Redirecionando para artigo existente...', 'info');
+                    setTimeout(() => {
+                        window.location.href = result.redirect_to;
                     }, 1500);
                 } else {
-                    throw new Error(result.message || 'Erro na geração do artigo');
+                    const errorMsg = result.message || result.error || 'Erro na geração do artigo';
+                    throw new Error(errorMsg);
                 }
                 
             } catch (error) {
