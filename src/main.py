@@ -2342,90 +2342,25 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
         produto_nome = product_data['nome']
         logger.info(f"🔍 Buscando dados completos para: {produto_nome}")
         
-        # Buscar produto nos dados do scraper
+        # Buscar produto nos dados do scraper usando utilitários
         try:
-            import json
-            import os
-            import glob
+            from src.utils.file_utils import find_product_by_name, get_minimal_product_data
             
-            # Buscar arquivos JSON de produtos (mesma lógica da função get_scraped_products)
-            json_files = glob.glob("logs/products_*.json")
-            
-            if not json_files:
-                logger.warning("⚠️ Nenhum arquivo de produtos encontrado")
-                return None
-            
-            all_products = []
-            
-            # Mapeamento de categorias conhecidas
-            categorias_mapeamento = {
-                'cartuchos-de-tinta': 'Cartuchos de Tinta',
-                'cartuchos-de-toner': 'Cartuchos de Toner', 
-                'refil-de-toner': 'Refil de Toner',
-                'impressoras': 'Impressoras',
-                'multifuncional': 'Multifuncionais',
-                'plotters': 'Plotters',
-                'suprimentos': 'Suprimentos'
-            }
-            
-            # Agrupar arquivos por categoria e pegar apenas o mais recente de cada uma
-            categoria_files = {}
-            for json_file in json_files:
-                filename = os.path.basename(json_file)
-                categoria_from_file = filename.replace('products_', '').split('_')[0]
-                
-                # Se não existe ou é mais recente, atualizar
-                if categoria_from_file not in categoria_files:
-                    categoria_files[categoria_from_file] = json_file
-                else:
-                    # Comparar timestamps nos nomes dos arquivos
-                    current_timestamp = filename.split('_')[-1].replace('.json', '')
-                    existing_filename = os.path.basename(categoria_files[categoria_from_file])
-                    existing_timestamp = existing_filename.split('_')[-1].replace('.json', '')
-                    
-                    if current_timestamp > existing_timestamp:
-                        categoria_files[categoria_from_file] = json_file
-            
-            # Carregar produtos apenas dos arquivos mais recentes
-            for categoria_key, json_file in categoria_files.items():
-                try:
-                    with open(json_file, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-                        
-                        # Usar categoria_key já extraída
-                        filename = os.path.basename(json_file)
-                        categoria_nome = categorias_mapeamento.get(categoria_key, categoria_key.title())
-                        
-                        # Adicionar produtos
-                        if isinstance(data, list):
-                            for product in data:
-                                product['categoria_key'] = categoria_key
-                                product['categoria_nome'] = categoria_nome
-                                product['source_file'] = filename
-                                all_products.append(product)
-                        elif isinstance(data, dict) and 'produtos' in data:
-                            for product in data['produtos']:
-                                product['categoria_key'] = categoria_key
-                                product['categoria_nome'] = categoria_nome
-                                product['source_file'] = filename
-                                all_products.append(product)
-                except Exception as e:
-                    logger.warning(f"Erro ao carregar arquivo {json_file}: {e}")
-                    continue
-            
-            # Procurar produto por nome exato
-            produto_encontrado = None
-            for produto in all_products:
-                if produto.get('nome', '').strip().lower() == produto_nome.strip().lower():
-                    produto_encontrado = produto
-                    break
+            produto_encontrado = find_product_by_name(produto_nome)
             
             if produto_encontrado:
                 product_data = produto_encontrado
                 logger.info(f"✅ Dados completos encontrados: {produto_encontrado.get('categoria_nome', 'N/A')}")
             else:
-                logger.warning(f"⚠️ Produto não encontrado nos dados do scraper: {produto_nome}")
-                # Continuar com dados mínimos
+                logger.warning(f"⚠️ Produto não encontrado, usando dados mínimos: {produto_nome}")
+                # Usar dados mínimos
+                minimal_data = get_minimal_product_data(produto_nome)
+                product_data.update(minimal_data)
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Erro ao buscar dados completos: {e}")
+            # Garantir que product_data tenha campos mínimos
+            if 'categoria_nome' not in product_data:
                 product_data.update({
                     'categoria_nome': 'produtos',
                     'preco': 'Consulte',
@@ -2433,9 +2368,6 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
                     'marca': 'N/A',
                     'descricao': f'Produto {produto_nome} de qualidade disponível em nossa loja.'
                 })
-                
-        except Exception as e:
-            logger.warning(f"⚠️ Erro ao buscar dados completos: {e}")
     
     logger.info(f"🎨 Gerando artigo avançado para: {product_data.get('nome', 'Produto')}")
     
@@ -2470,7 +2402,11 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
         template_generator = AdvancedArticleTemplates()
         
         # Gerar artigo super completo
+        logger.info(f"🔧 Dados para geração: nome={product_data.get('nome', 'N/A')}, categoria={categoria}")
         advanced_article = template_generator.generate_advanced_article(product_data, categoria)
+        
+        if not advanced_article:
+            raise Exception("Falha na geração do artigo pelo template avançado")
         
         # Adicionar sugestões da IA se houver
         conteudo_extra = ""

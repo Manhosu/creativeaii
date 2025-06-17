@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: creative-api-seo
+    runtime: python3
+    region: ohio
+    plan: starter
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DEBUG
+        value: false
+      - key: LOG_LEVEL
+        value: info
+      - key: WP_USERNAME
+        value: api_seo_bot
+      - key: WP_AUTO_PUBLISH
+        value: true
+      - key: WP_DEFAULT_STATUS
+        value: publish
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: OPENAI_TEMPERATURE
+        value: 0.7
+      - key: OPENAI_MAX_TOKENS
+        value: 2000
+      - key: CONTENT_MIN_WORDS
+        value: 300
+      - key: CONTENT_MAX_WORDS
+        value: 1000
+    # Variáveis secretas - configure no Render Dashboard:
+    # OPENAI_API_KEY (obrigatória)
+    # WP_PASSWORD (obrigatória - App Password)
+    # WP_SITE_URL (obrigatória)
+    # SITE_BASE_URL (obrigatória) 

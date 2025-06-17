@@ -1,0 +1,78 @@
+RENDER ENVIRONMENT VARIABLES - COPY & PASTE
+
+============================================
+OBRIGATÓRIAS (substitua os valores)
+============================================
+
+Key: OPENAI_API_KEY
+Value: [COLE_SUA_CHAVE_OPENAI_AQUI]
+
+Key: WP_SITE_URL
+Value: https://blog.creativecopias.com.br
+
+Key: WP_PASSWORD
+Value: [COLE_SUA_APP_PASSWORD_WORDPRESS_AQUI]
+
+Key: SITE_BASE_URL
+Value: https://www.creativecopias.com.br
+
+============================================
+RECOMENDADAS (copie direto)
+============================================
+
+Key: DEBUG
+Value: false
+
+Key: WP_USERNAME
+Value: api_seo_bot
+
+Key: WP_AUTO_PUBLISH
+Value: true
+
+Key: WP_DEFAULT_STATUS
+Value: publish
+
+Key: OPENAI_MODEL
+Value: gpt-4o-mini
+
+Key: OPENAI_TEMPERATURE
+Value: 0.7
+
+Key: OPENAI_MAX_TOKENS
+Value: 2000
+
+Key: CONTENT_MIN_WORDS
+Value: 300
+
+Key: CONTENT_MAX_WORDS
+Value: 1000
+
+Key: SCHEDULER_ENABLED
+Value: true
+
+============================================
+COMO OBTER OS TOKENS
+============================================
+
+OPENAI_API_KEY:
+1. https://platform.openai.com/api-keys
+2. "Create new secret key"
+3. Copie sk-proj-xxxxxxxxxxxxxxxx
+
+WP_PASSWORD:
+1. https://blog.creativecopias.com.br/wp-admin
+2. Usuários → Perfil → Senhas de Aplicativo
+3. "Adicionar Nova" → Nome: "Creative API"
+4. Copie xxxx xxxx xxxx xxxx
+
+============================================
+PROCESSO NO RENDER
+============================================
+
+1. Render Dashboard → Seu Service → Environment
+2. "Add Environment Variable"
+3. Copie Key e Value de cada variável acima
+4. Save após cada uma
+5. Deploy automaticamente
+
+============================================ 
