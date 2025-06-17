@@ -62,12 +62,28 @@ class PublicationManager:
         # Mapeamento de categorias padrão
         self.category_mapping = {
             'impressora': 'Impressoras',
-            'multifuncional': 'Multifuncionais',
+            'impressoras': 'Impressoras',
+            'multifuncional': 'Multifuncionais', 
+            'multifuncionais': 'Multifuncionais',
             'toner': 'Toners',
+            'toners': 'Toners',
+            'cartuchos-de-toner': 'Toners',
+            'refil-de-toner': 'Toners',
+            'cartucho': 'Cartuchos',
+            'cartuchos': 'Cartuchos', 
+            'cartuchos-de-tinta': 'Cartuchos',
+            'refil-de-tinta': 'Cartuchos',
             'papel': 'Papéis',
+            'papeis': 'Papéis',
+            'papel-fotografico': 'Papéis',
             'scanner': 'Scanners',
+            'scanners': 'Scanners',
             'copiadora': 'Copiadoras',
+            'copiadoras': 'Copiadoras',
             'suprimento': 'Suprimentos',
+            'suprimentos': 'Suprimentos',
+            'impressora-com-defeito': 'Impressoras Usadas',
+            'produto_generico': 'Geral',
             'generico': 'Geral'
         }
         
@@ -497,7 +513,7 @@ class PublicationManager:
             has_external = any(domain in content for domain in ['canon.com', 'hp.com', 'epson.com', 'brother.com'])
             
             if not has_internal:
-                link_interno = '<a href="https://blog.creativecopias.com.br/categoria/impressoras/">Veja mais impressoras</a>'
+                link_interno = '<a href="https://www.creativecopias.com.br/impressoras">Veja mais impressoras</a>'
                 # Inserir no meio do conteúdo
                 paragraphs = content.split('\n\n')
                 if len(paragraphs) >= 2:
@@ -766,7 +782,7 @@ class PublicationManager:
             logger.error(f"❌ ERRO CRÍTICO na otimização: {e}")
             # Fallback mínimo para não quebrar
             if not any(link in content for link in ['creativecopias.com.br', 'canon.com', 'hp.com']):
-                content += '\n\n<a href="https://blog.creativecopias.com.br/categoria/impressoras/">Veja mais impressoras</a>'
+                content += '\n\n<a href="https://www.creativecopias.com.br/impressoras">Veja mais impressoras</a>'
                 content += '\n\n<a href="https://www.canon.com.br" rel="nofollow" target="_blank">Site oficial da Canon</a>'
             return content
 
@@ -949,7 +965,7 @@ class PublicationManager:
 
     def _handle_featured_image(self, prepared_data: Dict[str, Any]) -> Optional[int]:
         """
-        Faz upload e configura imagem destacada com ALT otimizado
+        Extrai e configura imagem destacada do conteúdo HTML com URLs absolutas
         
         Args:
             prepared_data: Dados preparados do artigo
@@ -958,11 +974,31 @@ class PublicationManager:
             ID da mídia no WordPress ou None
         """
         try:
+            import re
+            
             focus_keyphrase = prepared_data.get('primary_keyword', '')
             produto_nome = prepared_data.get('produto_nome', '')
+            content = prepared_data.get('content', '')
             
-            # Para este exemplo, vamos usar uma imagem placeholder
-            # Em produção, você pode baixar imagem do produto ou usar uma específica
+            # Extrair primeira imagem do conteúdo HTML
+            image_url = None
+            img_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\'][^>]*>', content)
+            if img_match:
+                image_url = img_match.group(1)
+                
+                # Garantir URL absoluta
+                if image_url and not image_url.startswith('http'):
+                    if image_url.startswith('/'):
+                        image_url = f"https://blog.creativecopias.com.br{image_url}"
+                    else:
+                        image_url = f"https://blog.creativecopias.com.br/{image_url}"
+                
+                logger.info(f"🖼️ Imagem extraída do conteúdo: {image_url}")
+            
+            # Se não encontrou imagem no conteúdo, usar placeholder absoluto
+            if not image_url:
+                image_url = "https://blog.creativecopias.com.br/static/img/no-image.jpg"
+                logger.info(f"🖼️ Usando imagem placeholder: {image_url}")
             
             # ALT text otimizado para Yoast
             alt_text = f"{focus_keyphrase} - {produto_nome}" if produto_nome else f"{focus_keyphrase} - Análise completa"
@@ -970,12 +1006,38 @@ class PublicationManager:
             # Título da imagem
             title = f"{focus_keyphrase.title()} - Creative Cópias"
             
-            # Por enquanto, retornamos None pois não temos arquivo de imagem
-            # Em produção, você faria:
-            # media_id = self.wp_client.upload_media(image_path, title=title, alt_text=alt_text)
-            # return media_id
+            # Validar URL da imagem
+            try:
+                import requests
+                response = requests.head(image_url, timeout=5)
+                if response.status_code == 200:
+                    logger.info(f"✅ Imagem validada para WordPress: {image_url}")
+                    
+                    # Se o WordPress client estiver disponível, fazer upload real
+                    if self.wp_client and hasattr(self.wp_client, 'upload_media_from_url'):
+                        try:
+                            media_id = self.wp_client.upload_media_from_url(
+                                image_url, 
+                                title=title, 
+                                alt_text=alt_text,
+                                caption=f"Imagem do produto: {produto_nome}"
+                            )
+                            if media_id:
+                                logger.info(f"✅ Imagem uploaded para WordPress: ID {media_id}")
+                                return media_id
+                        except Exception as upload_error:
+                            logger.warning(f"⚠️ Erro no upload da imagem: {upload_error}")
+                    
+                    # Se não conseguiu fazer upload, pelo menos garantir que a imagem está no conteúdo
+                    logger.debug(f"🖼️ Imagem configurada (sem upload): {alt_text}")
+                    return None
+                    
+                else:
+                    logger.warning(f"⚠️ Imagem não acessível (HTTP {response.status_code}): {image_url}")
+                    
+            except Exception as validate_error:
+                logger.warning(f"⚠️ Erro ao validar imagem: {validate_error}")
             
-            logger.debug(f"🖼️ Imagem destacada preparada: {alt_text}")
             return None
             
         except Exception as e:
@@ -1046,6 +1108,23 @@ class PublicationManager:
             else:
                 initial_status = 'draft'
             
+            # Processar categorias WordPress
+            wp_categories = []
+            if prepared.get('wp_category'):
+                category = self.wp_client.get_or_create_category(prepared['wp_category'])
+                if category:
+                    wp_categories = [category['id']]
+                    logger.info(f"📂 Categoria WordPress: {prepared['wp_category']} (ID: {category['id']})")
+                else:
+                    logger.warning(f"⚠️ Falha ao criar/encontrar categoria: {prepared['wp_category']}")
+            
+            # Processar tags WordPress
+            wp_tags = []
+            if prepared.get('tags'):
+                wp_tags = self._process_wordpress_tags(prepared['tags'])
+                if wp_tags:
+                    logger.info(f"🏷️ Tags WordPress: {len(wp_tags)} tags processadas")
+
             post_data = {
                 'title': prepared['title'],
                 'content': wp_content,
@@ -1055,6 +1134,12 @@ class PublicationManager:
                 'comment_status': 'open',
                 'ping_status': 'open'
             }
+            
+            # Adicionar categorias e tags se disponíveis
+            if wp_categories:
+                post_data['categories'] = wp_categories
+            if wp_tags:
+                post_data['tags'] = wp_tags
             
             # Criar post no WordPress
             logger.info("📝 Criando post no WordPress...")
@@ -1241,21 +1326,13 @@ class PublicationManager:
                     
                 tag_name = tag_name.strip()
                 
-                # Buscar tag existente
-                existing_tags = self.wp_client.get_tags(search=tag_name)
-                
-                if existing_tags:
-                    # Tag já existe
-                    tag_ids.append(existing_tags[0]['id'])
+                # Buscar ou criar tag
+                tag = self.wp_client.get_or_create_tag(tag_name)
+                if tag and tag.get('id'):
+                    tag_ids.append(tag['id'])
+                    logger.debug(f"🏷️ Tag processada: {tag_name} (ID: {tag['id']})")
                 else:
-                    # Criar nova tag
-                    try:
-                        new_tag = self.wp_client.create_tag({'name': tag_name})
-                        if new_tag and new_tag.get('id'):
-                            tag_ids.append(new_tag['id'])
-                    except:
-                        logger.warning(f"⚠️ Não foi possível criar tag: {tag_name}")
-                        continue
+                    logger.warning(f"⚠️ Falha ao criar/encontrar tag: {tag_name}")
             
             return tag_ids
             

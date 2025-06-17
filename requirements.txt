@@ -1,11 +1,35 @@
+# Framework principal
 fastapi==0.104.1
-uvicorn==0.24.0
+uvicorn[standard]==0.24.0
+
+# Templates e formulários
 jinja2==3.1.2
 python-multipart==0.0.6
+
+# Configuração e ambiente
 python-dotenv==1.0.0
+
+# HTTP e web
 requests==2.31.0
-loguru==0.7.2
-openai==1.3.5
 beautifulsoup4==4.12.2
+
+# Logging e monitoramento
+loguru==0.7.2
+
+# IA e geração de conteúdo
+openai==1.54.4
+
+# Agendamento de tarefas
 apscheduler==3.10.4
-python-slugify==8.0.4 
+
+# Utilities
+python-slugify==8.0.4
+
+# Segurança (Railway recommendation)
+cryptography>=41.0.0
+
+# JSON e parsing
+pydantic>=2.0.0
+
+# Timezone (importante para agendamento)
+pytz>=2023.3 

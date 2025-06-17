@@ -116,6 +116,7 @@ class PromptBuilder:
 - NUNCA gere URLs genéricas como https://www.creativecopias.com.br/produto/equipamento
 - EXEMPLO CORRETO: Se URL real é "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-m404n.html", use exatamente essa URL
 - Links de compra devem usar: <a href="{url_do_produto}" target="_blank">Comprar {nome}</a>
+- IMPORTANTE: URLs devem começar com https:// ou http://, NUNCA com @
 
 IMPORTANTE: Retorne APENAS um JSON válido com a estrutura especificada, sem texto adicional antes ou depois.
             """
@@ -237,7 +238,7 @@ A categoria do produto é: {categoria}
 ```html
 <h1>[TÍTULO EXATO COM KEYWORD NO INÍCIO]</h1>
 
-<p>Escolha o artigo correto (A/O) baseado no produto. [PRODUTO] é uma excelente opção para [contexto]. [Continuação com benefício principal]. Além disso, [benefício secundário]. Para mais opções, <a href="https://blog.creativecopias.com.br/categoria/impressoras/" target="_blank">confira nossa seleção completa de impressoras</a>. Para comprar este produto, <a href="{url_do_produto}" target="_blank">clique aqui</a>. Mais informações técnicas estão disponíveis no <a href="[SITE_OFICIAL_MARCA]" target="_blank" rel="nofollow">site oficial da [MARCA]</a>.</p>
+<p>Escolha o artigo correto (A/O) baseado no produto. [PRODUTO] é uma excelente opção para [contexto]. [Continuação com benefício principal]. Além disso, [benefício secundário]. Para mais opções, <a href="https://www.creativecopias.com.br/impressoras" target="_blank">confira nossa seleção completa de impressoras</a>. Para comprar este produto, <a href="{url_do_produto}" target="_blank">clique aqui</a>. Mais informações técnicas estão disponíveis no <a href="[SITE_OFICIAL_MARCA]" target="_blank" rel="nofollow">site oficial da [MARCA]</a>.</p>
 
 <h2>Principais Características do [KEYWORD]</h2>
 <!-- Imagem removida conforme solicitação -->
@@ -286,7 +287,7 @@ A categoria do produto é: {categoria}
 
 **ATENÇÃO - URLs DEVEM ESTAR SEMPRE CORRETAS:**
 - NUNCA adicione espaços em URLs
-- URLs devem ser: https://blog.creativecopias.com.br/categoria/impressoras/
+- URLs devem ser: https://www.creativecopias.com.br/impressoras
 - JAMAIS: https://blog. creativecopias. com. br/categoria/impressoras/
 - JAMAIS: https://www. hp. com/br-pt/
 - SEMPRE: https://www.hp.com/br-pt/
@@ -296,6 +297,7 @@ A categoria do produto é: {categoria}
 - NUNCA gere URLs genéricas como https://www.creativecopias.com.br/produto/equipamento
 - EXEMPLO CORRETO: Se URL real é "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-m404n.html", use exatamente essa URL
 - Links de compra devem usar: <a href="{url_do_produto}" target="_blank">Comprar {nome}</a>
+- IMPORTANTE: URLs devem começar com https:// ou http://, NUNCA com @
 
 ### ESTRUTURA OBRIGATÓRIA:
         """

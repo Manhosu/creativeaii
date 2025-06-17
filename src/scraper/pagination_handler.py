@@ -5,6 +5,7 @@ Sistema inteligente de paginação para capturar todos os produtos de cada categ
 
 import re
 import time
+import os
 from typing import Dict, List, Set, Optional, Any, Tuple
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse
 from bs4 import BeautifulSoup
@@ -14,7 +15,7 @@ from loguru import logger
 class PaginationHandler:
     """Manipulador inteligente de paginação"""
     
-    def __init__(self, base_url: str = "https://www.creativecopias.com.br", 
+    def __init__(self, base_url: str = None, 
                  delay_range: tuple = (1, 2), max_pages: int = 15):
         """
         Inicializa o manipulador de paginação
@@ -24,7 +25,7 @@ class PaginationHandler:
             delay_range: Delay entre requests
             max_pages: Máximo de páginas para evitar loops infinitos
         """
-        self.base_url = base_url
+        self.base_url = base_url or os.getenv("SITE_BASE_URL", "https://www.creativecopias.com.br")
         self.delay_range = delay_range
         self.max_pages = max_pages
         self.session = requests.Session()

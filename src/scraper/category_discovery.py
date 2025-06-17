@@ -5,6 +5,7 @@ Descobre automaticamente todas as categorias e subcategorias de produtos no site
 
 import re
 import time
+import os
 from typing import Dict, List, Set, Optional, Any
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
@@ -14,7 +15,7 @@ from loguru import logger
 class CategoryDiscovery:
     """Descoberta automática de categorias de produtos"""
     
-    def __init__(self, base_url: str = "https://www.creativecopias.com.br", 
+    def __init__(self, base_url: str = None, 
                  delay_range: tuple = (1, 2)):
         """
         Inicializa o descobridor de categorias
@@ -23,7 +24,7 @@ class CategoryDiscovery:
             base_url: URL base do site
             delay_range: Delay entre requests
         """
-        self.base_url = base_url
+        self.base_url = base_url or os.getenv("SITE_BASE_URL", "https://www.creativecopias.com.br")
         self.delay_range = delay_range
         self.session = requests.Session()
         

@@ -36,7 +36,7 @@ async def publish_article(publication_data: dict):
         review_manager = ReviewManager()
         
         # CORREÇÃO: Verificar se artigo existe antes de tentar publicar
-        article_data = review_manager.get_article_by_id(article_id)
+        article_data = review_manager.get_article(article_id)
         
         if not article_data:
             logger.error(f"❌ ERRO 404: Artigo {article_id} não encontrado")

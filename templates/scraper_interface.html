@@ -809,18 +809,16 @@
                 // Mostrar loading
                 showNotification('⚡ Gerando Artigo', `Gerando artigo automaticamente para "${product.nome}"...`, 'info');
                 
-                // Gerar artigo automaticamente
-                const response = await fetch('/generator/generate', {
+                // Gerar artigo automaticamente usando endpoint AVANÇADO
+                const response = await fetch('/scraper/generate-article-advanced', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        product_data: product,
-                        produto_original: product.nome
-                    })
+                    body: JSON.stringify(product)
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Falha ao gerar artigo');
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Falha ao gerar artigo');
                 }
                 
                 const result = await response.json();
@@ -830,7 +828,7 @@
                     
                     // Redirecionar automaticamente para a revisão com o artigo gerado
                     setTimeout(() => {
-                        window.location.href = `/interface/review?article_id=${result.article_id}&highlight=true`;
+                        window.location.href = `/review/${result.article_id}/view`;
                     }, 1500);
                 } else {
                     throw new Error(result.message || 'Erro na geração do artigo');

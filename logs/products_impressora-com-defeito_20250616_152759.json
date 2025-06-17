@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "total_produtos": 120,
-    "data_export": "2025-06-11 02:22:18",
+    "total_produtos": 100,
+    "data_export": "2025-06-16 15:27:59",
     "resumo": {
-      "total_produtos": 120,
-      "com_preco": 120,
-      "disponiveis": 120,
+      "total_produtos": 100,
+      "com_preco": 100,
+      "disponiveis": 100,
       "sem_preco": 0,
       "indisponiveis": 0,
       "marcas_encontradas": 3,
@@ -17,27 +17,27 @@
       "categorias_processadas": 0,
       "taxa_preco": 100.0,
       "taxa_disponibilidade": 100.0,
-      "data_processamento": "2025-06-11 02:22:18"
+      "data_processamento": "2025-06-16 15:27:59"
     }
   },
   "produtos": [
     {
-      "nome": "Scanner Epson Workforce Gt-S55 Gts55  Conexão Usb Até Tamanho A4 Adf Para 75 Folhas  Com Defeito",
-      "url": "https://www.creativecopias.com.br/scanner-epson-workforce-gt-s55-gts55-conexao-usb-ate-tamanho-a4-adf-para-75-folhas-com-defeito.html",
+      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
       "preco": {
-        "valor": 411.05,
+        "valor": 7565.93,
         "moeda": "BRL",
-        "texto": "R$ 411,05"
+        "texto": "R$ 7.565,93"
       },
       "codigo": null,
-      "marca": "Epson",
+      "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8700_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -62,7 +62,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -72,22 +72,22 @@
       }
     },
     {
-      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica-com-defeito.html",
+      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
       "preco": {
-        "valor": 911.0,
+        "valor": 7565.93,
         "moeda": "BRL",
-        "texto": "R$ 911,00"
+        "texto": "R$ 7.565,93"
       },
       "codigo": null,
-      "marca": "Brother",
+      "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11570_ampliada_3.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -97,22 +97,22 @@
       }
     },
     {
-      "nome": "Scanner Epson Workforce Gt-S55 Gts55  Conexão Usb Até Tamanho A4 Adf Para 75 Folhas  Com Defeito",
-      "url": "https://www.creativecopias.com.br/scanner-epson-workforce-gt-s55-gts55-conexao-usb-ate-tamanho-a4-adf-para-75-folhas-com-defeito.html",
+      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
       "preco": {
-        "valor": 411.05,
+        "valor": 6550.0,
         "moeda": "BRL",
-        "texto": "R$ 411,05"
+        "texto": "R$ 6.550,00"
       },
       "codigo": null,
-      "marca": "Epson",
+      "marca": "Ricoh",
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8700_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -137,57 +137,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica-com-defeito.html",
-      "preco": {
-        "valor": 911.0,
-        "moeda": "BRL",
-        "texto": "R$ 911,00"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11570_ampliada_3.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Scanner Epson Workforce Gt-S55 Gts55  Conexão Usb Até Tamanho A4 Adf Para 75 Folhas  Com Defeito",
-      "url": "https://www.creativecopias.com.br/scanner-epson-workforce-gt-s55-gts55-conexao-usb-ate-tamanho-a4-adf-para-75-folhas-com-defeito.html",
-      "preco": {
-        "valor": 411.05,
-        "moeda": "BRL",
-        "texto": "R$ 411,05"
-      },
-      "codigo": null,
-      "marca": "Epson",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8700_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -212,57 +162,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica-com-defeito.html",
-      "preco": {
-        "valor": 911.0,
-        "moeda": "BRL",
-        "texto": "R$ 911,00"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11570_ampliada_3.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
-      "preco": {
-        "valor": 6550.0,
-        "moeda": "BRL",
-        "texto": "R$ 6.550,00"
-      },
-      "codigo": null,
-      "marca": "Ricoh",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -287,7 +187,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -312,7 +212,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -337,132 +237,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
-      "preco": {
-        "valor": 7565.93,
-        "moeda": "BRL",
-        "texto": "R$ 7.565,93"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Dcp-L5652Dn Multifuncional Laser Monocromática Com Duplex E Rede  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-l5652dn-multifuncional-laser-monocromatica-com-duplex-e-rede-com-defeito.html",
-      "preco": {
-        "valor": 5650.0,
-        "moeda": "BRL",
-        "texto": "R$ 5.650,00"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11501_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 3398.63,
-        "moeda": "BRL",
-        "texto": "R$ 3.398,63"
-      },
-      "codigo": null,
-      "marca": "Epson",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
-      "preco": {
-        "valor": 7565.93,
-        "moeda": "BRL",
-        "texto": "R$ 7.565,93"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 3398.63,
-        "moeda": "BRL",
-        "texto": "R$ 3.398,63"
-      },
-      "codigo": null,
-      "marca": "Epson",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -487,132 +262,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
-      "preco": {
-        "valor": 7565.93,
-        "moeda": "BRL",
-        "texto": "R$ 7.565,93"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 3398.63,
-        "moeda": "BRL",
-        "texto": "R$ 3.398,63"
-      },
-      "codigo": null,
-      "marca": "Epson",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
-      "preco": {
-        "valor": 6550.0,
-        "moeda": "BRL",
-        "texto": "R$ 6.550,00"
-      },
-      "codigo": null,
-      "marca": "Ricoh",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica-com-defeito.html",
-      "preco": {
-        "valor": 911.0,
-        "moeda": "BRL",
-        "texto": "R$ 911,00"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11570_ampliada_3.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
-      "preco": {
-        "valor": 6550.0,
-        "moeda": "BRL",
-        "texto": "R$ 6.550,00"
-      },
-      "codigo": null,
-      "marca": "Ricoh",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -637,82 +287,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Dcp-L5652Dn Multifuncional Laser Monocromática Com Duplex E Rede  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-l5652dn-multifuncional-laser-monocromatica-com-duplex-e-rede-com-defeito.html",
-      "preco": {
-        "valor": 5650.0,
-        "moeda": "BRL",
-        "texto": "R$ 5.650,00"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11501_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
-      "preco": {
-        "valor": 7565.93,
-        "moeda": "BRL",
-        "texto": "R$ 7.565,93"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 3398.63,
-        "moeda": "BRL",
-        "texto": "R$ 3.398,63"
-      },
-      "codigo": null,
-      "marca": "Epson",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -737,32 +312,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
-      "preco": {
-        "valor": 6550.0,
-        "moeda": "BRL",
-        "texto": "R$ 6.550,00"
-      },
-      "codigo": null,
-      "marca": "Ricoh",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -787,7 +337,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -812,7 +362,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -837,7 +387,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -862,7 +412,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -887,7 +437,32 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica-com-defeito.html",
+      "preco": {
+        "valor": 911.0,
+        "moeda": "BRL",
+        "texto": "R$ 911,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11570_ampliada_3.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -912,7 +487,232 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
+      "preco": {
+        "valor": 154.53,
+        "moeda": "BRL",
+        "texto": "R$ 154,53"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
+      "preco": {
+        "valor": 463.59,
+        "moeda": "BRL",
+        "texto": "R$ 463,59"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
+      "preco": {
+        "valor": 463.59,
+        "moeda": "BRL",
+        "texto": "R$ 463,59"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
+      "preco": {
+        "valor": 154.53,
+        "moeda": "BRL",
+        "texto": "R$ 154,53"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
+      "preco": {
+        "valor": 463.59,
+        "moeda": "BRL",
+        "texto": "R$ 463,59"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
+      "preco": {
+        "valor": 463.59,
+        "moeda": "BRL",
+        "texto": "R$ 463,59"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
+      "preco": {
+        "valor": 3398.63,
+        "moeda": "BRL",
+        "texto": "R$ 3.398,63"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
+      "preco": {
+        "valor": 154.53,
+        "moeda": "BRL",
+        "texto": "R$ 154,53"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
+      "preco": {
+        "valor": 6550.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.550,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -937,7 +737,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -962,7 +762,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -987,7 +787,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1012,7 +812,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1037,7 +837,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1062,7 +862,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1087,32 +887,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 463.59,
-        "moeda": "BRL",
-        "texto": "R$ 463,59"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1137,7 +912,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1162,7 +937,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1187,82 +962,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
-      "preco": {
-        "valor": 154.53,
-        "moeda": "BRL",
-        "texto": "R$ 154,53"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
-      "preco": {
-        "valor": 154.53,
-        "moeda": "BRL",
-        "texto": "R$ 154,53"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 463.59,
-        "moeda": "BRL",
-        "texto": "R$ 463,59"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1287,7 +987,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1312,7 +1012,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1337,7 +1037,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1362,7 +1062,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1387,7 +1087,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1412,7 +1112,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1437,7 +1137,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1462,7 +1162,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1487,7 +1187,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1512,7 +1212,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1537,7 +1237,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1562,7 +1262,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1587,7 +1287,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1612,7 +1312,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1637,7 +1337,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1662,7 +1362,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1687,7 +1387,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1712,7 +1412,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1737,7 +1437,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1762,7 +1462,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1787,7 +1487,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1812,7 +1512,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1837,7 +1537,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1862,7 +1562,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1887,7 +1587,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1912,7 +1612,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1937,7 +1637,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1962,7 +1662,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1987,7 +1687,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2012,7 +1712,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2037,7 +1737,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2062,7 +1762,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2087,7 +1787,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2112,7 +1812,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2137,7 +1837,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2162,7 +1862,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2187,7 +1887,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2212,7 +1912,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2237,7 +1937,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2262,7 +1962,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2287,7 +1987,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2312,7 +2012,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2337,7 +2037,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2362,7 +2062,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2387,7 +2087,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2412,7 +2112,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2437,7 +2137,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2462,7 +2162,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2487,7 +2187,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2512,7 +2212,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2537,7 +2237,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2562,7 +2262,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2587,7 +2287,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2612,7 +2312,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2637,7 +2337,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2662,7 +2362,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2672,47 +2372,22 @@
       }
     },
     {
-      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
+      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
       "preco": {
-        "valor": 7565.93,
+        "valor": 463.59,
         "moeda": "BRL",
-        "texto": "R$ 7.565,93"
+        "texto": "R$ 463,59"
       },
       "codigo": null,
-      "marca": null,
+      "marca": "Brother",
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 3398.63,
-        "moeda": "BRL",
-        "texto": "R$ 3.398,63"
-      },
-      "codigo": null,
-      "marca": "Epson",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2737,7 +2412,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2747,122 +2422,22 @@
       }
     },
     {
-      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
+      "nome": "Scanner Epson Workforce Gt-S55 Gts55  Conexão Usb Até Tamanho A4 Adf Para 75 Folhas  Com Defeito",
+      "url": "https://www.creativecopias.com.br/scanner-epson-workforce-gt-s55-gts55-conexao-usb-ate-tamanho-a4-adf-para-75-folhas-com-defeito.html",
       "preco": {
-        "valor": 6550.0,
+        "valor": 411.05,
         "moeda": "BRL",
-        "texto": "R$ 6.550,00"
+        "texto": "R$ 411,05"
       },
       "codigo": null,
-      "marca": "Ricoh",
+      "marca": "Epson",
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8700_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
-      "preco": {
-        "valor": 154.53,
-        "moeda": "BRL",
-        "texto": "R$ 154,53"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 463.59,
-        "moeda": "BRL",
-        "texto": "R$ 463,59"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 463.59,
-        "moeda": "BRL",
-        "texto": "R$ 463,59"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 463.59,
-        "moeda": "BRL",
-        "texto": "R$ 463,59"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2887,57 +2462,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 463.59,
-        "moeda": "BRL",
-        "texto": "R$ 463,59"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Hl-3140Cw Hl3140 Laser Colorida Com Wireless  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-hl-3140cw-hl3140-laser-colorida-com-wireless-com-defeito.html",
-      "preco": {
-        "valor": 463.59,
-        "moeda": "BRL",
-        "texto": "R$ 463,59"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7779_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2962,7 +2487,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -2972,47 +2497,22 @@
       }
     },
     {
-      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
+      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
       "preco": {
-        "valor": 154.53,
+        "valor": 3398.63,
         "moeda": "BRL",
-        "texto": "R$ 154,53"
+        "texto": "R$ 3.398,63"
       },
       "codigo": null,
-      "marca": "Brother",
+      "marca": "Epson",
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Impressora Brother Mfc-J4310Dw J-4310Dw  Multifuncional Jato De Tinta  Com Defeito",
-      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j4310dw-j-4310dw-multifuncional-jato-de-tinta-com-defeito.html",
-      "preco": {
-        "valor": 154.53,
-        "moeda": "BRL",
-        "texto": "R$ 154,53"
-      },
-      "codigo": null,
-      "marca": "Brother",
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8040_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:22:12",
+      "data_normalized": "2025-06-16 15:27:53",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,

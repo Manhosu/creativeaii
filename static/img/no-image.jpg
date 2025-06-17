@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGrad)" stroke="#dee2e6" stroke-width="2" rx="8"/>
+  
+  <!-- Icon container -->
+  <circle cx="200" cy="120" r="35" fill="#6c757d" opacity="0.15"/>
+  
+  <!-- Camera icon -->
+  <rect x="175" y="105" width="50" height="30" fill="none" stroke="#6c757d" stroke-width="3" rx="5"/>
+  <circle cx="195" cy="120" r="8" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <rect x="210" y="95" width="12" height="8" fill="#6c757d" rx="2"/>
+  
+  <!-- Text -->
+  <text x="200" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6c757d">
+    Produto
+  </text>
+  <text x="200" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#adb5bd">
+    Imagem não disponível
+  </text>
+  
+  <!-- Creative Cópias watermark -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ced4da">
+    Creative Cópias
+  </text>
+</svg> 

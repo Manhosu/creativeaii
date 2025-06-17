@@ -7,6 +7,7 @@ from typing import Dict, List, Optional, Any
 from bs4 import BeautifulSoup
 import requests
 import re
+import os
 from loguru import logger
 from .scraper_base import ScraperBase
 from .pagination_handler import PaginationHandler
@@ -23,7 +24,7 @@ class CreativeScraper(ScraperBase):
             timeout: Timeout para requests
         """
         super().__init__(delay_range, timeout)
-        self.base_url = "https://www.creativecopias.com.br"
+        self.base_url = os.getenv("SITE_BASE_URL", "https://www.creativecopias.com.br")
         
         # Headers específicos para Creative Cópias (sem User-Agent específico)
         # Criar nova sessão limpa para evitar headers herdados
@@ -412,21 +413,184 @@ class CreativeScraper(ScraperBase):
         return None
     
     def _extract_product_image(self, element: Any) -> Optional[str]:
-        """Extrai URL da imagem do produto"""
+        """
+        Extrai URL da imagem do produto com fallback robusto
+        Garante sempre URLs ABSOLUTAS da Creative Cópias
+        """
         try:
-            img = element.find('img')
-            if img:
-                src = img.get('src') or img.get('data-src')
-                if src:
-                    # Se for URL relativa, adicionar domínio
-                    if src.startswith('/'):
-                        return self.base_url + src
-                    elif src.startswith('http'):
-                        return src
-        except:
-            pass
+            # Seletores específicos para Creative Cópias (em ordem de prioridade)
+            img_selectors = [
+                # Específicos do Creative Cópias
+                '.product-image img',         # Container principal de imagem
+                '.item-image img',           # Imagem do item
+                '.product-photo img',        # Foto do produto
+                'img.product-image',         # Classe direta
+                '.product-image-main img',   # Imagem principal
+                '.product-thumb img',        # Thumbnail do produto
+                
+                # Seletores de atributos específicos
+                'img[alt*="produto" i]',     # Alt contendo "produto" (case insensitive)
+                'img[alt*="item" i]',        # Alt contendo "item"
+                'img[src*="/media/" i]',     # Imagens do diretório media
+                'img[src*="/images/" i]',    # Imagens do diretório images
+                'img[src*="/uploads/" i]',   # Imagens de uploads
+                'img[src*="product" i]',     # Src contendo "product"
+                
+                # Fallback geral (com filtros)
+                'img'
+            ]
+            
+            for selector in img_selectors:
+                try:
+                    img = element.select_one(selector)
+                    if not img:
+                        continue
+                    
+                    # Tentar diferentes atributos de imagem (lazy loading)
+                    src = (img.get('src') or 
+                          img.get('data-src') or 
+                          img.get('data-original') or 
+                          img.get('data-lazy') or
+                          img.get('data-image') or
+                          img.get('data-img'))
+                    
+                    if not src or not src.strip():
+                        continue
+                    
+                    src = src.strip()
+                    
+                    # FILTROS DE QUALIDADE - Rejeitar imagens inválidas
+                    if self._is_invalid_image(src):
+                        logger.debug(f"🚫 Imagem rejeitada por filtro: {src}")
+                        continue
+                    
+                    # CONVERTER PARA URL ABSOLUTA
+                    absolute_url = self._make_absolute_url(src)
+                    
+                    if absolute_url:
+                        logger.info(f"🖼️ Imagem extraída: {absolute_url}")
+                        return absolute_url
+                        
+                except Exception as selector_error:
+                    logger.debug(f"❌ Erro no seletor {selector}: {selector_error}")
+                    continue
+            
+            logger.warning(f"⚠️ Nenhuma imagem válida encontrada no elemento")
+            return None
+            
+        except Exception as e:
+            logger.error(f"❌ Erro crítico ao extrair imagem: {e}")
+            return None
+    
+    def _is_invalid_image(self, src: str) -> bool:
+        """
+        Verifica se a URL da imagem deve ser rejeitada
         
-        return None
+        Args:
+            src: URL da imagem a verificar
+            
+        Returns:
+            True se a imagem é inválida
+        """
+        if not src:
+            return True
+        
+        src_lower = src.lower()
+        
+        # Filtros de tamanho (imagens muito pequenas)
+        size_filters = ['1x1', '10x10', '20x20', '0x0', 'px.gif', 'spacer', 'blank']
+        if any(size in src_lower for size in size_filters):
+            return True
+        
+        # Filtros de tipo (imagens de controle/sistema)
+        type_filters = [
+            'placeholder', 'loading', 'spinner', 'ajax-loader',
+            'transparent', 'clear', 'empty', 'dummy', 'fake',
+            'icon-', 'sprite', 'css', 'background', 'border',
+            'arrow', 'button', 'nav', 'menu', 'close', 'search'
+        ]
+        if any(filter_type in src_lower for filter_type in type_filters):
+            return True
+        
+        # Filtros de extensão inválida
+        invalid_extensions = ['.css', '.js', '.txt', '.html', '.php']
+        if any(src_lower.endswith(ext) for ext in invalid_extensions):
+            return True
+        
+        # Filtros de URL suspeitas
+        suspicious_patterns = [
+            'data:image/gif;base64,R0lGOD',  # GIF transparente comum
+            'data:image/svg+xml',           # SVG inline muito simples
+            'javascript:',                   # URLs JavaScript
+            'mailto:',                      # URLs de email
+            '#'                            # Links âncora
+        ]
+        if any(pattern in src for pattern in suspicious_patterns):
+            return True
+        
+        # Se passou por todos os filtros, é válida
+        return False
+    
+    def _make_absolute_url(self, src: str) -> Optional[str]:
+        """
+        Converte URL relativa para absoluta usando base da Creative Cópias
+        
+        Args:
+            src: URL da imagem (pode ser relativa ou absoluta)
+            
+        Returns:
+            URL absoluta válida ou None
+        """
+        if not src:
+            return None
+        
+        # Se já é absoluta e válida, retornar
+        if src.startswith('http'):
+            # Verificar se é do domínio Creative Cópias ou confiável
+            trusted_domains = [
+                'creativecopias.com.br',
+                'via.placeholder.com',
+                'images.unsplash.com',
+                'picsum.photos'
+            ]
+            
+            if any(domain in src for domain in trusted_domains):
+                return src
+            else:
+                # URL externa - logar mas retornar mesmo assim
+                logger.debug(f"📎 URL externa aceita: {src}")
+                return src
+        
+        # URLs data: são válidas mas não ideais
+        if src.startswith('data:'):
+            logger.debug(f"📊 Data URL encontrada: {src[:50]}...")
+            return src
+        
+        # Converter URL relativa para absoluta
+        base_url = getattr(self, 'base_url', 'https://www.creativecopias.com.br')
+        
+        if src.startswith('/'):
+            # URL relativa à raiz
+            absolute_url = f"{base_url}{src}"
+        elif src.startswith('./'):
+            # URL relativa ao diretório atual
+            absolute_url = f"{base_url}/{src[2:]}"
+        elif src.startswith('../'):
+            # URL relativa ao diretório pai (não comum em produtos)
+            logger.warning(f"⚠️ URL relativa ao diretório pai: {src}")
+            absolute_url = f"{base_url}/{src}"
+        else:
+            # URL relativa simples
+            absolute_url = f"{base_url}/{src}"
+        
+        # Limpar URL duplicada (evitar ///)
+        absolute_url = absolute_url.replace('///', '//')
+        if absolute_url.count('//') > 1:
+            absolute_url = absolute_url.replace('//', '/', 1).replace('//', '/')
+            absolute_url = absolute_url.replace('http:/', 'http://').replace('https:/', 'https://')
+        
+        logger.debug(f"🔗 URL convertida: {src} → {absolute_url}")
+        return absolute_url
     
     def _extract_product_availability(self, element: Any) -> bool:
         """Verifica se produto está disponível"""

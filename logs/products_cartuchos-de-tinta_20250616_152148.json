@@ -1,0 +1,2526 @@
+{
+  "metadata": {
+    "total_produtos": 100,
+    "data_export": "2025-06-16 15:21:48",
+    "resumo": {
+      "total_produtos": 100,
+      "com_preco": 100,
+      "disponiveis": 100,
+      "sem_preco": 0,
+      "indisponiveis": 0,
+      "marcas_encontradas": 4,
+      "marcas": [
+        "Brother",
+        "Canon",
+        "Epson",
+        "HP"
+      ],
+      "categorias_processadas": 0,
+      "taxa_preco": 100.0,
+      "taxa_disponibilidade": 100.0,
+      "data_processamento": "2025-06-16 15:21:48"
+    }
+  },
+  "produtos": [
+    {
+      "nome": "Cartucho De Tinta Epson T40W220 Ciano T40W  T3170M T3170 T5170  Original 50Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t40w220-ciano-t40w-t3170-t-3170-3170-original-50ml.html",
+      "preco": {
+        "valor": 359.0,
+        "moeda": "BRL",
+        "texto": "R$ 359,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7311_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 712 Magenta 3Ed68A  Plotter T250 5Hb06A T650 5Hb08A 5Hb10A  Original 29Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-712-magenta-3ed68a-plotter-t250-5hb06a-t650-5hb08a-5hb10a-original-29ml.html",
+      "preco": {
+        "valor": 207.05,
+        "moeda": "BRL",
+        "texto": "R$ 207,05"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8402_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Ms Lc406M Magenta  Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 1,5K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406m-lc406-magenta-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-1-5k.html",
+      "preco": {
+        "valor": 189.0,
+        "moeda": "BRL",
+        "texto": "R$ 189,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9079_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Bks Lc406Bk Preto  Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 3K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406bk-lc406-preto-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-3k.html",
+      "preco": {
+        "valor": 220.0,
+        "moeda": "BRL",
+        "texto": "R$ 220,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9077_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 712 Preto 3Ed71A  Plotter T250 5Hb06A T650 5Hb08A 5Hb10A  Original 80Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-712-preto-3ed71a-plotter-t250-5hb06a-t650-5hb08a-5hb10a-original-80ml.html",
+      "preco": {
+        "valor": 398.0,
+        "moeda": "BRL",
+        "texto": "R$ 398,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8405_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Cs Lc406C Ciano  Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 1,5K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406c-lc406-ciano-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-1-5k.html",
+      "preco": {
+        "valor": 189.0,
+        "moeda": "BRL",
+        "texto": "R$ 189,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9078_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Ys Lc406Y Amarelo  Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 1,5K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406y-lc406-amarelo-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-1-5k.html",
+      "preco": {
+        "valor": 189.0,
+        "moeda": "BRL",
+        "texto": "R$ 189,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9080_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-107 Pfi-107Mbk Preto Fosco  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-107-pfi-107mbk-preto-fosco-original-130ml.html",
+      "preco": {
+        "valor": 385.0,
+        "moeda": "BRL",
+        "texto": "R$ 385,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5136_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Compatível Com Hp 45 51645Al Preto  Deskjet 6122 720C 930C 932C 950C  38Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-compativel-hp-45-51645al-preto-deskjet-6122-720c-930c-932c-950c-38ml.html",
+      "preco": {
+        "valor": 107.0,
+        "moeda": "BRL",
+        "texto": "R$ 107,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/748_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 712 Amarelo 3Ed69A  Plotter T250 5Hb06A T650 5Hb08A 5Hb10A  Original 29Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-712-amarelo-3ed69a-plotter-t250-5hb06a-t650-5hb08a-5hb10a-original-29ml.html",
+      "preco": {
+        "valor": 207.05,
+        "moeda": "BRL",
+        "texto": "R$ 207,05"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8403_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 712 Preto 3Ed70A  Plotter T250 5Hb06A T650 5Hb08A 5Hb10A  Original 38Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-712-preto-3ed70a-plotter-t250-5hb06a-t650-5hb08a-5hb10a-original-38ml.html",
+      "preco": {
+        "valor": 253.0,
+        "moeda": "BRL",
+        "texto": "R$ 253,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8404_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 45 51645Al Preto  Deskjet 6122 720C 930C 932C 950C  Original 42Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-45-51645al-preto-deskjet-6122-720c-930c-932c-950c-original-42ml.html",
+      "preco": {
+        "valor": 455.0,
+        "moeda": "BRL",
+        "texto": "R$ 455,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/4/5421_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Epson T40W420 Amarelo T40W  T3170M T3170 T5170  Original 50Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t40w420-amarelo-t40w-t3170-t-3170-3170-original-50ml.html",
+      "preco": {
+        "valor": 359.0,
+        "moeda": "BRL",
+        "texto": "R$ 359,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7313_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 712 Ciano 3Ed67A  Plotter T250 5Hb06A T650 5Hb08A 5Hb10A  Original 29Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-712-ciano-3ed67a-plotter-t250-5hb06a-t650-5hb08a-5hb10a-original-29ml.html",
+      "preco": {
+        "valor": 207.05,
+        "moeda": "BRL",
+        "texto": "R$ 207,05"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8401_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit De Substituição De Cabeça De Impressão Hp 711  T120 T520 T130  C1Q10A  Original",
+      "url": "https://www.creativecopias.com.br/kit-de-substituicao-de-cabeca-de-impressao-hp-711-c1q10a-original.html",
+      "preco": {
+        "valor": 1999.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.999,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/5/4544_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Epson T40W320 Magenta T40W  T3170M T3170 T5170  Original 50Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t40w320-magenta-t40w-t3170-t-3170-3170-original-50ml.html",
+      "preco": {
+        "valor": 359.0,
+        "moeda": "BRL",
+        "texto": "R$ 359,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7312_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-107 Pfi-107Y Amarelo  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-107-pfi-107y-amarelo-original-130ml.html",
+      "preco": {
+        "valor": 385.0,
+        "moeda": "BRL",
+        "texto": "R$ 385,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5140_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 711 Cz133A Preto  Plotter T120 T520 T130 Cq891A Cq890A Cq893A  Original 80Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-711-preto-cz133a-plotter-t120-t520-cq891a-cq890a-cq893a-original-80ml.html",
+      "preco": {
+        "valor": 524.0,
+        "moeda": "BRL",
+        "texto": "R$ 524,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/5/3597_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 62Xl 62 Preto C2P05Al  Original 12Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-62xl-62-preto-c2p05al-original-12ml.html",
+      "preco": {
+        "valor": 385.0,
+        "moeda": "BRL",
+        "texto": "R$ 385,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/7/5709_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 938 4S6X7Pl Amarelo  9122E 9110B 9125E 9128E 9130B 9135E 9730  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-938-4s6x7pl-amarelo-9122e-9110b-9125e-9128e-9130b-9135e-9730-original.html",
+      "preco": {
+        "valor": 167.0,
+        "moeda": "BRL",
+        "texto": "R$ 167,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10506_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Epson T40W120 Preto T40W  T3170M T3170 T5170  Original 80Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t40w120-preto-t40w-t3170-t-3170-3170-original-80ml.html",
+      "preco": {
+        "valor": 466.0,
+        "moeda": "BRL",
+        "texto": "R$ 466,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7310_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-107 Pfi-107C Ciano  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-107-pfi-107c-ciano-original-130ml.html",
+      "preco": {
+        "valor": 385.0,
+        "moeda": "BRL",
+        "texto": "R$ 385,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5138_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 938 4S6X6Pl Magenta  9122E 9110B 9125E 9128E 9130B 9135E 9730  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-938-4s6x6pl-magenta-9122e-9110b-9125e-9128e-9130b-9135e-9730-original.html",
+      "preco": {
+        "valor": 167.0,
+        "moeda": "BRL",
+        "texto": "R$ 167,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10505_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-107 Pfi-107M Magenta  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-107-pfi-107m-magenta-original-130ml.html",
+      "preco": {
+        "valor": 385.0,
+        "moeda": "BRL",
+        "texto": "R$ 385,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5139_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 938 4S6X5Pl Ciano  9122E 9110B 9125E 9128E 9130B 9135E 9730  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-938-4s6x5pl-ciano-9122e-9110b-9125e-9128e-9130b-9135e-9730-original.html",
+      "preco": {
+        "valor": 167.0,
+        "moeda": "BRL",
+        "texto": "R$ 167,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10504_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc3029M Lc-3029M Magenta  Mfc-J6935Dw J6935  Original 16,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc3029m-lc-3029m-magenta-mfc-j6935dw-j6935-original-16-5ml.html",
+      "preco": {
+        "valor": 142.0,
+        "moeda": "BRL",
+        "texto": "R$ 142,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/6/5647_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 964Xl 3Ja57Al Preto  9010 9020  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-964-xl-preto-9010-9020-original.html",
+      "preco": {
+        "valor": 334.0,
+        "moeda": "BRL",
+        "texto": "R$ 334,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7115_ampliada_3.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-107 Pfi-107Bk Preto  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-107-pfi-107bk-preto-original-130ml.html",
+      "preco": {
+        "valor": 385.0,
+        "moeda": "BRL",
+        "texto": "R$ 385,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5137_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 974X L0S08Al Preto  452Dn 452Dw 477Dn 477Dw 552Dw 577Dw 577Z  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-974x-l0s08ab-preto-452dn-452dw-477dn-477dw-552dw-577dw-577z-original.html",
+      "preco": {
+        "valor": 738.0,
+        "moeda": "BRL",
+        "texto": "R$ 738,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/5/4599_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 728 Amarelo F9J65A  Plotter Designjet T830 T730  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-728-amarelo-f9j65a-plotter-designjet-t830-t730-original-130ml.html",
+      "preco": {
+        "valor": 680.0,
+        "moeda": "BRL",
+        "texto": "R$ 680,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4852_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc3029Y Lc-3029Y Amarelo  Mfc-J6935Dw J6935  Original 16,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc3029y-lc-3029y-amarelo-mfc-j6935dw-j6935-original-16-5ml.html",
+      "preco": {
+        "valor": 142.0,
+        "moeda": "BRL",
+        "texto": "R$ 142,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/6/5648_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 938 4S6X8Pl Preto  9122E 9110B 9125E 9128E 9130B 9135E 9730  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-938-4s6x8pl-preto-9122e-9110b-9125e-9128e-9130b-9135e-9730-original.html",
+      "preco": {
+        "valor": 262.0,
+        "moeda": "BRL",
+        "texto": "R$ 262,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10503_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-030 Pfi-030Mbk Preto Fosco  Ta30 Ta20  Original 55Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-30-pfi-30mbk-preto-fosco-ta30-ta20-original-55ml.html",
+      "preco": {
+        "valor": 310.0,
+        "moeda": "BRL",
+        "texto": "R$ 310,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8531_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 72 Preto Matte C9403A  T770 T1120 T1200 T1300 T2300 T620 T795  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-72-preto-matte-c9403a-t770-t1120-t1200-t1300-t2300-t620-t795-original-130ml.html",
+      "preco": {
+        "valor": 750.0,
+        "moeda": "BRL",
+        "texto": "R$ 750,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4847_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 122 Ch561Hb Preto  Original 2Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-122-ch561hb-preto-original-2ml.html",
+      "preco": {
+        "valor": 82.5,
+        "moeda": "BRL",
+        "texto": "R$ 82,50"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1657_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Compatível Com Epson T136126 T136 T1361 Preto  Workforce K101 K301  35,5 Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t136126-t136-t1361-preto-workforce-k101-k301-compativel-35-5-ml.html",
+      "preco": {
+        "valor": 43.12,
+        "moeda": "BRL",
+        "texto": "R$ 43,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/2/2206_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 122 Ch562Hb Colorido  Original 2Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-122-ch562hb-colorido-original-2ml.html",
+      "preco": {
+        "valor": 99.89,
+        "moeda": "BRL",
+        "texto": "R$ 99,89"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1606_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Xlbks Lc-406Xlbk Preto Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 6K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406xlbk-lc-406bk-preto-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-6k.html",
+      "preco": {
+        "valor": 395.0,
+        "moeda": "BRL",
+        "texto": "R$ 395,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9073_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc3029Bk Lc-3029Bk Preto  Mfc-J6935Dw J6935  Original 60Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc3029bk-lc-3029bk-preto-mfc-j6935dw-j6935-original-60ml.html",
+      "preco": {
+        "valor": 195.0,
+        "moeda": "BRL",
+        "texto": "R$ 195,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/6/5645_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 964Xl 3Ja56Al Amarelo  9010 9020  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-964-xl-amarela-9010-9020-original.html",
+      "preco": {
+        "valor": 268.0,
+        "moeda": "BRL",
+        "texto": "R$ 268,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7118_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc3029C Lc-3029C Ciano  Mfc-J6935Dw J6935  Original 16,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc3029c-lc-3029c-ciano-mfc-j6935dw-j6935-original-16-5ml.html",
+      "preco": {
+        "valor": 142.0,
+        "moeda": "BRL",
+        "texto": "R$ 142,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/6/5646_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Epson T140120 T1401 T140 Preto  T42Wd Tx560Wd Tx620Fwd  Original 25 Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t140120-t140-t1401-preto-t42wd-tx560wd-tx620fwd-original-25-ml.html",
+      "preco": {
+        "valor": 78.0,
+        "moeda": "BRL",
+        "texto": "R$ 78,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1610_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 711 Cz130A Ciano  Plotter T120 T520 T130 Cq891A Cq890A Cq893A  Original 29Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-711-ciano-cz130a-plotter-t120-t520-cq891a-cq890a-cq893a-original-29ml.html",
+      "preco": {
+        "valor": 271.0,
+        "moeda": "BRL",
+        "texto": "R$ 271,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/5/3594_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit De Substituição De Cabeça De Impressão Hp 72 Preto Foscoamarelo  C9384A  Original",
+      "url": "https://www.creativecopias.com.br/kit-de-substituicao-de-cabeca-de-impressao-hp-72-preto-fosco-amarelo-c9384a-original.html",
+      "preco": {
+        "valor": 835.0,
+        "moeda": "BRL",
+        "texto": "R$ 835,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4857_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 72 Cinza C9374A  T770 T1120 T1200 T1300 T2300 T620 T795  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-72-cinza-c9374a-t770-t1120-t1200-t1300-t2300-t620-t795-original-130ml.html",
+      "preco": {
+        "valor": 750.0,
+        "moeda": "BRL",
+        "texto": "R$ 750,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4846_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 711 Cz136A Cz136Ab Amarelo  Pacote Com 3 Unidades De 29Ml Cada  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-711-cz136a-amarelo-pacote-com-3-unidades-de-29ml-cada-original.html",
+      "preco": {
+        "valor": 590.0,
+        "moeda": "BRL",
+        "texto": "R$ 590,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3754_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 728 Magenta F9J66A  Plotter Hp Designjet T830 T730  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-728-magenta-f9j66a-plotter-hp-designjet-t830-t730-original-130ml.html",
+      "preco": {
+        "valor": 680.0,
+        "moeda": "BRL",
+        "texto": "R$ 680,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4851_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 711 Cz131A Magenta  Plotter T120 T520 Cq891A Cq890A Cq893A  Original 29Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-711-magenta-cz131a-plotter-t120-t520-cq891a-cq890a-cq893a-original-29ml.html",
+      "preco": {
+        "valor": 271.0,
+        "moeda": "BRL",
+        "texto": "R$ 271,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/5/3595_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-102 Pfi-102Mbk Preto  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-102-pfi-102mbk-preto-original-130ml.html",
+      "preco": {
+        "valor": 460.0,
+        "moeda": "BRL",
+        "texto": "R$ 460,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/9889_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 964 3Ja53Al Preto  9010 9020  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-964-preto-9010-9020-original.html",
+      "preco": {
+        "valor": 207.0,
+        "moeda": "BRL",
+        "texto": "R$ 207,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7111_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 711 Cz132A Amarelo  Plotter T120 T520 Cq891A Cq890A Cq893A  Original 29Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-711-amarelo-cz132a-plotter-t120-t520-cq891a-cq890a-cq893a-original-29ml.html",
+      "preco": {
+        "valor": 271.0,
+        "moeda": "BRL",
+        "texto": "R$ 271,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/5/3596_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 712 3Ed79A Amarelo  Pacote Com 3 Unidades De 29Ml Cada  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-712-3ed79a-amarelo-pacote-com-3-unidades-de-29ml-cada-original.html",
+      "preco": {
+        "valor": 435.0,
+        "moeda": "BRL",
+        "texto": "R$ 435,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8417_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 728 Preto Fosco F9J68A  Plotter Designjet T730 T830  Original 300Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-728-preto-fosco-f9j68a-plotter-designjet-t730-t830-original-300ml.html",
+      "preco": {
+        "valor": 1360.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.360,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4849_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 728 Ciano F9J67A  Plotter Hp Designjet T730 T830  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-728-ciano-f9j67a-plotter-hp-designjet-t730-t830-original-130ml.html",
+      "preco": {
+        "valor": 680.0,
+        "moeda": "BRL",
+        "texto": "R$ 680,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4850_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-030 Pfi-030Y Amarelo  Ta30 Ta20  Original 55Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-30-pfi-30y-amarelo-ta30-ta20-original-55ml.html",
+      "preco": {
+        "valor": 310.0,
+        "moeda": "BRL",
+        "texto": "R$ 310,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8535_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Xlys Lc406Xly Amarelo Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 5K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406xly-lc406xl-amarelo-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-5k.html",
+      "preco": {
+        "valor": 441.0,
+        "moeda": "BRL",
+        "texto": "R$ 441,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9076_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-120 Pfi-120M Magenta  Tm200 Tm300 Tm305  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-120-pfi-120m-magenta-tm200-original-130ml.html",
+      "preco": {
+        "valor": 450.0,
+        "moeda": "BRL",
+        "texto": "R$ 450,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8564_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 964Xl 3Ja55Al Magenta  9010 9020  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-964-xl-magenta-9010-9020-original.html",
+      "preco": {
+        "valor": 268.0,
+        "moeda": "BRL",
+        "texto": "R$ 268,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7117_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Xlcs Lc406Xlc Ciano Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 5K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406xlc-lc406xl-ciano-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-5k.html",
+      "preco": {
+        "valor": 441.0,
+        "moeda": "BRL",
+        "texto": "R$ 441,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9074_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 712 3Ed77A Ciano  Pacote Com 3 Unidades De 29Ml Cada  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-712-3ed77a-ciano-pacote-com-3-unidades-de-29ml-cada-original.html",
+      "preco": {
+        "valor": 435.0,
+        "moeda": "BRL",
+        "texto": "R$ 435,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8415_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 964Xl 3Ja55Al Magenta  9010 9020  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-964-xl-magenta-9010-9020-original.html",
+      "preco": {
+        "valor": 268.0,
+        "moeda": "BRL",
+        "texto": "R$ 268,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7117_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-120 Pfi-120M Magenta  Tm200 Tm300 Tm305  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-120-pfi-120m-magenta-tm200-original-130ml.html",
+      "preco": {
+        "valor": 450.0,
+        "moeda": "BRL",
+        "texto": "R$ 450,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8564_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 711 Cz134A Cz134Ab Ciano  Pacote Com 3 Unidades De 29Ml Cada  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-711-cz134a-ciano-pacote-com-3-unidades-de-29ml-cada-original.html",
+      "preco": {
+        "valor": 590.0,
+        "moeda": "BRL",
+        "texto": "R$ 590,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3751_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 667 Preto 3Ym79L 3Ym79Al 3Ym79Ab  Deskjet Ink Advantage 2776  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-667-preto-3ym79l-deskjet-ink-advantage-2776-original.html",
+      "preco": {
+        "valor": 69.0,
+        "moeda": "BRL",
+        "texto": "R$ 69,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/1/8159_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Xlcs Lc406Xlc Ciano Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 5K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406xlc-lc406xl-ciano-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-5k.html",
+      "preco": {
+        "valor": 441.0,
+        "moeda": "BRL",
+        "texto": "R$ 441,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9074_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 711 Cz135A Cz135Ab Magenta  Pacote Com 3 Unidades De 29Ml Cada  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-711-cz135a-magenta-pacote-com-3-unidades-de-29ml-cada-original.html",
+      "preco": {
+        "valor": 590.0,
+        "moeda": "BRL",
+        "texto": "R$ 590,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3752_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 667Xl Preto 3Ym81L 3Ym81Al 3Ym81Ab  Deskjet Ink Advantage 2776  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-667xl-preto-3ym81l-deskjet-ink-advantage-2776-original.html",
+      "preco": {
+        "valor": 173.0,
+        "moeda": "BRL",
+        "texto": "R$ 173,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/1/8160_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 904Xl T6M12Al T6M12Ab Amarelo  Officejet Pro 6970  Original 9,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-904xl-t6m12al-t6m12ab-amarelo-officejet-pro-6970-original-9-5ml.html",
+      "preco": {
+        "valor": 152.0,
+        "moeda": "BRL",
+        "texto": "R$ 152,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5073_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 664 Preto F6V29Ab F6V29A  1115 4536 2136 3636 3836 3635 4676  Original 2Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-664-preto-f6v29ab-f6v29a-1115-4536-2136-3636-3836-3635-4676-original-2ml.html",
+      "preco": {
+        "valor": 68.0,
+        "moeda": "BRL",
+        "texto": "R$ 68,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/1/4135_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit De Substituição De Cabeça De Impressão Hp 72 Magentaciano  C9383A  Original",
+      "url": "https://www.creativecopias.com.br/kit-de-substituicao-de-cabeca-de-impressao-hp-72-magenta-ciano-c9383a-original.html",
+      "preco": {
+        "valor": 835.0,
+        "moeda": "BRL",
+        "texto": "R$ 835,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4856_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit De Substituição De Cabeça De Impressão Hp 72 Cinzapreto  C9380A  Original",
+      "url": "https://www.creativecopias.com.br/kit-de-substituicao-de-cabeca-de-impressao-hp-72-cinza-preto-c9380a-original.html",
+      "preco": {
+        "valor": 835.0,
+        "moeda": "BRL",
+        "texto": "R$ 835,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4848_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit De Substituição De Cabeça De Impressão Hp 713  T250 T650 T230  3Ed58A  Original",
+      "url": "https://www.creativecopias.com.br/kit-de-substituicao-de-cabeca-de-impressao-hp-713-3ed58a-original.html",
+      "preco": {
+        "valor": 1550.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.550,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8400_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 964 Ciano 3Ja50Al  9010 9020  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-964-ciano-9010-9020-original.html",
+      "preco": {
+        "valor": 156.0,
+        "moeda": "BRL",
+        "texto": "R$ 156,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7112_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 62Xl 62 Colorido C2P07Al  Original 11,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-62xl-62-colorido-c2p07al-original-11-5ml.html",
+      "preco": {
+        "valor": 418.0,
+        "moeda": "BRL",
+        "texto": "R$ 418,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/7/5710_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc406Xlms Lc406Xlm Magenta Mfcj6955Dw Mfcj5955Dw Mfcj4535Dw  Original 5K",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc406xlm-lc406xl-magenta-mfcj6955dw-mfcj5955dw-mfcj4535dw-original-5k.html",
+      "preco": {
+        "valor": 441.0,
+        "moeda": "BRL",
+        "texto": "R$ 441,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9075_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 964Xl 3Ja54Al Ciano  9010 9020  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-964-xl-ciano-9010-9020-original.html",
+      "preco": {
+        "valor": 268.0,
+        "moeda": "BRL",
+        "texto": "R$ 268,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7116_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 738 Preto 498N4A  Plotter Designjet T850 T950  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-738-preto-498n4a-plotter-designjet-t850-t950-original-130ml.html",
+      "preco": {
+        "valor": 630.0,
+        "moeda": "BRL",
+        "texto": "R$ 630,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10005_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Compatível Com Epson T133120 T133 Preto Tx120 Tx320F Tx420W T22 Tx430W Tx235W 8Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t133120-t133-preto-tx120-tx320f-tx420w-t22-tx430w-tx235w-compativel-8ml.html",
+      "preco": {
+        "valor": 16.48,
+        "moeda": "BRL",
+        "texto": "R$ 16,48"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1385_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 72 Amarelo C9373A  T770 T1120 T1200 T1300 T2300 T620 T795  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-72-amarelo-c9373a-t770-t1120-t1200-t1300-t2300-t620-t795-original-130ml.html",
+      "preco": {
+        "valor": 750.0,
+        "moeda": "BRL",
+        "texto": "R$ 750,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4845_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-120 Pfi-120C Ciano  Tm200 Tm300 Tm305  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-120-pfi-120c-ciano-tm200-original-130ml.html",
+      "preco": {
+        "valor": 450.0,
+        "moeda": "BRL",
+        "texto": "R$ 450,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8563_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Compatível Com Epson T140420 T140 Yellow  Tx620Fwd Tx560Wd T42Wd  15,8Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t140420-yellow-tx620fwd-tx560wd-t42wd-15-8ml-compativel.html",
+      "preco": {
+        "valor": 15.45,
+        "moeda": "BRL",
+        "texto": "R$ 15,45"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/9/2963_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pgi 7100Xxl Magenta  Wg7140 7140 Wg-7140 Wg 7140  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pgi-7100xxl-magenta-wg7140-7140-wg-7140-wg-7140-original.html",
+      "preco": {
+        "valor": 520.0,
+        "moeda": "BRL",
+        "texto": "R$ 520,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7338_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Compatível Com Epson T197 T197120 Preto Xp101 Xp201 Xp214 Xp401 Xp411 Wf-2532 15Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-compativel-com-epson-t197-t197120-preto-xp101-xp201-xp214-xp401-xp411-wf-2532-15ml.html",
+      "preco": {
+        "valor": 17.51,
+        "moeda": "BRL",
+        "texto": "R$ 17,51"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/4/3483-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-030 Pfi-030C Ciano  Ta30 Ta20  Original 55Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-30-pfi-30c-ciano-ta30-ta20-original-55ml.html",
+      "preco": {
+        "valor": 310.0,
+        "moeda": "BRL",
+        "texto": "R$ 310,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8533_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 738 Preto 498N8A  Plotter Designjet T850 T950  Original 300Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-738-preto-498n8a-plotter-designjet-t850-t950-original-300ml.html",
+      "preco": {
+        "valor": 1240.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.240,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10009_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pgi 7100Xxl Preto  Wg7140 7140 Wg-7140 Wg 7140  Original",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pgi-7100xxl-preto-wg7140-7140-wg-7140-wg-7140-original.html",
+      "preco": {
+        "valor": 445.0,
+        "moeda": "BRL",
+        "texto": "R$ 445,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7336_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 730 Amarelo P2V64A  Plotter Hp T1600 T1700  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-730-amarelo-p2v64a-plotter-hp-t1600-t1700-original-130ml.html",
+      "preco": {
+        "valor": 650.0,
+        "moeda": "BRL",
+        "texto": "R$ 650,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8496_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 122Xl 122 Ch564Hb Colorido  Original 7,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-122xl-122-ch564hb-colorido-original-7-5ml.html",
+      "preco": {
+        "valor": 256.0,
+        "moeda": "BRL",
+        "texto": "R$ 256,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1661_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Compatível Com Epson T132120 T132 T1321 Preto  T22 Tx120  6Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t132120-t132-t1321-preto-t22-tx120-compativel-6ml.html",
+      "preco": {
+        "valor": 3.61,
+        "moeda": "BRL",
+        "texto": "R$ 3,61"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/7/572_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 727 C1Q12A Preto Fosco  T2500 T1500 T920 T1530  Original 300Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-para-plotter-hp-727-c1q12a-preto-fosco-t2500-t1500-t920-original-300ml.html",
+      "preco": {
+        "valor": 1442.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.442,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/3/4324_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 662Xl 662 Cz105Ab Cz105Al Preto  Original 6,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-662xl-662-cz105ab-cz105al-preto-original-6-5ml.html",
+      "preco": {
+        "valor": 145.36,
+        "moeda": "BRL",
+        "texto": "R$ 145,36"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/5/2516_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 974X L0S05Ab Amarelo  452Dn 452Dw 477Dn 477Dw 552Dw 577Dw 577Z  Original 86Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-974x-l0s05ab-amarelo-452dn-452dw-477dn-477dw-552dw-577dw-577z-original-86ml.html",
+      "preco": {
+        "valor": 690.0,
+        "moeda": "BRL",
+        "texto": "R$ 690,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/6/4602_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 974X L0R99Ab Ciano  452Dn 452Dw 477Dn 477Dw 552Dw 577Dw 577Z  Original 85,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-974x-l0r99ab-ciano-452dn-452dw-477dn-477dw-552dw-577dw-577z-original-85-5ml.html",
+      "preco": {
+        "valor": 690.0,
+        "moeda": "BRL",
+        "texto": "R$ 690,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/6/4600_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Brother Lc-79Y Lc-79 Amarelo  Mfc-J6710Dw Mfc-J6510Dw Mfc-J5910Dw  Original 13Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-brother-lc-79y-lc-79-amarelo-mfc-j6710dw-mfc-j6510dw-mfc-j5910dw-original-13ml.html",
+      "preco": {
+        "valor": 159.0,
+        "moeda": "BRL",
+        "texto": "R$ 159,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3779_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Compatível Com Hp 78 C6578Dl Color  Deskjet 920C P1000 Psc720 30 Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-compativel-com-hp-78-c6578dl-color-deskjet-920c-p1000-psc720-30-ml.html",
+      "preco": {
+        "valor": 115.38,
+        "moeda": "BRL",
+        "texto": "R$ 115,38"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/1/410_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Canon Pfi-030 Pfi-030M Magenta  Ta30 Ta20  Original 55Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-canon-pfi-30-pfi-30m-magenta-ta30-ta20-original-55ml.html",
+      "preco": {
+        "valor": 310.0,
+        "moeda": "BRL",
+        "texto": "R$ 310,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8534_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 72 Preto Fotográfico C9370A  T770 T1120 T1200 T1300 T2300  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-72-preto-fotografico-c9370a-t770-t1120-t1200-t1300-t2300-original-130ml.html",
+      "preco": {
+        "valor": 750.0,
+        "moeda": "BRL",
+        "texto": "R$ 750,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4842_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 730 Magenta P2V63A  Plotter Hp T1600 T1700  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-730-magenta-p2v63a-plotter-hp-t1600-t1700-original-130ml.html",
+      "preco": {
+        "valor": 650.0,
+        "moeda": "BRL",
+        "texto": "R$ 650,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8501_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 730 Ciano P2V62A  Plotter Hp T1600 T1700  Original 130Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-730-ciano-p2v62a-plotter-hp-t1600-t1700-original-130ml.html",
+      "preco": {
+        "valor": 650.0,
+        "moeda": "BRL",
+        "texto": "R$ 650,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8498_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Cartucho De Tinta Hp 664Xl 664 Preto F6V31Ab F6V31A  1115 2136 3636 3836 3635 4676  Original 8,5Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-hp-664xl-664-preto-f6v31ab-f6v31a-1115-2136-3636-3836-3635-4676-original-8-5ml.html",
+      "preco": {
+        "valor": 182.0,
+        "moeda": "BRL",
+        "texto": "R$ 182,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/1/4137_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:21:22",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    }
+  ]
+}

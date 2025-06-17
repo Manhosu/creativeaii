@@ -1,0 +1,2526 @@
+{
+  "metadata": {
+    "total_produtos": 100,
+    "data_export": "2025-06-16 15:26:10",
+    "resumo": {
+      "total_produtos": 100,
+      "com_preco": 100,
+      "disponiveis": 100,
+      "sem_preco": 0,
+      "indisponiveis": 0,
+      "marcas_encontradas": 4,
+      "marcas": [
+        "Brother",
+        "Canon",
+        "Epson",
+        "HP"
+      ],
+      "categorias_processadas": 0,
+      "taxa_preco": 100.0,
+      "taxa_disponibilidade": 100.0,
+      "data_processamento": "2025-06-16 15:26:10"
+    }
+  },
+  "produtos": [
+    {
+      "nome": "Tinta Epson T544420 T544 Amarelo  L3150 L3110 L5190 L3250 L3210 5190 3150 3110  Original 65Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544420-t544-amarelo-l3150-l3110-3150-3110-original-65ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/9/6963_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T524420Al T524420 T524 Amarelo  L15150 L15160 L6490  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t524420al-t524420-t524-amarelo-l15150-l15160-original-70ml.html",
+      "preco": {
+        "valor": 113.0,
+        "moeda": "BRL",
+        "texto": "R$ 113,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8880_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T524220Al T524220 T524 Ciano  L15150 L15160 L6490  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t524220al-t524220-t524-ciano-l15150-l15160-original-70ml.html",
+      "preco": {
+        "valor": 113.0,
+        "moeda": "BRL",
+        "texto": "R$ 113,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8878_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T544120 T544 Preto  L3150 L3110 L5190 L3250 L3210 5190 3150 3110  Original 65Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544120-t544-preto-l3150-l3110-3150-3110-original-65ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/9/6960_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T524320Al T524320 T524 Magenta  L15150 L15160 L6490  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t524320al-t524320-t524-magenta-l15150-l15160-original-70ml.html",
+      "preco": {
+        "valor": 113.0,
+        "moeda": "BRL",
+        "texto": "R$ 113,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8879_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T534120 Preto  M1120 M3180 M2170 M1180 M-3180 M-1120 M-2170 M-1180  Original 120Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t534120-preta-m1120-m-1120-m-1120-original.html",
+      "preco": {
+        "valor": 70.05,
+        "moeda": "BRL",
+        "texto": "R$ 70,05"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7144_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T524120Al T524120 T524 Preto  L15150 L15160 L6490  Original 127Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t524120al-t524120-t524-preto-l15150-l15160-original-127ml.html",
+      "preco": {
+        "valor": 139.82,
+        "moeda": "BRL",
+        "texto": "R$ 139,82"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8877_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T544320 T544 Magenta  L3150 L3110 L5190 L3250 L3210 5190 3150 3110  Original 65Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544320-t544-magenta-l3150-l3110-3150-3110-original-65ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/9/6962_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504120Al T504120 T504 Preto  L4150 L4160 L6191 L6161 L6171 L14150  Original 127Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504120al-t504120-t504-preto-l4150-l4160-l6191-l6161-l6171-original-127ml.html",
+      "preco": {
+        "valor": 68.0,
+        "moeda": "BRL",
+        "texto": "R$ 68,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/3/6389_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T574120Al T574120 T574 Preto  L8050  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t574120al-t574120-t574-preto-l8050-original-70ml.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9322_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T555320-Al Magenta  L8180 L-8180 8180  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t555320-al-magenta-l8180-l-8180-8180-original-70ml.html",
+      "preco": {
+        "valor": 105.04,
+        "moeda": "BRL",
+        "texto": "R$ 105,04"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8706.png",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit Com 4 Garrafas De Tinta Epson T544520-4P  L3150 L3110 L3210 L3250 L5190  Original 65Ml",
+      "url": "https://www.creativecopias.com.br/kit-com-4-garrafas-de-tinta-epson-t544520-4p-l3150-l3110-l3210-l3250-l5190-original-65ml.html",
+      "preco": {
+        "valor": 208.0,
+        "moeda": "BRL",
+        "texto": "R$ 208,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10270_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504220 T504222 Ciano Corante Cc3E-1512  L6191 L4150 L4160 L6161 L6171  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504220-ciano-corante-l6191-l4150-l4160-l6161-l6171-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4868-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504320Al T504320 T504 Magenta  L4150 L4160 L6191 L6161 L6171 L14150  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504320al-t504320-t504-magenta-l4150-l4160-l6191-l6161-l6171-original-70ml.html",
+      "preco": {
+        "valor": 59.0,
+        "moeda": "BRL",
+        "texto": "R$ 59,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/3/6391_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504120 T504122 Preto Corante Bc3E-1509  L6191 L4150 L4160 L6161 L6171  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504120-preto-corante-l6191-l4150-l4160-l6161-l6171-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4871-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T555120-Al Preto  L8180 L-8180 8180  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t555120-al-preto-l8180-l-8180-8180-original-70ml.html",
+      "preco": {
+        "valor": 105.04,
+        "moeda": "BRL",
+        "texto": "R$ 105,04"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8709_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T574420Al T574420 T574 Amarelo  L8050  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t574420al-t574420-t574-amarelo-l8050-original-70ml.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9325_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504420 T504422 Amarelo Corante Yc3E-1514  L6191 L4150 L4160 L6161  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504420-amarelo-corante-l6191-l4150-l4160-l6161-l6171-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4866-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T544220 T544 Ciano  L3150 L3110 L5190 L3250 L3210 5190 3150 3110  Original 65Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544220-t544-ciano-l3150-l3110-3150-3110-original-65ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/9/6961_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T544120 Preto Corante Bc3E-1509  L3150 L3110 L5190 L3250 L3210  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544120-preto-corante-l3150-l3110-l5190-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4871-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Btd60Bk Bt-D60 Preto  Mfc-T810W Mfc-T4500Dw Mfc-T910Dw Hl-T4000Dw  Original 108Ml",
+      "url": "https://www.creativecopias.com.br/tinta-brother-btd60bk-bt-d60-preto-mfc-t810w-mfc-t4500dw-mfc-t910dw-original-108ml.html",
+      "preco": {
+        "valor": 55.0,
+        "moeda": "BRL",
+        "texto": "R$ 55,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/0/7020_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T574620Al T574620 T574 Magenta Claro  L8050  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t574620al-t574620-t574-magenta-claro-l8050-original-70ml.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9327_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T555220-Al Ciano  L8180 L-8180 8180  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t555220-al-ciano-l8180-l-8180-8180-original-70ml.html",
+      "preco": {
+        "valor": 105.04,
+        "moeda": "BRL",
+        "texto": "R$ 105,04"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8705.png",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504320 T504322 Magenta Corante Mc3E-1513  L6191 L4150 L4160 L6161  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504320-magenta-corante-l6191-l4150-l4160-l6161-l6171-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4870-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T574220Al T574220 T574 Ciano  L8050  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t574220al-t574220-t574-ciano-l8050-original-70ml.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9323_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504420Al T504420 T504 Amarelo  L4150 L4160 L6191 L6161 L6171 L14150  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504420al-t504420-t504-amarelo-l4150-l4160-l6191-l6161-l6171-original-70ml.html",
+      "preco": {
+        "valor": 59.0,
+        "moeda": "BRL",
+        "texto": "R$ 59,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/3/6392_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-190Bk Preto  Tanque De Tinta Pixma Maxx G1100 G2100 G3100 G3102  Original 135Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-190bk-preto-tanque-de-tinta-pixma-maxx-g1100-g2100-g3100-g3102-original-135ml.html",
+      "preco": {
+        "valor": 79.0,
+        "moeda": "BRL",
+        "texto": "R$ 79,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4433_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T504220Al T504220 T504 Ciano  L4150 L4160 L6191 L6161 L6171 L14150  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t504220al-t504220-t504-ciano-l4150-l4160-l6191-l6161-l6171-original-70ml.html",
+      "preco": {
+        "valor": 59.0,
+        "moeda": "BRL",
+        "texto": "R$ 59,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/3/6390_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Hp Gt53 Gt 53Bk Preto 1Vv22Al  Smart Tank 517 532 617 Deskjet Gt 5822 416 116  Original 90Ml",
+      "url": "https://www.creativecopias.com.br/tinta-hp-gt53-gt-53bk-preto-smart-tank-517-532-617-inktank-gt-5822-416-116-316-412-original-90ml.html",
+      "preco": {
+        "valor": 67.0,
+        "moeda": "BRL",
+        "texto": "R$ 67,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/7475_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T574320Al T574320 T574 Magenta  L8050  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t574320al-t574320-t574-magenta-l8050-original-70ml.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9324_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Bt-5001M Bt5001 Magenta  Dcp-T300 Dcp-T500W Dcp-T700W Mfc-T800W  Original 41.8Ml",
+      "url": "https://www.creativecopias.com.br/tinta-brother-bt-5001m-bt5001-magenta-dcp-t300-dcp-t500w-dcp-t700w-mfc-t800w-original-418ml.html",
+      "preco": {
+        "valor": 55.0,
+        "moeda": "BRL",
+        "texto": "R$ 55,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/3/4352_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-190M Magenta  Tanque De Tinta Pixma Maxx G1100 G2100 G3100 G3102  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-190m-magenta-tanque-de-tinta-pixma-maxx-g1100-g2100-g3100-g3102-original-70ml.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4438_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Bt-5001C Bt5001 Ciano  Dcp-T300 Dcp-T500W Dcp-T700W Mfc-T800W  Original 41.8Ml",
+      "url": "https://www.creativecopias.com.br/tinta-brother-bt-5001c-bt5001-ciano-dcp-t300-dcp-t500w-dcp-t700w-mfc-t800w-original-418ml.html",
+      "preco": {
+        "valor": 55.0,
+        "moeda": "BRL",
+        "texto": "R$ 55,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/3/4351_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T664120Al T664120 T664 Preto  L200 L220 L110 L355 L555 L396 L455 L365  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t664120al-t664120-t664-preto-l200-l220-l110-l355-l555-l396-l455-l365-original-70ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1111_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T555420-Al Amarelo  L8180 L-8180 8180  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t555420-al-amarelo-l8180-l-8180-8180-original-70ml.html",
+      "preco": {
+        "valor": 105.04,
+        "moeda": "BRL",
+        "texto": "R$ 105,04"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8707.png",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T574520Al T574520 T574 Ciano Claro  L8050  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t574520al-t574520-t574-ciano-claro-l8050-original-70ml.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9326_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Bt-5001Y Bt5001 Amarelo  Dcp-T300 Dcp-T500W Dcp-T700W Mfc-T800W  Original 41.8Ml",
+      "url": "https://www.creativecopias.com.br/tinta-brother-bt-5001y-bt5001-amarelo-dcp-t300-dcp-t500w-dcp-t700w-mfc-t800w-original-418ml.html",
+      "preco": {
+        "valor": 55.0,
+        "moeda": "BRL",
+        "texto": "R$ 55,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/3/4353_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-190Y Amarelo  Tanque De Tinta Pixma Maxx G1100 G2100 G3100 G3102  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-190y-amarelo-tanque-de-tinta-pixma-maxx-g1100-g2100-g3100-g3102-original-70ml.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4439_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T554120-Al Preto  L8180 L-8180 8180  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/cartucho-de-tinta-epson-t554120-al-preto-pigmentada-l8180-l-8180-8180-original-65ml.html",
+      "preco": {
+        "valor": 107.0,
+        "moeda": "BRL",
+        "texto": "R$ 107,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8910_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-190C Ciano  Tanque De Tinta Pixma Maxx G1100 G2100 G3100 G3102 G4100  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-190c-ciano-tanque-de-tinta-pixma-maxx-g1100-g2100-g3100-g3102-g4100-original-70ml.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4437_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Hp Gt52 Gt 52M M0H55Al Magenta  Gt5822 Ink Tank 416 Smart Tank 517 532 617  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-hp-gt52-gt-52m-m0h55al-magenta-gt-5822-gt5822-gt-5822-gt416-gt-416-gt-416-original-70ml.html",
+      "preco": {
+        "valor": 63.87,
+        "moeda": "BRL",
+        "texto": "R$ 63,87"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5170_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Hp Gt52 Gt 52C M0H54Al Ciano  Gt5822 Ink Tank 416 Smart Tank 517 532 617  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-hp-gt52-gt-52c-m0h54al-ciano-gt-5822-gt5822-gt-5822-gt416-gt-416-gt-416-original-70ml.html",
+      "preco": {
+        "valor": 63.87,
+        "moeda": "BRL",
+        "texto": "R$ 63,87"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5169_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T664320Al T664320 T664 Magenta  L200 L396 L220 L110 L355 L555 L455 L365  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t664320al-t664320-t664-magenta-l200-l396-l220-l110-l355-l555-l455-l365-original-70ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/4/1484_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T664320Al T664320 T664 Magenta  L200 L396 L220 L110 L355 L555 L455 L365  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t664320al-t664320-t664-magenta-l200-l396-l220-l110-l355-l555-l455-l365-original-70ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/4/1484_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Hp Gt52 Gt 52Y M0H56Al Amarelo  Gt5822 Ink Tank 416 Smart Tank 517 532 617  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-hp-gt52-gt-52y-m0h56al-amarelo-gt-5822-gt5822-gt-5822-gt416-gt-416-gt-416-original-70ml.html",
+      "preco": {
+        "valor": 63.87,
+        "moeda": "BRL",
+        "texto": "R$ 63,87"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5171_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-10Bk Preto  Tanque De Tinta Mega Tank G6010 G7010 Gm2010 Gm4010  Original 170Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-10bk-preto-tanque-de-tinta-mega-tank-g6010-g7010-gm2010-gm4010-original-170ml.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/1/8199_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-16Pgbk Gi16Bk Preto  Mega Tank Gx6010 Gx7010  Original 167Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-16pgbk-gi16bk-preto-mega-tank-gx6010-gx7010-original-167ml.html",
+      "preco": {
+        "valor": 240.0,
+        "moeda": "BRL",
+        "texto": "R$ 240,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8888_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673 T673420 Amarelo  L800 L810 L805 L1800 L850  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673-t673420-amarelo-l800-l810-l805-l1800-l850-original-70ml.html",
+      "preco": {
+        "valor": 66.96,
+        "moeda": "BRL",
+        "texto": "R$ 66,96"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3310_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T11B120Al Preta  Workforce Wf-C5810 Wf-C5390 Wf-C5310 Wf-C5890  Original 10K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t11b120al-preta-workforce-wf-c5810-wf-c5390-wf-c5310-wf-c5890-original-10k.html",
+      "preco": {
+        "valor": 392.0,
+        "moeda": "BRL",
+        "texto": "R$ 392,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9391_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Btd100Bk Bt-D100 Preto  Dcp-T230 Dcp-T430W Dcp-T530Dw Dcp-T730Dw  Original 108Ml",
+      "url": "https://www.creativecopias.com.br/tinta-brother-btd100bk-bt-d100-preto-dcp-t230-dcp-t430w-dcp-t530dw-dcp-t730dw-original-108ml.html",
+      "preco": {
+        "valor": 57.0,
+        "moeda": "BRL",
+        "texto": "R$ 57,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11602_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673 T673120 Preto  L800 L810 L1800 L805 L850  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673-t673120-preto-l800-l810-l1800-l805-l850-original-70ml.html",
+      "preco": {
+        "valor": 66.96,
+        "moeda": "BRL",
+        "texto": "R$ 66,96"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3307_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T664420Al T664420 T664 Amarelo  L200 L375 L220 L110 L355 L555 L455 L365  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t664420al-t664420-t664-amarelo-l200-l375-l220-l110-l355-l555-l455-l365-original-70ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1108_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T941320Al Magenta  Workforce Wf-C5790 Wf-C5710 Wf-C5290  Original 5K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t941320al-magento-workforce-wf-c5790-5790-wf-c5290-5290-original-5k.html",
+      "preco": {
+        "valor": 370.0,
+        "moeda": "BRL",
+        "texto": "R$ 370,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7181_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T49M120 T49M Preto  F170 F571 F570  Original 140Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t49m120-t49m-preto-f170-f571-f570-original-140ml.html",
+      "preco": {
+        "valor": 122.0,
+        "moeda": "BRL",
+        "texto": "R$ 122,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8846_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Btd100Y Bt-D100 Amarelo  Dcp-T230 Dcp-T430W Dcp-T530Dw Dcp-T730Dw  Original 48.8Ml",
+      "url": "https://www.creativecopias.com.br/tinta-brother-btd100y-bt-d100-amarelo-dcp-t230-dcp-t430w-dcp-t530dw-dcp-t730dw-original-488ml.html",
+      "preco": {
+        "valor": 56.0,
+        "moeda": "BRL",
+        "texto": "R$ 56,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11605_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T664220Al T664220 T664 Ciano  L200 L396 L110 L355 L555 L455 L365 L220  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t664220al-t664220-t664-ciano-l200-l396-l110-l355-l555-l455-l365-l220-original-70ml.html",
+      "preco": {
+        "valor": 55.12,
+        "moeda": "BRL",
+        "texto": "R$ 55,12"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1110_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T664 T664420 Amarelo  L355 L365 L555 L455 L475 L395  Katun Select 100Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t664-t664420-amarelo-l355-l365-l555-l455-l475-l395-katun-select-100ml.html",
+      "preco": {
+        "valor": 19.0,
+        "moeda": "BRL",
+        "texto": "R$ 19,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/6/7644_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T941220Al Ciano  Workforce Wf-C5790 Wf-C5710 Wf-C5290  Original 5K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t941220al-ciano-workforce-wf-c5790-5790-wf-c5290-5290-original-5k.html",
+      "preco": {
+        "valor": 370.0,
+        "moeda": "BRL",
+        "texto": "R$ 370,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7180_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-10C Ciano  Tanque De Tinta Mega Tank G6010 G7010  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-10c-ciano-tanque-de-tinta-mega-tank-g6010-g7010-original-70ml.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/2/8200_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Btd100M Bt-D100 Magenta  Dcp-T230 Dcp-T430W Dcp-T530Dw Dcp-T730Dw  Original 48.8Ml",
+      "url": "https://www.creativecopias.com.br/tinta-brother-btd100m-bt-d100-magenta-dcp-t230-dcp-t430w-dcp-t530dw-dcp-t730dw-original-418ml.html",
+      "preco": {
+        "valor": 56.0,
+        "moeda": "BRL",
+        "texto": "R$ 56,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11604_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673 T673220 Ciano  L805 L800 L810 L1800 L850  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673-t673220-ciano-l805-l800-l810-l1800-l850-original-70ml.html",
+      "preco": {
+        "valor": 66.96,
+        "moeda": "BRL",
+        "texto": "R$ 66,96"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3308_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-10C Ciano  Tanque De Tinta Mega Tank G6010 G7010  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-10c-ciano-tanque-de-tinta-mega-tank-g6010-g7010-original-70ml.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/2/8200_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673 T673320 Magenta  L800 L810 L805 L1800 L850  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673-t673320-magenta-l800-l810-l805-l1800-l850-original-70ml.html",
+      "preco": {
+        "valor": 66.96,
+        "moeda": "BRL",
+        "texto": "R$ 66,96"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3309_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T664 T664320 Magenta  L355 L365 L555 L455 L475 L395  Katun Select 100Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t664-t664320-magenta-l355-l365-l555-l455-l475-l395-katun-select-100ml.html",
+      "preco": {
+        "valor": 19.0,
+        "moeda": "BRL",
+        "texto": "R$ 19,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/6/7643_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T11A220Al Ciano  Workforce Wf-C5810 Wf-C5390 Wf-C5310 Wf-C5890  Original 5K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t11a220al-ciano-workforce-wf-c5810-wf-c5390-wf-c5310-wf-c5890-original-5k.html",
+      "preco": {
+        "valor": 415.0,
+        "moeda": "BRL",
+        "texto": "R$ 415,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9393_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-10M Magenta  Tanque De Tinta Mega Tank G6010 G7010  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-10m-magenta-tanque-de-tinta-mega-tank-g6010-g7010-original-70ml.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/2/8201_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-10Y Amarelo  Tanque De Tinta Mega Tank G6010 G7010  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-10y-amarelo-tanque-de-tinta-mega-tank-g6010-g7010-original-70ml.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/2/8202_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T664 T664220 Ciano  L355 L365 L555 L455 L475 L395  Katun Select 100Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t664-t664120-ciano-l355-l365-l555-l455-l475-l395-katun-select-100ml.html",
+      "preco": {
+        "valor": 19.0,
+        "moeda": "BRL",
+        "texto": "R$ 19,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/6/7642_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T664 T664120 Preto  L355 L365 L555 L455 L475 L395  Katun Select 100Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t664-t664120-preto-l355-l365-l555-l455-l475-l395-katun-select-100ml.html",
+      "preco": {
+        "valor": 19.0,
+        "moeda": "BRL",
+        "texto": "R$ 19,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/6/7640_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T544320 Magenta Corante Mc3E-1513  L3150 L3110 L5190 L3250 L3210  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544320-magenta-corante-l3150-l3110-l5190-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4870-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson Universal Magenta Corante Premium 930901000  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-universal-magenta-corante-930901000-qualy-ink-premium-1kg.html",
+      "preco": {
+        "valor": 48.0,
+        "moeda": "BRL",
+        "texto": "R$ 48,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11038_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-16M Gi16M Magenta  Mega Tank Gx6010 Gx7010  Original 132Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-16m-gi16m-magenta-mega-tank-gx6010-gx7010-original-132ml.html",
+      "preco": {
+        "valor": 180.0,
+        "moeda": "BRL",
+        "texto": "R$ 180,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8890_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T11A420Al Amarela  Workforce Wf-C5810 Wf-C5390 Wf-C5310 Wf-C5890  Original 5K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t11a420al-amarela-workforce-wf-c5810-wf-c5390-wf-c5310-wf-c5890-original-5k.html",
+      "preco": {
+        "valor": 415.0,
+        "moeda": "BRL",
+        "texto": "R$ 415,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9395_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T942120Al Preto  Workforce Wf-C5790 Wf-C5290 Wf-C5710  Original 10K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t942120al-preto-workforce-wf-c5790-5790-wf-c5290-5290-original-10k.html",
+      "preco": {
+        "valor": 389.0,
+        "moeda": "BRL",
+        "texto": "R$ 389,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7179_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T544420 Amarelo Corante Yc3E-1514  L3150 L3110 L5190 L3250 L3210  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544420-amarelo-corante-l3150-l3110-l5190-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4866-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673120 Preto Corante Bc3E-1509  L800 L810 L805 L1800  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673120-preto-corante-l800-l810-l805-l1800-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4871-2_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T544220 Ciano Corante Cc3E-1512  L3150 L3110 L5190 L3250 L3210  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t544220-ciano-corante-l3150-l3110-l5190-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 39.15,
+        "moeda": "BRL",
+        "texto": "R$ 39,15"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/8/4868-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673 T673620 Magenta Claro  L800 L810 L805 L1800 L850  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673-t673620-magenta-claro-l800-l810-l805-l1800-l850-original-70ml.html",
+      "preco": {
+        "valor": 66.96,
+        "moeda": "BRL",
+        "texto": "R$ 66,96"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3312_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673 T673520 Ciano Claro  L800 L805 L810 L1800 L850  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673-t673520-ciano-claro-l800-l805-l810-l1800-l850-original-70ml.html",
+      "preco": {
+        "valor": 66.96,
+        "moeda": "BRL",
+        "texto": "R$ 66,96"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3311_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson Universal Magenta Corante Premium 930901000  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-universal-magenta-corante-930901000-qualy-ink-premium-1kg.html",
+      "preco": {
+        "valor": 48.0,
+        "moeda": "BRL",
+        "texto": "R$ 48,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11038_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T11A320Al Magenta  Workforce Wf-C5810 Wf-C5390 Wf-C5310 Wf-C5890  Original 5K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t11a320al-magenta-workforce-wf-c5810-wf-c5390-wf-c5310-wf-c5890-original-5k.html",
+      "preco": {
+        "valor": 415.0,
+        "moeda": "BRL",
+        "texto": "R$ 415,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9394_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T673 T673520 Ciano Claro  L800 L805 L810 L1800 L850  Original 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t673-t673520-ciano-claro-l800-l805-l810-l1800-l850-original-70ml.html",
+      "preco": {
+        "valor": 66.96,
+        "moeda": "BRL",
+        "texto": "R$ 66,96"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3311_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-16Y Gi16Y Amarelo  Mega Tank Gx6010 Gx7010  Original 132Ml",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-16y-gi16y-amarelo-mega-tank-gx6010-gx7010-original-132ml.html",
+      "preco": {
+        "valor": 180.0,
+        "moeda": "BRL",
+        "texto": "R$ 180,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8891_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit Com 3 Garrafas De Tinta Brother Btd1003Pk Cmy  Dcp-T230 Dcp-T430W Dcp-T530Dw  Original 5K",
+      "url": "https://www.creativecopias.com.br/kit-com-3-garrafas-de-tinta-brother-btd1003pk-cmy-dcp-t230-dcp-t430w-dcp-t530dw-original-5k.html",
+      "preco": {
+        "valor": 159.0,
+        "moeda": "BRL",
+        "texto": "R$ 159,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11807_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T774120-Al T774120 Preto  Workforce M105 M205 Ecotank L656 L606  Original 140Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t774120-al-t774120-preto-workforce-m105-m205-ecotank-l656-l606-original-140ml.html",
+      "preco": {
+        "valor": 105.08,
+        "moeda": "BRL",
+        "texto": "R$ 105,08"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2677.png",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T11A320Al Magenta  Workforce Wf-C5810 Wf-C5390 Wf-C5310 Wf-C5890  Original 5K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t11a320al-magenta-workforce-wf-c5810-wf-c5390-wf-c5310-wf-c5890-original-5k.html",
+      "preco": {
+        "valor": 415.0,
+        "moeda": "BRL",
+        "texto": "R$ 415,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9394_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Universal Magenta Corante Premium 930901000  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-brother-universal-magenta-corante-premium-930901000-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 48.0,
+        "moeda": "BRL",
+        "texto": "R$ 48,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11038-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit Com 2 Garrafas De Tinta Preta Epson T544120-2P  L3150 L3110 L3210 L3250 L5190  Original 65Ml",
+      "url": "https://www.creativecopias.com.br/kit-com-2-garrafas-de-tinta-preta-epson-t544120-l3150-l3110-l3210-l3250-l5190-original-65ml.html",
+      "preco": {
+        "valor": 108.07,
+        "moeda": "BRL",
+        "texto": "R$ 108,07"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9043_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Canon Gi-13Bk Preto  Tanque De Tinta Mega Tank G610  Original",
+      "url": "https://www.creativecopias.com.br/tinta-canon-gi-13bk-preto-tanque-de-tinta-mega-tank-g610-original.html",
+      "preco": {
+        "valor": 162.0,
+        "moeda": "BRL",
+        "texto": "R$ 162,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8982_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T544420 T544 Amarelo  L3150 L3110 L5190 L3250 L3210  Katun Select 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t544420-t544-amarelo-l3150-l3110-l5190-l3250-l3210-katun-select-70ml.html",
+      "preco": {
+        "valor": 24.24,
+        "moeda": "BRL",
+        "texto": "R$ 24,24"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10392_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T544120 T544 Preto  L3150 L3110 L5190 L3250 L3210  Katun Select 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t544120-t544-preto-l3150-l3110-l5190-l3250-l3210-katun-select-70ml.html",
+      "preco": {
+        "valor": 22.0,
+        "moeda": "BRL",
+        "texto": "R$ 22,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10371_ampliada1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson Universal Amarelo Corante Premium 931101000  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-epson-universal-amarelo-corante-931101000-qualy-ink-premium-1kg.html",
+      "preco": {
+        "valor": 48.0,
+        "moeda": "BRL",
+        "texto": "R$ 48,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11040_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Brother Universal Amarelo Corante Premium 931101000  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-brother-universal-amarelo-corante-premium-931101000-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 48.0,
+        "moeda": "BRL",
+        "texto": "R$ 48,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11040-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T544320 T544 Magenta  L3150 L3110 L5190 L3250 L3210  Katun Select 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t544320-t544-magenta-l3150-l3110-l5190-l3250-l3210-katun-select-70ml.html",
+      "preco": {
+        "valor": 24.24,
+        "moeda": "BRL",
+        "texto": "R$ 24,24"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10393_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Compatível Com Epson T544220 T544 Ciano  L3150 L3110 L5190 L3250 L3210  Katun Select 70Ml",
+      "url": "https://www.creativecopias.com.br/tinta-compativel-com-epson-t544220-t544-ciano-l3150-l3110-l5190-l3250-l3210-katun-select-70ml.html",
+      "preco": {
+        "valor": 24.24,
+        "moeda": "BRL",
+        "texto": "R$ 24,24"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10388_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T49M220 T49M Ciano  F170 F571 F570  Original 140Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t49m220-t49m-ciano-f170-f571-f570-original-140ml.html",
+      "preco": {
+        "valor": 122.0,
+        "moeda": "BRL",
+        "texto": "R$ 122,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8847_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T941420Al Amarelo  Workforce Wf-C5790 Wf-C5710 Wf-C5290  Original 5K",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t941420al-amarelo-workforce-wf-c5790-5790-wf-c5290-5290-original-5k.html",
+      "preco": {
+        "valor": 370.0,
+        "moeda": "BRL",
+        "texto": "R$ 370,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7182_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T49M320 T49M Magenta  F170 F571 F570  Original 140Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t49m320-t49m-magenta-f170-f571-f570-original-140ml.html",
+      "preco": {
+        "valor": 122.0,
+        "moeda": "BRL",
+        "texto": "R$ 122,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8848_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Epson T49H100 T49 Preto  Surecolor T3170X  Original 140Ml",
+      "url": "https://www.creativecopias.com.br/tinta-epson-t49h100-t49-preto-surecolor-t3170x-original-140ml.html",
+      "preco": {
+        "valor": 219.0,
+        "moeda": "BRL",
+        "texto": "R$ 219,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8524_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Tinta Hp Corante Preto Universal Bc3H-1179  Qualy Ink 1Kg",
+      "url": "https://www.creativecopias.com.br/tinta-hp-corante-preto-universal-bc3h-1179-qualy-ink-1kg.html",
+      "preco": {
+        "valor": 45.0,
+        "moeda": "BRL",
+        "texto": "R$ 45,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/5/1506_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:25:43",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    }
+  ]
+}

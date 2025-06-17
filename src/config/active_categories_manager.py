@@ -6,6 +6,7 @@ Gerencia as categorias ativas para scraping, geração e publicação
 
 import sqlite3
 import asyncio
+import os
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime
 from loguru import logger
@@ -19,7 +20,7 @@ class ActiveCategoriesManager:
     
     def __init__(self, db_path: str = "src/database/config.db"):
         self.db_path = db_path
-        self.base_url = "https://www.creativecopias.com.br"
+        self.base_url = os.getenv("SITE_BASE_URL", "https://www.creativecopias.com.br")
         self._init_database()
     
     def _init_database(self):

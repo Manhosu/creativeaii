@@ -181,6 +181,42 @@
             color: var(--text-primary);
         }
         
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn:disabled:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Estilo específico para botão de exclusão */
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            border: 2px solid #c82333;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #c82333, #a71e2a);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .btn-danger.deleting {
+            background: linear-gradient(45deg, #dc3545, #c82333) !important;
+            animation: pulse-delete 1.5s infinite;
+        }
+        
+        @keyframes pulse-delete {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
         /* Lista de Artigos */
         .articles-container {
             display: grid;
@@ -463,8 +499,8 @@
                         <button class="btn btn-primary" onclick="searchArticles()">
                             🔍 Buscar
             </button>
-                        <button class="btn btn-secondary" onclick="clearSearch()">
-                            🧹 Limpar
+                        <button class="btn btn-danger" onclick="clearAllArticles()" id="clearBtn" title="Excluir TODOS os artigos da sessão atual">
+                            🗑️ Limpar Tudo
             </button>
         </div>
                     </div>
@@ -722,10 +758,89 @@
             displayArticles(articlesData);
         }
         
-        // Limpar busca
-        function clearSearch() {
-            document.getElementById('searchInput').value = '';
+        // Limpar TODOS os artigos da sessão
+        async function clearAllArticles() {
+            const clearBtn = document.getElementById('clearBtn');
+            
+            // Confirmação dupla para segurança
+            const confirmFirst = confirm('⚠️ ATENÇÃO: Você tem certeza que deseja excluir TODOS os artigos da sessão atual?\n\nEsta ação não pode ser desfeita e ajudará a manter o sistema otimizado.');
+            
+            if (!confirmFirst) return;
+            
+            const confirmSecond = confirm('🚨 CONFIRMAÇÃO FINAL: Todos os artigos serão permanentemente excluídos.\n\nDeseja continuar?');
+            
+            if (!confirmSecond) return;
+            
+            // Efeito visual no botão
+            if (clearBtn) {
+                clearBtn.innerHTML = '⏳ Excluindo todos...';
+                clearBtn.disabled = true;
+                clearBtn.classList.add('deleting');
+            }
+            
+            try {
+                // Usar endpoint otimizado para exclusão em lote
+                const response = await fetch('/review/cleanup/all', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Limpar lista local
+                    articlesData = [];
+                    
+                    // Atualizar interface
+                    displayArticles(articlesData);
+                    
+                    // Limpar campo de busca também
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.value = '';
+                    }
             currentSearch = '';
+                    
+                    // Feedback baseado no resultado
+                    if (result.deleted_count === 0) {
+                        showNotification('ℹ️ Informação', 'Não havia artigos para excluir.', 'info');
+                    } else if (result.errors && result.errors.length > 0) {
+                        showNotification(
+                            '⚠️ Limpeza Parcial', 
+                            `${result.deleted_count} artigos excluídos com ${result.total_errors || result.errors.length} erros.`, 
+                            'warning'
+                        );
+                    } else {
+                        showNotification(
+                            '🗑️ Limpeza Completa', 
+                            `${result.deleted_count} artigos excluídos com sucesso! Sistema otimizado.`, 
+                            'success'
+                        );
+                    }
+                } else {
+                    throw new Error(result.error || 'Erro desconhecido');
+                }
+                
+            } catch (error) {
+                console.error('Erro na limpeza geral:', error);
+                showNotification('❌ Erro', 'Erro ao executar limpeza: ' + error.message, 'error');
+                
+            } finally {
+                // Restaurar botão
+                if (clearBtn) {
+                    clearBtn.innerHTML = '🗑️ Limpar Tudo';
+                    clearBtn.disabled = false;
+                    clearBtn.classList.remove('deleting');
+                }
+            }
+        }
+        
+        // Buscar artigos (função mantida para compatibilidade)
+        function searchArticles() {
+            const searchInput = document.getElementById('searchInput');
+            currentSearch = searchInput.value.trim();
             displayArticles(articlesData);
         }
         

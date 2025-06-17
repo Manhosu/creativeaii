@@ -35,7 +35,7 @@ os.environ.setdefault('CONTENT_MIN_WORDS', '300')
 os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
 
 # Configurar outras variáveis importantes
-os.environ['PORT'] = '3025'  # FORÇAR porta 3025
+# Porta será definida pelo Railway via variável de ambiente PORT
 os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
 
 # Não definir chave de API aqui - deve vir do .env
@@ -130,6 +130,7 @@ except ImportError as e:
 try:
     from src.intelligence.priority_manager import PriorityManager
     from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
     INTELLIGENCE_AVAILABLE = True
     logger.info("✅ Módulos de inteligência carregados com sucesso")
 except ImportError as e:
@@ -948,18 +949,8 @@ async def dashboard():
                                 <div class="action-card">
                                     <span class="action-icon">🔍</span>
                                     <h3 class="action-title">Scraper</h3>
-                                    <p class="action-desc">Busca de produtos e categorias de sites e-commerce</p>
+                                    <p class="action-desc">Busca de produtos e gera artigos automaticamente</p>
                                     <a href="/interface/scraper" class="action-btn">
-                                        <span>Acessar</span>
-                                        <span>→</span>
-                                    </a>
-                                </div>
-                                
-                                <div class="action-card">
-                                    <span class="action-icon">📝</span>
-                                    <h3 class="action-title">Revisão</h3>
-                                    <p class="action-desc">Revise e gerencie artigos antes da publicação</p>
-                                    <a href="/interface/review" class="action-btn success-btn">
                                         <span>Acessar</span>
                                         <span>→</span>
                                     </a>
@@ -2338,82 +2329,497 @@ async def get_scraper_categories():
         logger.error(f"❌ Erro ao obter categorias: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/scraper/generate-article")
-async def generate_article_from_product(product_data: dict):
-    """Gera artigo a partir de dados do produto e envia para revisão"""
-    if not GENERATOR_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo gerador não disponível")
+@app.post("/scraper/generate-article-advanced")
+async def generate_advanced_article_from_product(product_data: dict, allow_duplicates: bool = False):
+    """Gera artigo super completo usando templates avançados"""
+    
+    # 🔧 NORMALIZAR FORMATO DOS DADOS - aceitar tanto 'nome' quanto 'productName'
+    if 'productName' in product_data and 'nome' not in product_data:
+        product_data['nome'] = product_data['productName']
+    
+    # Se recebeu apenas productName, buscar dados completos do produto no banco
+    if len(product_data) == 1 and 'nome' in product_data:
+        produto_nome = product_data['nome']
+        logger.info(f"🔍 Buscando dados completos para: {produto_nome}")
+        
+        # Buscar produto nos dados do scraper
+        try:
+            import json
+            import os
+            import glob
+            
+            # Buscar arquivos JSON de produtos (mesma lógica da função get_scraped_products)
+            json_files = glob.glob("logs/products_*.json")
+            
+            if not json_files:
+                logger.warning("⚠️ Nenhum arquivo de produtos encontrado")
+                return None
+            
+            all_products = []
+            
+            # Mapeamento de categorias conhecidas
+            categorias_mapeamento = {
+                'cartuchos-de-tinta': 'Cartuchos de Tinta',
+                'cartuchos-de-toner': 'Cartuchos de Toner', 
+                'refil-de-toner': 'Refil de Toner',
+                'impressoras': 'Impressoras',
+                'multifuncional': 'Multifuncionais',
+                'plotters': 'Plotters',
+                'suprimentos': 'Suprimentos'
+            }
+            
+            # Agrupar arquivos por categoria e pegar apenas o mais recente de cada uma
+            categoria_files = {}
+            for json_file in json_files:
+                filename = os.path.basename(json_file)
+                categoria_from_file = filename.replace('products_', '').split('_')[0]
+                
+                # Se não existe ou é mais recente, atualizar
+                if categoria_from_file not in categoria_files:
+                    categoria_files[categoria_from_file] = json_file
+                else:
+                    # Comparar timestamps nos nomes dos arquivos
+                    current_timestamp = filename.split('_')[-1].replace('.json', '')
+                    existing_filename = os.path.basename(categoria_files[categoria_from_file])
+                    existing_timestamp = existing_filename.split('_')[-1].replace('.json', '')
+                    
+                    if current_timestamp > existing_timestamp:
+                        categoria_files[categoria_from_file] = json_file
+            
+            # Carregar produtos apenas dos arquivos mais recentes
+            for categoria_key, json_file in categoria_files.items():
+                try:
+                    with open(json_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                        
+                        # Usar categoria_key já extraída
+                        filename = os.path.basename(json_file)
+                        categoria_nome = categorias_mapeamento.get(categoria_key, categoria_key.title())
+                        
+                        # Adicionar produtos
+                        if isinstance(data, list):
+                            for product in data:
+                                product['categoria_key'] = categoria_key
+                                product['categoria_nome'] = categoria_nome
+                                product['source_file'] = filename
+                                all_products.append(product)
+                        elif isinstance(data, dict) and 'produtos' in data:
+                            for product in data['produtos']:
+                                product['categoria_key'] = categoria_key
+                                product['categoria_nome'] = categoria_nome
+                                product['source_file'] = filename
+                                all_products.append(product)
+                except Exception as e:
+                    logger.warning(f"Erro ao carregar arquivo {json_file}: {e}")
+                    continue
+            
+            # Procurar produto por nome exato
+            produto_encontrado = None
+            for produto in all_products:
+                if produto.get('nome', '').strip().lower() == produto_nome.strip().lower():
+                    produto_encontrado = produto
+                    break
+            
+            if produto_encontrado:
+                product_data = produto_encontrado
+                logger.info(f"✅ Dados completos encontrados: {produto_encontrado.get('categoria_nome', 'N/A')}")
+            else:
+                logger.warning(f"⚠️ Produto não encontrado nos dados do scraper: {produto_nome}")
+                # Continuar com dados mínimos
+                product_data.update({
+                    'categoria_nome': 'produtos',
+                    'preco': 'Consulte',
+                    'codigo': 'N/A',
+                    'marca': 'N/A',
+                    'descricao': f'Produto {produto_nome} de qualidade disponível em nossa loja.'
+                })
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Erro ao buscar dados completos: {e}")
+    
+    logger.info(f"🎨 Gerando artigo avançado para: {product_data.get('nome', 'Produto')}")
     
     try:
-        from src.generator.generator_manager import GeneratorManager
-        from src.review.review_manager import ReviewManager
+        if not REVIEW_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de revisão não disponível")
         
-        # Criar instâncias dos managers
-        generator_manager = GeneratorManager()
+        # 🧠 VERIFICAR APRENDIZADO DA IA
+        produto_nome = product_data.get('nome', '')
+        categoria = product_data.get('categoria_nome', 'produtos')
+        ai_suggestions = []
+        
+        try:
+            ai_learning = AILearning()
+            
+            # Verificar se produto já foi rejeitado antes
+            has_rejections = ai_learning.has_previous_rejections(produto_nome, categoria)
+            
+            if has_rejections:
+                logger.warning(f"⚠️ ATENÇÃO: Produto '{produto_nome}' já foi rejeitado antes!")
+                ai_suggestions.append(f"⚠️ ATENÇÃO: Este produto já foi rejeitado antes - seja mais cuidadoso!")
+            
+        except Exception as ai_error:
+            logger.warning(f"⚠️ Erro ao consultar aprendizado da IA: {ai_error}")
+        
+        # Usar o ReviewManager adequado
+        from src.review.review_manager import ReviewManager
         review_manager = ReviewManager()
         
-        logger.info(f"🤖 Gerando artigo para produto: {product_data.get('nome', 'N/A')}")
+        # 🎨 USAR SISTEMA AVANÇADO DE TEMPLATES
+        from src.generator.article_templates import AdvancedArticleTemplates
+        template_generator = AdvancedArticleTemplates()
         
-        # Preparar dados para geração
-        generation_request = {
-            'product_data': product_data,
-            'tone': 'profissional',
-            'wp_category': product_data.get('categoria_nome', ''),
-            'produto_original': product_data.get('nome', '')
-        }
+        # Gerar artigo super completo
+        advanced_article = template_generator.generate_advanced_article(product_data, categoria)
         
-        # Gerar o artigo
-        article_data = generator_manager.generate_article_from_product(product_data, 
-                                                                      tone=generation_request.get('tone', 'profissional'),
-                                                                      wp_category=generation_request.get('wp_category', ''),
-                                                                      produto_original=generation_request.get('produto_original', ''),
-                                                                      skip_availability_check=product_data.get('skip_availability_check', False))
+        # Adicionar sugestões da IA se houver
+        conteudo_extra = ""
+        if ai_suggestions:
+            conteudo_extra = f"""
+<div style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
+    <h4>🧠 Sugestões da IA:</h4>
+    <ul>
+        {''.join([f'<li>{suggestion}</li>' for suggestion in ai_suggestions])}
+    </ul>
+</div>
+"""
         
-        # Verificar se a geração foi bem-sucedida
-        if not article_data or article_data.get('status') == 'skipped':
-            error_msg = article_data.get('motivo', 'Erro na geração do artigo')
-            raise HTTPException(status_code=400, detail=error_msg)
-        
-        # Verificar se é um artigo válido
-        if not article_data.get('titulo') or not article_data.get('conteudo'):
-            raise HTTPException(status_code=500, detail="Artigo gerado está incompleto")
-        
-        review_data = {
-            'titulo': article_data.get('titulo', ''),
-            'slug': article_data.get('slug', ''),
-            'meta_descricao': article_data.get('meta_descricao', ''),
-            'conteudo': article_data.get('conteudo', ''),
-            'tags': article_data.get('tags', []),
-            'wp_category': product_data.get('categoria_nome', ''),
+        # Preparar dados do artigo para o ReviewManager
+        article_data = {
+            'titulo': advanced_article['titulo'],
+            'slug': advanced_article['slug'],
+            'meta_descricao': advanced_article['meta_descricao'],
+            'conteudo': conteudo_extra + advanced_article['conteudo'],
+            'tags': advanced_article['tags'],
+            'wp_category': categoria,
             'produto_original': product_data.get('nome', ''),
-            'status': 'pending'
+            'produto_nome': product_data.get('nome', ''),
+            'tipo_produto': categoria,
+            'tom_usado': 'profissional',
+            'status': 'pendente'
         }
         
-        # Salvar na revisão
-        article_id = review_manager.save_article_for_review(review_data)
-        review_result = {'success': True, 'article_id': article_id}
+        # Salvar usando o ReviewManager com controle de duplicatas
+        article_id = review_manager.save_article_for_review(article_data, allow_duplicates=allow_duplicates)
         
-        if review_result.get('success'):
+        if article_id:
+            logger.info(f"✅ Artigo avançado salvo com ID: {article_id}")
+            
+            response_data = {
+                "success": True,
+                "article_id": article_id,
+                "article": advanced_article,  # CORREÇÃO: Incluir o artigo na resposta
+                "message": f"Artigo avançado criado e enviado para revisão com sucesso!",
+                "produto": product_data.get('nome', ''),
+                "categoria": product_data.get('categoria_nome', ''),
+                "allow_duplicates": allow_duplicates,
+                "template_type": "advanced"
+            }
+            
+            # Adicionar informações de aprendizado se houver
+            if ai_suggestions:
+                response_data["ai_learning"] = {
+                    "has_previous_rejections": True,
+                    "suggestions": ai_suggestions,
+                    "message": "IA detectou que este produto já foi rejeitado - revise com cuidado!"
+                }
+            
+            return response_data
+        else:
+            raise Exception("Falha ao salvar artigo no sistema de revisão")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao gerar artigo avançado: {e}")
+        import traceback
+        logger.error(f"❌ Traceback: {traceback.format_exc()}")
+        return {
+            "success": False,
+            "error": str(e),
+            "message": "Erro ao criar artigo avançado",
+            "suggestion": "💡 Tente adicionar ?allow_duplicates=true na URL se quiser forçar a criação"
+        }
+
+@app.post("/scraper/generate-article")
+async def generate_article_from_product(product_data: dict, allow_duplicates: bool = False):
+    """Gera artigo a partir de dados do produto com sistema inteligente integrado"""
+    
+    logger.info(f"🤖 Gerando artigo inteligente para produto: {product_data.get('nome', 'Produto')}")
+    
+    try:
+        if not REVIEW_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de revisão não disponível")
+        
+        # 🧠 SISTEMA INTELIGENTE - VERIFICAR STATUS DO PRODUTO
+        from src.intelligence.learning_manager import LearningManager
+        learning_manager = LearningManager()
+        
+        product_status = learning_manager.check_product_status(product_data)
+        
+        # 1. REDIRECIONAR SE JÁ EXISTE ARTIGO PENDENTE
+        if product_status['status'] == 'has_pending':
+            logger.info(f"📋 Redirecionando para artigo pendente: {product_status['article_id']}")
             return {
                 "success": True,
-                "article_id": review_result.get('article_id'),
-                "message": f"Artigo gerado e enviado para revisão com sucesso!",
+                "action": "redirect",
+                "redirect_to": product_status['redirect_url'],
+                "article_id": product_status['article_id'],
+                "message": product_status['message'],
+                "article_title": product_status['article_title'],
+                "recommendation": "👆 Revise o artigo existente ao invés de criar um novo"
+            }
+        
+        # 2. GERAR CONTEÚDO COM MELHORIAS DA IA
+        produto_nome = product_data.get('nome', '')
+        categoria = product_data.get('categoria_nome', 'produtos')
+        
+        # Criar conteúdo base
+        titulo = f"Review: {produto_nome}"
+        slug = produto_nome.lower().replace(' ', '-').replace(':', '').replace(',', '')
+        
+        conteudo_base = f"""<h1>{produto_nome}</h1>
+
+<h2>Informações do Produto</h2>
+<ul>
+<li><strong>Categoria:</strong> {categoria}</li>
+<li><strong>Preço:</strong> {product_data.get('preco', 'Consulte')}</li>
+<li><strong>Código:</strong> {product_data.get('codigo', 'N/A')}</li>
+<li><strong>Marca:</strong> {product_data.get('marca', 'N/A')}</li>
+</ul>
+
+<h2>Descrição</h2>
+<p>{product_data.get('descricao', 'Produto de qualidade disponível em nossa loja.')}</p>
+
+<h2>Características</h2>
+<p>Este produto oferece excelente qualidade e desempenho para suas necessidades.</p>
+
+<h3>Vantagens</h3>
+<ul>
+<li>Qualidade superior</li>
+<li>Ótimo custo-benefício</li>
+<li>Entrega rápida</li>
+</ul>
+
+<p><a href="{product_data.get('url', '#')}" target="_blank">Ver produto no site</a></p>"""
+
+        # 3. APLICAR MELHORIAS INTELIGENTES SE HOUVER HISTÓRICO
+        if product_status['status'] == 'has_rejections':
+            logger.info(f"🧠 Aplicando melhorias baseadas em IA para {produto_nome}")
+            conteudo_melhorado = learning_manager.generate_smart_content_improvements(product_data, conteudo_base)
+        else:
+            conteudo_melhorado = conteudo_base
+        
+        # Usar o ReviewManager adequado
+        from src.review.review_manager import ReviewManager
+        review_manager = ReviewManager()
+        
+        # Preparar dados do artigo
+        article_data = {
+            'titulo': titulo,
+            'slug': slug,
+            'meta_descricao': f"Review completo do {produto_nome} - Características, preço e onde comprar",
+            'conteudo': conteudo_melhorado,
+            'tags': [categoria, product_data.get('marca', '').lower() if product_data.get('marca') else 'produtos'],
+            'wp_category': categoria,
+            'produto_original': produto_nome,
+            'produto_nome': produto_nome,
+            'tipo_produto': categoria,
+            'tom_usado': 'profissional',
+            'status': 'pendente'
+        }
+        
+        # 4. SALVAR COM CONTROLE INTELIGENTE DE DUPLICATAS
+        try:
+            article_id = review_manager.save_article_for_review(article_data, allow_duplicates=allow_duplicates)
+        except ValueError as duplicate_error:
+            if "duplicado" in str(duplicate_error).lower():
+                # Sugerir atualização ao invés de duplicata
+                logger.warning(f"🔄 Tentativa de duplicata detectada para {produto_nome}")
+                return {
+                    "success": False,
+                    "error": "duplicate_detected",
+                    "message": f"Já existe um artigo similar para '{produto_nome}'",
+                    "suggestion": "💡 Use allow_duplicates=true para forçar criação ou atualize o artigo existente",
+                    "recommendation": "Considere revisar o artigo existente ao invés de criar um novo"
+                }
+            else:
+                raise duplicate_error
+        
+        if article_id:
+            logger.info(f"✅ Artigo inteligente salvo com ID: {article_id}")
+            
+            # 5. PREPARAR RESPOSTA COM INFORMAÇÕES DA IA
+            response_data = {
+                "success": True,
+                "article_id": article_id,
+                "message": f"Artigo criado com sistema inteligente!",
+                "produto": produto_nome,
+                "categoria": categoria,
+                "allow_duplicates": allow_duplicates,
+                "ai_status": product_status['status']
+            }
+            
+            # Adicionar informações específicas baseadas no status
+            if product_status['status'] == 'has_rejections':
+                response_data["ai_learning"] = {
+                    "applied_improvements": True,
+                    "last_rejection": product_status.get('last_rejection'),
+                    "suggestions_applied": len(product_status.get('suggestions', [])),
+                    "message": "🧠 IA aplicou melhorias baseadas em rejeições anteriores",
+                    "warning": product_status.get('warning', '')
+                }
+            elif product_status['status'] == 'clean':
+                response_data["ai_learning"] = {
+                    "applied_improvements": False,
+                    "message": "✨ Produto sem histórico de problemas - artigo gerado normalmente"
+                }
+            
+            return response_data
+        else:
+            raise Exception("Falha ao salvar artigo no sistema de revisão")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao gerar artigo inteligente: {e}")
+        import traceback
+        logger.error(f"❌ Traceback: {traceback.format_exc()}")
+        return {
+            "success": False,
+            "error": str(e),
+            "message": "Erro ao criar artigo com sistema inteligente",
+            "suggestion": "💡 Tente adicionar ?allow_duplicates=true na URL se quiser forçar a criação"
+        }
+
+@app.post("/scraper/generate-article-smart")
+async def generate_article_smart(product_data: dict, update_existing: bool = True, force_update: bool = False):
+    """Gera artigo de forma inteligente - atualiza existente ou cria novo"""
+    
+    logger.info(f"🧠 Geração inteligente para produto: {product_data.get('nome', 'Produto')}")
+    
+    try:
+        if not REVIEW_AVAILABLE:
+            raise HTTPException(status_code=503, detail="Sistema de revisão não disponível")
+        
+        # 🧠 VERIFICAR APRENDIZADO DA IA
+        produto_nome = product_data.get('nome', '')
+        categoria = product_data.get('categoria_nome', 'produtos')
+        ai_suggestions = []
+        
+        try:
+            ai_learning = AILearning()
+            
+            # Verificar se produto já foi rejeitado antes
+            has_rejections = ai_learning.has_previous_rejections(produto_nome, categoria)
+            
+            if has_rejections:
+                logger.warning(f"⚠️ ATENÇÃO: Produto '{produto_nome}' já foi rejeitado antes!")
+                ai_suggestions.append(f"⚠️ ATENÇÃO: Este produto já foi rejeitado antes - seja mais cuidadoso!")
+            
+        except Exception as ai_error:
+            logger.warning(f"⚠️ Erro ao consultar aprendizado da IA: {ai_error}")
+        
+        # Usar o ReviewManager adequado
+        from src.review.review_manager import ReviewManager
+        review_manager = ReviewManager()
+        
+        # Criar dados do artigo no formato esperado pelo ReviewManager
+        titulo = f"Review: {product_data.get('nome', 'Produto')}"
+        slug = product_data.get('nome', 'produto').lower().replace(' ', '-').replace(':', '').replace(',', '')
+        
+        # 📝 CONTEÚDO MELHORADO BASEADO NO APRENDIZADO
+        conteudo_extra = ""
+        if ai_suggestions:
+            conteudo_extra = f"""
+<div style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
+    <h4>🧠 Sugestões da IA:</h4>
+    <ul>
+        {''.join([f'<li>{suggestion}</li>' for suggestion in ai_suggestions])}
+    </ul>
+</div>
+"""
+
+        conteudo = f"""{conteudo_extra}<h1>{product_data.get('nome', 'Produto')}</h1>
+
+<h2>Informações do Produto</h2>
+<ul>
+<li><strong>Categoria:</strong> {categoria}</li>
+<li><strong>Preço:</strong> {product_data.get('preco', 'Consulte')}</li>
+<li><strong>Código:</strong> {product_data.get('codigo', 'N/A')}</li>
+<li><strong>Marca:</strong> {product_data.get('marca', 'N/A')}</li>
+</ul>
+
+<h2>Descrição</h2>
+<p>{product_data.get('descricao', 'Produto de qualidade disponível em nossa loja.')}</p>
+
+<h2>Características</h2>
+<p>Este produto oferece excelente qualidade e desempenho para suas necessidades.</p>
+
+<h3>Vantagens</h3>
+<ul>
+<li>Qualidade superior</li>
+<li>Ótimo custo-benefício</li>
+<li>Entrega rápida</li>
+</ul>
+
+<p><a href="{product_data.get('url', '#')}" target="_blank">Ver produto no site</a></p>"""
+
+        # Preparar dados do artigo para o ReviewManager
+        article_data = {
+            'titulo': titulo,
+            'slug': slug,
+            'meta_descricao': f"Review completo do {product_data.get('nome', 'produto')} - Características, preço e onde comprar",
+            'conteudo': conteudo,
+            'tags': [categoria, product_data.get('marca', '').lower() if product_data.get('marca') else 'produtos'],
+            'wp_category': categoria,
+            'produto_original': product_data.get('nome', ''),
+            'produto_nome': product_data.get('nome', ''),
+            'tipo_produto': categoria,
+            'tom_usado': 'profissional',
+            'status': 'pendente'
+        }
+        
+        # Usar geração inteligente
+        if update_existing:
+            article_id, was_updated = review_manager.update_or_create_article(article_data, force_update=force_update)
+            action = "atualizado" if was_updated else "criado"
+        else:
+            # Criar sempre novo (pode dar erro se for duplicata)
+            article_id = review_manager.save_article_for_review(article_data, allow_duplicates=False)
+            action = "criado"
+            was_updated = False
+        
+        if article_id:
+            logger.info(f"✅ Artigo {action} com ID: {article_id}")
+            
+            response_data = {
+                "success": True,
+                "article_id": article_id,
+                "action": action,
+                "was_updated": was_updated,
+                "message": f"Artigo {action} e enviado para revisão com sucesso!",
                 "produto": product_data.get('nome', ''),
                 "categoria": product_data.get('categoria_nome', '')
             }
+            
+            # Adicionar informações de aprendizado se houver
+            if ai_suggestions:
+                response_data["ai_learning"] = {
+                    "has_previous_rejections": True,
+                    "suggestions": ai_suggestions,
+                    "message": "IA detectou que este produto já foi rejeitado - revise com cuidado!"
+                }
+            
+            return response_data
         else:
-            raise HTTPException(status_code=500, detail="Erro ao salvar artigo para revisão")
+            raise Exception("Falha ao salvar/atualizar artigo no sistema de revisão")
         
-    except HTTPException:
-        # Re-raise HTTPExceptions para que o FastAPI as trate corretamente
-        raise
     except Exception as e:
-        logger.error(f"❌ Erro ao gerar artigo: {e}")
-        logger.error(f"❌ Tipo do erro: {type(e)}")
+        logger.error(f"❌ Erro na geração inteligente: {e}")
         import traceback
         logger.error(f"❌ Traceback: {traceback.format_exc()}")
-        error_detail = str(e) if str(e) else f"Erro interno: {type(e).__name__}"
-        raise HTTPException(status_code=500, detail=error_detail)
+        return {
+            "success": False,
+            "error": str(e),
+            "message": "Erro ao criar/atualizar artigo"
+        }
 
 @app.get("/scraper/products/export")
 async def export_scraped_products():
@@ -2763,15 +3169,15 @@ async def generate_article(request: GenerationRequest):
             # TODO: Integrar com scraper para buscar produto por ID
             raise HTTPException(status_code=400, detail="Integração com scraper ainda não implementada. Use product_data.")
         
-        # Gerar artigo
-        article = manager.generate_article_from_product(
-            product=request.product_data,
-            custom_keywords=request.custom_keywords,
-            custom_instructions=request.custom_instructions,
-            tone=request.tone,
-            wp_category=request.wp_category,
-            produto_original=request.produto_original
-        )
+        # CORREÇÃO: Usar sistema avançado de templates
+        from src.generator.article_templates import AdvancedArticleTemplates
+        template_generator = AdvancedArticleTemplates()
+        
+        # Determinar categoria baseada no produto
+        categoria = request.wp_category or 'Produto'
+        
+        # Gerar artigo com sistema avançado
+        article = template_generator.generate_advanced_article(request.product_data, categoria)
         
         if article:
             # Salvar automaticamente no sistema de revisão
@@ -2781,16 +3187,17 @@ async def generate_article(request: GenerationRequest):
                     review_manager = ReviewManager()
                     
                     # Salvar artigo para revisão
-                    article_id = review_manager.save_article(
-                        title=article.get('titulo', 'Artigo sem título'),
-                        content=article.get('conteudo', ''),
-                        meta_description=article.get('meta_descricao', ''),
-                        slug=article.get('slug', ''),
-                        tags=article.get('tags', []),
-                        wp_category=request.wp_category,
-                        produto_original=request.produto_original,
-                        status='pendente'
-                    )
+                    review_data = {
+                        'titulo': article.get('titulo', 'Artigo sem título'),
+                        'conteudo': article.get('conteudo', ''),
+                        'meta_descricao': article.get('meta_descricao', ''),
+                        'slug': article.get('slug', ''),
+                        'tags': article.get('tags', []),
+                        'wp_category': request.wp_category,
+                        'produto_original': request.produto_original,
+                        'status': 'pendente'
+                    }
+                    article_id = review_manager.save_article_for_review(review_data)
                     
                     return {
                         "success": True,
@@ -3097,39 +3504,22 @@ async def review_article_view_html(article_id: int):
 
 @app.get("/review/{article_id}/edit", response_class=HTMLResponse)
 async def review_article_edit(article_id: int):
-    """Interface de edição de artigo"""
-    if not REVIEW_AVAILABLE:
-        raise HTTPException(status_code=503, detail="Módulo Review não disponível")
-    
-    try:
-        review_manager = ReviewManager()
-        article = review_manager.get_article(article_id)
-        
-        if not article:
-            raise HTTPException(status_code=404, detail="Artigo não encontrado")
-        
-        if not templates:
-            return JSONResponse({
-                "article": article,
-                "edit_mode": True,
-                "message": "Use a API /review/{id}/update para editar via JSON"
-            })
-        
-        return templates.TemplateResponse("review_article.html", {
-            "request": {},
-            "article": article,
-            "is_edit_mode": True
-        })
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"❌ Erro ao carregar editor para artigo {article_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+    """ENDPOINT DESABILITADO - Edição removida do sistema"""
+    return HTMLResponse("""
+    <html>
+        <head><title>Edição Desabilitada</title></head>
+        <body style="font-family: Arial; text-align: center; padding: 50px;">
+            <h1>❌ Edição Desabilitada</h1>
+            <p>A edição de artigos foi removida.</p>
+            <p>🧠 A IA aprende automaticamente com as rejeições.</p>
+            <a href="/interface/review" style="color: #007AFF;">← Voltar à Lista</a>
+        </body>
+    </html>
+    """, status_code=410)
 
 @app.post("/review/{article_id}/update")
 async def review_article_update(article_id: int, request: ReviewRequest):
-    """Atualizar dados do artigo"""
+    """Atualizar título do artigo"""
     
     # Forçar Content-Type para JSON
     headers = {"Content-Type": "application/json; charset=utf-8"}
@@ -3144,20 +3534,9 @@ async def review_article_update(article_id: int, request: ReviewRequest):
     try:
         review_manager = ReviewManager()
         
-        # Converter request para dict, removendo valores None
-        updates = {k: v for k, v in request.dict().items() if v is not None}
-        
-        if not updates:
-            return JSONResponse({
-                "success": False,
-                "error": "Nenhum campo válido para atualizar",
-                "status_code": 400,
-                "article_id": article_id
-            }, status_code=400, headers=headers)
-        
-        success = review_manager.update_article(article_id, updates, "API User")
-        
-        if not success:
+        # Verificar se o artigo existe
+        article = review_manager.get_article(article_id)
+        if not article:
             return JSONResponse({
                 "success": False,
                 "error": "Artigo não encontrado",
@@ -3165,14 +3544,46 @@ async def review_article_update(article_id: int, request: ReviewRequest):
                 "article_id": article_id
             }, status_code=404, headers=headers)
         
-        # Retornar artigo atualizado
-        updated_article = review_manager.get_article(article_id)
+        # Apenas permitir edição de título em artigos pendentes
+        if article.get('status') != 'pendente':
+            return JSONResponse({
+                "success": False,
+                "error": "Apenas artigos pendentes podem ter o título editado",
+                "status_code": 400,
+                "article_id": article_id
+            }, status_code=400, headers=headers)
+        
+        # Preparar atualizações (apenas título por segurança)
+        updates = {}
+        if request.titulo and request.titulo.strip():
+            updates['titulo'] = request.titulo.strip()
+        
+        if not updates:
+            return JSONResponse({
+                "success": False,
+                "error": "Nenhum campo válido para atualização",
+                "status_code": 400,
+                "article_id": article_id
+            }, status_code=400, headers=headers)
+        
+        # Atualizar artigo
+        success = review_manager.update_article(article_id, updates, "Editor Web")
+        
+        if not success:
+            return JSONResponse({
+                "success": False,
+                "error": "Erro ao atualizar artigo",
+                "status_code": 500,
+                "article_id": article_id
+            }, status_code=500, headers=headers)
+        
+        logger.info(f"✅ Título do artigo {article_id} atualizado para: {updates.get('titulo', '')[:50]}...")
         
         return JSONResponse({
             "success": True,
-            "message": "Artigo atualizado com sucesso",
-            "article": dict(updated_article) if updated_article else None,
-            "article_id": article_id
+            "message": "Título atualizado com sucesso",
+            "article_id": article_id,
+            "updated_fields": list(updates.keys())
         }, headers=headers)
         
     except Exception as e:
@@ -3185,7 +3596,7 @@ async def review_article_update(article_id: int, request: ReviewRequest):
         }, status_code=500, headers=headers)
 
 @app.post("/review/{article_id}/approve")
-async def review_article_approve(article_id: int, request: ReviewActionRequest = None):
+async def review_article_approve(article_id: int, request: dict = None):
     """Aprovar artigo para publicação"""
     
     # Forçar Content-Type para JSON
@@ -3199,19 +3610,26 @@ async def review_article_approve(article_id: int, request: ReviewActionRequest =
         }, status_code=503, headers=headers)
     
     try:
-        # Se request é None, criar um vazio
+        # Se request é None ou vazio, usar valores padrão
         if not request:
-            request = ReviewActionRequest()
+            request = {}
+        
+        # Extrair valores com defaults seguros
+        reviewer = request.get('reviewer', 'Sistema')
+        comment = request.get('comment', '')
+        wp_category = request.get('wp_category')
+        produto_original = request.get('produto_original')
+        skip_availability_check = request.get('skip_availability_check', False)
         
         review_manager = ReviewManager()
         
         success = review_manager.approve_article(
             article_id, 
-            request.reviewer, 
-            request.comment,
-            wp_category=request.wp_category,
-            produto_original=request.produto_original,
-            skip_availability_check=request.skip_availability_check
+            reviewer, 
+            comment,
+            wp_category=wp_category,
+            produto_original=produto_original,
+            skip_availability_check=skip_availability_check
         )
         
         if not success:
@@ -3226,7 +3644,7 @@ async def review_article_approve(article_id: int, request: ReviewActionRequest =
             "success": True,
             "message": f"Artigo {article_id} aprovado com sucesso",
             "action": "approved",
-            "reviewer": request.reviewer,
+            "reviewer": reviewer,
             "article_id": article_id
         }, headers=headers)
         
@@ -3240,8 +3658,8 @@ async def review_article_approve(article_id: int, request: ReviewActionRequest =
         }, status_code=500, headers=headers)
 
 @app.post("/review/{article_id}/reject")
-async def review_article_reject(article_id: int, request: ReviewActionRequest = None):
-    """Rejeitar artigo"""
+async def review_article_reject(article_id: int, request: dict = None):
+    """Rejeitar artigo - IA aprende automaticamente"""
     
     # Forçar Content-Type para JSON
     headers = {"Content-Type": "application/json; charset=utf-8"}
@@ -3254,11 +3672,15 @@ async def review_article_reject(article_id: int, request: ReviewActionRequest = 
         }, status_code=503, headers=headers)
     
     try:
-        # Se request é None, criar um vazio
+        # Se request é None ou vazio, usar valores padrão
         if not request:
-            request = ReviewActionRequest()
+            request = {}
         
-        if not request.comment:
+        # Extrair valores com defaults seguros
+        reviewer = request.get('reviewer', 'Sistema')
+        comment = request.get('comment', '')
+        
+        if not comment:
             return JSONResponse({
                 "success": False,
                 "error": "Motivo da rejeição é obrigatório",
@@ -3268,13 +3690,10 @@ async def review_article_reject(article_id: int, request: ReviewActionRequest = 
         
         review_manager = ReviewManager()
         
-        success = review_manager.reject_article(
-            article_id, 
-            request.comment,  # Motivo da rejeição
-            request.reviewer
-        )
+        # Obter dados do artigo ANTES de rejeitá-lo
+        article_data = review_manager.get_article(article_id)
         
-        if not success:
+        if not article_data:
             return JSONResponse({
                 "success": False,
                 "error": "Artigo não encontrado",
@@ -3282,12 +3701,40 @@ async def review_article_reject(article_id: int, request: ReviewActionRequest = 
                 "article_id": article_id
             }, status_code=404, headers=headers)
         
+        # 🧠 ARMAZENAR REJEIÇÃO PARA APRENDIZADO DA IA
+        try:
+            ai_learning = AILearning()
+            ai_learning.store_rejection(
+                article_data=dict(article_data),
+                rejection_reason=comment,
+                reviewer=reviewer
+            )
+            logger.info(f"🧠 IA aprendeu com rejeição do artigo {article_id}")
+        except Exception as ai_error:
+            logger.warning(f"⚠️ Erro no aprendizado da IA: {ai_error}")
+        
+        # Rejeitar artigo no sistema
+        success = review_manager.reject_article(
+            article_id, 
+            comment,  # Motivo da rejeição
+            reviewer
+        )
+        
+        if not success:
+            return JSONResponse({
+                "success": False,
+                "error": "Erro ao rejeitar artigo",
+                "status_code": 500,
+                "article_id": article_id
+            }, status_code=500, headers=headers)
+        
         return JSONResponse({
             "success": True,
-            "message": f"Artigo {article_id} rejeitado",
+            "message": f"Artigo {article_id} rejeitado - IA aprenderá com este feedback",
             "action": "rejected",
-            "reason": request.comment,
-            "reviewer": request.reviewer,
+            "reason": comment,
+            "reviewer": reviewer,
+            "ai_learning": "Feedback armazenado para melhorar futuros artigos",
             "article_id": article_id
         }, headers=headers)
         
@@ -3313,7 +3760,7 @@ async def review_delete_article(article_id: int):
             "error": "Módulo Review não disponível",
             "status_code": 503
         }, status_code=503, headers=headers)
-    
+
     try:
         review_manager = ReviewManager()
         success = review_manager.delete_article(article_id, "API User")
@@ -3339,6 +3786,73 @@ async def review_delete_article(article_id: int):
             "error": f"Erro interno: {str(e)}",
             "status_code": 500,
             "article_id": article_id
+        }, status_code=500, headers=headers)
+
+@app.post("/review/cleanup/all")
+async def review_delete_all_articles():
+    """Remover TODOS os artigos do sistema para otimização"""
+    
+    # Forçar Content-Type para JSON
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    
+    if not REVIEW_AVAILABLE:
+        return JSONResponse({
+            "success": False,
+            "error": "Módulo Review não disponível",
+            "status_code": 503
+        }, status_code=503, headers=headers)
+
+    try:
+        review_manager = ReviewManager()
+        
+        # Obter lista de todos os artigos
+        articles = review_manager.list_articles(limit=10000)  # Limite alto para pegar todos
+        
+        if not articles:
+            return JSONResponse({
+                "success": True,
+                "message": "Nenhum artigo encontrado para excluir",
+                "deleted_count": 0
+            }, headers=headers)
+        
+        deleted_count = 0
+        errors = []
+        
+        # Excluir cada artigo
+        for article in articles:
+            try:
+                success = review_manager.delete_article(article['id'], "Sistema - Limpeza Automática")
+                if success:
+                    deleted_count += 1
+                else:
+                    errors.append(f"Falha ao excluir artigo {article['id']}")
+            except Exception as e:
+                errors.append(f"Erro ao excluir artigo {article['id']}: {str(e)}")
+        
+        logger.info(f"🗑️ Limpeza completa executada: {deleted_count} artigos excluídos")
+        
+        if errors:
+            logger.warning(f"⚠️ Erros durante limpeza: {len(errors)} erros")
+            return JSONResponse({
+                "success": True,
+                "message": f"Limpeza parcial concluída: {deleted_count} artigos excluídos",
+                "deleted_count": deleted_count,
+                "errors": errors[:10],  # Limitar erros mostrados
+                "total_errors": len(errors)
+            }, headers=headers)
+        
+        return JSONResponse({
+            "success": True,
+            "message": f"Limpeza completa concluída: {deleted_count} artigos excluídos",
+            "deleted_count": deleted_count
+        }, headers=headers)
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na limpeza geral de artigos: {e}")
+        return JSONResponse({
+            "success": False,
+            "error": f"Erro interno: {str(e)}",
+            "status_code": 500
         }, status_code=500, headers=headers)
 
 @app.post("/review/save-from-generator")
@@ -3532,7 +4046,7 @@ async def publish_article(publication_data: dict):
         
         # Buscar artigo no sistema de revisão
         review_manager = ReviewManager()
-        article = review_manager.get_article(article_id)  # Usar método correto
+        article = review_manager.get_article(article_id)  # Método correto
         
         if not article:
             logger.error(f"❌ ERRO 404: Artigo {article_id} não encontrado")
@@ -3849,6 +4363,134 @@ async def check_wordpress_publication_config():
     except Exception as e:
         logger.error(f"❌ Erro ao verificar configuração: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/intelligence/learn-from-rejection")
+async def learn_from_rejection(learning_data: dict):
+    """Endpoint para a IA aprender com feedback de rejeições"""
+    if not INTELLIGENCE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Módulos de inteligência não disponíveis")
+    
+    try:
+        # Usar o novo sistema de aprendizado
+        from src.intelligence.learning_manager import LearningManager
+        
+        learning_manager = LearningManager()
+        
+        # Dados necessários
+        produto_nome = learning_data.get('produto_nome')
+        motivo = learning_data.get('motivo_rejeicao')
+        article_id = learning_data.get('article_id', 0)
+        
+        if not all([produto_nome, motivo]):
+            return {
+                "success": False,
+                "error": "Campos obrigatórios: produto_nome, motivo_rejeicao"
+            }
+        
+        # Registrar aprendizado
+        success = learning_manager.handle_article_rejection(
+            article_id=article_id,
+            rejection_reason=motivo,
+            reviewer=learning_data.get('reviewer', 'API')
+        )
+        
+        if success:
+            # Buscar sugestões para próximas gerações
+            suggestions = learning_manager.ai_learning.get_improvement_suggestions(produto_nome, learning_data.get('categoria', ''))
+            
+            logger.info(f"🧠 IA processou aprendizado - Produto: {produto_nome}")
+            
+            return {
+                "success": True,
+                "message": "Aprendizado registrado com sucesso",
+                "suggestions": suggestions,
+                "suggestions_count": len(suggestions),
+                "learning_active": True
+            }
+        else:
+            return {
+                "success": False,
+                "error": "Falha ao registrar aprendizado"
+            }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro no aprendizado da IA: {e}")
+        return {
+            "success": False,
+            "message": f"Erro no aprendizado: {str(e)}",
+            "note": "Erro no sistema de aprendizado"
+        }
+
+@app.get("/intelligence/product-status/{produto_nome}")
+async def get_product_intelligence_status(produto_nome: str):
+    """Verifica status inteligente de um produto específico"""
+    try:
+        from src.intelligence.learning_manager import LearningManager
+        
+        learning_manager = LearningManager()
+        
+        # Simular dados básicos do produto para verificação
+        product_data = {'nome': produto_nome, 'categoria_nome': 'produtos'}
+        
+        status = learning_manager.check_product_status(product_data)
+        summary = learning_manager.get_product_learning_summary(produto_nome)
+        
+        return {
+            "success": True,
+            "produto_nome": produto_nome,
+            "status": status,
+            "learning_summary": summary,
+            "recommendation": status.get('message', 'Status verificado')
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao verificar status do produto: {e}")
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+@app.post("/intelligence/test-smart-generation")
+async def test_smart_generation(test_data: dict):
+    """Testa sistema de geração inteligente"""
+    try:
+        from src.intelligence.learning_manager import LearningManager
+        
+        learning_manager = LearningManager()
+        
+        product_data = test_data.get('product_data', {
+            'nome': 'Impressora HP LaserJet Pro M404dn',
+            'categoria_nome': 'impressoras',
+            'marca': 'HP'
+        })
+        
+        # Verificar status
+        status = learning_manager.check_product_status(product_data)
+        
+        # Simular conteúdo base
+        base_content = f"""<h1>{product_data['nome']}</h1>
+<h2>Características</h2>
+<p>Impressora laser monocromática de alta qualidade.</p>"""
+        
+        # Aplicar melhorias se necessário
+        improved_content = learning_manager.generate_smart_content_improvements(product_data, base_content)
+        
+        return {
+            "success": True,
+            "product_data": product_data,
+            "product_status": status,
+            "base_content_length": len(base_content),
+            "improved_content_length": len(improved_content),
+            "ai_improvements_applied": len(improved_content) > len(base_content),
+            "test_result": "✅ Sistema inteligente funcionando corretamente"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro no teste de geração inteligente: {e}")
+        return {
+            "success": False,
+            "error": str(e)
+        }
 
 @app.get("/config", response_class=HTMLResponse)
 async def config_page():
@@ -6068,6 +6710,123 @@ async def check_category_active(category_key: str):
         logger.error(f"❌ Erro ao verificar categoria '{category_key}': {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/review/duplicates")
+async def get_duplicate_articles():
+    """Lista artigos duplicados no sistema"""
+    if not REVIEW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Sistema de revisão não disponível")
+    
+    try:
+        from src.review.review_manager import ReviewManager
+        review_manager = ReviewManager()
+        
+        # Buscar artigos duplicados por título
+        duplicates = []
+        articles = review_manager.list_articles(limit=1000)
+        
+        # Agrupar por título
+        title_groups = {}
+        for article in articles:
+            titulo = article.get('titulo', '')
+            if titulo not in title_groups:
+                title_groups[titulo] = []
+            title_groups[titulo].append(article)
+        
+        # Encontrar grupos com duplicatas
+        for titulo, group in title_groups.items():
+            if len(group) > 1:
+                duplicates.append({
+                    "titulo": titulo,
+                    "count": len(group),
+                    "articles": group
+                })
+        
+        logger.info(f"🔍 Encontrados {len(duplicates)} grupos de artigos duplicados")
+        
+        return {
+            "success": True,
+            "duplicate_groups": len(duplicates),
+            "total_duplicates": sum(len(g["articles"]) for g in duplicates),
+            "duplicates": duplicates
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao buscar duplicatas: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/review/clean-duplicates")
+async def clean_duplicate_articles(keep_latest: bool = True, dry_run: bool = True):
+    """Remove artigos duplicados automaticamente"""
+    if not REVIEW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Sistema de revisão não disponível")
+    
+    try:
+        from src.review.review_manager import ReviewManager
+        review_manager = ReviewManager()
+        
+        # Buscar artigos duplicados
+        duplicates = []
+        articles = review_manager.list_articles(limit=1000)
+        
+        # Agrupar por título
+        title_groups = {}
+        for article in articles:
+            titulo = article.get('titulo', '')
+            if titulo not in title_groups:
+                title_groups[titulo] = []
+            title_groups[titulo].append(article)
+        
+        removed_count = 0
+        actions = []
+        
+        # Processar cada grupo de duplicatas
+        for titulo, group in title_groups.items():
+            if len(group) > 1:
+                # Ordenar por data de criação
+                group.sort(key=lambda x: x.get('data_criacao', ''), reverse=keep_latest)
+                
+                # Manter o primeiro (mais recente se keep_latest=True)
+                to_keep = group[0]
+                to_remove = group[1:]
+                
+                for article in to_remove:
+                    article_id = article.get('id')
+                    action = {
+                        "action": "remove",
+                        "article_id": article_id,
+                        "titulo": article.get('titulo', ''),
+                        "data_criacao": article.get('data_criacao', ''),
+                        "status": article.get('status', '')
+                    }
+                    
+                    if not dry_run:
+                        # Remover efetivamente
+                        if review_manager.delete_article(article_id):
+                            removed_count += 1
+                            action["executed"] = True
+                        else:
+                            action["executed"] = False
+                            action["error"] = "Falha ao remover"
+                    else:
+                        action["executed"] = False
+                        action["note"] = "Dry run - não executado"
+                    
+                    actions.append(action)
+        
+        logger.info(f"🧹 Limpeza de duplicatas: {removed_count} artigos removidos (dry_run={dry_run})")
+        
+        return {
+            "success": True,
+            "dry_run": dry_run,
+            "removed_count": removed_count,
+            "total_actions": len(actions),
+            "actions": actions
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na limpeza de duplicatas: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/review/clean-template-variables")
 async def clean_template_variables():
     """Corrigir artigos existentes que ainda têm variáveis de template não substituídas"""
@@ -6113,6 +6872,19 @@ async def clean_template_variables():
     except Exception as e:
         logger.error(f"❌ Erro na limpeza de variáveis: {e}")
         raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+
+@app.post("/test/create-article")
+async def test_create_article_simple(product_data: dict):
+    """Teste simples de criação de artigo"""
+    return {
+        "success": True,
+        "article_id": 999,
+        "message": "Teste funcionando",
+        "produto": product_data.get('nome', ''),
+        "categoria": product_data.get('categoria_nome', '')
+    }
+
+# Duplicate endpoint removed - using the one at line 2330
 
 
 # =====================================================

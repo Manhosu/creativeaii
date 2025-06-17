@@ -57,18 +57,18 @@ class SEOOptimizer:
                 "{produto}: Especificações e Comparativo"
             ],
             'multifuncional': [
-                "{produto}: Multifuncional Completa - Review",
-                "{produto}: All-in-One para Escritório",
-                "{produto}: Análise da Multifuncional {marca}",
-                "{produto}: 3 em 1 - Vale a Pena?",
-                "{produto}: Multifuncional Profissional"
+                "{produto}: Análise Completa da Multifuncional",
+                "{produto}: Review da Impressora All-in-One",
+                "{produto}: Especificações e Características",
+                "{produto}: Multifuncional Profissional - Review",
+                "{produto}: Análise Técnica Detalhada"
             ],
             'toner': [
-                "{produto}: Toner Original - Rendimento",
-                "{produto}: Análise do Toner {marca}",
+                "{produto}: Análise do Toner Original",
+                "{produto}: Review do Cartucho {marca}",
                 "{produto}: Rendimento e Qualidade",
-                "{produto}: Cartucho Original vs Compatível",
-                "{produto}: Toner de Alta Performance"
+                "{produto}: Toner Original vs Compatível",
+                "{produto}: Especificações do Toner"
             ],
             'scanner': [
                 "{produto}: Scanner Profissional Review",
@@ -106,55 +106,55 @@ class SEOOptimizer:
             Artigo otimizado para Yoast SEO
         """
         try:
-            optimized = article_data.copy()
+            optimized_article = article_data.copy()
             
             # Extrair palavra-chave principal do título/produto
-            primary_keyword = self._extract_primary_keyword(optimized)
-            optimized['primary_keyword'] = primary_keyword
+            primary_keyword = self._extract_primary_keyword(optimized_article)
+            optimized_article['primary_keyword'] = primary_keyword
             
             # NOVO: Gerar título único e descritivo
-            if 'titulo' in optimized:
+            if 'titulo' in optimized_article:
                 # Usar nova função de título único
-                optimized['titulo'] = self.generate_unique_title(optimized)
+                optimized_article['titulo'] = self.generate_unique_title(optimized_article)
             else:
                 # Fallback se não tem título
-                optimized['titulo'] = self.generate_unique_title(optimized)
+                optimized_article['titulo'] = self.generate_unique_title(optimized_article)
             
             # NOVO: Gerar slug único baseado no título
-            optimized['slug'] = self.generate_unique_slug(optimized['titulo'], optimized)
+            optimized_article['slug'] = self.generate_unique_slug(optimized_article['titulo'], optimized_article)
             
             # Otimizar meta descrição (120-155 chars + keyword)
-            if 'meta_descricao' in optimized:
-                optimized['meta_descricao'] = self.optimize_meta_description_yoast(
-                    optimized['meta_descricao'], primary_keyword
+            if 'meta_descricao' in optimized_article:
+                optimized_article['meta_descricao'] = self.optimize_meta_description_yoast(
+                    optimized_article['meta_descricao'], primary_keyword
                 )
-            elif 'conteudo' in optimized:
-                optimized['meta_descricao'] = self.generate_meta_description_yoast(
-                    optimized['conteudo'], primary_keyword
+            elif 'conteudo' in optimized_article:
+                optimized_article['meta_descricao'] = self.generate_meta_description_yoast(
+                    optimized_article['conteudo'], primary_keyword
                 )
             
             # Otimizar conteúdo para legibilidade Yoast
-            if 'conteudo' in optimized:
-                optimized['conteudo'] = self.optimize_content_readability(
-                    optimized['conteudo'], primary_keyword
+            if 'conteudo' in optimized_article:
+                optimized_article['conteudo'] = self.optimize_content_readability(
+                    optimized_article['conteudo'], primary_keyword
                 )
             
             # Otimizar tags
-            if 'tags' in optimized:
-                optimized['tags'] = self.optimize_tags_yoast(optimized['tags'], primary_keyword)
+            if 'tags' in optimized_article:
+                optimized_article['tags'] = self.optimize_tags_yoast(optimized_article['tags'], primary_keyword)
             
             # Adicionar dados estruturados
-            optimized['seo_data'] = self.generate_structured_data_yoast(optimized)
+            optimized_article['seo_data'] = self.generate_structured_data_yoast(optimized_article)
             
             # NOVO: Gerar alt tag automática para imagem destacada
-            if 'produto_imagem' in optimized or 'imagem' in optimized:
-                optimized['imagem_alt'] = self.generate_automatic_alt_tag(optimized)
+            if 'produto_imagem' in optimized_article or 'imagem' in optimized_article:
+                optimized_article['imagem_alt'] = self.generate_automatic_alt_tag(optimized_article)
             
             # Validar pontuação Yoast
-            optimized['yoast_score'] = self.calculate_yoast_score(optimized)
+            optimized_article['yoast_score'] = self.calculate_yoast_score(optimized_article)
             
             logger.debug("✅ Artigo otimizado para Yoast SEO - Pontuação Verde")
-            return optimized
+            return optimized_article
             
         except Exception as e:
             logger.error(f"❌ Erro na otimização SEO: {e}")

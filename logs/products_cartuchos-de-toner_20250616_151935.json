@@ -1,0 +1,2528 @@
+{
+  "metadata": {
+    "total_produtos": 100,
+    "data_export": "2025-06-16 15:19:35",
+    "resumo": {
+      "total_produtos": 100,
+      "com_preco": 100,
+      "disponiveis": 100,
+      "sem_preco": 0,
+      "indisponiveis": 0,
+      "marcas_encontradas": 6,
+      "marcas": [
+        "Brother",
+        "Canon",
+        "HP",
+        "Lexmark",
+        "Ricoh",
+        "Samsung"
+      ],
+      "categorias_processadas": 0,
+      "taxa_preco": 100.0,
+      "taxa_disponibilidade": 100.0,
+      "data_processamento": "2025-06-16 15:19:35"
+    }
+  },
+  "produtos": [
+    {
+      "nome": "Toner Compatível Com Brother Tn-B021 Preto  Dcp-B7520Dw B7520Dw Dcp-B7535Dw  Premium Quality 2.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn-b021-preto-dcp-b7520dw-b7520dw-dcp-b7535dw-premium-quality-26k.html",
+      "preco": {
+        "valor": 23.0,
+        "moeda": "BRL",
+        "texto": "R$ 23,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/5/8576_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Ricoh 408284  Sp3710 Sp3710Sf Sp3710Dn M320F  Katun Select 7K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-ricoh-sp3710-sp3710sf-sp3710dn-408284-katun-select-7k.html",
+      "preco": {
+        "valor": 82.0,
+        "moeda": "BRL",
+        "texto": "R$ 82,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7705_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp W1330X 330X Preto  M432Fdn M432 M408Dn M408  Original 15K",
+      "url": "https://www.creativecopias.com.br/toner-hp-w1330x-330x-preto-m432fdn-m432-m408fdn-m408-original-15k.html",
+      "preco": {
+        "valor": 286.4,
+        "moeda": "BRL",
+        "texto": "R$ 286,40"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/1/8155_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Ricoh 408284  Sp3710 Sp3710Sf Sp3710Dn M320F M320 P311  Original 7K",
+      "url": "https://www.creativecopias.com.br/toner-ricoh-sp3710-sp3710sf-sp3710dn-408284-original-7k.html",
+      "preco": {
+        "valor": 246.0,
+        "moeda": "BRL",
+        "texto": "R$ 246,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/9/6912_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn3472 Tn3472Br  Dcp-L5652Dn Dcp-L5502Dn Mfc-L6702Dw  Premium 12K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-brother-tn3472-tn3472br-dcp-l5652dn-dcp-l5502dn-mfc-l6702dw-premium-12k.html",
+      "preco": {
+        "valor": 62.0,
+        "moeda": "BRL",
+        "texto": "R$ 62,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/1/5173_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Ce278A  P1566 P1606 P1606N P1606Dn M1530 M1536 M1536Dnf  Premium 2K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-ce278a-p1566-p1606-p1606n-p1606dn-m1530-m1536-m1536dnf-premium-2k.html",
+      "preco": {
+        "valor": 44.3,
+        "moeda": "BRL",
+        "texto": "R$ 44,30"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/5/950_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp Cf258X 58X M428Fdw M404Dw M428Dw M404N  Original 10K",
+      "url": "https://www.creativecopias.com.br/toner-hp-cf258x-58x-m428fdw-m404dw-m428dw-m404n-original-10k.html",
+      "preco": {
+        "valor": 340.0,
+        "moeda": "BRL",
+        "texto": "R$ 340,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/5/7524_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn2370  Hl-L2360 Hl-L2320 Mfc-L2720 Mfc-L2740 Mfc-L2700  Premium 2.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-brother-tn2370-hl-l2360-hl-l2320-mfc-l2720-mfc-l2740-mfc-l2700-premium-26k.html",
+      "preco": {
+        "valor": 37.09,
+        "moeda": "BRL",
+        "texto": "R$ 37,09"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4417_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Ce285A 285A Ce285Ab  P1102 P1102W M1132 M1210 M1212 M1130  Premium 1.8K",
+      "url": "https://www.creativecopias.com.br/toner-hp-ce285a-85a-285a-ce285ab-compativel-p1102-p1102w-m1132-m1210-m1212-m1130-premium-18k.html",
+      "preco": {
+        "valor": 40.18,
+        "moeda": "BRL",
+        "texto": "R$ 40,18"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/449_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn660  Dcp-L2540 Dcp-L2520 Mfc-L2740 Mfc-L2700 Mfc-L2720 Premium 2.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-brother-tn660-dcp-l2540-dcp-l2520-mfc-l2740-mfc-l2700-mfc-l2720-premium-26k.html",
+      "preco": {
+        "valor": 37.09,
+        "moeda": "BRL",
+        "texto": "R$ 37,09"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4417-2_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf283A 83A  M127Fn M127Fw M125 M201 M225 M226 M202 M201Dw  Premium 1.5K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-cf283a-83a-m127fn-m127fw-m127-m125-m201-m225-m226-m202-m201dw-premium-15k.html",
+      "preco": {
+        "valor": 40.18,
+        "moeda": "BRL",
+        "texto": "R$ 40,18"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3296_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn2340  Hl-L2360 Hl-L2320 Mfc-L2720 Mfc-L2740 Mfc-L2700  Premium 2.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-brother-tn2340-hl-l2360-hl-l2320-mfc-l2720-mfc-l2740-mfc-l2700-premium-26k.html",
+      "preco": {
+        "valor": 37.09,
+        "moeda": "BRL",
+        "texto": "R$ 37,09"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4417-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cb435A Cb436A Ce285A Universal  P1005 P1505 M1120 M1212 M1130  Premium",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-cb435a-cb436a-ce285a-universal-p1005-p1505-m1120-m1210-m1212-m1130-premium.html",
+      "preco": {
+        "valor": 40.18,
+        "moeda": "BRL",
+        "texto": "R$ 40,18"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/6/869_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp 105A W1105A  107A 107W 135A 135W  Com Chip  Importado 1K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-105a-w1105a-107a-107w-135a-135w-importado-1k.html",
+      "preco": {
+        "valor": 46.0,
+        "moeda": "BRL",
+        "texto": "R$ 46,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/3/8399_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn3612 Tn3612Xl Tn3662Xl Tn3662Xls Dcp-L5512 Dcp-L5662 Hl-L5212 Mfc-L5912 Original 25K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3662xls-tn3662xls-dcp-l5512-dcp-l5662-hl-l5212-hl-l6412-mfc-l5912-original-25k.html",
+      "preco": {
+        "valor": 441.0,
+        "moeda": "BRL",
+        "texto": "R$ 441,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9613_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn-B021 Preto  Dcp-B7520Dw B7520Dw Dcp-B7535Dw B7535Dw Dcp-B7650Dw  Original 2.6K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn-b021-preto-dcp-b7520dw-b7520dw-dcp-b7535dw-b7535dw-original-26k.html",
+      "preco": {
+        "valor": 89.0,
+        "moeda": "BRL",
+        "texto": "R$ 89,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/2/7210_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn1060  Dcp1602 Dcp1512 Dcp1617Nw Hl1112 Hl1202 Hl1212W  Premium 1K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-brother-tn1060-dcp1602-dcp1512-dcp1617nw-hl1112-hl1202-hl1212w-premium-1k.html",
+      "preco": {
+        "valor": 29.85,
+        "moeda": "BRL",
+        "texto": "R$ 29,85"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/0/3034_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Ricoh 1060 1075 7000 6000 2051 7001 7500 2051 2060 6500 6110D 6210D  Katun Access 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-ricoh-1060-1075-7000-6000-2051-7001-7500-2051-2060-6500-6110d-6210d-katun-access-1kg.html",
+      "preco": {
+        "valor": 104.0,
+        "moeda": "BRL",
+        "texto": "R$ 104,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/0/7052.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Q2612A 2612A 12A  1010 1012 1015 1018 1020 1022 3015 3030 3050  Premium 2K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-q2612a-2612a-12a-1010-1012-1015-1018-1020-1022-3015-3030-3050-premium-2k.html",
+      "preco": {
+        "valor": 39.29,
+        "moeda": "BRL",
+        "texto": "R$ 39,29"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/9/396_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Ricoh Im430 Im 430 Preto  Im430F P502  Original 419078 418126 17.4K",
+      "url": "https://www.creativecopias.com.br/toner-ricoh-im-430-im-430f-original-174k.html",
+      "preco": {
+        "valor": 333.0,
+        "moeda": "BRL",
+        "texto": "R$ 333,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/9/7931_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf258X 58X  M428Fdw M404Dw M428Dw M404N  Sem Chip  Importado 10K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-cf258x-58x-m428fdw-m404dw-m428dw-m404n-importado-10k.html",
+      "preco": {
+        "valor": 72.0,
+        "moeda": "BRL",
+        "texto": "R$ 72,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/5/7522_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn3472 Tn-3472  Hl-L5102Dw Dcp-L5652Dn Dcp-L5502Dn Mfc-L6702Dw  Original 12K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3472-tn3472s-hl-l5102dw-dcp-l5652dn-dcp-l5502dn-mfc-l6702dw-original-12k.html",
+      "preco": {
+        "valor": 535.0,
+        "moeda": "BRL",
+        "texto": "R$ 535,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4420_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Hp W1330X 330X Preto  M432Fdn M432 M408Dn M408  Sem Chip  Katun Select 15K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-w1330x-330x-preto-m432fdn-m432-m408dn-m408-sem-chip-katun-select-15k.html",
+      "preco": {
+        "valor": 68.0,
+        "moeda": "BRL",
+        "texto": "R$ 68,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10548_ampliada.jpeg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn3472 Tn880  5652 6600 6200 6202 6400 6402 6700 6800 Katun Select 12K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3472-hl-l6202dw-hl-l6402dw-mfc-l6702dw-mfc-l6800dw-mfc-l6902dw-katun-select-12k.html",
+      "preco": {
+        "valor": 84.0,
+        "moeda": "BRL",
+        "texto": "R$ 84,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/5/5550_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Samsung Mlt-D203U D203 203U  M4070Fr M4020Nd M4070Fr Sl-M4070Fr Sl-M4020Nd  Katun Access 15K",
+      "url": "https://www.creativecopias.com.br/toner-samsung-mlt-d203u-d203-203u-m4070fr-m4020nd-m4070fr-sl-m4070fr-sl-m4020nd-katun-select-15k.html",
+      "preco": {
+        "valor": 88.0,
+        "moeda": "BRL",
+        "texto": "R$ 88,00"
+      },
+      "codigo": null,
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/6/4644_ampliada1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp W1030X Preto  4003N 4103Fdw 4103Dw 4104Fdw  Com Chip  Premium 9.7K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-w1030x-preto-4003n-4103fdw-4103dw-4104fdw-com-chip-premium-97k.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11856_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Samsung Mlt-D111S D111S  M2020 M2020Fw M2070 M2070W M2070Fw  Premium 1K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-samsung-mlt-d111s-d111s-m2020-m2020fw-m2070-m2070w-m2070fw-premium-1k.html",
+      "preco": {
+        "valor": 59.0,
+        "moeda": "BRL",
+        "texto": "R$ 59,00"
+      },
+      "codigo": null,
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/8/3857_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Lexmark 55B4000  Mx431Adw Ms431Dw Ms331Dn Mx331Adn  Original 3K",
+      "url": "https://www.creativecopias.com.br/toner-lexmark-55b4000-mx431adw-ms431dw-ms331dn-mx331adn-original-3k.html",
+      "preco": {
+        "valor": 355.0,
+        "moeda": "BRL",
+        "texto": "R$ 355,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8872_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn3602 Tn-3602Xxl  Dcp-L5512 Dcp-L5662 Hl-L5212 L6412  Importado 11K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3602-tn-3602xxl-dcp-l5512-dcp-l5662-hl-l5212-hl-l6412-mfc-l5912-original-11k.html",
+      "preco": {
+        "valor": 159.0,
+        "moeda": "BRL",
+        "texto": "R$ 159,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9610_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf258A 58A  M428Fdw M404Dw M428Dw M404N  Sem Chip  Importado 3K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-cf258a-58a-m428fdw-m404dw-m428dw-m404n-sem-chip-importado-3k.html",
+      "preco": {
+        "valor": 58.5,
+        "moeda": "BRL",
+        "texto": "R$ 58,50"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/9/7924_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn116 Tn116Br Tn-116  Hl-L1222 Hl-L1222V Hl-L1232W Hl-L1232Wv Dcp-L1632  Original 1K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn116-tn-116-hl-l1222-hl-l1222v-hl-l1232w-hl-l1232wv-dcp-l1632w-original-1k.html",
+      "preco": {
+        "valor": 77.9,
+        "moeda": "BRL",
+        "texto": "R$ 77,90"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11612_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Ricoh 418477 Preto  Im550 Im600 P800 P801  Katun Performance 25.5K",
+      "url": "https://www.creativecopias.com.br/toner-ricoh-418477-preto-im550-im600-p800-p801-katun-performance-255k.html",
+      "preco": {
+        "valor": 188.0,
+        "moeda": "BRL",
+        "texto": "R$ 188,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10407_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Kyocera Tk3182 Preto  M3655Idn P3055Dn  Katun Access 21K",
+      "url": "https://www.creativecopias.com.br/toner-kyocera-mita-tk3182-preto-m3566idn-p3055dn-m3566-p3055-katun-acces-21k.html",
+      "preco": {
+        "valor": 131.3,
+        "moeda": "BRL",
+        "texto": "R$ 131,30"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/2/7233_ampliada_2.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf258X 58X  M428Fdw M404Dw M428Dw M404N  Com Chip  Premium 10K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-cf258x-58x-m428fdw-m404dw-m428dw-m404n-com-chip-premium-10k.html",
+      "preco": {
+        "valor": 122.0,
+        "moeda": "BRL",
+        "texto": "R$ 122,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10035_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Lexmark 56Fb000 56F4000 56Fb  Ms521 Mx521 Ms621 Mx522 Ms622 Mx622 Ms321 Mx321  Original 6K",
+      "url": "https://www.creativecopias.com.br/toner-lexmark-56fb000-56f4000-56fb-ms521-mx521-ms621-mx522-ms622-mx622-ms321-mx321-original-6k.html",
+      "preco": {
+        "valor": 445.0,
+        "moeda": "BRL",
+        "texto": "R$ 445,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/7415_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Kyocera Tk1175 Tk-1175  M2040 M2640 2040Dn 2640Idw  Katun Access 12K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-kyocera-mita-tk1175-tk-1175-m2040-m2640-2040dn-2640idw-katun-access-12k.html",
+      "preco": {
+        "valor": 88.0,
+        "moeda": "BRL",
+        "texto": "R$ 88,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/7465_ampliada2.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn-419Bk Preto  Hl-L8360Cdw Mfc-L8610Cdw Mfc-L8900Cdw  Premium 9K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn-419bk-preto-hl-l8360cdw-mfc-l8610cdw-mfc-l8900cdw-premium-9k.html",
+      "preco": {
+        "valor": 76.76,
+        "moeda": "BRL",
+        "texto": "R$ 76,76"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7723_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Ricoh Aficio Sp5200  Sp5200Dn Sp5200S Sp5210 Sp5210Dnht Sp5210Sfhw  Katun Select 25K",
+      "url": "https://www.creativecopias.com.br/toner-ricoh-aficio-sp5200-sp5200dn-sp5200s-sp5210-sp5210dnht-sp5210sfhw-katun-select-25k.html",
+      "preco": {
+        "valor": 285.0,
+        "moeda": "BRL",
+        "texto": "R$ 285,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/5/4543_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf226X Cf226 Cf226Xb  M426 M402 M426Fdw M426Dw M402Dn  Premium 9K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-cf226x-cf226-cf226xb-m426-m402-m426fdw-m426dw-m402dn-premium-9k.html",
+      "preco": {
+        "valor": 76.0,
+        "moeda": "BRL",
+        "texto": "R$ 76,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/3/5391_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cb435A Cb436A Ce285A Universal  P1102 P1005 P1505 P1006  Katun Select 2K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-cb435a-cb436a-ce285a-universal-p1102-p1005-p1505-p1006-m1132-katun-select-2k.html",
+      "preco": {
+        "valor": 48.0,
+        "moeda": "BRL",
+        "texto": "R$ 48,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/5/2540_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Samsung Mlt-D203U D203 203U  M4070Fr M4020Nd M4070Fr Sl-M4070Fr Sl-M4020Nd  Katun Select 15K",
+      "url": "https://www.creativecopias.com.br/toner-samsung-mlt-d203u-d203-203u-m4070fr-m4020nd-m4070fr-sl-m4070fr-sl-m4020nd-katun-select-15k-3.html",
+      "preco": {
+        "valor": 99.0,
+        "moeda": "BRL",
+        "texto": "R$ 99,00"
+      },
+      "codigo": null,
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8719_ampliada_2.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compativel Com Hp W1030X Preto  4003N 4103Fdw 4103Dw 4104Fdw  Sem Chip  Premium 9.7K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-w1030-151-152-preto-4003n-4103fdw-4103dw-4104fdw-sem-chip-premium-97k.html",
+      "preco": {
+        "valor": 74.0,
+        "moeda": "BRL",
+        "texto": "R$ 74,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11494_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn2340 Tn2370  Hl-L2320D Mfc-L2700Dw Mfc-L2740Dw  Katun Select  2.6K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn2340-tn2370-hl-l2300d-hl-l2320d-hl-l2340dw-mfc-l2700dw-mfc-l2740dw-katun-select.html",
+      "preco": {
+        "valor": 45.0,
+        "moeda": "BRL",
+        "texto": "R$ 45,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/5/5551_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Elgin Pb-210R Pb210 Pb210R Pb211 Pb 211 Ev P2500W M6550Nw M6600N P2500 M6550 M6600 Elgin 1.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-elgin-pantum-pb-211ev-p2500w-m6550nw-m6600n-p2500-m6550-m6600-importado-16k.html",
+      "preco": {
+        "valor": 149.0,
+        "moeda": "BRL",
+        "texto": "R$ 149,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/0/7059_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf217A 17A  M130 M102 130A 102A 102W 130Fn 130Fw 130Nw  Premium 1.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-cf217a-17a-m130-m102-130a-102a-102w-130fn-130fw-130nw-premium-16k.html",
+      "preco": {
+        "valor": 49.0,
+        "moeda": "BRL",
+        "texto": "R$ 49,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/4/6449_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn3492 Tn-3492S  Mfc-L6902Dw Mfcl6902Dw Hl-L6402Dw Hll6402Dw  Original 20K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3492-tn3492s-tn3492sbr-mfc-l6902dw-mfcl6902dw-hl-l6402dw-hll6402dw-original-20k.html",
+      "preco": {
+        "valor": 445.0,
+        "moeda": "BRL",
+        "texto": "R$ 445,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4421_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Kyocera Tk350 Tk352  Fs3920Dn Fs3040Mfp Fs3140  Com Chip  Katun Performance 15K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-kyocera-tk350-tk352-fs3920dn-fs3040mfp-fs3140-com-chip-katun-performance-15k.html",
+      "preco": {
+        "valor": 75.0,
+        "moeda": "BRL",
+        "texto": "R$ 75,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11414_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Ce505A Ce505Ab  P2035 P2055 P2035N P2055N P2055X P2055Dn  Premium 2.3K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-ce505a-ce505ab-p2035-p2055-p2035n-p2055n-p2055x-p2055dn-premium-23k.html",
+      "preco": {
+        "valor": 51.0,
+        "moeda": "BRL",
+        "texto": "R$ 51,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/2/421_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf258X 58X  M428Fdw M404Dw M428Dw M404N  Sem Chip  Katun Select 10K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-cf258x-58x-m428fdw-m404dw-m428dw-m404n-katun-select-10k.html",
+      "preco": {
+        "valor": 93.0,
+        "moeda": "BRL",
+        "texto": "R$ 93,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9257_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Konica Minolta Tn-324K Tn512K Preto  Bizhub C454 C554 C258 C308 C368  Katun Access 544G",
+      "url": "https://www.creativecopias.com.br/toner-konica-minolta-tn-324k-tn512k-preto-bizhub-c454-c554-c258-c308-c368-katun-access-544g.html",
+      "preco": {
+        "valor": 163.0,
+        "moeda": "BRL",
+        "texto": "R$ 163,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/7/4741_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp W2020X 414X Preto  M454Dw M454Dn M479Fdw M479Dw M479Fdn  Original 7.5K",
+      "url": "https://www.creativecopias.com.br/toner-hp-w2020x-414x-preto-m454dw-m454dn-m479fdw-m479dw-m479fdn-original-75k.html",
+      "preco": {
+        "valor": 640.0,
+        "moeda": "BRL",
+        "texto": "R$ 640,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7737_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Samsung Mlt-D116L D116 116L  Sl-M2885Fw M2835Dw M2825Nd M2875Fd  Premium 3K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-samsung-mlt-d116l-d116-116l-sl-m2885fw-sl-m2835dw-sl-m2825nd-m2875fd-premium-3k.html",
+      "preco": {
+        "valor": 53.0,
+        "moeda": "BRL",
+        "texto": "R$ 53,00"
+      },
+      "codigo": null,
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3321_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf258A 58A  M428Fdw M404Dw M428Dw M404N  Com Chip  Premium 3K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-cf258a-58a-m428fdw-m404dw-m428dw-m404n-com-chip-premium-3k.html",
+      "preco": {
+        "valor": 95.0,
+        "moeda": "BRL",
+        "texto": "R$ 95,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10036_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Canon T106 T06 3526C001Aa  Ir1643If Ir1643  Sem Chip  Katun Performance 18K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-canon-t106-3526c001aa-ir1643if-ir1643-sem-chip-katun-performance-18k.html",
+      "preco": {
+        "valor": 140.0,
+        "moeda": "BRL",
+        "texto": "R$ 140,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/4/9441_ampliada.jpeg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn3602 Tn-3602Xl  Dcp-L5512 Dcp-L5662 Hl-L5212 L6412  Importado 6K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3602-tn-3602xl-dcp-l5512-dcp-l5662-hl-l5212-hl-l6412-mfc-l5912-original-6k.html",
+      "preco": {
+        "valor": 88.0,
+        "moeda": "BRL",
+        "texto": "R$ 88,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9609_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Hp W1330X 330X Preto  M432Fdn M432 M408Dn M408  Katun Select 15K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-w1330x-330x-preto-m432fdn-m432-m408dn-m408-sem-chip-katun-select-15k-3.html",
+      "preco": {
+        "valor": 129.0,
+        "moeda": "BRL",
+        "texto": "R$ 129,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10549_ampliada_1.jpeg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp W1030X W1510X Preto  4003N 4003 4103Fdw 4103Dw 4103 4004 Mfp 4104  Original 9,7K",
+      "url": "https://www.creativecopias.com.br/toner-hp-w1030x-w1030xc-preto-4003n-4003-4103fdw-4103dw-4103-original-3k.html",
+      "preco": {
+        "valor": 449.0,
+        "moeda": "BRL",
+        "texto": "R$ 449,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9118_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp 154X W1540X Preto  Mfp-1602W 1602 Mfp-2602Sdw 2602  Original 5K",
+      "url": "https://www.creativecopias.com.br/toner-hp-154x-w1540x-preto-mfp-1602w-1602-mfp-2602sdw-2602-original-5k.html",
+      "preco": {
+        "valor": 172.0,
+        "moeda": "BRL",
+        "texto": "R$ 172,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9108_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Kyocera Tk3182 Tk-3182 Preto  M3655Idn P3055Dn  Katun Performance 21K",
+      "url": "https://www.creativecopias.com.br/toner-kyocera-tk3182-preto-m3655idn-p3055dn-katun-performance-21k.html",
+      "preco": {
+        "valor": 185.0,
+        "moeda": "BRL",
+        "texto": "R$ 185,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/6/8663_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn-419M Magenta  Hl-L8360Cdw Mfc-L8610Cdw Mfc-L8900Cdw  Premium 9K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn-419m-magenta-hl-l8360cdw-mfc-l8610cdw-mfc-l8900cdw-premium-9k.html",
+      "preco": {
+        "valor": 90.9,
+        "moeda": "BRL",
+        "texto": "R$ 90,90"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7725_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Samsung Mlt-D203U D203  Sl-M4020Nd M4020 Sl-M4070Fr M4070  Original 15K",
+      "url": "https://www.creativecopias.com.br/toner-samsung-mlt-d203u-d203-sl-m4020nd-m4020-sl-m4070fr-m4070-original-15k.html",
+      "preco": {
+        "valor": 329.66,
+        "moeda": "BRL",
+        "texto": "R$ 329,66"
+      },
+      "codigo": null,
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/0/3074_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp 103A W1103A W1103Ab  1200A 1200W 1000A 1000W 1000N 1200Nw  Premium 2.5K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-103a-w1103a-neverstop-1200a-1200w-1000a-1000w-1000n-1200nw-premium-25k.html",
+      "preco": {
+        "valor": 28.0,
+        "moeda": "BRL",
+        "texto": "R$ 28,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/6/8696_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Samsung Mlt-D101S  Ml2160 Ml2161 Ml2165 Scx3400 Scx3401  Premium 1.5K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-samsung-mlt-d101s-ml2160-ml2161-ml2165-scx3400-scx3401-premium-15k.html",
+      "preco": {
+        "valor": 53.0,
+        "moeda": "BRL",
+        "texto": "R$ 53,00"
+      },
+      "codigo": null,
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/3/2388_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp W2023X 414X Magenta  M454Dw M454Dn M479Fdw M479Dw M479Fdn  Original 6K",
+      "url": "https://www.creativecopias.com.br/toner-hp-w2023x-414x-magenta-m454dw-m454dn-m479fdw-m479dw-m479fdn-original-6k.html",
+      "preco": {
+        "valor": 795.0,
+        "moeda": "BRL",
+        "texto": "R$ 795,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7740_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp W2022X 414X Amarelo  M454Dw M454Dn M479Fdw M479Dw M479Fdn  Original 6K",
+      "url": "https://www.creativecopias.com.br/toner-hp-w2022x-414x-amarelo-m454dw-m454dn-m479fdw-m479dw-m479fdn-original-6k.html",
+      "preco": {
+        "valor": 795.0,
+        "moeda": "BRL",
+        "texto": "R$ 795,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7739_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn-419C Ciano  Hl-L8360Cdw Mfc-L8610Cdw Mfc-L8900Cdw  Premium 9K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn-419c-ciano-hl-l8360cdw-mfc-l8610cdw-mfc-l8900cdw-premium-9k.html",
+      "preco": {
+        "valor": 90.9,
+        "moeda": "BRL",
+        "texto": "R$ 90,90"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7724_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn-419Y Amarelo  Hl-L8360Cdw Mfc-L8610Cdw Mfc-L8900Cdw  Premium 9K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn-419y-amarelo-hl-l8360cdw-mfc-l8610cdw-mfc-l8900cdw-premium-9k.html",
+      "preco": {
+        "valor": 90.9,
+        "moeda": "BRL",
+        "texto": "R$ 90,90"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7726_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn-219Bk Tn219 Preto  Hl-L3240 Dcp-L3560 Mfc-L3760  Premium 1.5K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn-219bk-tn219-preto-hl-l3240-dcp-l3560-mfc-l3760-premium-15k.html",
+      "preco": {
+        "valor": 120.0,
+        "moeda": "BRL",
+        "texto": "R$ 120,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11495_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp W2020X 414X Preto  M454Dw M454Dn M479Fdw M479Dw M479Fdn  Com Chip  7.5K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-w2020x-414x-preto-m454dw-m454dn-m479fdw-m479dw-m479fdn-compativel-75k.html",
+      "preco": {
+        "valor": 130.0,
+        "moeda": "BRL",
+        "texto": "R$ 130,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8745_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Canon T106 T06 106 3526C001Aa  Ir1643I  1643  Ir 1643If Original 20K",
+      "url": "https://www.creativecopias.com.br/toner-canon-t106-106-ir1643i-original-20k.html",
+      "preco": {
+        "valor": 689.0,
+        "moeda": "BRL",
+        "texto": "R$ 689,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/6/8617_ampliada_2.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Ricoh 1060 841332  6110D 6210D  Original 43K",
+      "url": "https://www.creativecopias.com.br/toner-ricoh-1060-6110d-6210d-original-43k.html",
+      "preco": {
+        "valor": 433.0,
+        "moeda": "BRL",
+        "texto": "R$ 433,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8907_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp W2021X 414X Ciano  M454Dw M454Dn M479Fdw M479Dw M479Fdn  Original 6K",
+      "url": "https://www.creativecopias.com.br/toner-hp-w2021x-414x-ciano-m454dw-m454dn-m479fdw-m479dw-m479fdn-original-6k.html",
+      "preco": {
+        "valor": 795.0,
+        "moeda": "BRL",
+        "texto": "R$ 795,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7738_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Kyocera Tk3182 Tk-3182 Preto  M3655Idn P3055Dn P3155Dn M3655 P3055 P3155  Original 21K",
+      "url": "https://www.creativecopias.com.br/toner-kyocera-tk3182-tk-3281-preto-m3566idn-p3055dn-m3566-p3055-original-21k.html",
+      "preco": {
+        "valor": 760.0,
+        "moeda": "BRL",
+        "texto": "R$ 760,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/0/8095_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn650  Dcp8080Dn Dcp8085N Hl5350Dn Hl5370Dwt Mfc8480Dn Katun Select 8K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn650-dcp8080dn-dcp8085n-hl5350dn-hl5370dwt-mfc8480dn-katun-select-8k.html",
+      "preco": {
+        "valor": 60.0,
+        "moeda": "BRL",
+        "texto": "R$ 60,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/848-49_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Ce505X  P2055 P2055N P2055Dn P2055X  Alto Rendimento  Premium 6.5K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-ce505x-p2055-p2055n-p2055dn-p2055x-alto-rendimento-premium-65k.html",
+      "preco": {
+        "valor": 64.0,
+        "moeda": "BRL",
+        "texto": "R$ 64,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/0/606_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Kyocera Tk-3402 Tk3402 1T0C0Y0Us0 Preto  Pa4500X Ma4500Ix Ma4500Ifx 4500X  Original 12.5K",
+      "url": "https://www.creativecopias.com.br/toner-kyocera-tk-3402-tk3402-pa4500x-ma4500ix-ma4500ifx-4500x-original-125k.html",
+      "preco": {
+        "valor": 579.0,
+        "moeda": "BRL",
+        "texto": "R$ 579,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10146_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn450  Mfc7360N Dcp7065Dn Mfc7860Dw Hl2270Dw Hl2130  Premium 2.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-brother-tn450-mfc7360n-dcp7065dn-mfc7860dw-hl2240-hl2270dw-hl2130-premium-26k.html",
+      "preco": {
+        "valor": 41.0,
+        "moeda": "BRL",
+        "texto": "R$ 41,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/877_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn3332 Tn3382  Dcp-8112Dn Hl-5452Dn Dcp-8152Dn  Katun Select 8K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3332-tn3382-dcp-8112dn-hl-5452dn-hl-5472dw-dcp-8152dn-mfc-8512dn-katun-select-8k.html",
+      "preco": {
+        "valor": 65.0,
+        "moeda": "BRL",
+        "texto": "R$ 65,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3204-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Kyocera Tk1175 Tk-1175  M2040 M2640 2040Dn 2640Idw  Katun Performance 12K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-kyocera-mita-tk1175-tk-1175-m2040-m2640-2040dn-2640idw-katun-performance-12k.html",
+      "preco": {
+        "valor": 186.0,
+        "moeda": "BRL",
+        "texto": "R$ 186,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7184_ampliada2.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Kyocera Tk-3162  P3045 M3145 3045Dn 3145Idn P3045Dn M3145Dn  Original 12.5K",
+      "url": "https://www.creativecopias.com.br/toner-kyocera-tk-3160-p3045-m3145-3045dn-3145dn-p3045dn-m3145dn-original-125k.html",
+      "preco": {
+        "valor": 574.0,
+        "moeda": "BRL",
+        "texto": "R$ 574,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7146_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Cf218A 18A  132Nw 132Fn 132Fw 132A 132Snw 132Fp 104A 104W  Premium 1.4K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-hp-cf218a-18a-132nw-132fn-132fw-132a-132snw-132fp-104a-104w-premium-14k.html",
+      "preco": {
+        "valor": 47.39,
+        "moeda": "BRL",
+        "texto": "R$ 47,39"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/4/6450_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Lexmark 56Fbh00 56Fbh0E 56Fbh  Ms521 Mx521 Ms621 Mx522 Ms622 Mx622 Ms321  Original 15K",
+      "url": "https://www.creativecopias.com.br/toner-lexmark-56f4h00-56f4h-ms521-mx521-ms621-mx522-ms622-mx622-ms321-mx321-ms421-mx421-original.html",
+      "preco": {
+        "valor": 910.0,
+        "moeda": "BRL",
+        "texto": "R$ 910,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/0/7084_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Gestetner 6002 7502 Dsm651 Dsm660 Dsm675 Dsm755  Katun Performance",
+      "url": "https://www.creativecopias.com.br/toner-gestetner-6002-toner-gestetner-6002-7502-dsm651-dsm660-dsm675-dsm755-katun-performance.html",
+      "preco": {
+        "valor": 145.0,
+        "moeda": "BRL",
+        "texto": "R$ 145,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/2/624-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn420  Hl2270Dw Hl2130 Mfc7360N Dcp7065Dn Mfc7860Dw  Premium 2.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-brother-tn420-hl2270dw-hl2130-mfc7360n-dcp7065dn-mfc7860dw-hl2240-premium-26k.html",
+      "preco": {
+        "valor": 41.0,
+        "moeda": "BRL",
+        "texto": "R$ 41,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/877-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp Ce390X 390X 90X  M602 M601 M603 M602N M601 M603 M4555  Premium 24K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-ce390x-390x-90x-m602-m601-m603-m602n-m601-m603-m4555-premium-24k.html",
+      "preco": {
+        "valor": 159.68,
+        "moeda": "BRL",
+        "texto": "R$ 159,68"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/922-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn-3662Xls Tn3662Xls  Dcp-L5512 Dcp-L5662 Hl-L5212 Hl-L6412 Mfc-L5912  Original 25K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn3612xl-tn-3612xl-dcp-l5512-dcp-l5662-hl-l5212-hl-l6412-mfc-l5912-original-25k.html",
+      "preco": {
+        "valor": 441.0,
+        "moeda": "BRL",
+        "texto": "R$ 441,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9612_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp 103A W1103A W1103Ab  Neverstop 1200A 1200W 1000A 1000W 1000N 1200Nw  Original 2.5K",
+      "url": "https://www.creativecopias.com.br/toner-hp-103a-neverstop-1200a-1200w-1000a-1000w-original-25k.html",
+      "preco": {
+        "valor": 107.0,
+        "moeda": "BRL",
+        "texto": "R$ 107,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/7479_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Elgin Pb-210Ev Pb-211Ev P2500W M6550Nw M6600N P2500 M6550 M6600 Importado 1.6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-elgin-pb-211ev-pb211ev-p2500w-m6550nw-m6600n-p2500-m6550-m6600-importado-16k.html",
+      "preco": {
+        "valor": 59.0,
+        "moeda": "BRL",
+        "texto": "R$ 59,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9216_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn3612 Tn-3612  Dcp-L5512 Dcp-L5662 Hl-L5212 Hl-L6412  Premium 18K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn3612-tn-3612-dcp-l5512-dcp-l5662-hl-l5212-hl-l6412-premium-18k.html",
+      "preco": {
+        "valor": 165.0,
+        "moeda": "BRL",
+        "texto": "R$ 165,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11785_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn-3392  Dcp-8157Dn Mfc-8952Dw Hl-6182Dw Mfc-8712Dw Katun Select",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn-3392-dcp-8157dn-mfc-8952dw-hl-6182dw-hl-6182dwt-mfc-8712dw-katun-select.html",
+      "preco": {
+        "valor": 84.0,
+        "moeda": "BRL",
+        "texto": "R$ 84,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3203-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Brother Tn3492 Tn890  Mfc-L6902Dw Hl-L6402Dw 6902Dw  Katun Select 20K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-brother-tn-3492-tn3492-mfc-l6902dw-hl-l6402dw-6902dw-katun-select-20k.html",
+      "preco": {
+        "valor": 122.0,
+        "moeda": "BRL",
+        "texto": "R$ 122,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/7/7741_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Pantum Tl-425U Tl425  M7105Dn M7105Dw P3305Dn P3305Dw  Importado 11K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-pantum-tl-425u-tl425-m7105dn-m7105dw-p3305dn-p3305dw-importado-11k.html",
+      "preco": {
+        "valor": 62.0,
+        "moeda": "BRL",
+        "texto": "R$ 62,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/4/9471_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn-219Xlbk Tn219Xl Preto  Mfc-L3760Cdw Hl-L3240Cdw Dcp-L3560Cdw  Original 3K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn-219xlbk-tn219xl-preto-mfc-l3760cdw-hl-l3240cdw-dcp-l3560cdw-original-3k.html",
+      "preco": {
+        "valor": 615.0,
+        "moeda": "BRL",
+        "texto": "R$ 615,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10286_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Ricoh 408284  Sp3710 Sp3710Sf Sp3710Dn  Premium 6.4K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-ricoh-sp3710-sp3710sf-sp3710dn-408284-premium-7k.html",
+      "preco": {
+        "valor": 79.9,
+        "moeda": "BRL",
+        "texto": "R$ 79,90"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/9/7960_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp W2021X 414X Ciano  M454Dw M454Dn M479Fdw M479Dw M479Fdn  Com Chip  6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-w2021x-414x-ciano-m454dw-m454dn-m479fdw-m479dw-m479fdn-compativel-6k.html",
+      "preco": {
+        "valor": 130.0,
+        "moeda": "BRL",
+        "texto": "R$ 130,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8746_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Hp W2023X 414X Magenta  M454Dw M454Dn M479Fdw M479Dw M479Fdn  Com Chip  6K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-w2023x-414x-magenta-m454dw-m454dn-m479fdw-m479dw-m479fdn-compativel-6k.html",
+      "preco": {
+        "valor": 130.0,
+        "moeda": "BRL",
+        "texto": "R$ 130,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/7/8747_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Brother Tn-419Bk Preto  Hl-L8360Cdw Mfc-L8610Cdw Mfc-L8900Cdw Mfc-L9570Cdw  Original 9K",
+      "url": "https://www.creativecopias.com.br/toner-brother-tn-419bk-preto-hl-l8360cdw-mfc-l8610cdw-mfc-l8900cdw-mfc-l9570cdw-original-9k.html",
+      "preco": {
+        "valor": 560.0,
+        "moeda": "BRL",
+        "texto": "R$ 560,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/7/5704_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Kyocera Tk-3432 Tk3432 Preto  Pa5500 Pa5500X Ma5500Ifx 5500X  Original 21K",
+      "url": "https://www.creativecopias.com.br/toner-kyocera-tk-3432-tk3432-preto-pa5500-pa5500x-ma5500ifx-5500x-original-21k.html",
+      "preco": {
+        "valor": 630.0,
+        "moeda": "BRL",
+        "texto": "R$ 630,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10147_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp 154A W1540A Preto  Mfp-1602W 1602 Mfp-2602Sdw 2602  Original 2.5K",
+      "url": "https://www.creativecopias.com.br/toner-hp-154a-w1540a-preto-mfp-1602w-1602-mfp-2602sdw-2602-original-25k.html",
+      "preco": {
+        "valor": 104.03,
+        "moeda": "BRL",
+        "texto": "R$ 104,03"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9107_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Ricoh Aficio Mp3500 Mp4000 Mp4001 Mp4500 Mp5000 Mp5001  Katun Performance",
+      "url": "https://www.creativecopias.com.br/toner-ricoh-aficio-mp3500-mp4000-mp4001-mp4500-mp5000-mp5001-katun-performance.html",
+      "preco": {
+        "valor": 122.0,
+        "moeda": "BRL",
+        "texto": "R$ 122,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/1/2147_ampliada.jpeg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:19:10",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    }
+  ]
+}

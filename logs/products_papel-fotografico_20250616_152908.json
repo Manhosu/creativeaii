@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "total_produtos": 66,
-    "data_export": "2025-06-11 02:19:59",
+    "total_produtos": 64,
+    "data_export": "2025-06-16 15:29:08",
     "resumo": {
-      "total_produtos": 66,
-      "com_preco": 66,
-      "disponiveis": 66,
+      "total_produtos": 64,
+      "com_preco": 64,
+      "disponiveis": 64,
       "sem_preco": 0,
       "indisponiveis": 0,
       "marcas_encontradas": 0,
@@ -13,52 +13,27 @@
       "categorias_processadas": 0,
       "taxa_preco": 100.0,
       "taxa_disponibilidade": 100.0,
-      "data_processamento": "2025-06-11 02:19:59"
+      "data_processamento": "2025-06-16 15:29:08"
     }
   },
   "produtos": [
     {
-      "nome": "Papel Fotográfico Glossy Brilhante  230G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-230g-tamanho-a4-pacote-com-20-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante  135G Tamanho A4  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-135g-tamanho-a4-pacote-com-50-folhas.html",
       "preco": {
-        "valor": 7.95,
+        "valor": 13.0,
         "moeda": "BRL",
-        "texto": "R$ 7,95"
+        "texto": "R$ 13,00"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1695_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3325_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  180G Rolo 610Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-180g-rolo-610mm-x-30m.html",
-      "preco": {
-        "valor": 128.0,
-        "moeda": "BRL",
-        "texto": "R$ 128,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2665_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -83,132 +58,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  180G Tamanho A3  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-180g-tamanho-a3-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 16.0,
-        "moeda": "BRL",
-        "texto": "R$ 16,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/4/5451_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante  180G Tamanho A4  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-180g-tamanho-a4-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 15.0,
-        "moeda": "BRL",
-        "texto": "R$ 15,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/713_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  115G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-auto-adesivo-115g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 9.8,
-        "moeda": "BRL",
-        "texto": "R$ 9,80"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7385_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante  135G Tamanho A4  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-135g-tamanho-a4-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 13.0,
-        "moeda": "BRL",
-        "texto": "R$ 13,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3325_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante  150G Tamanho A4  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-150g-tamanho-a4-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 15.45,
-        "moeda": "BRL",
-        "texto": "R$ 15,45"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3324_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -233,157 +83,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  120G Tamanho A4  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-120g-tamanho-a4-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 22.0,
-        "moeda": "BRL",
-        "texto": "R$ 22,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/2/7222_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Sulfite  90G Rolo 610Mm X 50M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-90g-rolo-610mm-x-50m.html",
-      "preco": {
-        "valor": 76.0,
-        "moeda": "BRL",
-        "texto": "R$ 76,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3170_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante  180G Tamanho A3  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-180g-tamanho-a3-pacote-com-20-folhas-a-prova-d-agua.html",
-      "preco": {
-        "valor": 13.39,
-        "moeda": "BRL",
-        "texto": "R$ 13,39"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/9/39_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante  180G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-180g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 6.7,
-        "moeda": "BRL",
-        "texto": "R$ 6,70"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/712_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Sulfite  75G Rolo 914Mm X 50M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-75g-rolo-914mm-x-50m.html",
-      "preco": {
-        "valor": 86.54,
-        "moeda": "BRL",
-        "texto": "R$ 86,54"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3168_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Sulfite  75G Rolo 610Mm X 50M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-75g-rolo-610mm-x-50m.html",
-      "preco": {
-        "valor": 64.0,
-        "moeda": "BRL",
-        "texto": "R$ 64,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3166_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -408,7 +108,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -418,22 +118,22 @@
       }
     },
     {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Adesivo  130G Rolo 610Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-adesivo-130g-rolo-610mm-x-30m.html",
+      "nome": "Papel Para Plotter Sulfite  90G Rolo 610Mm X 50M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-90g-rolo-610mm-x-50m.html",
       "preco": {
-        "valor": 252.4,
+        "valor": 76.0,
         "moeda": "BRL",
-        "texto": "R$ 252,40"
+        "texto": "R$ 76,00"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/1/2132_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3170_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -443,22 +143,22 @@
       }
     },
     {
-      "nome": "Papel Fotográfico Glossy Brilhante Microporoso  260G Tamanho 10X15Cm  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-microporoso-260g-tamanho-10x15cm-pacote-com-20-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  180G Tamanho A3  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-180g-tamanho-a3-pacote-com-20-folhas.html",
       "preco": {
-        "valor": 9.79,
+        "valor": 16.0,
         "moeda": "BRL",
-        "texto": "R$ 9,79"
+        "texto": "R$ 16,00"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3284_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/4/5451_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -468,22 +168,22 @@
       }
     },
     {
-      "nome": "Papel Fotográfico Sem Brilho Microporoso  260G Tamanho 10X15Cm  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-sem-brilho-microporoso-260g-tamanho-10x15cm-pacote-com-20-folhas.html",
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  180G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-180g-rolo-610mm-x-30m.html",
       "preco": {
-        "valor": 9.79,
+        "valor": 128.0,
         "moeda": "BRL",
-        "texto": "R$ 9,79"
+        "texto": "R$ 128,00"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3282_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2665_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -493,22 +193,22 @@
       }
     },
     {
-      "nome": "Papel Fotográfico Glossy Brilhante Microporoso  260G Tamanho 10X15Cm  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-microporoso-260g-tamanho-10x15cm-pacote-com-20-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  115G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-auto-adesivo-115g-tamanho-a4-pacote-com-20-folhas.html",
       "preco": {
-        "valor": 9.79,
+        "valor": 9.8,
         "moeda": "BRL",
-        "texto": "R$ 9,79"
+        "texto": "R$ 9,80"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3284_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7385_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -518,922 +218,22 @@
       }
     },
     {
-      "nome": "Papel Fotográfico Glossy Brilhante  265G Tamanho 10X15Cm  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-265g-tamanho-10x15cm-pacote-com-20-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante  180G Tamanho A3  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-180g-tamanho-a3-pacote-com-20-folhas-a-prova-d-agua.html",
       "preco": {
-        "valor": 3.81,
+        "valor": 13.39,
         "moeda": "BRL",
-        "texto": "R$ 3,81"
+        "texto": "R$ 13,39"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/710_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/9/39_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  220G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-220g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 12.46,
-        "moeda": "BRL",
-        "texto": "R$ 12,46"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2654_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante  230G Tamanho A3  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-230g-tamanho-a3-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 17.0,
-        "moeda": "BRL",
-        "texto": "R$ 17,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/2824_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  230G Rolo 610Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-230g-rolo-610mm-x-30m.html",
-      "preco": {
-        "valor": 171.7,
-        "moeda": "BRL",
-        "texto": "R$ 171,70"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1961_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  130G Tamanho A4  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-adesivo-130g-tamanho-a4-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 25.0,
-        "moeda": "BRL",
-        "texto": "R$ 25,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/8/3803_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  230G Rolo 914Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-230g-rolo-914mm-x-30m.html",
-      "preco": {
-        "valor": 247.25,
-        "moeda": "BRL",
-        "texto": "R$ 247,25"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1962_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Microporoso  260G Rolo 610Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-microporoso-260g-rolo-610mm-x-30m.html",
-      "preco": {
-        "valor": 357.0,
-        "moeda": "BRL",
-        "texto": "R$ 357,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2692_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Matte Fosco  230G Tamanho A4  Pacote Com 100 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-matte-fosco-230g-tamanho-a4-pacote-com-100-folhas.html",
-      "preco": {
-        "valor": 50.58,
-        "moeda": "BRL",
-        "texto": "R$ 50,58"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/9/7921_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  130G Tamanho A3  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-adesivo-130g-tamanho-a3-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 19.99,
-        "moeda": "BRL",
-        "texto": "R$ 19,99"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/8/3898_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante  230G Tamanho A4  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-230g-tamanho-a4-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 24.0,
-        "moeda": "BRL",
-        "texto": "R$ 24,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/2/2205_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Matte Fosco  108G Rolo 610Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-matte-fosco-108g-rolo-610mm-x-30m.html",
-      "preco": {
-        "valor": 98.55,
-        "moeda": "BRL",
-        "texto": "R$ 98,55"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/1/2130_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  115G Rolo 610Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-115g-rolo-610mm-x-30m.html",
-      "preco": {
-        "valor": 120.0,
-        "moeda": "BRL",
-        "texto": "R$ 120,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/2/12121_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Sulfite  75G Rolo 1070Mm X 50M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-75g-rolo-1070mm-x-50m.html",
-      "preco": {
-        "valor": 99.0,
-        "moeda": "BRL",
-        "texto": "R$ 99,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3174_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Adesivo Vinil Glossy Branco  135G Rolo 610Mm X 10M",
-      "url": "https://www.creativecopias.com.br/papel-adesivo-vinil-glossy-branco-135g-rolo-610mm-x-10m.html",
-      "preco": {
-        "valor": 168.0,
-        "moeda": "BRL",
-        "texto": "R$ 168,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11788_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Matte Fosco  170G Tamanho A4  Pacote Com 100 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-matte-fosco-170g-tamanho-a4-pacote-com-100-folhas.html",
-      "preco": {
-        "valor": 37.09,
-        "moeda": "BRL",
-        "texto": "R$ 37,09"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/9/7920_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  220G Tamanho A3  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-220g-tamanho-a3-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 26.0,
-        "moeda": "BRL",
-        "texto": "R$ 26,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/9/3951_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Textura Linho  200G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-linho-200g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 14.01,
-        "moeda": "BRL",
-        "texto": "R$ 14,01"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1965_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  80G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-auto-adesivo-180g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 11.02,
-        "moeda": "BRL",
-        "texto": "R$ 11,02"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7384_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Textura Couro  200G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-couro-200g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 11.8,
-        "moeda": "BRL",
-        "texto": "R$ 11,80"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1964_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Textura Linho  200G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-linho-200g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 14.01,
-        "moeda": "BRL",
-        "texto": "R$ 14,01"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1965_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Transfer Sublimático Resinado  100G Tamanho A4  Pacote Com 100 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-transfer-sublimatico-resinado-100g-tamanho-a4-pacote-com-100-folhas.html",
-      "preco": {
-        "valor": 30.7,
-        "moeda": "BRL",
-        "texto": "R$ 30,70"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7394_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  80G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-auto-adesivo-180g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 11.02,
-        "moeda": "BRL",
-        "texto": "R$ 11,02"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7384_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Transfer Sublimático Resinado  100G Tamanho A4  Pacote Com 100 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-transfer-sublimatico-resinado-100g-tamanho-a4-pacote-com-100-folhas.html",
-      "preco": {
-        "valor": 30.7,
-        "moeda": "BRL",
-        "texto": "R$ 30,70"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7394_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Filme Adesivo Transparente  150G Tamanho A4  Pacote Com 10 Folhas",
-      "url": "https://www.creativecopias.com.br/filme-adesivo-transparente-150g-tamanho-a4-pacote-com-10-folhas.html",
-      "preco": {
-        "valor": 27.24,
-        "moeda": "BRL",
-        "texto": "R$ 27,24"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1969_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Textura Couro  200G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-couro-200g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 11.8,
-        "moeda": "BRL",
-        "texto": "R$ 11,80"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1964_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Minilab  240G Rolo 152Mm X 100M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-minilab-240g-rolo-152mm-x-100m.html",
-      "preco": {
-        "valor": 268.0,
-        "moeda": "BRL",
-        "texto": "R$ 268,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11853_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Minilab  260G Rolo 305Mm X 100M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-minilab-260g-rolo-305mm-x-100m.html",
-      "preco": {
-        "valor": 499.0,
-        "moeda": "BRL",
-        "texto": "R$ 499,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11852_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Couchê Brilho  210G Tamanho A3 420X297Mm  Pacote Com 250 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-couche-brilho-210g-tamanho-a3-420x297mm-pacote-com-250-folhas.html",
-      "preco": {
-        "valor": 252.4,
-        "moeda": "BRL",
-        "texto": "R$ 252,40"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/8/7897_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Com Brilho Microporoso  260G Rolo 914Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-com-brilho-microporoso-260g-rolo-914mm-x-30m.html",
-      "preco": {
-        "valor": 535.0,
-        "moeda": "BRL",
-        "texto": "R$ 535,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11402_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Transfer Para Tecido Claro  160G Tamanho A4  Pacote Com 05 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-transfer-para-tecido-claro-160g-tamanho-a4-pacote-com-05-folhas.html",
-      "preco": {
-        "valor": 15.0,
-        "moeda": "BRL",
-        "texto": "R$ 15,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/2821_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  180G Rolo 914Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-180g-rolo-914mm-x-30m.html",
-      "preco": {
-        "valor": 220.0,
-        "moeda": "BRL",
-        "texto": "R$ 220,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2666_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Matte Fosco  90G Tamanho A4  Pacote Com 100 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-matte-fosco-90g-tamanho-a4-pacote-com-100-folhas.html",
-      "preco": {
-        "valor": 17.0,
-        "moeda": "BRL",
-        "texto": "R$ 17,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3742_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Matte  108G Rolo 610Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-matte-108g-rolo-610mm-x-30m.html",
-      "preco": {
-        "valor": 217.0,
-        "moeda": "BRL",
-        "texto": "R$ 217,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11991_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Couchê Semi Brilho  200G Tamanho A4 210X297Mm  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-couche-semi-brilho-200g-tamanho-a4-210x297mm-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 15.0,
-        "moeda": "BRL",
-        "texto": "R$ 15,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/5/9545_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Couchê Semi Brilho  160G Tamanho A4 210X297Mm  Pacote Com 50 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-couche-semi-brilho-160g-tamanho-a4-210x297mm-pacote-com-50-folhas.html",
-      "preco": {
-        "valor": 13.0,
-        "moeda": "BRL",
-        "texto": "R$ 13,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/5/9544_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Fotográfico Glossy Brilhante Textura Pérola  200G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-perola-200g-tamanho-a4-pacote-com-20-folhas.html",
-      "preco": {
-        "valor": 14.03,
-        "moeda": "BRL",
-        "texto": "R$ 14,03"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1963_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
-      "status": "normalizado",
-      "verificacao_disponibilidade": {
-        "disponivel": true,
-        "motivo": "3 indicadores positivos encontrados",
-        "detalhes": "Página contém elementos que indicam produto ativo",
-        "status_code": 200
-      }
-    },
-    {
-      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Adesivo  130G Rolo 914Mm X 30M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-adesivo-130g-rolo-914mm-x-30m.html",
-      "preco": {
-        "valor": 389.0,
-        "moeda": "BRL",
-        "texto": "R$ 389,00"
-      },
-      "codigo": null,
-      "marca": null,
-      "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/0/4056_ampliada.jpg",
-      "disponivel": true,
-      "id": null,
-      "categoria_url": null,
-      "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1458,7 +258,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1468,22 +268,22 @@
       }
     },
     {
-      "nome": "Papel Fotográfico Glossy Brilhante Microporoso  260G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-microporoso-260g-tamanho-a4-pacote-com-20-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  120G Tamanho A4  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-120g-tamanho-a4-pacote-com-50-folhas.html",
       "preco": {
-        "valor": 28.33,
+        "valor": 22.0,
         "moeda": "BRL",
-        "texto": "R$ 28,33"
+        "texto": "R$ 22,00"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/1/2134_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/2/7222_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1493,22 +293,22 @@
       }
     },
     {
-      "nome": "Papel Magnético Fotográfico Glossy Brilhante  690G Tamanho A4  Pacote Com 05 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-com-ima-no-verso-690g-tamanho-a4-pacote-com-05-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante  180G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-180g-tamanho-a4-pacote-com-20-folhas.html",
       "preco": {
-        "valor": 24.0,
+        "valor": 6.7,
         "moeda": "BRL",
-        "texto": "R$ 24,00"
+        "texto": "R$ 6,70"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/0/2013_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/712_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1518,22 +318,22 @@
       }
     },
     {
-      "nome": "Papel Transfer Para Tecido Escuro  235G Tamanho A4  Pacote Com 05 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-transfer-para-tecido-escuro-235g-tamanho-a4-pacote-com-05-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante  150G Tamanho A4  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-150g-tamanho-a4-pacote-com-50-folhas.html",
       "preco": {
-        "valor": 35.0,
+        "valor": 15.45,
         "moeda": "BRL",
-        "texto": "R$ 35,00"
+        "texto": "R$ 15,45"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/2822_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/3/3324_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1543,8 +343,133 @@
       }
     },
     {
-      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  180G Tamanho A4  Pacote Com 20 Folhas",
-      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-180g-tamanho-a4-pacote-com-20-folhas.html",
+      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  130G Tamanho A4  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-adesivo-130g-tamanho-a4-pacote-com-50-folhas.html",
+      "preco": {
+        "valor": 25.0,
+        "moeda": "BRL",
+        "texto": "R$ 25,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/8/3803_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante  180G Tamanho A4  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-180g-tamanho-a4-pacote-com-50-folhas.html",
+      "preco": {
+        "valor": 15.0,
+        "moeda": "BRL",
+        "texto": "R$ 15,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/713_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Sulfite  75G Rolo 610Mm X 50M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-75g-rolo-610mm-x-50m.html",
+      "preco": {
+        "valor": 64.0,
+        "moeda": "BRL",
+        "texto": "R$ 64,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3166_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Sem Brilho Microporoso  260G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-sem-brilho-microporoso-260g-rolo-610mm-x-30m.html",
+      "preco": {
+        "valor": 350.27,
+        "moeda": "BRL",
+        "texto": "R$ 350,27"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2693_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante  265G Tamanho 10X15Cm  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-265g-tamanho-10x15cm-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 3.81,
+        "moeda": "BRL",
+        "texto": "R$ 3,81"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/710_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Sem Brilho Microporoso  260G Tamanho 10X15Cm  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-sem-brilho-microporoso-260g-tamanho-10x15cm-pacote-com-20-folhas.html",
       "preco": {
         "valor": 9.79,
         "moeda": "BRL",
@@ -1553,12 +478,487 @@
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/0/2012_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3282_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Adesivo  130G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-adesivo-130g-rolo-610mm-x-30m.html",
+      "preco": {
+        "valor": 252.4,
+        "moeda": "BRL",
+        "texto": "R$ 252,40"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/1/2132_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Matte Fosco  108G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-matte-fosco-108g-rolo-610mm-x-30m.html",
+      "preco": {
+        "valor": 98.55,
+        "moeda": "BRL",
+        "texto": "R$ 98,55"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/1/2130_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante  230G Tamanho A4  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-230g-tamanho-a4-pacote-com-50-folhas.html",
+      "preco": {
+        "valor": 24.0,
+        "moeda": "BRL",
+        "texto": "R$ 24,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/2/2205_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  230G Rolo 914Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-230g-rolo-914mm-x-30m.html",
+      "preco": {
+        "valor": 247.25,
+        "moeda": "BRL",
+        "texto": "R$ 247,25"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1962_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Sulfite  75G Rolo 914Mm X 50M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-75g-rolo-914mm-x-50m.html",
+      "preco": {
+        "valor": 86.54,
+        "moeda": "BRL",
+        "texto": "R$ 86,54"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3168_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Adesivo Vinil Glossy Branco  135G Rolo 610Mm X 10M",
+      "url": "https://www.creativecopias.com.br/papel-adesivo-vinil-glossy-branco-135g-rolo-610mm-x-10m.html",
+      "preco": {
+        "valor": 168.0,
+        "moeda": "BRL",
+        "texto": "R$ 168,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11788_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  115G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-115g-rolo-610mm-x-30m.html",
+      "preco": {
+        "valor": 120.0,
+        "moeda": "BRL",
+        "texto": "R$ 120,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/2/12121_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Microporoso  260G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-microporoso-260g-rolo-610mm-x-30m.html",
+      "preco": {
+        "valor": 357.0,
+        "moeda": "BRL",
+        "texto": "R$ 357,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2692_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  220G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-220g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 12.46,
+        "moeda": "BRL",
+        "texto": "R$ 12,46"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2654_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  80G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-auto-adesivo-180g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 11.02,
+        "moeda": "BRL",
+        "texto": "R$ 11,02"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7384_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  230G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-230g-rolo-610mm-x-30m.html",
+      "preco": {
+        "valor": 171.7,
+        "moeda": "BRL",
+        "texto": "R$ 171,70"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1961_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Matte Fosco  170G Tamanho A4  Pacote Com 100 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-matte-fosco-170g-tamanho-a4-pacote-com-100-folhas.html",
+      "preco": {
+        "valor": 37.09,
+        "moeda": "BRL",
+        "texto": "R$ 37,09"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/9/7920_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Sulfite  75G Rolo 1070Mm X 50M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-sulfite-75g-rolo-1070mm-x-50m.html",
+      "preco": {
+        "valor": 99.0,
+        "moeda": "BRL",
+        "texto": "R$ 99,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3174_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Vegetal  92G Rolo 610Mm X 50M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-vegetal-92g-rolo-660mm-x-50m.html",
+      "preco": {
+        "valor": 278.0,
+        "moeda": "BRL",
+        "texto": "R$ 278,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/1/3176_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Textura Couro  200G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-couro-200g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 11.8,
+        "moeda": "BRL",
+        "texto": "R$ 11,80"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1964_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Minilab  260G Rolo 305Mm X 100M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-minilab-260g-rolo-305mm-x-100m.html",
+      "preco": {
+        "valor": 499.0,
+        "moeda": "BRL",
+        "texto": "R$ 499,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11852_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Transfer Para Tecido Claro  160G Tamanho A4  Pacote Com 05 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-transfer-para-tecido-claro-160g-tamanho-a4-pacote-com-05-folhas.html",
+      "preco": {
+        "valor": 15.0,
+        "moeda": "BRL",
+        "texto": "R$ 15,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/2821_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Textura Couro  200G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-couro-200g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 11.8,
+        "moeda": "BRL",
+        "texto": "R$ 11,80"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1964_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Minilab  240G Rolo 152Mm X 100M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-minilab-240g-rolo-152mm-x-100m.html",
+      "preco": {
+        "valor": 268.0,
+        "moeda": "BRL",
+        "texto": "R$ 268,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11853_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1583,7 +983,482 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Transfer Para Tecido Escuro  235G Tamanho A4  Pacote Com 05 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-transfer-para-tecido-escuro-235g-tamanho-a4-pacote-com-05-folhas.html",
+      "preco": {
+        "valor": 35.0,
+        "moeda": "BRL",
+        "texto": "R$ 35,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/2822_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Textura Pérola  200G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-perola-200g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 14.03,
+        "moeda": "BRL",
+        "texto": "R$ 14,03"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1963_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Couchê Semi Brilho  160G Tamanho A4 210X297Mm  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-couche-semi-brilho-160g-tamanho-a4-210x297mm-pacote-com-50-folhas.html",
+      "preco": {
+        "valor": 13.0,
+        "moeda": "BRL",
+        "texto": "R$ 13,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/5/9544_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Couchê Brilho  210G Tamanho A3 420X297Mm  Pacote Com 250 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-couche-brilho-210g-tamanho-a3-420x297mm-pacote-com-250-folhas.html",
+      "preco": {
+        "valor": 252.4,
+        "moeda": "BRL",
+        "texto": "R$ 252,40"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/8/7897_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Transfer Sublimático Resinado  100G Tamanho A4  Pacote Com 100 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-transfer-sublimatico-resinado-100g-tamanho-a4-pacote-com-100-folhas.html",
+      "preco": {
+        "valor": 30.7,
+        "moeda": "BRL",
+        "texto": "R$ 30,70"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7394_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Microporoso  260G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-microporoso-260g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 28.33,
+        "moeda": "BRL",
+        "texto": "R$ 28,33"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/1/2134_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Com Brilho Microporoso  260G Rolo 914Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-com-brilho-microporoso-260g-rolo-914mm-x-30m.html",
+      "preco": {
+        "valor": 535.0,
+        "moeda": "BRL",
+        "texto": "R$ 535,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11402_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Couchê Semi Brilho  200G Tamanho A4 210X297Mm  Pacote Com 50 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-couche-semi-brilho-200g-tamanho-a4-210x297mm-pacote-com-50-folhas.html",
+      "preco": {
+        "valor": 15.0,
+        "moeda": "BRL",
+        "texto": "R$ 15,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/5/9545_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Couchê Brilho  210G Tamanho A4 210X297Mm  Pacote Com 250 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-couche-brilho-210g-tamanho-a4-210x297mm-pacote-com-250-folhas.html",
+      "preco": {
+        "valor": 91.69,
+        "moeda": "BRL",
+        "texto": "R$ 91,69"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/6/7697_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Filme Adesivo Transparente  150G Tamanho A4  Pacote Com 10 Folhas",
+      "url": "https://www.creativecopias.com.br/filme-adesivo-transparente-150g-tamanho-a4-pacote-com-10-folhas.html",
+      "preco": {
+        "valor": 27.24,
+        "moeda": "BRL",
+        "texto": "R$ 27,24"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1969_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante  180G Rolo 914Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-180g-rolo-914mm-x-30m.html",
+      "preco": {
+        "valor": 220.0,
+        "moeda": "BRL",
+        "texto": "R$ 220,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2666_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Matte Fosco  90G Tamanho A4  Pacote Com 100 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-matte-fosco-90g-tamanho-a4-pacote-com-100-folhas.html",
+      "preco": {
+        "valor": 17.0,
+        "moeda": "BRL",
+        "texto": "R$ 17,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3742_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante  230G Tamanho A3  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-230g-tamanho-a3-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 17.0,
+        "moeda": "BRL",
+        "texto": "R$ 17,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/2824_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Brilhante Adesivo  130G Rolo 914Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-brilhante-adesivo-130g-rolo-914mm-x-30m.html",
+      "preco": {
+        "valor": 389.0,
+        "moeda": "BRL",
+        "texto": "R$ 389,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/0/4056_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Matte Fosco  230G Tamanho A4  Pacote Com 100 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-matte-fosco-230g-tamanho-a4-pacote-com-100-folhas.html",
+      "preco": {
+        "valor": 50.58,
+        "moeda": "BRL",
+        "texto": "R$ 50,58"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/9/7921_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  220G Tamanho A3  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-220g-tamanho-a3-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 26.0,
+        "moeda": "BRL",
+        "texto": "R$ 26,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/9/3951_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Adesivo  130G Tamanho A3  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-adesivo-130g-tamanho-a3-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 19.99,
+        "moeda": "BRL",
+        "texto": "R$ 19,99"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/8/3898_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Magnético Fotográfico Glossy Brilhante  690G Tamanho A4  Pacote Com 05 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-com-ima-no-verso-690g-tamanho-a4-pacote-com-05-folhas.html",
+      "preco": {
+        "valor": 24.0,
+        "moeda": "BRL",
+        "texto": "R$ 24,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/0/2013_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Textura Linho  200G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-textura-linho-200g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 14.01,
+        "moeda": "BRL",
+        "texto": "R$ 14,01"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/9/1965_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1608,7 +1483,7 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1618,22 +1493,47 @@
       }
     },
     {
-      "nome": "Papel Para Plotter Fotográfico Glossy Semi Brilho Minilab  240G Rolo 152Mm X 100M",
-      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-semi-brilho-minilab-240g-rolo-152mm-x-100m.html",
+      "nome": "Papel Fotográfico Glossy Brilhante Microporoso  260G Tamanho 10X15Cm  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-microporoso-260g-tamanho-10x15cm-pacote-com-20-folhas.html",
       "preco": {
-        "valor": 268.0,
+        "valor": 9.79,
         "moeda": "BRL",
-        "texto": "R$ 268,00"
+        "texto": "R$ 9,79"
       },
       "codigo": null,
       "marca": null,
       "descricao": null,
-      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11854_ampliada.jpg",
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/2/3284_ampliada.jpg",
       "disponivel": true,
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Fotográfico Glossy Brilhante Dupla Face  180G Tamanho A4  Pacote Com 20 Folhas",
+      "url": "https://www.creativecopias.com.br/papel-fotografico-glossy-brilhante-dupla-face-180g-tamanho-a4-pacote-com-20-folhas.html",
+      "preco": {
+        "valor": 9.79,
+        "moeda": "BRL",
+        "texto": "R$ 9,79"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/0/2012_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,
@@ -1658,7 +1558,57 @@
       "id": null,
       "categoria_url": null,
       "data_scraped": null,
-      "data_normalized": "2025-06-11 02:19:35",
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Glossy Semi Brilho Minilab  240G Rolo 152Mm X 100M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-glossy-semi-brilho-minilab-240g-rolo-152mm-x-100m.html",
+      "preco": {
+        "valor": 268.0,
+        "moeda": "BRL",
+        "texto": "R$ 268,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11854_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Papel Para Plotter Fotográfico Matte  108G Rolo 610Mm X 30M",
+      "url": "https://www.creativecopias.com.br/papel-para-plotter-fotografico-matte-108g-rolo-610mm-x-30m.html",
+      "preco": {
+        "valor": 217.0,
+        "moeda": "BRL",
+        "texto": "R$ 217,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11991_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:28:39",
       "status": "normalizado",
       "verificacao_disponibilidade": {
         "disponivel": true,

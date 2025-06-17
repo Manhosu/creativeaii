@@ -249,59 +249,59 @@ class ContentGenerator:
         try:
             logger.debug("🔍 Aplicando otimizações de legibilidade Yoast...")
             
-            optimized = article_data.copy()
+            optimized_data = article_data.copy()
             
             # Otimizar conteúdo principal
-            if 'conteudo' in optimized:
-                content = optimized['conteudo']
+            if 'conteudo' in optimized_data:
+                content = optimized_data['conteudo']
                 
                 # CRITICO 1: Garantir conteúdo mínimo de 300 palavras
-                content = self._ensure_minimum_content_length(content, optimized.get('produto_nome', ''))
+                content = self._ensure_minimum_content_length(content, optimized_data.get('produto_nome', ''))
                 
                 # CRITICO 2: Adicionar links internos obrigatórios
                 content = self._add_mandatory_internal_links(content)
                 
                 # CRITICO 3: Garantir links externos obrigatórios
-                content = self._ensure_external_links(content, optimized.get('produto_nome', ''))
+                content = self._ensure_external_links(content, optimized_data.get('produto_nome', ''))
                 
                 # CRITICO 4: Adicionar imagens com ALT contendo keyword
-                content = self._add_images_with_keyword_alt(content, optimized.get('produto_nome', ''))
+                content = self._add_images_with_keyword_alt(content, optimized_data.get('produto_nome', ''))
                 
                 # CRITICO 5: Garantir focus keyword no primeiro parágrafo
-                content = self._ensure_keyword_in_first_paragraph(content, optimized.get('produto_nome', ''))
+                content = self._ensure_keyword_in_first_paragraph(content, optimized_data.get('produto_nome', ''))
                 
                 # Aplicar otimizações de legibilidade existentes
                 content = self._optimize_sentence_length_yoast(content)
                 content = self._fix_unnecessary_capitals(content)
                 content = self._fix_article_gender_agreement(content)
                 content = self._add_transition_words_yoast(content)
-                content = self._optimize_lists_yoast(content, optimized.get('produto_nome', ''))
+                content = self._optimize_lists_yoast(content, optimized_data.get('produto_nome', ''))
                 content = self._optimize_paragraph_length_yoast(content)
                 content = self._convert_to_active_voice(content)
                 
                 # CRÍTICO: Limpar URLs malformadas - DEVE SER O ÚLTIMO PASSO
                 content = self._clean_urls_in_content(content)
                 
-                optimized['conteudo'] = content
+                optimized_data['conteudo'] = content
             
             # Otimizar título
-            if 'titulo' in optimized:
-                optimized['titulo'] = self._optimize_title_for_yoast_green(optimized['titulo'], optimized.get('produto_nome', ''))
+            if 'titulo' in optimized_data:
+                optimized_data['titulo'] = self._optimize_title_for_yoast_green(optimized_data['titulo'], optimized_data.get('produto_nome', ''))
             
             # Otimizar meta description
-            if 'meta_descricao' in optimized:
-                optimized['meta_descricao'] = self._optimize_meta_for_yoast_green(optimized['meta_descricao'], optimized.get('produto_nome', ''))
+            if 'meta_descricao' in optimized_data:
+                optimized_data['meta_descricao'] = self._optimize_meta_for_yoast_green(optimized_data['meta_descricao'], optimized_data.get('produto_nome', ''))
             
             # Gerar focus keyword otimizada - USAR PRODUTO_NOME CORRETO
-            product_name = optimized.get('produto_nome', '')
+            product_name = optimized_data.get('produto_nome', '')
             if not product_name:
                 # Se produto_nome não existe, tentar outras fontes
-                product_name = optimized.get('nome', '') or optimized.get('title', '') or optimized.get('titulo', '')
+                product_name = optimized_data.get('nome', '') or optimized_data.get('title', '') or optimized_data.get('titulo', '')
             
-            optimized['focus_keyword'] = self._generate_focus_keyword_yoast(product_name)
+            optimized_data['focus_keyword'] = self._generate_focus_keyword_yoast(product_name)
             
             logger.debug("✅ Otimizações de legibilidade Yoast aplicadas")
-            return optimized
+            return optimized_data
             
         except Exception as e:
             logger.error(f"❌ Erro na otimização Yoast: {e}")
@@ -537,7 +537,7 @@ class ContentGenerator:
                         article = "O"
                     
                     # Gerar link de compra do produto usando URL REAL
-                    product_real_url = self._get_product_real_url(optimized.get('produto_url', ''))
+                    product_real_url = "https://www.creativecopias.com.br"  # URL fallback
                     buy_link = URLUtils.generate_buy_link(product_name, product_real_url, validate=True)
                     
                     # VALIDAÇÃO CRÍTICA: Verificar se product_name não está vazio
@@ -1150,13 +1150,32 @@ class ContentGenerator:
         # Gerar link de compra com URL REAL - SEM ESPAÇOS
         def get_buy_link():
             if url_real_produto and url_real_produto.strip():
-                # GARANTIR que a URL não tenha espaços
+                # GARANTIR que a URL não tenha espaços e @ indevidos
                 clean_url = re.sub(r'\s+', '', url_real_produto.strip())
+                clean_url = clean_url.replace('@https://', 'https://')
+                clean_url = clean_url.replace('@http://', 'http://')
+                clean_url = clean_url.replace('@www.', 'www.')
+                
+                # Garantir protocolo correto
+                if not clean_url.startswith('http'):
+                    clean_url = 'https://' + clean_url
+                
                 link_html = f'<a href="{clean_url}" target="_blank"><strong>Comprar {nome}</strong></a>'
                 logger.debug(f"🔗 Link gerado: {link_html}")
                 return link_html
             else:
-                fallback_link = f'<a href="https://www.creativecopias.com.br/impressoras" target="_blank"><strong>Comprar {nome}</strong></a>'
+                # Fallback baseado na categoria do produto
+                categoria_lower = product.get('categoria', 'impressoras').lower()
+                if 'cartucho' in categoria_lower and 'tinta' in categoria_lower:
+                    fallback_url = 'https://www.creativecopias.com.br/cartuchos-de-tinta'
+                elif 'cartucho' in categoria_lower and 'toner' in categoria_lower:
+                    fallback_url = 'https://www.creativecopias.com.br/cartuchos-de-toner'
+                elif 'papel' in categoria_lower:
+                    fallback_url = 'https://www.creativecopias.com.br/papel-fotografico'
+                else:
+                    fallback_url = 'https://www.creativecopias.com.br/impressoras'
+                
+                fallback_link = f'<a href="{fallback_url}" target="_blank"><strong>Comprar {nome}</strong></a>'
                 logger.debug(f"🔗 Link fallback: {fallback_link}")
                 return fallback_link
         
@@ -1522,6 +1541,16 @@ class ContentGenerator:
         
         # Aplicar correção PRIMEIRO em todas as URLs com espaços visíveis
         cleaned_content = re.sub(r'href="([^"]*\s[^"]*)"', fix_url_spaces, cleaned_content)
+        
+        # CORREÇÃO CRÍTICA: Remover @ que pode aparecer antes de URLs
+        cleaned_content = re.sub(r'href="@([^"]*)"', r'href="\1"', cleaned_content)
+        cleaned_content = re.sub(r'@(https?://[^"\s]*)', r'\1', cleaned_content)
+        cleaned_content = re.sub(r'@(www\.[^"\s]*)', r'\1', cleaned_content)
+        cleaned_content = re.sub(r'href="@', 'href="', cleaned_content)
+        
+        # Remover @ de qualquer lugar que possa aparecer em URLs
+        cleaned_content = re.sub(r'(@)(https?://)', r'\2', cleaned_content)
+        cleaned_content = re.sub(r'(@)(www\.)', r'\2', cleaned_content)
         
         # TERCEIRA passada: aplicar em TODAS as URLs mesmo sem espaços visíveis
         cleaned_content = re.sub(r'href="([^"]*)"', fix_url_spaces, cleaned_content)

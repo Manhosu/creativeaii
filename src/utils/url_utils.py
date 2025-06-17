@@ -4,13 +4,14 @@
 import re
 import unidecode
 import requests
+import os
 from typing import Optional, Tuple
 from loguru import logger
 
 class URLUtils:
     """Utilitários para manipulação e validação de URLs"""
     
-    BASE_URL = "https://www.creativecopias.com.br"
+    BASE_URL = os.getenv("SITE_BASE_URL", "https://www.creativecopias.com.br")
     
     @staticmethod
     def slugify(text: str) -> str:

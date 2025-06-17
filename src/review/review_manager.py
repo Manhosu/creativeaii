@@ -6,7 +6,7 @@ Sistema de revisão humana de artigos antes da publicação
 import os
 import sqlite3
 import json
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime
 from loguru import logger
 from ..scraper.availability_checker import AvailabilityChecker
@@ -116,7 +116,9 @@ class ReviewManager:
                         tipo_produto TEXT,
                         tom_usado TEXT DEFAULT 'profissional',
                         generation_data TEXT,
-                        content_hash TEXT
+                        content_hash TEXT,
+                        wp_category TEXT,
+                        produto_original TEXT
                     )
                 """)
                 
@@ -252,21 +254,39 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
         except Exception as e:
             logger.error(f"❌ Erro ao criar artigos de exemplo: {e}")
     
-    def save_article_for_review(self, article_data: Dict[str, Any]) -> int:
+    def save_article_for_review(self, article_data: Dict[str, Any], allow_duplicates: bool = True) -> int:
         """
-        Salva artigo gerado para revisão
+        Salva artigo gerado para revisão - PERMITE MÚLTIPLOS ARTIGOS DO MESMO PRODUTO
         
         Args:
             article_data: Dados do artigo gerado pelo Generator
+            allow_duplicates: Se True, permite salvar mesmo se for duplicata (padrão: True)
             
         Returns:
             ID do artigo no sistema de revisão
         """
         try:
-            # VERIFICAR DUPLICATAS ANTES DE SALVAR
-            if self._is_duplicate_article(article_data):
-                logger.warning(f"🚫 Artigo duplicado detectado: {article_data.get('titulo', 'Sem título')}")
-                raise ValueError("Artigo duplicado - não será salvo")
+            # 🔄 SISTEMA INTELIGENTE: Permitir múltiplos artigos por padrão
+            produto_nome = article_data.get('produto_nome', '')
+            
+            # Verificação apenas se explicitamente não permitir duplicatas
+            if not allow_duplicates:
+                # Verificar duplicatas apenas por hash de conteúdo idêntico
+                if self._is_exact_duplicate(article_data):
+                    logger.warning(f"🚫 Conteúdo idêntico detectado: {article_data.get('titulo', 'Sem título')}")
+                    
+                    existing_id = self._get_existing_article_id(article_data)
+                    if existing_id:
+                        logger.info(f"💡 Sugestão: Atualize o artigo existente ID {existing_id} ou use allow_duplicates=True")
+                    
+                    raise ValueError("Conteúdo idêntico detectado - use allow_duplicates=True para forçar")
+                
+                logger.info(f"✅ Novo artigo para produto existente: {produto_nome}")
+            
+            # Log informativo sobre produtos com múltiplos artigos
+            if self._count_articles_for_product(produto_nome) > 0:
+                count = self._count_articles_for_product(produto_nome) + 1
+                logger.info(f"📚 Este será o {count}º artigo para o produto: {produto_nome}")
             
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
@@ -281,9 +301,9 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                 cursor.execute("""
                     INSERT INTO articles (
                         titulo, slug, meta_descricao, conteudo, tags,
-                        produto_id, produto_nome, tipo_produto, tom_usado,
+                        produto_id, produto_nome, tipo_produto, tom_usado, status,
                         score_seo, generation_data, content_hash, wp_category, produto_original
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     article_data.get('titulo', ''),
                     article_data.get('slug', ''),
@@ -294,6 +314,7 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                     article_data.get('produto_nome'),
                     article_data.get('tipo_produto'),
                     article_data.get('tom_usado'),
+                    article_data.get('status', 'pendente'),
                     article_data.get('seo_score', 0),
                     generation_json,
                     content_hash,
@@ -364,6 +385,80 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
         content_for_hash = f"{titulo}{conteudo[:200] if conteudo else ''}"
         return hashlib.md5(content_for_hash.encode('utf-8')).hexdigest()
     
+    def _is_exact_duplicate(self, article_data: Dict[str, Any]) -> bool:
+        """
+        Verifica se artigo é duplicata EXATA (mesmo conteúdo) antes de salvar
+        
+        Args:
+            article_data: Dados do artigo
+            
+        Returns:
+            True se é duplicata exata
+        """
+        try:
+            content_hash = self._calculate_content_hash(article_data)
+            
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                
+                # Verificar apenas por hash de conteúdo (conteúdo idêntico)
+                cursor.execute("SELECT id FROM articles WHERE content_hash = ?", (content_hash,))
+                return cursor.fetchone() is not None
+                
+        except Exception as e:
+            logger.error(f"❌ Erro na verificação de duplicata exata: {e}")
+            return False
+    
+    def _count_articles_for_product(self, produto_nome: str) -> int:
+        """
+        Conta quantos artigos existem para um produto específico
+        
+        Args:
+            produto_nome: Nome do produto
+            
+        Returns:
+            Número de artigos existentes
+        """
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                
+                cursor.execute("SELECT COUNT(*) FROM articles WHERE produto_nome = ?", (produto_nome,))
+                count = cursor.fetchone()[0]
+                return count
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao contar artigos do produto: {e}")
+            return 0
+
+    def _get_existing_article_id(self, article_data: Dict[str, Any]) -> Optional[int]:
+        """
+        Busca ID de artigo existente baseado no hash de conteúdo
+        
+        Args:
+            article_data: Dados do artigo
+            
+        Returns:
+            ID do artigo existente ou None
+        """
+        try:
+            content_hash = self._calculate_content_hash(article_data)
+            
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                
+                # Buscar por hash de conteúdo (duplicata exata)
+                cursor.execute("SELECT id FROM articles WHERE content_hash = ?", (content_hash,))
+                result = cursor.fetchone()
+                if result:
+                    return result[0]
+                
+                return None
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao buscar artigo existente: {e}")
+            return None
+    
     def list_articles(self, status: str = None, limit: int = 50, offset: int = 0) -> List[Dict[str, Any]]:
         """
         Lista artigos para revisão
@@ -402,7 +497,19 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                 articles = []
                 for row in rows:
                     article = dict(row)
-                    article['tags'] = json.loads(article['tags']) if article['tags'] else []
+                    # Handle tags field safely
+                    if article['tags']:
+                        try:
+                            # Try to parse as JSON first
+                            article['tags'] = json.loads(article['tags'])
+                        except (json.JSONDecodeError, TypeError):
+                            # If not JSON, treat as comma-separated string
+                            if isinstance(article['tags'], str):
+                                article['tags'] = [tag.strip() for tag in article['tags'].split(',') if tag.strip()]
+                            else:
+                                article['tags'] = []
+                    else:
+                        article['tags'] = []
                     articles.append(article)
                 
                 logger.debug(f"📋 Listados {len(articles)} artigos (status: {status})")
@@ -435,7 +542,19 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
                     return None
                 
                 article = dict(row)
-                article['tags'] = json.loads(article['tags']) if article['tags'] else []
+                # Handle tags field safely
+                if article['tags']:
+                    try:
+                        # Try to parse as JSON first
+                        article['tags'] = json.loads(article['tags'])
+                    except (json.JSONDecodeError, TypeError):
+                        # If not JSON, treat as comma-separated string
+                        if isinstance(article['tags'], str):
+                            article['tags'] = [tag.strip() for tag in article['tags'].split(',') if tag.strip()]
+                        else:
+                            article['tags'] = []
+                else:
+                    article['tags'] = []
                 
                 # Tentar carregar dados de geração
                 try:
@@ -622,7 +741,7 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
     
     def reject_article(self, article_id: int, motivo: str, revisor: str = "Sistema") -> bool:
         """
-        Rejeita artigo
+        Rejeita artigo e registra aprendizado automaticamente
         
         Args:
             article_id: ID do artigo
@@ -641,6 +760,26 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
         
         if success:
             logger.info(f"❌ Artigo rejeitado: ID {article_id} por {revisor} - {motivo}")
+            
+            # 🧠 REGISTRAR APRENDIZADO AUTOMÁTICO
+            try:
+                from src.intelligence.learning_manager import LearningManager
+                learning_manager = LearningManager()
+                
+                learning_success = learning_manager.handle_article_rejection(
+                    article_id=article_id,
+                    rejection_reason=motivo,
+                    reviewer=revisor
+                )
+                
+                if learning_success:
+                    logger.info(f"🧠 Aprendizado registrado automaticamente para artigo {article_id}")
+                else:
+                    logger.warning(f"⚠️ Falha ao registrar aprendizado para artigo {article_id}")
+                    
+            except Exception as learning_error:
+                logger.error(f"❌ Erro no sistema de aprendizado: {learning_error}")
+                # Não falhar a rejeição por erro no aprendizado
         
         return success
     
@@ -882,6 +1021,61 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
             logger.debug("🔒 Review Manager recursos fechados")
         except:
             pass
+ 
+    def update_or_create_article(self, article_data: Dict[str, Any], force_update: bool = False) -> Tuple[int, bool]:
+        """
+        Atualiza artigo existente ou cria um novo se não existir
+        
+        Args:
+            article_data: Dados do artigo
+            force_update: Se True, força atualização mesmo se rejeitado
+            
+        Returns:
+            Tupla (article_id, was_updated)
+        """
+        try:
+            # Verificar se artigo já existe
+            existing_id = self._get_existing_article_id(article_data)
+            
+            if existing_id:
+                # Artigo existe - verificar se pode ser atualizado
+                existing_article = self.get_article(existing_id)
+                
+                if existing_article:
+                    status = existing_article.get('status', '')
+                    
+                    # Só atualizar se não estiver rejeitado ou se for forçado
+                    if status != 'rejeitado' or force_update:
+                        logger.info(f"🔄 Atualizando artigo existente ID {existing_id}")
+                        
+                        # Preparar dados para atualização
+                        update_data = {
+                            'titulo': article_data.get('titulo', ''),
+                            'slug': article_data.get('slug', ''),
+                            'meta_descricao': article_data.get('meta_descricao', ''),
+                            'conteudo': article_data.get('conteudo', ''),
+                            'tags': article_data.get('tags', [])
+                        }
+                        
+                        # Atualizar artigo
+                        if self.update_article(existing_id, update_data):
+                            logger.info(f"✅ Artigo ID {existing_id} atualizado com sucesso")
+                            return existing_id, True
+                        else:
+                            logger.error(f"❌ Falha ao atualizar artigo ID {existing_id}")
+                            raise Exception("Falha ao atualizar artigo existente")
+                    else:
+                        logger.warning(f"⚠️ Artigo ID {existing_id} foi rejeitado - use force_update=True para forçar atualização")
+                        raise ValueError(f"Artigo rejeitado (ID {existing_id}) - não será atualizado automaticamente")
+            
+            # Artigo não existe - criar novo
+            logger.info(f"🆕 Criando novo artigo: {article_data.get('titulo', 'Sem título')}")
+            article_id = self.save_article_for_review(article_data, allow_duplicates=True)
+            return article_id, False
+            
+        except Exception as e:
+            logger.error(f"❌ Erro em update_or_create_article: {e}")
+            raise
  
  
  

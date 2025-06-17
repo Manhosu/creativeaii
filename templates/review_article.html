@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https: http:; connect-src 'self' https: http:; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
     <title>📝 {{ article.titulo or 'Artigo' }} - Revisão</title>
     
     <!-- Meta Description Dinâmica -->
@@ -74,9 +75,11 @@
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 40px;
             animation: fadeInUp 0.8s ease-out;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         
         .header-info h1 {
@@ -87,6 +90,18 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.3;
+            width: 100%;
+            max-width: none;
+        }
+        
+        .header-info {
+            flex: 1;
+            min-width: 0;
+            word-wrap: break-word;
         }
         
         .header-meta {
@@ -582,14 +597,222 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Modal de Rejeição */
+        .rejection-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 15000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .rejection-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .rejection-modal-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .rejection-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 30px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .rejection-modal-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: var(--accent-red);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 59, 48, 0.1);
+            color: var(--accent-red);
+        }
+
+        .rejection-modal-body {
+            padding: 30px;
+        }
+
+        .modal-description {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .rejection-categories {
+            margin-bottom: 24px;
+        }
+
+        .rejection-categories h4 {
+            margin: 0 0 12px 0;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            background: var(--editor-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .category-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .category-btn.selected {
+            background: rgba(0, 122, 255, 0.2);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .rejection-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .char-counter-rejection {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .ai-learning-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(0, 122, 255, 0.1);
+            border: 1px solid rgba(0, 122, 255, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .ai-info-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .ai-info-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .rejection-modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .btn-secondary {
+            padding: 12px 24px;
+            background: var(--editor-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-reject {
+            padding: 12px 24px;
+            background: rgba(255, 59, 48, 0.2);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            border-radius: 12px;
+            color: var(--accent-red);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-reject:hover:not(:disabled) {
+            background: rgba(255, 59, 48, 0.3);
+            border-color: var(--accent-red);
+        }
+
+        .btn-reject:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         
         /* WordPress Preview Styles */
         .wordpress-preview-container {
             background: #ffffff;
             border-radius: 16px;
             padding: 0;
-            overflow: hidden;
+            overflow: visible;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
         
         .wordpress-preview {
@@ -597,9 +820,11 @@
             color: #333333;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
             line-height: 1.7;
-            max-width: 800px;
+            width: 100%;
             margin: 0 auto;
             padding: 40px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         .wp-post-header {
@@ -612,9 +837,14 @@
             font-size: 2.5rem;
             font-weight: 700;
             color: #1a1a1a;
-            line-height: 1.2;
+            line-height: 1.3;
             margin-bottom: 16px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            width: 100%;
+            white-space: normal;
         }
         
         .wp-post-meta {
@@ -792,12 +1022,27 @@
         
         /* Responsividade para WordPress Preview */
         @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .header-info h1 {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            
             .wordpress-preview {
                 padding: 20px;
             }
             
             .wp-post-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
             }
             
             .wp-post-content h1 {
@@ -845,10 +1090,7 @@
         
         <div class="tabs-container">
             <div class="tabs">
-                <div class="tab active" onclick="switchTab('preview')">
-                    👁️ Preview
-                </div>
-                <div class="tab" onclick="switchTab('wordpress')">
+                <div class="tab active" onclick="switchTab('wordpress')">
                     🌐 Prévia WordPress
                 </div>
                 <div class="tab" onclick="switchTab('seo')">
@@ -857,22 +1099,10 @@
                 <div class="tab" onclick="switchTab('info')">
                     ℹ️ Informações
                 </div>
-                {% if is_edit_mode %}
-                <div class="tab" onclick="switchTab('edit')">
-                    ✏️ Editar
-                </div>
-                {% endif %}
-            </div>
-            
-            <!-- Tab Preview -->
-            <div id="preview-tab" class="tab-content active">
-                <div class="preview-content">
-                    {{ article.conteudo | safe if article.conteudo else '<p>Conteúdo não disponível</p>' }}
-                </div>
             </div>
             
             <!-- Tab WordPress Preview -->
-            <div id="wordpress-tab" class="tab-content">
+            <div id="wordpress-tab" class="tab-content active">
                 <div class="wordpress-preview-container">
                     <div class="wordpress-preview">
                         <div class="wp-post-header">
@@ -969,6 +1199,37 @@
             <!-- Tab Informações -->
             <div id="info-tab" class="tab-content">
                 <div class="form-grid">
+                    {% if article.status == 'pendente' %}
+                    <div class="form-group">
+                        <label class="form-label">📝 Título do Artigo (Editável)</label>
+                        <div style="position: relative;">
+                            <input 
+                                type="text" 
+                                class="form-input" 
+                                id="titulo" 
+                                value="{{ article.titulo or '' }}" 
+                                placeholder="Digite o título do artigo..."
+                                maxlength="70"
+                                oninput="updateCharCount('titulo', 60)"
+                                onkeypress="if(event.key === 'Enter') updateTitle()"
+                            >
+                            <div class="char-counter" id="titulo-counter">
+                                {{ article.titulo|length if article.titulo else 0 }}/60
+                            </div>
+                        </div>
+                        <div class="form-help">Edite o título conforme necessário. Ideal até 60 caracteres para SEO.</div>
+                        <button class="action-btn btn-primary" onclick="updateTitle()" style="margin-top: 10px;">
+                            💾 Salvar Título
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="form-group">
+                        <label class="form-label">📝 Título do Artigo</label>
+                        <input type="text" class="form-input" value="{{ article.titulo or '' }}" readonly>
+                        <div class="form-help">Título não pode ser editado após aprovação</div>
+                    </div>
+                    {% endif %}
+                    
                     <div class="form-group">
                         <label class="form-label">ID do Artigo</label>
                         <input type="text" class="form-input" value="{{ article.id }}" readonly>
@@ -1035,80 +1296,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Tab Editar -->
-            {% if is_edit_mode %}
-            <div id="edit-tab" class="tab-content">
-                <form id="edit-form">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label">Título do Artigo</label>
-                            <div style="position: relative;">
-                                <input type="text" class="form-input" id="titulo" value="{{ article.titulo or '' }}" 
-                                       onkeyup="updateCharCount('titulo', 60)">
-                                <div class="char-counter" id="titulo-counter">{{ article.titulo|length if article.titulo else 0 }}/60</div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Slug SEO</label>
-                            <input type="text" class="form-input" id="slug" value="{{ article.slug or '' }}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Meta Description</label>
-                            <div style="position: relative;">
-                                <textarea class="form-textarea" id="meta_descricao" 
-                                          onkeyup="updateCharCount('meta_descricao', 160)">{{ article.meta_descricao or '' }}</textarea>
-                                <div class="char-counter" id="meta_descricao-counter">{{ article.meta_descricao|length if article.meta_descricao else 0 }}/160</div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Tags</label>
-                            <div class="tags-input" onclick="focusTagInput()">
-                                <div id="tags-container">
-                                    {% if article.tags %}
-                                        {% for tag in article.tags %}
-                                        <span class="tag">{{ tag }}<span class="tag-remove" onclick="removeTag(this)">×</span></span>
-                                        {% endfor %}
-                                    {% endif %}
-                                </div>
-                                <input type="text" class="tag-input" id="tag-input" placeholder="Adicionar tag..." 
-                                       onkeypress="handleTagInput(event)">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Categoria WordPress</label>
-                            <select class="form-input" id="edit_wp_category">
-                                <option value="">📂 Detecção Automática</option>
-                                <option value="geral" {{ 'selected' if article.wp_category == 'geral' else '' }}>📝 Geral</option>
-                                <option value="tecnologia" {{ 'selected' if article.wp_category == 'tecnologia' else '' }}>💻 Tecnologia</option>
-                                <option value="impressoras" {{ 'selected' if article.wp_category == 'impressoras' else '' }}>🖨️ Impressoras</option>
-                                <option value="multifuncionais" {{ 'selected' if article.wp_category == 'multifuncionais' else '' }}>🖨️ Multifuncionais</option>
-                                <option value="suprimentos" {{ 'selected' if article.wp_category == 'suprimentos' else '' }}>🔋 Suprimentos</option>
-                                <option value="dicas" {{ 'selected' if article.wp_category == 'dicas' else '' }}>💡 Dicas</option>
-                            </select>
-                            <div class="form-help">Categoria onde o artigo será publicado no WordPress</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Produto Associado</label>
-                            <input type="text" class="form-input" id="edit_produto_original" 
-                                   value="{{ article.produto_original or '' }}" 
-                                   placeholder="Ex: HP DeskJet 3776, Brother L2540DW...">
-                            <div class="form-help">Nome do produto específico para associar ao artigo</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Conteúdo</label>
-                            <textarea class="form-textarea content-editor" id="conteudo">{{ article.conteudo or '' }}</textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            {% endif %}
         </div>
         
         <div class="actions-bar">
@@ -1121,23 +1308,13 @@
             </button>
             {% endif %}
             
-            {% if is_edit_mode %}
-            <button class="action-btn btn-primary" onclick="saveChanges()">
-                💾 Salvar Alterações
-            </button>
-            {% else %}
-            <a href="/review/{{ article.id }}/edit" class="action-btn btn-secondary">
-                ✏️ Editar Artigo
-            </a>
-            {% endif %}
-            
             {% if article.status == 'aprovado' %}
             <button class="action-btn btn-primary" onclick="publishArticle()">
                 🚀 Publicar no WordPress
             </button>
             {% endif %}
             
-                                    <a href="/interface/review" class="action-btn btn-secondary">
+            <a href="/interface/review" class="action-btn btn-secondary">
                 📋 Voltar à Lista
             </a>
         </div>
@@ -1145,6 +1322,78 @@
     
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Modal de Rejeição -->
+    <div class="rejection-modal" id="rejection-modal">
+        <div class="rejection-modal-content">
+            <div class="rejection-modal-header">
+                <h3>❌ Rejeitar Artigo</h3>
+                <button class="modal-close" onclick="closeRejectionModal()">×</button>
+            </div>
+            <div class="rejection-modal-body">
+                <p class="modal-description">
+                    Forneça feedback detalhado para que a IA aprenda e melhore os próximos artigos:
+                </p>
+                
+                <div class="rejection-categories">
+                    <h4>Categoria do Problema:</h4>
+                    <div class="category-buttons">
+                        <button class="category-btn" data-category="conteudo" onclick="selectCategory('conteudo')">
+                            📝 Conteúdo
+                        </button>
+                        <button class="category-btn" data-category="seo" onclick="selectCategory('seo')">
+                            📊 SEO
+                        </button>
+                        <button class="category-btn" data-category="formatacao" onclick="selectCategory('formatacao')">
+                            🎨 Formatação
+                        </button>
+                        <button class="category-btn" data-category="precisao" onclick="selectCategory('precisao')">
+                            🎯 Precisão
+                        </button>
+                        <button class="category-btn" data-category="outros" onclick="selectCategory('outros')">
+                            💡 Outros
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Descrição detalhada do problema:</label>
+                    <textarea 
+                        id="rejection-reason" 
+                        class="form-textarea rejection-textarea" 
+                        placeholder="Descreva especificamente o que está errado para que a IA possa aprender e melhorar..."
+                        rows="4"
+                    ></textarea>
+                    <div class="char-counter-rejection">0/500</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Sugestão de melhoria (opcional):</label>
+                    <textarea 
+                        id="rejection-suggestion" 
+                        class="form-textarea" 
+                        placeholder="Como este artigo poderia ser melhorado?"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="ai-learning-info">
+                    <div class="ai-info-icon">🤖</div>
+                    <div class="ai-info-text">
+                        <strong>Aprendizado da IA:</strong> Seu feedback será analisado pela IA para evitar erros similares em futuros artigos.
+                    </div>
+                </div>
+            </div>
+            <div class="rejection-modal-footer">
+                <button class="btn-secondary" onclick="closeRejectionModal()">
+                    Cancelar
+                </button>
+                <button class="btn-reject" onclick="submitRejection()" id="submit-rejection-btn" disabled>
+                    ❌ Rejeitar Artigo
+                </button>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -1163,6 +1412,12 @@
         function updateCharCount(fieldId, maxLength) {
             const field = document.getElementById(fieldId);
             const counter = document.getElementById(fieldId + '-counter');
+            
+            // Verificar se os elementos existem
+            if (!field || !counter) {
+                return;
+            }
+            
             const currentLength = field.value.length;
             
             counter.textContent = `${currentLength}/${maxLength}`;
@@ -1202,9 +1457,9 @@
         
         // Funções de ação
         async function approveArticle() {
-            // Coletar dados da categoria e produto
-            const wpCategory = document.getElementById('wp_category').value;
-            const produtoOriginal = document.getElementById('produto_original').value.trim();
+            // Coletar dados da categoria e produto 
+            const wpCategory = document.getElementById('wp_category')?.value || null;
+            const produtoOriginal = document.getElementById('produto_original')?.value?.trim() || null;
             
             showLoading(true);
             try {
@@ -1214,8 +1469,8 @@
                     body: JSON.stringify({
                         comment: 'Aprovado via interface web',
                         reviewer: 'Revisor Web',
-                        wp_category: wpCategory || null,
-                        produto_original: produtoOriginal || null
+                        wp_category: wpCategory,
+                        produto_original: produtoOriginal
                     })
                 });
                 
@@ -1233,65 +1488,190 @@
         }
         
         async function rejectArticle() {
-            const reason = prompt('Motivo da rejeição (obrigatório):');
-            if (!reason) return;
+            openRejectionModal();
+        }
+
+        // Variável global para controlar a categoria selecionada
+        let selectedCategory = '';
+
+        function openRejectionModal() {
+            document.getElementById('rejection-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
             
+            // Reset form
+            selectedCategory = '';
+            document.getElementById('rejection-reason').value = '';
+            document.getElementById('rejection-suggestion').value = '';
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById('submit-rejection-btn').disabled = true;
+            updateCharCounter();
+        }
+
+        function closeRejectionModal() {
+            document.getElementById('rejection-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function selectCategory(category) {
+            selectedCategory = category;
+            
+            // Update UI
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('selected'));
+            document.querySelector(`[data-category="${category}"]`).classList.add('selected');
+            
+            // Check if form is valid
+            validateRejectionForm();
+        }
+
+        function validateRejectionForm() {
+            const reasonElement = document.getElementById('rejection-reason');
+            const submitBtn = document.getElementById('submit-rejection-btn');
+            
+            // Verificar se os elementos existem
+            if (!reasonElement || !submitBtn) {
+                return;
+            }
+            
+            const reason = reasonElement.value.trim();
+            const hasCategory = selectedCategory !== '';
+            const hasReason = reason.length >= 10;
+            
+            submitBtn.disabled = !(hasCategory && hasReason);
+        }
+
+        function updateCharCounter() {
+            const textarea = document.getElementById('rejection-reason');
+            const counter = document.querySelector('.char-counter-rejection');
+            
+            // Verificar se os elementos existem
+            if (!textarea || !counter) {
+                return;
+            }
+            
+            const current = textarea.value.length;
+            const max = 500;
+            
+            counter.textContent = `${current}/${max}`;
+            
+            if (current > max) {
+                counter.style.color = 'var(--accent-red)';
+                textarea.value = textarea.value.substring(0, max);
+            } else if (current > max * 0.8) {
+                counter.style.color = 'var(--accent-orange)';
+            } else {
+                counter.style.color = 'var(--text-secondary)';
+            }
+        }
+
+        async function submitRejection() {
+            const reason = document.getElementById('rejection-reason').value.trim();
+            const suggestion = document.getElementById('rejection-suggestion').value.trim();
+            
+            if (!selectedCategory || reason.length < 10) {
+                showNotification('❌ Selecione uma categoria e forneça um motivo detalhado', 'error');
+                return;
+            }
+            
+            closeRejectionModal();
             showLoading(true);
+            
             try {
+                // Preparar feedback detalhado para a IA
+                const aiLearningData = {
+                    article_id: {{ article.id }},
+                    category: selectedCategory,
+                    reason: reason,
+                    suggestion: suggestion,
+                    article_title: `{{ article.titulo | safe | replace('"', '\\"') if article.titulo else '' }}`,
+                    article_content_preview: `{{ (article.conteudo[:200] + '...') | safe | replace('"', '\\"') if article.conteudo else '' }}`,
+                    rejection_timestamp: new Date().toISOString()
+                };
+                
                 const response = await fetch(`/review/{{ article.id }}/reject`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        comment: reason,
-                        reviewer: 'Revisor Web'
+                        comment: `[${selectedCategory.toUpperCase()}] ${reason}${suggestion ? '\n\nSugestão: ' + suggestion : ''}`,
+                        reviewer: 'Revisor Web',
+                        ai_learning_data: aiLearningData
                     })
                 });
                 
                 if (response.ok) {
-                    showNotification('❌ Artigo rejeitado', 'warning');
-                    setTimeout(() => location.reload(), 1500);
+                    showNotification('❌ Artigo rejeitado - IA aprenderá com este feedback', 'warning');
+                    
+                    // Enviar dados para aprendizado da IA
+                    try {
+                        await fetch('/intelligence/learn-from-rejection', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(aiLearningData)
+                        });
+                        
+                        showNotification('🤖 Feedback enviado para aprendizado da IA', 'info');
+                    } catch (learningError) {
+                        console.log('Erro no aprendizado da IA:', learningError);
+                    }
+                    
+                    setTimeout(() => window.location.href = '/interface/review', 2000);
                 } else {
                     showNotification('❌ Erro ao rejeitar artigo', 'error');
                 }
             } catch (error) {
-                showNotification('❌ Erro de conexão', 'error');
+                showNotification('❌ Erro de conexão: ' + error.message, 'error');
             } finally {
                 showLoading(false);
             }
         }
         
-        async function saveChanges() {
-            const formData = {
-                titulo: document.getElementById('titulo').value,
-                slug: document.getElementById('slug').value,
-                meta_descricao: document.getElementById('meta_descricao').value,
-                conteudo: document.getElementById('conteudo').value,
-                tags: Array.from(document.querySelectorAll('#tags-container .tag')).map(tag => tag.textContent.replace('×', '').trim()),
-                wp_category: document.getElementById('edit_wp_category').value || null,
-                produto_original: document.getElementById('edit_produto_original').value.trim() || null
-            };
+        async function updateTitle() {
+            const titleInput = document.getElementById('titulo');
+            const newTitle = titleInput.value.trim();
+            
+            if (!newTitle) {
+                showNotification('❌ Título não pode estar vazio', 'error');
+                return;
+            }
+            
+            if (newTitle.length > 70) {
+                showNotification('❌ Título muito longo (máximo 70 caracteres)', 'error');
+                return;
+            }
             
             showLoading(true);
             try {
                 const response = await fetch(`/review/{{ article.id }}/update`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify({
+                        titulo: newTitle
+                    })
                 });
                 
-                if (response.ok) {
-                    showNotification('💾 Alterações salvas com sucesso!', 'success');
-                    setTimeout(() => location.reload(), 1500);
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('✅ Título atualizado com sucesso!', 'success');
+                    
+                    // Atualizar o título na preview do WordPress
+                    const wpTitle = document.querySelector('.wp-post-title');
+                    if (wpTitle) {
+                        wpTitle.textContent = newTitle;
+                    }
+                    
+                    // Atualizar título da página
+                    document.title = `📝 ${newTitle} - Revisão`;
+                    
                 } else {
-                    showNotification('❌ Erro ao salvar alterações', 'error');
+                    showNotification('❌ Erro ao atualizar título: ' + (data.error || 'Erro desconhecido'), 'error');
                 }
             } catch (error) {
-                showNotification('❌ Erro de conexão', 'error');
+                showNotification('❌ Erro de conexão: ' + error.message, 'error');
             } finally {
                 showLoading(false);
             }
         }
-        
+
         async function publishArticle() {
             if (!confirm('Tem certeza que deseja publicar este artigo no WordPress?')) {
                 return;
@@ -1376,11 +1756,53 @@
         
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Interface de revisão carregada');
+            
+            // Verificar se as imagens estão carregando
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    console.log('✅ Imagem carregada:', this.src);
+                });
+                img.addEventListener('error', function() {
+                    console.error('❌ Erro ao carregar imagem:', this.src);
+                });
+            });
+            
             // Atualizar contadores iniciais
-            {% if is_edit_mode %}
             updateCharCount('titulo', 60);
             updateCharCount('meta_descricao', 160);
-            {% endif %}
+            
+            // Event listeners para o modal de rejeição
+            const rejectionTextarea = document.getElementById('rejection-reason');
+            if (rejectionTextarea) {
+                rejectionTextarea.addEventListener('input', function() {
+                    updateCharCounter();
+                    validateRejectionForm();
+                });
+            }
+            
+            // Fechar modal ao clicar fora
+            const modal = document.getElementById('rejection-modal');
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeRejectionModal();
+                    }
+                });
+            }
+            
+            // Fechar modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('rejection-modal');
+                    if (modal && modal.classList.contains('active')) {
+                        closeRejectionModal();
+                    }
+                }
+            });
+            
+            console.log('✅ Todos os event listeners configurados');
         });
     </script>
         </div>
