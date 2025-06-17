@@ -24,6 +24,7 @@ apscheduler==3.10.4
 
 # Utilities
 python-slugify==8.0.4
+unidecode==1.3.7
 
 # Segurança (Railway recommendation)
 cryptography>=41.0.0
