@@ -361,6 +361,55 @@
             padding-right: 48px;
         }
         
+        /* Estilos para elementos de display (somente leitura) */
+        .config-display {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            min-height: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .display-value {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .display-note {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+        
+        .schedule-info-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        
+        .info-note {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        
+        .info-note ul {
+            margin: 8px 0 0 20px;
+            color: var(--text-secondary);
+        }
+        
+        .info-note li {
+            margin-bottom: 4px;
+        }
+        
         .save-btn {
             background: var(--gradient-primary);
             color: white;
@@ -1441,7 +1490,10 @@
             <div class="tab-content" id="agenda">
                 <div class="config-section">
                     <h3><i class="fas fa-calendar-alt"></i>Agenda de Execução Automática</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Configure quando o sistema executará automaticamente</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                        <i class="fas fa-info-circle"></i> 
+                        Visualização das programações automáticas do sistema (somente leitura)
+                    </p>
                     
                     <div class="schedule-status" style="margin-bottom: 32px;">
                         <div class="status-card">
@@ -1450,56 +1502,57 @@
                                 <div class="schedule-item">
                                     <span class="schedule-label">Próxima Execução:</span>
                                     <span class="schedule-value" id="next-execution">Carregando...</span>
-                    </div>
+                                </div>
                                 <div class="schedule-item">
                                     <span class="schedule-label">Última Execução:</span>
                                     <span class="schedule-value" id="last-execution">Carregando...</span>
                                 </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            
-                    <div class="config-grid">
+                    
+                    <div class="config-grid" style="margin-bottom: 32px;">
                         <div class="config-item">
                             <label class="config-label">
                                 <i class="fas fa-calendar-day"></i>
-                                Dia da Semana
+                                Dia da Semana Programado
                             </label>
-                            <select class="config-input config-select" id="dia_execucao">
-                                <option value="0">Domingo</option>
-                                <option value="1">Segunda-feira</option>
-                                <option value="2">Terça-feira</option>
-                                <option value="3">Quarta-feira</option>
-                                <option value="4">Quinta-feira</option>
-                                <option value="5">Sexta-feira</option>
-                                <option value="6">Sábado</option>
-                            </select>
+                            <div class="config-display">
+                                <span id="dia-display" class="display-value">Domingo</span>
+                                <small class="display-note">Configuração fixa do sistema</small>
+                            </div>
                         </div>
                         <div class="config-item">
                             <label class="config-label">
                                 <i class="fas fa-clock"></i>
                                 Horário de Execução
                             </label>
-                            <div class="input-group">
-                                <input type="time" class="config-input with-icon" id="horario_execucao" value="10:00">
-                                <i class="fas fa-clock input-icon"></i>
-                    </div>
-                </div>
-            </div>
-            
-                    <div class="schedule-preview" style="margin-top: 24px;">
-                        <h4 style="color: var(--text-primary); margin-bottom: 12px;">
-                            <i class="fas fa-eye"></i> Prévia da Programação
-                        </h4>
-                        <div id="schedule-preview" class="preview-text">
-                            Configuração será exibida aqui conforme você seleciona as opções
+                            <div class="config-display">
+                                <span id="horario-display" class="display-value">10:00</span>
+                                <small class="display-note">Horário fixo programado</small>
+                            </div>
                         </div>
                     </div>
-
-                    <button class="save-btn" onclick="saveAgendaConfig()">
-                        <i class="fas fa-save"></i>
-                        Salvar Configurações da Agenda
-                    </button>
+                    
+                    <div class="schedule-info-card" style="margin-top: 24px;">
+                        <h4 style="color: var(--text-primary); margin-bottom: 12px;">
+                            <i class="fas fa-calendar-check"></i> Programação Automática
+                        </h4>
+                        <div id="schedule-preview" class="preview-text">
+                            <i class="fas fa-calendar-check"></i>
+                            O sistema executará automaticamente toda <strong>Domingo</strong> às <strong>10:00</strong>
+                        </div>
+                        <div class="info-note" style="margin-top: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                            <i class="fas fa-lightbulb"></i>
+                            <strong>Como funciona:</strong> O sistema executa automaticamente todas as tarefas programadas:
+                            <ul style="margin: 8px 0 0 20px; color: var(--text-secondary);">
+                                <li>🔍 Scraping de produtos das categorias ativas</li>
+                                <li>📝 Geração de artigos para produtos novos</li>
+                                <li>📤 Publicação automática no WordPress</li>
+                                <li>🧹 Limpeza de dados antigos</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -1665,11 +1718,6 @@
                 input.addEventListener('input', () => {
                     hasUnsavedChanges = true;
                     document.getElementById('floatingSave').classList.add('visible');
-                    
-                    // Atualizar preview da agenda em tempo real
-                    if (input.id === 'dia_execucao' || input.id === 'horario_execucao') {
-                        updateSchedulePreview();
-                    }
                 });
             });
         }
@@ -1777,8 +1825,14 @@
                 const response = await fetch('/config/agenda');
                 if (response.ok) {
                     const data = await response.json();
-                    document.getElementById('dia_execucao').value = data.dia_execucao || '0';
-                    document.getElementById('horario_execucao').value = data.horario_execucao || '10:00';
+                    const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+                    
+                    // Atualizar displays informativos
+                    const diaIndex = data.dia_execucao || 0;
+                    const horario = data.horario_execucao || '10:00';
+                    
+                    document.getElementById('dia-display').textContent = dias[diaIndex];
+                    document.getElementById('horario-display').textContent = horario;
                     
                     // Atualizar status da agenda
                     if (data.next_execution) {
@@ -1787,10 +1841,26 @@
                     if (data.last_execution) {
                         document.getElementById('last-execution').textContent = data.last_execution;
                     }
+                    
+                    // Atualizar preview
+                    document.getElementById('schedule-preview').innerHTML = `
+                        <i class="fas fa-calendar-check"></i>
+                        O sistema executará automaticamente toda <strong>${dias[diaIndex]}</strong> às <strong>${horario}</strong>
+                    `;
+                } else {
+                    // Valores padrão
+                    document.getElementById('dia-display').textContent = 'Domingo';
+                    document.getElementById('horario-display').textContent = '10:00';
+                    document.getElementById('next-execution').textContent = 'Domingo às 10:00 (Programada)';
+                    document.getElementById('last-execution').textContent = 'Sistema ativo - aguardando primeira execução';
                 }
-                updateSchedulePreview();
             } catch (error) {
                 console.log('Agenda config not found, using defaults');
+                // Valores padrão em caso de erro
+                document.getElementById('dia-display').textContent = 'Domingo';
+                document.getElementById('horario-display').textContent = '10:00';
+                document.getElementById('next-execution').textContent = 'Domingo às 10:00 (Programada)';
+                document.getElementById('last-execution').textContent = 'Sistema ativo - aguardando primeira execução';
             }
         }
         
