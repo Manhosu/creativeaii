@@ -1,0 +1,2531 @@
+{
+  "metadata": {
+    "total_produtos": 100,
+    "data_export": "2025-06-16 15:23:59",
+    "resumo": {
+      "total_produtos": 100,
+      "com_preco": 100,
+      "disponiveis": 100,
+      "sem_preco": 0,
+      "indisponiveis": 0,
+      "marcas_encontradas": 7,
+      "marcas": [
+        "Brother",
+        "Canon",
+        "HP",
+        "Lexmark",
+        "Ricoh",
+        "Samsung",
+        "Xerox"
+      ],
+      "categorias_processadas": 0,
+      "taxa_preco": 100.0,
+      "taxa_disponibilidade": 100.0,
+      "data_processamento": "2025-06-16 15:23:59"
+    },
+    "produtos_corrigidos": 1,
+    "data_correcao": "2025-06-23 11:24:06"
+  },
+  "produtos": [
+    {
+      "nome": "Toner Compatível Com Hp 103A W1103A W1103Ab  1200A 1200W 1000A 1000W 1000N 1200Nw  Premium 2.5K",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-hp-103a-w1103a-neverstop-1200a-1200w-1000a-1000w-1000n-1200nw-premium-25k.html",
+      "preco": {
+        "valor": 28.0,
+        "moeda": "BRL",
+        "texto": "R$ 28,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/6/8696_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp 103A W1103A W1103Ab  Neverstop 1200A 1200W 1000A 1000W 1000N 1200Nw  Original 2.5K",
+      "url": "https://www.creativecopias.com.br/toner-hp-103a-neverstop-1200a-1200w-1000a-1000w-original-25k.html",
+      "preco": {
+        "valor": 107.0,
+        "moeda": "BRL",
+        "texto": "R$ 107,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/7479_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Universal  Kora 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-universal-kora-1kg.html",
+      "preco": {
+        "valor": 74.17,
+        "moeda": "BRL",
+        "texto": "R$ 74,17"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/2/4237_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn1060  Dcp1512 Dcp1602 Hl1112 Dcp1617Nw Hl1202 Hl1212W  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn1060-dcp1512-dcp1602-hl1112-dcp1617nw-hl1202-hl1212w-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Tk20 Tk100 Tk172 Tk1147  Fs1000 Fs1010 Fs1050  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-mita-tk20-tk100-tk172-tk1147-fs1000-fs1010-fs1050-katun-performance-1kg.html",
+      "preco": {
+        "valor": 160.0,
+        "moeda": "BRL",
+        "texto": "R$ 160,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/9/3929_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Compatível Com Canon Gpr-37 Gpr-38 Preto  3764B003Aa  Ir8085 8095 8105  Katun Access 2200G",
+      "url": "https://www.creativecopias.com.br/toner-compativel-com-canon-gpr-37-gpr-38-3764b003aa-ir8085-ir8095-ir8105-ir8205-katun-access-220.html",
+      "preco": {
+        "valor": 320.0,
+        "moeda": "BRL",
+        "texto": "R$ 320,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/4/9432_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn2370 Tn2340  Dcp-L2540Dw Dcp-L2520Dw Hl-L2320D  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn2370-tn2340-dcp-l2540dw-dcp-l2520dw-hl-l2320d-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-6_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Tk1147 Tk137  Fs1035 Km2810 Km2820 M2035  Katun Performance 290G",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-mita-tk1147-tk137-fs1035-km2810-km2820-m2035-katun-performance-290g.html",
+      "preco": {
+        "valor": 57.0,
+        "moeda": "BRL",
+        "texto": "R$ 57,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/7/273-2_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Hp 103Ad W1103Ad W1103Ae  Neverstop 1200W 1200 1000A 1000W 1000N  Pacote Duplo  Original 5K",
+      "url": "https://www.creativecopias.com.br/toner-hp-103ad-w1103ad-neverstop-1200a-1200w-1000a-1000w-pacote-duplo-original-5k.html",
+      "preco": {
+        "valor": 187.0,
+        "moeda": "BRL",
+        "texto": "R$ 187,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/7481_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Em Bag Para Canon Imagerunner 5000 6000 5020 6020 6045  Katun Access 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-em-bag-para-canon-imagerunner-5000-6000-5020-6020-6045-katun-access-1kg.html",
+      "preco": {
+        "valor": 83.0,
+        "moeda": "BRL",
+        "texto": "R$ 83,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/6/4653_ampliada_2.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Em Bag Ricoh Aficio 1060 1075 841332 885400 Type 6110D 6210D  Katun Access 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-em-bag-ricoh-aficio-1060-1075-841332-885400-type-6110d-6210d-katun-access-1kg.html",
+      "preco": {
+        "valor": 93.0,
+        "moeda": "BRL",
+        "texto": "R$ 93,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/2/5239_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Ce285A  P1102 M1210 M1130 M1132 M1217 P1102W M1217Fw Universal Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-ce285a-p1102-m1210-m1130-m1132-m1217-p1102w-m1217fw-universal-katun-performance-1kg.html",
+      "preco": {
+        "valor": 95.0,
+        "moeda": "BRL",
+        "texto": "R$ 95,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/283-2_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp  Universal Q2612A  Katun 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-universal-q2612a-katun-1kg.html",
+      "preco": {
+        "valor": 85.0,
+        "moeda": "BRL",
+        "texto": "R$ 85,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/7/277_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Pantum Rk-219 Rk219  Para Toner Pd-219  P2509W P2509 M6559Nw M6559  Original 1.6K",
+      "url": "https://www.creativecopias.com.br/toner-refil-pantum-rk-219-rk219-para-toner-pd-219-p2509w-p2509-m6559nw-m6559-original-16k.html",
+      "preco": {
+        "valor": 87.57,
+        "moeda": "BRL",
+        "texto": "R$ 87,57"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9102_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn650 Tn620  8080 8085 8890 5340 5350  Katun Performance 200G",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn650-tn620-8080-8085-8890-5340-5350-katun-performance-200g.html",
+      "preco": {
+        "valor": 36.7,
+        "moeda": "BRL",
+        "texto": "R$ 36,70"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/2/1203-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn650 Tn620  8080 8085 8890 5340 5350  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn650-tn620-8080-8085-8890-5340-5350-katun-performance-1kg.html",
+      "preco": {
+        "valor": 164.0,
+        "moeda": "BRL",
+        "texto": "R$ 164,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1376-11_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn3442  6202 5102 5202 6402 5502 5602 5652 5902 5702 6702  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn3442-6202-5102-5202-6402-5502-5602-5652-5902-5702-6702-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-8_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Em Bag Para Brother Tn350 Tn360 Tn560 Tn580 Tn550 Tn650 Tn620  Kora 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-em-bag-para-brother-tn350-tn360-tn560-tn580-tn550-tn650-tn620-kora-1kg.html",
+      "preco": {
+        "valor": 87.57,
+        "moeda": "BRL",
+        "texto": "R$ 87,57"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/4/4479_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Canon Ir5000 Ir5020 Ir6000 Ir6020 Ir4600 Np-6080 6150 6650 7050  1.500G  Katun Access",
+      "url": "https://www.creativecopias.com.br/toner-refil-canon-ir5000-ir5020-ir6000-ir6020-ir4600-1500g-katun-access.html",
+      "preco": {
+        "valor": 141.0,
+        "moeda": "BRL",
+        "texto": "R$ 141,00"
+      },
+      "codigo": "IL",
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/2/2225_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Ricoh Aficio Sp3400 Sp3410 Sp3500 Sp3510  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-ricoh-aficio-sp3400-sp3410-sp3500-sp3510-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-27_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn3442  6202 5102 5202 6402 5502 5602 5652 5902 5702 6702  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn3442-6202-5102-5202-6402-5502-5602-5652-5902-5702-6702-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-8_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Sharp Ar160 Ar200 Ar205 Ar5220 Ar5316 Ar5320 Al 2031 Al 2041 Katun Performance  610G",
+      "url": "https://www.creativecopias.com.br/toner-refil-sharp-ar160-ar200-ar205-ar5220-ar5316-ar5320-al-2031-al-2041-katun-performance-610g.html",
+      "preco": {
+        "valor": 126.0,
+        "moeda": "BRL",
+        "texto": "R$ 126,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1628_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Sharp Ar160 Ar200 Ar205 Ar5220 Ar5316 Ar5320 Al 2031 Al 2041 Katun Performance  610G",
+      "url": "https://www.creativecopias.com.br/toner-refil-sharp-ar160-ar200-ar205-ar5220-ar5316-ar5320-al-2031-al-2041-katun-performance-610g.html",
+      "preco": {
+        "valor": 126.0,
+        "moeda": "BRL",
+        "texto": "R$ 126,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1628_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn410 Tn450 Tn420  Hl2270Dw Hl2130 Mfc7360N Dcp7065Dn  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn410-tn450-tn420-hl2270dw-hl2130-mfc7360n-dcp7065dn-katun-performance-1kg.html",
+      "preco": {
+        "valor": 164.0,
+        "moeda": "BRL",
+        "texto": "R$ 164,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1376_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Scx4521 Scx4725 Ml1440 Ml1450 Ml1451 Ml1610 Ml2010 Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-scx4521-scx4725-ml1440-ml1450-ml1451-ml1610-ml2010-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox Phaser 3635 Xerox 3635D 3635Dn  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-phaser-3635-xerox-3635d-3635dn-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-21_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Konica Minolta Bizhub20  Bizhub 20  Katun Performance  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-konica-minolta-bizhub20-bizhub-20-katun-performance-1kg.html",
+      "preco": {
+        "valor": 164.0,
+        "moeda": "BRL",
+        "texto": "R$ 164,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1376-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn1060  Hl1112 Dcp1512 Hl1202 Hl1212W Dcp1602 Dcp1617Nw  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn1060-hl1112-dcp1512-hl1202-hl1212w-dcp1602-dcp1617nw-katun-performance-1kg.html",
+      "preco": {
+        "valor": 164.0,
+        "moeda": "BRL",
+        "texto": "R$ 164,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1376-12_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Lexmark  E210  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-lexmark-universal-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-12_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn3382 Tn3392 Tn3332 Tn750 Tn780 Tn720  Dcp8152 Dcp8157  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn3382-tn3392-tn3332-tn750-tn780-tn720-dcp8152-dcp8157-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn350 Tn360 Tn460 Tn530 Tn560 Tn550 Tn580 Tn650  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn350-tn360-tn460-tn530-tn560-tn550-tn580-tn650-katun-performance-1kg.html",
+      "preco": {
+        "valor": 164.0,
+        "moeda": "BRL",
+        "texto": "R$ 164,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1376-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn2340 Tn2370  Hl-L2360 Mfc-L2720 Mfc-L2700 Dcp-L2540  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn2340-tn2370-hl-l2360-mfc-l2720-mfc-l2700-dcp-l2540-katun-performance-1kg.html",
+      "preco": {
+        "valor": 164.0,
+        "moeda": "BRL",
+        "texto": "R$ 164,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1376-13_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Mlt-D205 D205E  Ml3710Nd Ml3710 Scx5637Fr Scx5637  Katun Performance 80G",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-mlt-d205-d205e-ml3710nd-ml3710-scx5637fr-scx5637-katun-performance-80g.html",
+      "preco": {
+        "valor": 22.24,
+        "moeda": "BRL",
+        "texto": "R$ 22,24"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-27_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Mlt-D116S Mlt-D116L  M2825Nd M2835Dw M2875Fd M2885Fw  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-mlt-d116s-mlt-d116l-m2825nd-m2835dw-m2875fd-m2885fw-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-26_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn3492  Mfc-L6902Dw Hl-L6402Dw Mfcl6902 Hll6402  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn3492-mfc-l6902dw-hl-l6402dw-mfcl6902-hll6402-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-10_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox Pe16 Pe220 3100 3200 Mfp Katun Performance  80G",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-pe16-pe220-3100-3200-mfp-katun-performance-80g.html",
+      "preco": {
+        "valor": 22.24,
+        "moeda": "BRL",
+        "texto": "R$ 22,24"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Cb436A Cb435A Ce285A Ce278A Cf283A  Kora 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-cb436a-cb435a-ce285a-ce278a-cf283a-kora-1kg.html",
+      "preco": {
+        "valor": 74.17,
+        "moeda": "BRL",
+        "texto": "R$ 74,17"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/2/4238_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Universal  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-universal-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-12_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Tk20 Tk100  Fs1000 Fs1010 Fs1020D Km1820 Fs1050  Katun Performance 290G",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-mita-tk20-tk100-fs1000-fs1010-fs1020d-km1820-fs1050-katun-performance-290g.html",
+      "preco": {
+        "valor": 57.0,
+        "moeda": "BRL",
+        "texto": "R$ 57,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/7/273_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp 130A Cf351A Ciano  M176N M177Fw M176 M177  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-130a-cf351a-ciano-m176n-m177fw-m176-m177-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1075-8_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Mlt-D205 D205E  Ml3710Nd Ml3710 Scx5637Fr Scx5637  Katun Performance 80G",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-mlt-d205-d205e-ml3710nd-ml3710-scx5637fr-scx5637-katun-performance-80g.html",
+      "preco": {
+        "valor": 22.24,
+        "moeda": "BRL",
+        "texto": "R$ 22,24"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-27_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Tk20 Tk100  Fs1000 Fs1010 Fs1020D Km1820 Fs1050  Katun Performance 290G",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-mita-tk20-tk100-fs1000-fs1010-fs1020d-km1820-fs1050-katun-performance-290g.html",
+      "preco": {
+        "valor": 57.0,
+        "moeda": "BRL",
+        "texto": "R$ 57,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/7/273_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 106R02312 106R02310  Wc3325 Wc3315 Phaser 3320  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-106r02312-106r02310-wc3325-wc3315-phaser-3320-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-21_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Tk1102  Fs1124 Fs-1124 Fs1024 Fs-1024 Fs1124Mfp  Katun Performance 290G",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-tk1102-fs1124-fs-1124-fs1024-fs-1024-fs1124mfp-katun-performance-290g.html",
+      "preco": {
+        "valor": 57.0,
+        "moeda": "BRL",
+        "texto": "R$ 57,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/7/273-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Mlt-D205 D205L  Ml3310 Ml3710 Scx4833 Scx5637  Katun Performance 80G",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-mlt-d205-d205l-ml3310-ml3710-scx4833-scx5637-katun-performance-80g.html",
+      "preco": {
+        "valor": 22.24,
+        "moeda": "BRL",
+        "texto": "R$ 22,24"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-26_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung D204 Mlt-D204U  M4025Nd M4075Fw M4025 M4075  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-d204-mlt-d204u-m4025nd-m4075fw-m4025-m4075-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-18_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung D204 Mlt-D204E  M3825Dw M4025Nd M3875Fw M4075Fw  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-d204-mlt-d204e-m3825dw-m4025nd-m3875fw-m4075fw-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-17_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Mlt-D205 D205L  Ml3310 Ml3710 Scx4833 Scx5637  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-mlt-d205-d205l-ml3310-ml3710-scx4833-scx5637-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-19_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung D204 Mlt-D204S  M3825 M4025 M3325 M3875 M3375 M4075  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-d204-mlt-d204s-m3825-m4025-m3325-m3875-m3375-m4075-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-16_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Mlt-D205 D205E  Ml3710Nd Ml3710 Scx5637Fr Scx5637  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-mlt-d205-d205e-ml3710nd-ml3710-scx5637fr-scx5637-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-20_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp 130A Cf351A Ciano  M176N M177Fw M176 M177  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-130a-cf351a-ciano-m176n-m177fw-m176-m177-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1075-8_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung D204 Mlt-D204L  M3825 M4025 M3325 M3875 M3375 M4075  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-d204-mlt-d204l-m3825-m4025-m3325-m3875-m3375-m4075-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-15_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Tk350 Tk352  Fs3920Dn Fs3040Mfp Fs3140Mfp Fs3640Mfp  Katun Performance 290G",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-tk350-tk352-fs3920dn-fs3040mfp-fs3140mfp-fs3640mfp-katun-performance-290g.html",
+      "preco": {
+        "valor": 57.0,
+        "moeda": "BRL",
+        "texto": "R$ 57,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/7/273-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp 130A Cf352A Amarelo  M176N M177Fw M176 M177  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-130a-cf352a-amarelo-m176n-m177fw-m176-m177-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1076-8_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp 130A Cf353A Magenta  M176N M177Fw M176 M177  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-130a-cf353a-magenta-m176n-m177fw-m176-m177-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1078-8_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp 130A Cf350A Preto  M176N M177Fw M176 M177  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-130a-cf350a-preto-m176n-m177fw-m176-m177-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1074-8_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 3250 3250D 3250Dn  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-3250-3250d-3250dn-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-13_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 4118 M418 M418I  Xerox 006R01278  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-4118-m418-m418i-xerox-006r01278-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-14_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox Phaser 3435  106R01415  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-phaser-3435-106r01415-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-15_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Scx4016 Scx4100 Scx4116  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-scx4016-scx4100-scx4116-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-11_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 3250 3250D 3250Dn  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-3250-3250d-3250dn-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-13_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Scx4016 Scx4100 Scx4116  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-scx4016-scx4100-scx4116-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-11_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox Phaser 3635 Xerox 3635D 3635Dn  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-phaser-3635-xerox-3635d-3635dn-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-13_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Q2624A 24A  1150 1150N  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-q2624a-24a-1150-1150n-jadi-1kg.html",
+      "preco": {
+        "valor": 78.78,
+        "moeda": "BRL",
+        "texto": "R$ 78,78"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/6/2648-6_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 4118 M418 M418I  Xerox 006R01278  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-4118-m418-m418i-xerox-006r01278-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-14_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Scx4200 Scx4300 Scx4216F Scx4828 Scx4828Nd  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-scx4200-scx4300-scx4216f-scx4828-scx4828nd-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-10_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Tk1102  Fs1124 Fs-1124 Fs1024 Fs-1024 Fs1124Mfp  Katun Performance 290G",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-tk1102-fs1124-fs-1124-fs1024-fs-1024-fs1124mfp-katun-performance-290g.html",
+      "preco": {
+        "valor": 57.0,
+        "moeda": "BRL",
+        "texto": "R$ 57,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/7/273-4_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 106R02312 106R02310  Wc3325 Wc3315 Phaser 3320  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-106r02312-106r02310-wc3325-wc3315-phaser-3320-jadi-1kg.html",
+      "preco": {
+        "valor": 98.0,
+        "moeda": "BRL",
+        "texto": "R$ 98,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/1105-21_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox Phaser 3435  106R01415  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-phaser-3435-106r01415-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-15_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox Pe16 Pe220 3200Mfp 3100 3115 3116 3117 3119 3124 3125  Katun Performance  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-pe16-pe220-3200mfp-3100-3115-3116-3117-3119-3124-3125-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-9_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Mlt-D309L D309  Ml5510 Ml6510 Ml-5510Nd Ml-6510Dn  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-mlt-d309l-d309-ml5510-ml6510-ml-5510nd-ml-6510dn-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-16_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit 2 Toner Refil Samsung Ml1665 Ml1660 Ml1860 Ml1865 Scx3200 Mlt D104S  Katun Performance  80G",
+      "url": "https://www.creativecopias.com.br/kit-2-toner-refil-samsung-ml1665-ml1660-ml1860-ml1865-scx3200-mlt-d104s-katun-performance-80g.html",
+      "preco": {
+        "valor": 44.48,
+        "moeda": "BRL",
+        "texto": "R$ 44,48"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-22_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung D101S  Ml2135  Ml2165W  Scx3405  Scx3405W  Scx3405Fw Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-d101s-ml2135-ml2165w-scx3405-scx3405w-scx3405fw-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-18_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 3045 3040 3010  Katun Performance  80G",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-3045-3040-3010-katun-performance-80g.html",
+      "preco": {
+        "valor": 22.24,
+        "moeda": "BRL",
+        "texto": "R$ 22,24"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-25_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Cf283A 83A  M127 M125 M201 M225 M226 M202 M127  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-cf283a-83a-m127-m125-m201-m225-m226-m202-m127-katun-performance-1kg.html",
+      "preco": {
+        "valor": 95.0,
+        "moeda": "BRL",
+        "texto": "R$ 95,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/283-5_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Magenta Cf213A  Pro 200 131A  Pro200  M251  M276  Jadi  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-magenta-cf213a-pro-200-131a-pro200-m251-m276-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1078-7_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Ciano Cf211A  Pro 200 131A  Pro200  M251  M276  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-ciano-cf211a-pro-200-131a-pro200-m251-m276-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1075-7_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Preto Cf210A  Pro 200 131A  Pro200  M251  M276  Jadi  1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-preto-cf210a-pro-200-131a-pro200-m251-m276-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1074-7_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 3140 3155 3160  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-3140-3155-3160-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-22_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Kit 10 Toner Refil Samsung Ml1665 Ml1660 Ml1860 Ml1865 Scx3200 Mlt D104S  Katun Performance  80G",
+      "url": "https://www.creativecopias.com.br/kit-10-toner-refil-samsung-ml1665-ml1660-ml1860-ml1865-scx3200-mlt-d104s-katun-performance-80g.html",
+      "preco": {
+        "valor": 222.4,
+        "moeda": "BRL",
+        "texto": "R$ 222,40"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-24_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Scx 5530  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-scx-5530-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-23_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Ce505A 05A  P2035 P2055 P2055N P2035N P2055Dn  Universal Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-ce505a-05a-p2035-p2055-p2055n-p2035n-p2055dn-universal-katun-performance-1kg.html",
+      "preco": {
+        "valor": 95.0,
+        "moeda": "BRL",
+        "texto": "R$ 95,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/283-6_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Sharp Ar200  Ar160 Ar150 Ar150E Ar156 Ar161  Katun Access 610G",
+      "url": "https://www.creativecopias.com.br/toner-refil-sharp-ar200-ar160-ar150-ar150e-ar156-ar161-katun-access-610g.html",
+      "preco": {
+        "valor": 128.78,
+        "moeda": "BRL",
+        "texto": "R$ 128,78"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/6/1638-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Ml3050 Ml3050B Ml3051 Ml3051N Ml3051Nd  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-ml3050-ml3050b-ml3051-ml3051n-ml3051nd-katun-performance-1kg.html",
+      "preco": {
+        "valor": 135.0,
+        "moeda": "BRL",
+        "texto": "R$ 135,00"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/2/8/280-24_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Xerox 106R02312 106R02310  Wc3325 Wc3315 Phaser 3320  Katun Performance 80G",
+      "url": "https://www.creativecopias.com.br/toner-refil-xerox-106r02312-106r02310-wc3325-wc3315-phaser-3320-katun-performance-80g.html",
+      "preco": {
+        "valor": 22.24,
+        "moeda": "BRL",
+        "texto": "R$ 22,24"
+      },
+      "codigo": "IL",
+      "marca": "Xerox",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/8/989-28_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Toshiba E-Studio 28 E-Studio 35 E-Studio 45  Katun Access  300G",
+      "url": "https://www.creativecopias.com.br/toner-refil-toshiba-e-studio-28-e-studio-35-e-studio-45-katun-access-300g.html",
+      "preco": {
+        "valor": 18.2,
+        "moeda": "BRL",
+        "texto": "R$ 18,20"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/8/7826_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn3422  6202 5102 5202 6402 5502 5602 5652 5902 5702 6702  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn3422-6202-5102-5202-6402-5502-5602-5652-5902-5702-6702-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-9_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Samsung Clt-M404S 404S M404 Magenta  Sl-C430 C480 C430W C480W C480Fw  Jadi 35G",
+      "url": "https://www.creativecopias.com.br/toner-refil-samsung-clt-m404s-404s-m404-magenta-sl-c430-c480-c430w-c480w-c480fw-jadi-35g.html",
+      "preco": {
+        "valor": 5.15,
+        "moeda": "BRL",
+        "texto": "R$ 5,15"
+      },
+      "codigo": "IL",
+      "marca": "Samsung",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/6/86-1_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Universal Tn3472  6202 5102 5202 6402 5502 5602 5652 5902 5702 6702  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-universal-tn3472-6202-5102-5202-6402-5502-5602-5652-5902-5702-6702-jadi-1kg.html",
+      "preco": {
+        "valor": 94.0,
+        "moeda": "BRL",
+        "texto": "R$ 94,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/0/5063-11_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn2370 Tn2340 Tn660  Hl-L2360 Hl-L2320 Mfc-L2720  Katun Performance 200G",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn2370-tn2340-tn660-hl-l2360-hl-l2320-mfc-l2720-katun-performance-200g.html",
+      "preco": {
+        "valor": 36.7,
+        "moeda": "BRL",
+        "texto": "R$ 36,70"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/2/1203-22_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn2370 Tn2340 Tn660  Hl-L2360 Hl-L2320 Mfc-L2720  Katun Performance 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn2370-tn2340-tn660-hl-l2360-hl-l2320-mfc-l2720-katun-performance-1kg.html",
+      "preco": {
+        "valor": 164.0,
+        "moeda": "BRL",
+        "texto": "R$ 164,00"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/3/1376-15_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Brother Tn2340 Tn2370  Hl-L2360 Mfc-L2720 Mfc-L2700 Dcp-L2540  Katun Performance 200G",
+      "url": "https://www.creativecopias.com.br/toner-refil-brother-tn2340-tn2370-hl-l2360-mfc-l2720-mfc-l2700-dcp-l2540-katun-performance-200g.html",
+      "preco": {
+        "valor": 36.7,
+        "moeda": "BRL",
+        "texto": "R$ 36,70"
+      },
+      "codigo": "IL",
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/2/1203-21_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Cf510A 510A Preto  Cp1215 Cp1510 Cp1515 Cp1518 Cm1312  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-cf510a-510a-preto-cp1215-cp1510-cp1515-cp1518-cm1312-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1074-13_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Cf512A 512A Amarelo  Cp1215 Cp1510 Cp1515 Cp1518 Cm1312  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-cf512a-512a-amarelo-cp1215-cp1510-cp1515-cp1518-cm1312-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1076-12_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Ce313A  126A  Cp1020  Cp1020Nw  Cp1025  Cp1025Nw  M175A M175Nw Magenta Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-ce313a-126a-cp1020-cp1020nw-cp1025-cp1025nw-m175a-m175nw-magenta-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1078-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Cf513A 513A Magenta  Cp1215 Cp1510 Cp1515 Cp1518 Cm1312  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-cf513a-513a-magenta-cp1215-cp1510-cp1515-cp1518-cm1312-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1078-12_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Kyocera Mita Taskalfa 3010 I 3010I  Katun 759G",
+      "url": "https://www.creativecopias.com.br/toner-refil-kyocera-mita-taskalfa-3010-i-3010i-katun-759g.html",
+      "preco": {
+        "valor": 110.0,
+        "moeda": "BRL",
+        "texto": "R$ 110,00"
+      },
+      "codigo": "IL",
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11465_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Cf511A 511A Ciano  Cp1215 Cp1510 Cp1515 Cp1518 Cm1312  Jadi 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-cf511a-511a-ciano-cp1215-cp1510-cp1515-cp1518-cm1312-jadi-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1075-12_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Hp Ce312A  126A  Cp1020  Cp1020Nw  Cp1025  Cp1025Nw  M175A  M175Nw  Amarelo 1Kg",
+      "url": "https://www.creativecopias.com.br/toner-refil-hp-ce312a-126a-cp1020-cp1020nw-cp1025-cp1025nw-m175a-m175nw-amarelo-1kg.html",
+      "preco": {
+        "valor": 307.0,
+        "moeda": "BRL",
+        "texto": "R$ 307,00"
+      },
+      "codigo": "IL",
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/1076-3_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Toner Refil Ricoh Sp377 Sp377Dnwx 377Dnwx Sp377Sfnwx 377Sfnwx  Katun 170G",
+      "url": "https://www.creativecopias.com.br/toner-refil-ricoh-sp377-sp377dnwx-377dnwx-sp377sfnwx-377sfnwx-katun-170g.html",
+      "preco": {
+        "valor": 29.0,
+        "moeda": "BRL",
+        "texto": "R$ 29,00"
+      },
+      "codigo": "IL",
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11464_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:23:30",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    }
+  ]
+}

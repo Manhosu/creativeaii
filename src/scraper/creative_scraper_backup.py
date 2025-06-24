@@ -318,106 +318,32 @@ class CreativeScraper(ScraperBase):
         return None
     
     def _extract_product_price(self, element: Any) -> Optional[str]:
-        """
-        Extrai preço do produto - PRIORIZA PREÇOS PROMOCIONAIS
-        CORRIGIDO: Agora captura preços promocionais/especiais primeiro
-        """
-        # PRIORIDADE 1: Preços promocionais/especiais (preços reais de venda)
-        promo_selectors = [
-            '.special-price',           # Preço especial (mais comum)
-            '.promotion-price',         # Preço promocional
-            '.discount-price',          # Preço com desconto
-            '.sale-price',             # Preço de venda
-            '.final-price',            # Preço final
-            '.current-price',          # Preço atual
-            '.price-final_price .price', # Estrutura específica Magento
-            '[data-price-type="finalPrice"]'  # Atributo data específico
-        ]
-        
-        for selector in promo_selectors:
-            try:
-                price_elem = element.select_one(selector)
-                if price_elem:
-                    price_text = price_elem.get_text(strip=True)
-                    # Limpar texto e extrair preço
-                    price_match = re.search(r'R\$[\s]*([0-9.,]+)', price_text)
-                    if price_match:
-                        promo_price = f"R$ {price_match.group(1)}"
-                        logger.info(f"💰 PREÇO PROMOCIONAL capturado: {promo_price} (seletor: {selector})")
-                        return promo_price
-            except Exception as e:
-                logger.debug(f"❌ Erro no seletor promocional {selector}: {e}")
-                continue
-        
-        # PRIORIDADE 2: Preços regulares (fallback)
-        regular_selectors = [
-            '.price-box .price',       # Container de preço padrão
-            '.regular-price .price',   # Preço regular
+        """Extrai preço do produto"""
+        price_selectors = [
             '.price', '.preco', '.valor',
             '[data-price]', '.product-price',
             '.money', '.currency'
         ]
         
-        for selector in regular_selectors:
+        for selector in price_selectors:
             try:
                 price_elem = element.select_one(selector)
                 if price_elem:
                     price_text = price_elem.get_text(strip=True)
-                    
-                    # Evitar capturar preços antigos/cortados
-                    if any(word in price_text.lower() for word in ['de:', 'era:', 'antes:', 'old']):
-                        logger.debug(f"⚠️ Preço antigo ignorado: {price_text}")
-                        continue
-                    
                     # Extrair números e vírgulas/pontos do preço
                     price_match = re.search(r'R\$[\s]*([0-9.,]+)', price_text)
                     if price_match:
-                        regular_price = f"R$ {price_match.group(1)}"
-                        logger.info(f"💵 Preço regular capturado: {regular_price} (seletor: {selector})")
-                        return regular_price
-            except Exception as e:
-                logger.debug(f"❌ Erro no seletor regular {selector}: {e}")
+                        return f"R$ {price_match.group(1)}"
+            except:
                 continue
         
-        # PRIORIDADE 3: Busca genérica por padrão de preço (último recurso)
-        try:
-            text = element.get_text()
-            
-            # Procurar padrões que indicam preço promocional
-            promo_patterns = [
-                r'[Pp]or[\s]*R\$[\s]*([0-9.,]+)',        # "Por R$ X"
-                r'[Aa]penas[\s]*R\$[\s]*([0-9.,]+)',     # "Apenas R$ X"
-                r'[Oo]ferta[\s]*R\$[\s]*([0-9.,]+)',     # "Oferta R$ X"
-            ]
-            
-            for pattern in promo_patterns:
-                match = re.search(pattern, text)
-                if match:
-                    generic_promo = f"R$ {match.group(1)}"
-                    logger.info(f"🔍 Preço promocional genérico: {generic_promo}")
-                    return generic_promo
-            
-            # Padrão genérico normal
-            price_pattern = r'R\$[\s]*([0-9.,]+)'
-            matches = re.findall(price_pattern, text)
-            
-            # Se encontrou múltiplos preços, tentar identificar o correto
-            if len(matches) > 1:
-                # Filtrar preços muito baixos (provavelmente parcelas)
-                valid_prices = [price for price in matches if ',' in price and float(price.replace('.', '').replace(',', '.')) > 100]
-                if valid_prices:
-                    generic_price = f"R$ {valid_prices[0]}"
-                    logger.info(f"🔍 Preço genérico filtrado: {generic_price}")
-                    return generic_price
-            elif len(matches) == 1:
-                generic_price = f"R$ {matches[0]}"
-                logger.info(f"🔍 Preço genérico único: {generic_price}")
-                return generic_price
-                
-        except Exception as e:
-            logger.error(f"❌ Erro na busca genérica de preço: {e}")
+        # Busca mais genérica por padrão de preço
+        text = element.get_text()
+        price_pattern = r'R\$[\s]*([0-9.,]+)'
+        match = re.search(price_pattern, text)
+        if match:
+            return f"R$ {match.group(1)}"
         
-        logger.warning(f"⚠️ Nenhum preço encontrado no elemento")
         return None
     
     def _extract_product_code(self, element: Any) -> Optional[str]:

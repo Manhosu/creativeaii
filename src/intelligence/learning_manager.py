@@ -163,7 +163,7 @@ class LearningManager:
             if '<h2>' in improved_content:
                 parts = improved_content.split('<h2>', 1)
                 improved_content = parts[0] + ai_section + '<h2>' + parts[1]
-                else:
+            else:
                 improved_content = ai_section + improved_content
             
             logger.info(f"🤖 Melhorias de IA aplicadas ao conteúdo de {produto_nome}")

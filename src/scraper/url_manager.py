@@ -538,47 +538,77 @@ class URLManager:
     
     def get_summary(self) -> Dict[str, Any]:
         """
-        Retorna resumo do gerenciador de URLs
+        Retorna resumo do gerenciador de URLs - CORRIGIDO para não contar duplicatas
         
         Returns:
-            Dicionário com estatísticas
+            Dicionário com estatísticas corretas (sem duplicação)
         """
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 
-                # Contar produtos reais dos arquivos JSON
+                # Contar produtos únicos dos arquivos JSON (SEM DUPLICAÇÃO)
                 import glob
                 import json
                 import os
                 
-                total_processed = 0
-                categories = {}
-                
-                # Buscar todos os arquivos JSON de produtos
+                # CORREÇÃO: Identificar arquivos únicos (preferir _CORRIGIDO)
+                categoria_files = {}
                 json_files = glob.glob("logs/products_*.json")
                 
+                # Lógica corrigida para evitar duplicatas
                 for json_file in json_files:
+                    filename = os.path.basename(json_file)
+                    categoria_key = filename.replace('products_', '').split('_')[0]
+                    
+                    if 'CORRIGIDO' in filename:
+                        # Arquivo corrigido tem prioridade
+                        categoria_files[categoria_key] = json_file
+                    elif categoria_key not in categoria_files:
+                        # Primeiro arquivo desta categoria
+                        categoria_files[categoria_key] = json_file
+                    # Ignorar arquivos duplicados
+                
+                logger.info(f"📊 CONTAGEM CORRIGIDA: {len(categoria_files)} categorias únicas (eliminando duplicatas)")
+                
+                total_processed = 0
+                categories = {}
+                unique_products = set()
+                
+                # Contar apenas produtos únicos
+                for categoria_key, json_file in categoria_files.items():
                     try:
                         with open(json_file, 'r', encoding='utf-8') as f:
                             data = json.load(f)
                             
-                            # Extrair categoria do nome do arquivo
-                            filename = os.path.basename(json_file)
-                            categoria_key = filename.replace('products_', '').split('_')[0]
-                            
-                            # Contar produtos
-                            if isinstance(data, list):
-                                count = len(data)
-                                total_processed += count
-                                categories[categoria_key] = categories.get(categoria_key, 0) + count
-                            elif isinstance(data, dict) and 'produtos' in data:
-                                count = len(data['produtos'])
-                                total_processed += count
-                                categories[categoria_key] = categories.get(categoria_key, 0) + count
+                        # Contar produtos e produtos únicos
+                        if isinstance(data, list):
+                            count = len(data)
+                            total_processed += count
+                            categories[categoria_key] = count
+                            for product in data:
+                                if product.get('nome'):
+                                    unique_products.add(product['nome'])
+                        elif isinstance(data, dict) and 'produtos' in data:
+                            count = len(data['produtos'])
+                            total_processed += count
+                            categories[categoria_key] = count
+                            for product in data['produtos']:
+                                if product.get('nome'):
+                                    unique_products.add(product['nome'])
+                        else:
+                            count = 0
+                            categories[categoria_key] = count
+                                    
+                        logger.debug(f"✅ {categoria_key}: {count} produtos ({os.path.basename(json_file)})")
+                        
                     except Exception as e:
                         logger.warning(f"Erro ao ler arquivo {json_file}: {e}")
                         continue
+                
+                # Use produtos únicos como total real
+                total_unique = len(unique_products)
+                logger.info(f"📊 CORREÇÃO APLICADA: {total_unique} produtos únicos (era {total_processed} com duplicatas)")
                 
                 # Últimas estatísticas (manter do banco de dados)
                 cursor.execute('''
@@ -591,8 +621,10 @@ class URLManager:
                 summary = {
                     'total_urls_configuradas': len(self.category_urls),
                     'urls_categorias': self.category_urls,
-                    'total_produtos_processados': total_processed,
+                    'total_produtos_processados': total_unique,  # 🚨 CORRIGIDO: usar produtos únicos
                     'produtos_por_categoria': categories,
+                    'arquivos_utilizados': len(categoria_files),  # Número de arquivos únicos
+                    'arquivos_duplicados_ignorados': len(json_files) - len(categoria_files),  # Duplicatas ignoradas
                     'ultimos_7_dias': {
                         'total_produtos_encontrados': recent_stats[0] or 0,
                         'novos_produtos': recent_stats[1] or 0,

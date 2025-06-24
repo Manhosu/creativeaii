@@ -289,8 +289,13 @@ A categoria do produto é: {categoria}
 - NUNCA adicione espaços em URLs
 - URLs devem ser: https://www.creativecopias.com.br/impressoras
 - JAMAIS: https://blog. creativecopias. com. br/categoria/impressoras/
-- JAMAIS: https://www. hp. com/br-pt/
-- SEMPRE: https://www.hp.com/br-pt/
+- CORREÇÃO: Links externos devem corresponder à MARCA do produto:
+  * HP: https://www.hp.com/br-pt/
+  * Canon: https://www.canon.com.br/
+  * Epson: https://www.epson.com.br/
+  * Brother: https://www.brother.com.br/
+  * Samsung: https://www.samsung.com.br/
+  * Outras marcas: usar https://www.creativecopias.com.br
 
 **REGRA CRÍTICA PARA LINKS DE PRODUTOS:**
 - SEMPRE use a URL REAL do produto fornecida nos dados: {url_do_produto}

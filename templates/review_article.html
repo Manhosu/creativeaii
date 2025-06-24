@@ -1139,10 +1139,10 @@
             <div id="seo-tab" class="tab-content">
                 <div class="seo-metrics">
                     <div class="metric-card">
-                        <div class="metric-value metric-{{ 'good' if article.titulo and article.titulo|length <= 60 else 'warning' if article.titulo and article.titulo|length <= 70 else 'bad' }}">
+                        <div class="metric-value metric-{{ 'good' if article.titulo and article.titulo|length <= 70 else 'warning' if article.titulo and article.titulo|length <= 80 else 'bad' }}">
                             {{ article.titulo|length if article.titulo else 0 }}
                         </div>
-                        <div class="metric-label">Caracteres do Título (máx 60)</div>
+                        <div class="metric-label">🚨 CORRIGIDO: Caracteres do Título (máx 70)</div>
                     </div>
                     
                     <div class="metric-card">
@@ -1209,15 +1209,15 @@
                                 id="titulo" 
                                 value="{{ article.titulo or '' }}" 
                                 placeholder="Digite o título do artigo..."
-                                maxlength="70"
-                                oninput="updateCharCount('titulo', 60)"
+                                maxlength="80"
+                                oninput="updateCharCount('titulo', 70)"
                                 onkeypress="if(event.key === 'Enter') updateTitle()"
                             >
                             <div class="char-counter" id="titulo-counter">
-                                {{ article.titulo|length if article.titulo else 0 }}/60
+                                {{ article.titulo|length if article.titulo else 0 }}/70
                             </div>
                         </div>
-                        <div class="form-help">Edite o título conforme necessário. Ideal até 60 caracteres para SEO.</div>
+                        <div class="form-help">🚨 CORREÇÃO: Ideal até 70 caracteres (era 60). Palavras completas preservadas.</div>
                         <button class="action-btn btn-primary" onclick="updateTitle()" style="margin-top: 10px;">
                             💾 Salvar Título
                         </button>
@@ -1633,8 +1633,8 @@
                 return;
             }
             
-            if (newTitle.length > 70) {
-                showNotification('❌ Título muito longo (máximo 70 caracteres)', 'error');
+            if (newTitle.length > 80) {
+                showNotification('❌ Título muito longo (máximo 80 caracteres)', 'error');
                 return;
             }
             

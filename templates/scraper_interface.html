@@ -807,7 +807,7 @@
                 const product = JSON.parse(decodeURIComponent(productJson));
                 
                 // Mostrar loading
-                showNotification('⚡ Gerando Artigo', `Gerando artigo automaticamente para "${product.nome}"...`, 'info');
+                showNotification('⚡ Processando', `⚡ Verificando produto e gerando artigo para "${product.nome}"...`, 'info');
                 
                 console.log('🔍 Dados do produto:', product);
                 
@@ -818,8 +818,27 @@
                     body: JSON.stringify(product)
                 });
                 
-                // Se falhar, tentar endpoint simples como fallback
+                // Se falhar, verificar se é duplicata antes de tentar fallback
                 if (!response.ok) {
+                    // Tratar especificamente erro 409 (duplicata) antes do fallback
+                    if (response.status === 409) {
+                        try {
+                            const errorData = await response.json();
+                            if (errorData.detail && errorData.detail.error === 'duplicate_detected') {
+                                showNotification('📋 Artigo Já Existe', 
+                                    `Produto já possui artigo (ID: ${errorData.detail.existing_article_id}). Redirecionando...`, 'info');
+                                
+                                // Redirecionar para o artigo existente após 2 segundos
+                                setTimeout(() => {
+                                    window.location.href = `/review/${errorData.detail.existing_article_id}/view`;
+                                }, 2000);
+                                return; // Não continuar com fallback
+                            }
+                        } catch (e) {
+                            console.error('Erro ao processar resposta 409:', e);
+                        }
+                    }
+                    
                     console.warn('⚠️ Endpoint avançado falhou, tentando endpoint simples...');
                     showNotification('🔄 Tentando Alternativa', 'Tentando método alternativo de geração...', 'warning');
                     
@@ -832,8 +851,26 @@
                 
                 if (!response.ok) {
                     let errorMessage = 'Falha ao gerar artigo';
+                    let errorData = null;
+                    
                     try {
-                        const errorData = await response.json();
+                        errorData = await response.json();
+                        
+                        // Tratar especificamente erro 409 (duplicata) - Endpoint simples
+                        if (response.status === 409 && errorData.detail) {
+                            const detail = errorData.detail;
+                            if (detail.error === 'duplicate_detected') {
+                                showNotification('📋 Artigo Já Existe', 
+                                    `Produto já possui artigo (ID: ${detail.existing_article_id}). Redirecionando...`, 'info');
+                                
+                                // Redirecionar para o artigo existente após 2 segundos
+                                setTimeout(() => {
+                                    window.location.href = `/review/${detail.existing_article_id}/view`;
+                                }, 2000);
+                                return; // Não continuar com erro
+                            }
+                        }
+                        
                         errorMessage = errorData.detail || errorData.message || errorData.error || errorMessage;
                         
                         // Se for um objeto de erro estruturado

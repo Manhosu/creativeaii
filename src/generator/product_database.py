@@ -421,6 +421,27 @@ class ProductDatabase:
         self.used_products.clear()
         logger.info("🔄 Lista de produtos usados resetada")
     
+    def reset_used_product(self, product_name: str):
+        """
+        NOVA FUNÇÃO: Reseta um produto específico para permitir nova geração
+        
+        Args:
+            product_name: Nome do produto a ser liberado
+        """
+        # Encontrar produto pelo nome
+        for product in self.products:
+            if product.get('nome', '').lower() == product_name.lower():
+                if product['id'] in self.used_products:
+                    self.used_products.remove(product['id'])
+                    logger.info(f"🔄 Produto '{product_name}' liberado para nova geração")
+                    return True
+                else:
+                    logger.debug(f"ℹ️ Produto '{product_name}' já estava disponível")
+                    return True
+        
+        logger.warning(f"⚠️ Produto '{product_name}' não encontrado na base de dados")
+        return False
+    
     def export_products(self) -> List[Dict[str, Any]]:
         """
         Exporta todos os produtos

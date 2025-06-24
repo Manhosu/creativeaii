@@ -741,6 +741,6289 @@ app.openapi = custom_openapi
 
 @app.get("/")
 async def dashboard():
+    """Dashboard principal do sistema - DESIGN ORIGINAL RESTAURADO"""
+    try:
+        # Usar template original com layout limpo de apenas 2 botões
+        with open("templates/home_original.html", "r", encoding="utf-8") as f:
+            html_content = f.read()
+        
+        return HTMLResponse(content=html_content)
+        
+    except Exception as e:
+        logger.error(f"Erro no dashboard: {e}")
+        return JSONResponse({"error": "Erro interno do servidor"}, status_code=500)
+
+
+@app.get("/health")
+async def health_check():
+    """Verificação de saúde do sistema"""
+    modules_status = {
+        "scraper": "ready" if SCRAPER_AVAILABLE else "not_available",
+        "generator": "ready" if GENERATOR_AVAILABLE else "not_available", 
+        "review": "ready" if REVIEW_AVAILABLE else "not_available",
+        "publisher": "ready" if PUBLISHER_AVAILABLE else "not_available",
+        "config": "ready" if CONFIG_AVAILABLE else "not_available",
+        "scheduler": "ready" if SCHEDULER_AVAILABLE else "not_available"
+    }
+    
+    # Verificar status do scraper se disponível
+    if SCRAPER_AVAILABLE:
+        try:
+            manager = ScraperManager()
+            scraper_data = manager.get_scraping_status()
+            modules_status["scraper"] = "operational"
+            modules_status["scraper_details"] = {
+                "urls_configuradas": scraper_data.get("urls_configuradas", 0),
+                "produtos_processados": scraper_data.get("produtos_processados", 0)
+            }
+        except Exception as e:
+            modules_status["scraper"] = "error"
+            modules_status["scraper_error"] = str(e)
+    
+    # Verificar status do generator se disponível
+    if GENERATOR_AVAILABLE:
+        try:
+            gen_manager = GeneratorManager()
+            gen_stats = gen_manager.get_stats()
+            modules_status["generator"] = "operational"
+            modules_status["generator_details"] = {
+                "simulation_mode": gen_stats.get("simulation_mode", True),
+                "articles_generated": gen_stats.get("total_articles_in_memory", 0),
+                "total_generated": gen_stats["manager_stats"].get("total_generated", 0)
+            }
+        except Exception as e:
+            modules_status["generator"] = "error"
+            modules_status["generator_error"] = str(e)
+    
+    # Verificar status do review se disponível
+    if REVIEW_AVAILABLE:
+        try:
+            review_manager = ReviewManager()
+            review_stats = review_manager.get_statistics()
+            modules_status["review"] = "operational"
+            modules_status["review_details"] = {
+                "total_articles": review_stats.get("total_artigos", 0),
+                "pending_review": review_stats.get("pendentes", 0),
+                "approved": review_stats.get("aprovados", 0),
+                "rejected": review_stats.get("rejeitados", 0)
+            }
+        except Exception as e:
+            modules_status["review"] = "error"
+            modules_status["review_error"] = str(e)
+    
+    # Verificar status do publisher se disponível
+    if PUBLISHER_AVAILABLE:
+        try:
+            pub_manager = PublicationManager()
+            pub_stats = pub_manager.get_publication_statistics()
+            modules_status["publisher"] = "operational"
+            modules_status["publisher_details"] = {
+                "total_publications": pub_stats.get("total_publications", 0),
+                "published": pub_stats.get("published", 0),
+                "failed": pub_stats.get("failed", 0),
+                "pending": pub_stats.get("pending", 0),
+                "wordpress_configured": pub_stats.get("wordpress_configured", False)
+            }
+        except Exception as e:
+            modules_status["publisher"] = "error"
+            modules_status["publisher_error"] = str(e)
+    
+    # Adicionar status do config
+    if CONFIG_AVAILABLE:
+        try:
+            config_manager = ConfigManager()
+            modules_status["config"] = {
+                "status": "operational",
+                "statistics": config_manager.get_statistics()
+            }
+        except Exception as e:
+            modules_status["config"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["config"] = {'status': 'not_available'}
+    
+    # Verificar status do scheduler se disponível
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_status = scheduler_manager.get_status()
+            modules_status["scheduler"] = {
+                "status": "operational",
+                "is_running": scheduler_status.get("is_running", False),
+                "jobs_count": scheduler_status.get("jobs_count", 0),
+                "recent_executions": len(scheduler_status.get("recent_executions", [])),
+                "details": scheduler_status
+            }
+        except Exception as e:
+            modules_status["scheduler"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["scheduler"] = {'status': 'not_available' if not SCHEDULER_AVAILABLE else 'not_initialized'}
+    
+    return {
+        "status": "healthy",
+        "app_name": APP_NAME,
+        "version": APP_VERSION,
+        "port": PORT,
+        "modules": modules_status
+    }
+
+
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+# =====================================================
+# ROTAS PRINCIPAIS
+# =====================================================
+
+@app.get("/")
+async def dashboard():
+    """Dashboard principal do sistema - DESIGN ORIGINAL RESTAURADO"""
+    try:
+        # Usar template original com layout limpo de apenas 2 botões
+        with open("templates/home_original.html", "r", encoding="utf-8") as f:
+            html_content = f.read()
+        
+        return HTMLResponse(content=html_content)
+        
+    except Exception as e:
+        logger.error(f"Erro no dashboard: {e}")
+        return JSONResponse({"error": "Erro interno do servidor"}, status_code=500)
+
+
+@app.get("/health")
+async def health_check():
+    """Verificação de saúde do sistema"""
+    modules_status = {
+        "scraper": "ready" if SCRAPER_AVAILABLE else "not_available",
+        "generator": "ready" if GENERATOR_AVAILABLE else "not_available", 
+        "review": "ready" if REVIEW_AVAILABLE else "not_available",
+        "publisher": "ready" if PUBLISHER_AVAILABLE else "not_available",
+        "config": "ready" if CONFIG_AVAILABLE else "not_available",
+        "scheduler": "ready" if SCHEDULER_AVAILABLE else "not_available"
+    }
+    
+    # Verificar status do scraper se disponível
+    if SCRAPER_AVAILABLE:
+        try:
+            manager = ScraperManager()
+            scraper_data = manager.get_scraping_status()
+            modules_status["scraper"] = "operational"
+            modules_status["scraper_details"] = {
+                "urls_configuradas": scraper_data.get("urls_configuradas", 0),
+                "produtos_processados": scraper_data.get("produtos_processados", 0)
+            }
+        except Exception as e:
+            modules_status["scraper"] = "error"
+            modules_status["scraper_error"] = str(e)
+    
+    # Verificar status do generator se disponível
+    if GENERATOR_AVAILABLE:
+        try:
+            gen_manager = GeneratorManager()
+            gen_stats = gen_manager.get_stats()
+            modules_status["generator"] = "operational"
+            modules_status["generator_details"] = {
+                "simulation_mode": gen_stats.get("simulation_mode", True),
+                "articles_generated": gen_stats.get("total_articles_in_memory", 0),
+                "total_generated": gen_stats["manager_stats"].get("total_generated", 0)
+            }
+        except Exception as e:
+            modules_status["generator"] = "error"
+            modules_status["generator_error"] = str(e)
+    
+    # Verificar status do review se disponível
+    if REVIEW_AVAILABLE:
+        try:
+            review_manager = ReviewManager()
+            review_stats = review_manager.get_statistics()
+            modules_status["review"] = "operational"
+            modules_status["review_details"] = {
+                "total_articles": review_stats.get("total_artigos", 0),
+                "pending_review": review_stats.get("pendentes", 0),
+                "approved": review_stats.get("aprovados", 0),
+                "rejected": review_stats.get("rejeitados", 0)
+            }
+        except Exception as e:
+            modules_status["review"] = "error"
+            modules_status["review_error"] = str(e)
+    
+    # Verificar status do publisher se disponível
+    if PUBLISHER_AVAILABLE:
+        try:
+            pub_manager = PublicationManager()
+            pub_stats = pub_manager.get_publication_statistics()
+            modules_status["publisher"] = "operational"
+            modules_status["publisher_details"] = {
+                "total_publications": pub_stats.get("total_publications", 0),
+                "published": pub_stats.get("published", 0),
+                "failed": pub_stats.get("failed", 0),
+                "pending": pub_stats.get("pending", 0),
+                "wordpress_configured": pub_stats.get("wordpress_configured", False)
+            }
+        except Exception as e:
+            modules_status["publisher"] = "error"
+            modules_status["publisher_error"] = str(e)
+    
+    # Adicionar status do config
+    if CONFIG_AVAILABLE:
+        try:
+            config_manager = ConfigManager()
+            modules_status["config"] = {
+                "status": "operational",
+                "statistics": config_manager.get_statistics()
+            }
+        except Exception as e:
+            modules_status["config"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["config"] = {'status': 'not_available'}
+    
+    # Verificar status do scheduler se disponível
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_status = scheduler_manager.get_status()
+            modules_status["scheduler"] = {
+                "status": "operational",
+                "is_running": scheduler_status.get("is_running", False),
+                "jobs_count": scheduler_status.get("jobs_count", 0),
+                "recent_executions": len(scheduler_status.get("recent_executions", [])),
+                "details": scheduler_status
+            }
+        except Exception as e:
+            modules_status["scheduler"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["scheduler"] = {'status': 'not_available' if not SCHEDULER_AVAILABLE else 'not_initialized'}
+    
+    return {
+        "status": "healthy",
+        "app_name": APP_NAME,
+        "version": APP_VERSION,
+        "port": PORT,
+        "modules": modules_status
+    }
+
+
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+# =====================================================
+# ROTAS PRINCIPAIS
+# =====================================================
+
+@app.get("/")
+async def dashboard():
+    """Dashboard principal do sistema - DESIGN ORIGINAL com apenas 2 botões"""
+    try:
+        
+        html_content = """
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Sistema de Geração Automática de Conteúdo</title>
+                <link rel="stylesheet" href="/static/css/_design_system.css">
+                <style>
+                    .page-wrapper {
+                        background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .page-wrapper::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: radial-gradient(circle at 30% 40%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
+                                    radial-gradient(circle at 70% 60%, rgba(48, 209, 88, 0.1) 0%, transparent 50%);
+                        pointer-events: none;
+                        z-index: 0;
+                    }
+                    
+                    .content {
+                        position: relative;
+                        z-index: 1;
+                        width: 100%;
+                        max-width: 900px;
+                        padding: var(--space-6);
+                    }
+                    
+                    .header {
+                        text-align: center;
+                        margin-bottom: var(--space-16);
+                    }
+                    
+                    .header h1 { 
+                        font-size: var(--text-5xl);
+                        font-weight: var(--font-bold);
+                        margin-bottom: 0;
+                        background: linear-gradient(135deg, var(--primary), var(--success));
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        animation: fadeInUp 0.8s ease-out;
+                    }
+                    
+                    .main-actions {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                        gap: var(--space-8);
+                        margin-bottom: var(--space-16);
+                        max-width: 600px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    
+                    .action-card {
+                        background: var(--bg-card);
+                        border: 1px solid var(--border-primary);
+                        border-radius: var(--radius-3xl);
+                        padding: var(--space-12);
+                        text-align: center;
+                        transition: all var(--transition-spring);
+                        position: relative;
+                        overflow: hidden;
+                        backdrop-filter: blur(20px);
+                        animation: fadeInUp 0.8s ease-out var(--delay, 0.6s) both;
+                    }
+                    
+                    .action-card:nth-child(1) { --delay: 0.2s; }
+                    .action-card:nth-child(2) { --delay: 0.4s; }
+                    
+                    .action-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(135deg, transparent, rgba(0, 122, 255, 0.05));
+                        opacity: 0;
+                        transition: var(--transition-normal);
+                    }
+                    
+                    .action-card:hover::before {
+                        opacity: 1;
+                    }
+                    
+                    .action-card:hover {
+                        transform: translateY(-8px) scale(1.02);
+                        border-color: var(--border-accent);
+                        box-shadow: var(--shadow-2xl), var(--shadow-glow);
+                    }
+                    
+                    .action-icon {
+                        font-size: 4rem;
+                        margin-bottom: var(--space-6);
+                        display: block;
+                        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+                    }
+                    
+                    .action-title {
+                        font-size: var(--text-2xl);
+                        font-weight: var(--font-bold);
+                        margin-bottom: var(--space-4);
+                        color: var(--text-primary);
+                    }
+                    
+                    .action-desc {
+                        color: var(--text-secondary);
+                        margin-bottom: var(--space-8);
+                        font-size: var(--text-base);
+                        line-height: var(--leading-relaxed);
+                    }
+                    
+                    .action-btn {
+                        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                        color: white;
+                        border: none;
+                        padding: var(--space-4) var(--space-8);
+                        border-radius: var(--radius-2xl);
+                        font-size: var(--text-lg);
+                        font-weight: var(--font-semibold);
+                        cursor: pointer;
+                        transition: all var(--transition-spring);
+                        text-decoration: none; 
+                        display: inline-flex;
+                        align-items: center;
+                        gap: var(--space-2);
+                        box-shadow: var(--shadow-lg), var(--shadow-glow);
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .action-btn:hover {
+                        transform: translateY(-3px);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow);
+                        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+                    }
+                    
+                    .action-btn.warning-btn {
+                        background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+                        box-shadow: var(--shadow-lg), var(--shadow-glow-warning);
+                    }
+                    
+                    .action-btn.warning-btn:hover {
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-warning);
+                        background: linear-gradient(135deg, var(--warning-light), var(--warning));
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .header h1 { 
+                            font-size: var(--text-3xl); 
+                        }
+                        .main-actions {
+                            grid-template-columns: 1fr;
+                        }
+                        .action-card { 
+                            padding: var(--space-8); 
+                        }
+                        .action-icon {
+                            font-size: 3rem;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="page-wrapper">
+                    <div class="content">
+                        <div class="container">
+                            <div class="header">
+                                <h1>Sistema de Geração Automática de Conteúdo</h1>
+                            </div>
+                            
+                            <div class="main-actions">
+                                <div class="action-card">
+                                    <span class="action-icon">🔍</span>
+                                    <h3 class="action-title">Scraper</h3>
+                                    <p class="action-desc">Busca de produtos e gera artigos automaticamente</p>
+                                    <a href="/interface/scraper" class="action-btn">
+                                        <span>Acessar</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="action-card">
+                                    <span class="action-icon">⚙️</span>
+                                    <h3 class="action-title">Configurações</h3>
+                                    <p class="action-desc">Painel de configuração geral do sistema</p>
+                                    <a href="/config" class="action-btn warning-btn">
+                                        <span>Acessar</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+        """
+        
+        return HTMLResponse(content=html_content)
+        
+    except Exception as e:
+        logger.error(f"Erro no dashboard: {e}")
+        return JSONResponse({"error": "Erro interno do servidor"}, status_code=500)
+
+
+@app.get("/health")
+async def health_check():
+    """Verificação de saúde do sistema"""
+    modules_status = {
+        "scraper": "ready" if SCRAPER_AVAILABLE else "not_available",
+        "generator": "ready" if GENERATOR_AVAILABLE else "not_available", 
+        "review": "ready" if REVIEW_AVAILABLE else "not_available",
+        "publisher": "ready" if PUBLISHER_AVAILABLE else "not_available",
+        "config": "ready" if CONFIG_AVAILABLE else "not_available",
+        "scheduler": "ready" if SCHEDULER_AVAILABLE else "not_available"
+    }
+    
+    # Verificar status do scraper se disponível
+    if SCRAPER_AVAILABLE:
+        try:
+            manager = ScraperManager()
+            scraper_data = manager.get_scraping_status()
+            modules_status["scraper"] = "operational"
+            modules_status["scraper_details"] = {
+                "urls_configuradas": scraper_data.get("urls_configuradas", 0),
+                "produtos_processados": scraper_data.get("produtos_processados", 0)
+            }
+        except Exception as e:
+            modules_status["scraper"] = "error"
+            modules_status["scraper_error"] = str(e)
+    
+    # Verificar status do generator se disponível
+    if GENERATOR_AVAILABLE:
+        try:
+            gen_manager = GeneratorManager()
+            gen_stats = gen_manager.get_stats()
+            modules_status["generator"] = "operational"
+            modules_status["generator_details"] = {
+                "simulation_mode": gen_stats.get("simulation_mode", True),
+                "articles_generated": gen_stats.get("total_articles_in_memory", 0),
+                "total_generated": gen_stats["manager_stats"].get("total_generated", 0)
+            }
+        except Exception as e:
+            modules_status["generator"] = "error"
+            modules_status["generator_error"] = str(e)
+    
+    # Verificar status do review se disponível
+    if REVIEW_AVAILABLE:
+        try:
+            review_manager = ReviewManager()
+            review_stats = review_manager.get_statistics()
+            modules_status["review"] = "operational"
+            modules_status["review_details"] = {
+                "total_articles": review_stats.get("total_artigos", 0),
+                "pending_review": review_stats.get("pendentes", 0),
+                "approved": review_stats.get("aprovados", 0),
+                "rejected": review_stats.get("rejeitados", 0)
+            }
+        except Exception as e:
+            modules_status["review"] = "error"
+            modules_status["review_error"] = str(e)
+    
+    # Verificar status do publisher se disponível
+    if PUBLISHER_AVAILABLE:
+        try:
+            pub_manager = PublicationManager()
+            pub_stats = pub_manager.get_publication_statistics()
+            modules_status["publisher"] = "operational"
+            modules_status["publisher_details"] = {
+                "total_publications": pub_stats.get("total_publications", 0),
+                "published": pub_stats.get("published", 0),
+                "failed": pub_stats.get("failed", 0),
+                "pending": pub_stats.get("pending", 0),
+                "wordpress_configured": pub_stats.get("wordpress_configured", False)
+            }
+        except Exception as e:
+            modules_status["publisher"] = "error"
+            modules_status["publisher_error"] = str(e)
+    
+    # Adicionar status do config
+    if CONFIG_AVAILABLE:
+        try:
+            config_manager = ConfigManager()
+            modules_status["config"] = {
+                "status": "operational",
+                "statistics": config_manager.get_statistics()
+            }
+        except Exception as e:
+            modules_status["config"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["config"] = {'status': 'not_available'}
+    
+    # Verificar status do scheduler se disponível
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_status = scheduler_manager.get_status()
+            modules_status["scheduler"] = {
+                "status": "operational",
+                "is_running": scheduler_status.get("is_running", False),
+                "jobs_count": scheduler_status.get("jobs_count", 0),
+                "recent_executions": len(scheduler_status.get("recent_executions", [])),
+                "details": scheduler_status
+            }
+        except Exception as e:
+            modules_status["scheduler"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["scheduler"] = {'status': 'not_available' if not SCHEDULER_AVAILABLE else 'not_initialized'}
+    
+    return {
+        "status": "healthy",
+        "app_name": APP_NAME,
+        "version": APP_VERSION,
+        "port": PORT,
+        "modules": modules_status
+    }
+
+
+@app.get("/api-docs", response_class=HTMLResponse)
+async def api_documentation():
+    """Documentação interativa da API com campo de busca"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Documentação da API - Sistema SEO</title>
+        <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --accent-purple: #af52de;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            body {
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+                background: var(--bg-primary);
+                color: var(--text-primary);
+                line-height: 1.6;
+            }
+            
+            .header {
+                background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+                padding: 30px 0;
+                text-align: center;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 10px;
+            }
+            
+            .header p {
+                color: var(--text-secondary);
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 40px 20px;
+            }
+            
+            .search-section {
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 30px;
+                margin-bottom: 40px;
+                position: sticky;
+                top: 20px;
+                z-index: 100;
+            }
+            
+            .search-box {
+                position: relative;
+                margin-bottom: 20px;
+            }
+            
+            .search-input {
+                width: 100%;
+                padding: 15px 50px 15px 20px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 12px;
+                color: var(--text-primary);
+                font-size: 1rem;
+                transition: all 0.3s ease;
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+            }
+            
+            .search-icon {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--text-secondary);
+                font-size: 1.2rem;
+            }
+            
+            .filters {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 8px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 20px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 0.9rem;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .stats {
+                margin-top: 15px;
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+            }
+            
+            .modules {
+                display: grid;
+                gap: 30px;
+            }
+            
+            .module {
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 30px;
+                transition: all 0.3s ease;
+            }
+            
+            .module:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+            
+            .module-header {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            
+            .module-icon {
+                font-size: 2rem;
+            }
+            
+            .module-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+            
+            .module-desc {
+                color: var(--text-secondary);
+                margin-bottom: 20px;
+            }
+            
+            .endpoints {
+                display: grid;
+                gap: 15px;
+            }
+            
+            .endpoint {
+                background: var(--bg-tertiary);
+                border-radius: 12px;
+                padding: 20px;
+                transition: all 0.3s ease;
+                border-left: 4px solid transparent;
+            }
+            
+            .endpoint:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+            
+            .endpoint.get { border-left-color: var(--accent-blue); }
+            .endpoint.post { border-left-color: var(--accent-green); }
+            .endpoint.put { border-left-color: var(--accent-orange); }
+            .endpoint.delete { border-left-color: var(--accent-red); }
+            
+            .endpoint-header {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+            
+            .method {
+                padding: 4px 8px;
+                border-radius: 6px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                min-width: 60px;
+                text-align: center;
+            }
+            
+            .method.get { background: var(--accent-blue); }
+            .method.post { background: var(--accent-green); }
+            .method.put { background: var(--accent-orange); }
+            .method.delete { background: var(--accent-red); }
+            
+            .endpoint-path {
+                font-family: 'Courier New', monospace;
+                font-size: 1rem;
+                color: var(--text-primary);
+                flex: 1;
+            }
+            
+            .endpoint-desc {
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+            }
+            
+            .hidden {
+                display: none !important;
+            }
+            
+            .no-results {
+                text-align: center;
+                padding: 60px 20px;
+                color: var(--text-secondary);
+            }
+            
+            .no-results h3 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            
+            @media (max-width: 768px) {
+                .filters {
+                    justify-content: center;
+                }
+                
+                .endpoint-header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 10px;
+                }
+            }
+        </style>
+    </head>
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+# =====================================================
+# ROTAS PRINCIPAIS
+# =====================================================
+
+@app.get("/")
+async def dashboard():
+    """Dashboard principal do sistema - DESIGN ORIGINAL RESTAURADO"""
+    try:
+        # Usar template original com layout limpo de apenas 2 botões
+        with open("templates/home_original.html", "r", encoding="utf-8") as f:
+            html_content = f.read()
+        
+        return HTMLResponse(content=html_content)
+        
+    except Exception as e:
+        logger.error(f"Erro no dashboard: {e}")
+        return JSONResponse({"error": "Erro interno do servidor"}, status_code=500)
+
+
+@app.get("/health")
+async def health_check():
+    """Verificação de saúde do sistema"""
+    modules_status = {
+        "scraper": "ready" if SCRAPER_AVAILABLE else "not_available",
+        "generator": "ready" if GENERATOR_AVAILABLE else "not_available", 
+        "review": "ready" if REVIEW_AVAILABLE else "not_available",
+        "publisher": "ready" if PUBLISHER_AVAILABLE else "not_available",
+        "config": "ready" if CONFIG_AVAILABLE else "not_available",
+        "scheduler": "ready" if SCHEDULER_AVAILABLE else "not_available"
+    }
+    
+    # Verificar status do scraper se disponível
+    if SCRAPER_AVAILABLE:
+        try:
+            manager = ScraperManager()
+            scraper_data = manager.get_scraping_status()
+            modules_status["scraper"] = "operational"
+            modules_status["scraper_details"] = {
+                "urls_configuradas": scraper_data.get("urls_configuradas", 0),
+                "produtos_processados": scraper_data.get("produtos_processados", 0)
+            }
+        except Exception as e:
+            modules_status["scraper"] = "error"
+            modules_status["scraper_error"] = str(e)
+    
+    # Verificar status do generator se disponível
+    if GENERATOR_AVAILABLE:
+        try:
+            gen_manager = GeneratorManager()
+            gen_stats = gen_manager.get_stats()
+            modules_status["generator"] = "operational"
+            modules_status["generator_details"] = {
+                "simulation_mode": gen_stats.get("simulation_mode", True),
+                "articles_generated": gen_stats.get("total_articles_in_memory", 0),
+                "total_generated": gen_stats["manager_stats"].get("total_generated", 0)
+            }
+        except Exception as e:
+            modules_status["generator"] = "error"
+            modules_status["generator_error"] = str(e)
+    
+    # Verificar status do review se disponível
+    if REVIEW_AVAILABLE:
+        try:
+            review_manager = ReviewManager()
+            review_stats = review_manager.get_statistics()
+            modules_status["review"] = "operational"
+            modules_status["review_details"] = {
+                "total_articles": review_stats.get("total_artigos", 0),
+                "pending_review": review_stats.get("pendentes", 0),
+                "approved": review_stats.get("aprovados", 0),
+                "rejected": review_stats.get("rejeitados", 0)
+            }
+        except Exception as e:
+            modules_status["review"] = "error"
+            modules_status["review_error"] = str(e)
+    
+    # Verificar status do publisher se disponível
+    if PUBLISHER_AVAILABLE:
+        try:
+            pub_manager = PublicationManager()
+            pub_stats = pub_manager.get_publication_statistics()
+            modules_status["publisher"] = "operational"
+            modules_status["publisher_details"] = {
+                "total_publications": pub_stats.get("total_publications", 0),
+                "published": pub_stats.get("published", 0),
+                "failed": pub_stats.get("failed", 0),
+                "pending": pub_stats.get("pending", 0),
+                "wordpress_configured": pub_stats.get("wordpress_configured", False)
+            }
+        except Exception as e:
+            modules_status["publisher"] = "error"
+            modules_status["publisher_error"] = str(e)
+    
+    # Adicionar status do config
+    if CONFIG_AVAILABLE:
+        try:
+            config_manager = ConfigManager()
+            modules_status["config"] = {
+                "status": "operational",
+                "statistics": config_manager.get_statistics()
+            }
+        except Exception as e:
+            modules_status["config"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["config"] = {'status': 'not_available'}
+    
+    # Verificar status do scheduler se disponível
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_status = scheduler_manager.get_status()
+            modules_status["scheduler"] = {
+                "status": "operational",
+                "is_running": scheduler_status.get("is_running", False),
+                "jobs_count": scheduler_status.get("jobs_count", 0),
+                "recent_executions": len(scheduler_status.get("recent_executions", [])),
+                "details": scheduler_status
+            }
+        except Exception as e:
+            modules_status["scheduler"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["scheduler"] = {'status': 'not_available' if not SCHEDULER_AVAILABLE else 'not_initialized'}
+    
+    return {
+        "status": "healthy",
+        "app_name": APP_NAME,
+        "version": APP_VERSION,
+        "port": PORT,
+        "modules": modules_status
+    }
+
+
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+# =====================================================
+# ROTAS PRINCIPAIS
+# =====================================================
+
+@app.get("/")
+async def dashboard():
+    """Dashboard principal do sistema - DESIGN ORIGINAL RESTAURADO"""
+    try:
+        # Usar template original com layout limpo de apenas 2 botões
+        with open("templates/home_original.html", "r", encoding="utf-8") as f:
+            html_content = f.read()
+        
+        return HTMLResponse(content=html_content)
+        
+    except Exception as e:
+        logger.error(f"Erro no dashboard: {e}")
+        return JSONResponse({"error": "Erro interno do servidor"}, status_code=500)
+
+
+@app.get("/health")
+async def health_check():
+    """Verificação de saúde do sistema"""
+    modules_status = {
+        "scraper": "ready" if SCRAPER_AVAILABLE else "not_available",
+        "generator": "ready" if GENERATOR_AVAILABLE else "not_available", 
+        "review": "ready" if REVIEW_AVAILABLE else "not_available",
+        "publisher": "ready" if PUBLISHER_AVAILABLE else "not_available",
+        "config": "ready" if CONFIG_AVAILABLE else "not_available",
+        "scheduler": "ready" if SCHEDULER_AVAILABLE else "not_available"
+    }
+    
+    # Verificar status do scraper se disponível
+    if SCRAPER_AVAILABLE:
+        try:
+            manager = ScraperManager()
+            scraper_data = manager.get_scraping_status()
+            modules_status["scraper"] = "operational"
+            modules_status["scraper_details"] = {
+                "urls_configuradas": scraper_data.get("urls_configuradas", 0),
+                "produtos_processados": scraper_data.get("produtos_processados", 0)
+            }
+        except Exception as e:
+            modules_status["scraper"] = "error"
+            modules_status["scraper_error"] = str(e)
+    
+    # Verificar status do generator se disponível
+    if GENERATOR_AVAILABLE:
+        try:
+            gen_manager = GeneratorManager()
+            gen_stats = gen_manager.get_stats()
+            modules_status["generator"] = "operational"
+            modules_status["generator_details"] = {
+                "simulation_mode": gen_stats.get("simulation_mode", True),
+                "articles_generated": gen_stats.get("total_articles_in_memory", 0),
+                "total_generated": gen_stats["manager_stats"].get("total_generated", 0)
+            }
+        except Exception as e:
+            modules_status["generator"] = "error"
+            modules_status["generator_error"] = str(e)
+    
+    # Verificar status do review se disponível
+    if REVIEW_AVAILABLE:
+        try:
+            review_manager = ReviewManager()
+            review_stats = review_manager.get_statistics()
+            modules_status["review"] = "operational"
+            modules_status["review_details"] = {
+                "total_articles": review_stats.get("total_artigos", 0),
+                "pending_review": review_stats.get("pendentes", 0),
+                "approved": review_stats.get("aprovados", 0),
+                "rejected": review_stats.get("rejeitados", 0)
+            }
+        except Exception as e:
+            modules_status["review"] = "error"
+            modules_status["review_error"] = str(e)
+    
+    # Verificar status do publisher se disponível
+    if PUBLISHER_AVAILABLE:
+        try:
+            pub_manager = PublicationManager()
+            pub_stats = pub_manager.get_publication_statistics()
+            modules_status["publisher"] = "operational"
+            modules_status["publisher_details"] = {
+                "total_publications": pub_stats.get("total_publications", 0),
+                "published": pub_stats.get("published", 0),
+                "failed": pub_stats.get("failed", 0),
+                "pending": pub_stats.get("pending", 0),
+                "wordpress_configured": pub_stats.get("wordpress_configured", False)
+            }
+        except Exception as e:
+            modules_status["publisher"] = "error"
+            modules_status["publisher_error"] = str(e)
+    
+    # Adicionar status do config
+    if CONFIG_AVAILABLE:
+        try:
+            config_manager = ConfigManager()
+            modules_status["config"] = {
+                "status": "operational",
+                "statistics": config_manager.get_statistics()
+            }
+        except Exception as e:
+            modules_status["config"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["config"] = {'status': 'not_available'}
+    
+    # Verificar status do scheduler se disponível
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_status = scheduler_manager.get_status()
+            modules_status["scheduler"] = {
+                "status": "operational",
+                "is_running": scheduler_status.get("is_running", False),
+                "jobs_count": scheduler_status.get("jobs_count", 0),
+                "recent_executions": len(scheduler_status.get("recent_executions", [])),
+                "details": scheduler_status
+            }
+        except Exception as e:
+            modules_status["scheduler"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["scheduler"] = {'status': 'not_available' if not SCHEDULER_AVAILABLE else 'not_initialized'}
+    
+    return {
+        "status": "healthy",
+        "app_name": APP_NAME,
+        "version": APP_VERSION,
+        "port": PORT,
+        "modules": modules_status
+    }
+
+
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+# =====================================================
+# ROTAS PRINCIPAIS
+# =====================================================
+
+@app.get("/")
+async def dashboard():
     """Dashboard principal do sistema - DESIGN ORIGINAL com apenas 2 botões"""
     try:
         
@@ -2258,6 +8541,24 @@ async def get_scraped_products(limit: int = 100, offset: int = 0, categoria: str
             
         logger.info(f"📊 CORREÇÃO CRÍTICA: {len(unique_products)} produtos únicos de {len(categoria_files)} categorias (era {len(all_products)} incluindo duplicatas)")
         
+        # 🔍 APLICAR FILTRO DE BUSCA POR NOME (CORREÇÃO IMPLEMENTADA!)
+        if search and search.strip():
+            search_term = search.strip().lower()
+            filtered_products = []
+            search_unique = set()
+            
+            for product in all_products:
+                product_name = product.get('nome', '').lower()
+                # Buscar se o termo de pesquisa está contido no nome do produto
+                if search_term in product_name:
+                    filtered_products.append(product)
+                    if product.get('nome'):
+                        search_unique.add(product['nome'])
+            
+            all_products = filtered_products
+            unique_products = search_unique
+            logger.info(f"🔍 Filtro de busca '{search}': {len(search_unique)} produtos únicos encontrados")
+        
         # Aplicar filtro de categoria com COMPARAÇÃO EXATA
         if categoria and categoria.lower() != 'todas':
             filtered = []
@@ -2462,7 +8763,7 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
                         "success": False,
                         "error": "duplicate_detected",
                         "message": f"Artigo para '{produto_nome}' já existe (Status: {existing_article['status']})",
-                        "suggestion": "💡 Use o botão 'Forçar Novo' para criar mesmo assim",
+                        "suggestion": "💡 Este produto já possui um artigo gerado",
                         "existing_article_id": existing_article['id'],
                         "action": "redirect_to_existing"
                     }
@@ -2521,7 +8822,7 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
                 "success": False,
                 "error": str(e),
                 "message": "Erro ao criar artigo avançado",
-                "suggestion": "💡 Tente adicionar ?allow_duplicates=true na URL se quiser forçar a criação",
+                "suggestion": "💡 Verifique se os dados do produto estão corretos",
                 "error_type": "generation_error"
             }
         )
@@ -2637,7 +8938,7 @@ async def generate_article_from_product(product_data: dict, allow_duplicates: bo
                         "success": False,
                         "error": "duplicate_detected",
                         "message": f"Artigo para '{produto_nome}' já existe (Status: {existing_article['status']})",
-                        "suggestion": "💡 Use o botão 'Forçar Novo' para criar mesmo assim",
+                        "suggestion": "💡 Este produto já possui um artigo gerado",
                         "existing_article_id": existing_article['id'],
                         "action": "redirect_to_existing"
                     }
@@ -2697,7 +8998,7 @@ async def generate_article_from_product(product_data: dict, allow_duplicates: bo
                 "success": False,
                 "error": str(e),
                 "message": "Erro ao criar artigo com sistema inteligente",
-                "suggestion": "💡 Tente adicionar ?allow_duplicates=true na URL se quiser forçar a criação",
+                "suggestion": "💡 Verifique se os dados do produto estão corretos",
                 "error_type": "generation_error"
             }
         )
@@ -6880,9 +13181,6 @@ async def test_create_article_simple(product_data: dict):
         "produto": product_data.get('nome', ''),
         "categoria": product_data.get('categoria_nome', '')
     }
-
-# Duplicate endpoint removed - using the one at line 2330
-
 
 # =====================================================
 # PONTO DE ENTRADA

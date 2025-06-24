@@ -201,27 +201,40 @@ class SEOOptimizer:
             # Adicionar keyword no início se possível
             title = f"{keyword.title()}: {title}"
         
-        # Limitar a 60 caracteres
-        if len(title) > self.max_title_length:
+        # 🚨 CORREÇÃO: Limitar a 70 caracteres e cortar em palavras completas
+        max_length = 70  # Aumentado de 60 para 70
+        if len(title) > max_length:
             # Tentar cortar mantendo a palavra-chave
-            if keyword.lower() in title[:self.max_title_length].lower():
+            if keyword.lower() in title[:max_length].lower():
                 # Keyword está na parte que será mantida
                 words = title.split()
                 optimized_title = ""
                 
                 for word in words:
                     test_length = len(optimized_title + " " + word) if optimized_title else len(word)
-                    if test_length <= self.max_title_length:
+                    if test_length <= max_length:
                         optimized_title += (" " if optimized_title else "") + word
                     else:
                         break
                 
                 title = optimized_title
+                # Só adicionar "..." se cortou significativamente
+                if len(title) < len(" ".join(words)) - 10:
+                    title = title + "..."
             else:
                 # Keyword não está na parte mantida, reformular
                 title = f"{keyword.title()}: {title.split(':')[-1].strip()}"
-                if len(title) > self.max_title_length:
-                    title = title[:self.max_title_length-3] + "..."
+                if len(title) > max_length:
+                    # Cortar em palavra completa, não no meio
+                    words = title.split()
+                    truncated = ""
+                    for word in words:
+                        test_length = len(truncated + " " + word) if truncated else len(word)
+                        if test_length <= max_length - 3:  # -3 para "..."
+                            truncated += (" " if truncated else "") + word
+                        else:
+                            break
+                    title = truncated + "..." if truncated else title[:max_length-3] + "..."
         
         return title.strip()
     

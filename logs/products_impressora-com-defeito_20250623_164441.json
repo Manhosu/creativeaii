@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "total_produtos": 5,
+    "data_export": "2025-06-23 16:44:41",
+    "resumo": {
+      "total_produtos": 5,
+      "com_preco": 5,
+      "disponiveis": 5,
+      "sem_preco": 0,
+      "indisponiveis": 0,
+      "marcas_encontradas": 3,
+      "marcas": [
+        "Brother",
+        "Epson",
+        "Ricoh"
+      ],
+      "categorias_processadas": 0,
+      "taxa_preco": 100.0,
+      "taxa_disponibilidade": 100.0,
+      "data_processamento": "2025-06-23 16:44:41"
+    }
+  },
+  "produtos": [
+    {
+      "nome": "Impressora Brother Dcp-L5652Dn Multifuncional Laser Monocromática Com Duplex E Rede  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-l5652dn-multifuncional-laser-monocromatica-com-duplex-e-rede-com-defeito.html",
+      "preco": {
+        "valor": 5650.0,
+        "moeda": "BRL",
+        "texto": "R$ 5.650,00",
+        "original": "R$ 5.650,00",
+        "timestamp": "2025-06-23 16:44:41"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11501_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-23 16:44:41",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Kyocera Ecosys M-3655Idn M3655  Multifuncional Laser Monocromático  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m-3655idn-m3655-multifuncional-laser-monocromatico-com-defeito.html",
+      "preco": {
+        "valor": 7565.93,
+        "moeda": "BRL",
+        "texto": "R$ 7.565,93",
+        "original": "R$ 7.565,93",
+        "timestamp": "2025-06-23 16:44:41"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11503_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-23 16:44:41",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless-com-defeito.html",
+      "preco": {
+        "valor": 3398.63,
+        "moeda": "BRL",
+        "texto": "R$ 3.398,63",
+        "original": "R$ 3.398,63",
+        "timestamp": "2025-06-23 16:44:41"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11569_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-23 16:44:41",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática  Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica-com-defeito.html",
+      "preco": {
+        "valor": 911.0,
+        "moeda": "BRL",
+        "texto": "R$ 911,00",
+        "original": "R$ 911,00",
+        "timestamp": "2025-06-23 16:44:41"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11570_ampliada_3.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-23 16:44:41",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh Mp 305Spf Mp305 417434  Multifuncional Laser Monocromática Com Defeito",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-mp-305spf-mp305-417434-multifuncional-laser-monocromatica-com-defeito.html",
+      "preco": {
+        "valor": 6550.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.550,00",
+        "original": "R$ 6.550,00",
+        "timestamp": "2025-06-23 16:44:41"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11783_ampliada.png",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-23 16:44:41",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    }
+  ]
+}

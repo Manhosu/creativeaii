@@ -1,0 +1,2532 @@
+{
+  "metadata": {
+    "total_produtos": 100,
+    "data_export": "2025-06-16 15:17:20",
+    "resumo": {
+      "total_produtos": 100,
+      "com_preco": 100,
+      "disponiveis": 100,
+      "sem_preco": 0,
+      "indisponiveis": 0,
+      "marcas_encontradas": 6,
+      "marcas": [
+        "Brother",
+        "Canon",
+        "Epson",
+        "HP",
+        "Lexmark",
+        "Ricoh"
+      ],
+      "categorias_processadas": 0,
+      "taxa_preco": 100.0,
+      "taxa_disponibilidade": 100.0,
+      "data_processamento": "2025-06-16 15:17:20"
+    },
+    "produtos_corrigidos": 1,
+    "data_correcao": "2025-06-23 11:21:54"
+  },
+  "produtos": [
+    {
+      "nome": "Impressora Hp Laserjet M408Dn 7Uq75A Com Conexão Usb E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-m408dn-7uq75a-com-conexao-usb-e-duplex.html",
+      "preco": {
+        "valor": 1649.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.649,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/1/8165_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-L2540Dw Dcp-L2540 Multifuncional Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-l2540dw-dcp-l2540-multifuncional-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 2543.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.543,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/8/3883_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Pro M428Fdw W1A30A  Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-m428fdw-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 3990.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.990,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/4/7404_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Mfp-M432Fdn M432 7Uq76A Multifuncional Com Usb E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-mfp-m432fdn-m432fdn-7uq76a-multifuncional-com-usb-e-duplex.html",
+      "preco": {
+        "valor": 2890.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.890,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/1/8157_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-B7520Dw Dcp-B7520 Multifuncional Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-b7520dw-dcp-b7520-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 1862.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.862,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7156_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-L3240Cdw L3240 Laser Colorida Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-l3240cdw-l3240-laser-colorida-com-wireless.html",
+      "preco": {
+        "valor": 3040.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.040,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10285_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-L5512Dn Dcp-L5512 Multifuncional Laser Monocromática Com Duplex E Rede",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-l5512dn-dcp-l5512-multifuncional-laser-monocromatica-com-duplex-e-rede.html",
+      "preco": {
+        "valor": 3059.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.059,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9619_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L6490 Multifuncional Tanque De Tinta Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l6490-multifuncional-tanque-de-tinta-com-wireless.html",
+      "preco": {
+        "valor": 3198.63,
+        "moeda": "BRL",
+        "texto": "R$ 3.198,63"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8962_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-1617Nw Dcp1617 Multifuncional Laser Monocromática Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-1617nw-dcp1617-multifuncional-laser-monocromatica-com-wireless.html",
+      "preco": {
+        "valor": 2190.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.190,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3727_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh P311 P 311  Laser Monocromática Com Ethernet 408526",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-p311-p-311-laser-monocromatica-com-ethernet.html",
+      "preco": {
+        "valor": 1662.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.662,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9191_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh M320F M320  Multifuncional Laser Monocromática Com Ethernet E Duplex 408535",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-m-320f-multifuncional-laser-monocromatica.html",
+      "preco": {
+        "valor": 2499.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.499,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9007_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L3250 Multifuncional Tanque De Tinta Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l3250-multifuncional-tanque-de-tinta-com-wireless.html",
+      "preco": {
+        "valor": 1290.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.290,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8863_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Pro 4303Fdw 5Hh67A  Multifuncional Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-4303fdw-5hh67a-multifuncional-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 3899.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.899,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/5/9579_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet 107W 4Zb78A696 Com Conexão Usb E Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-107w-4zb78a-com-conexao-usb-e-wireless.html",
+      "preco": {
+        "valor": 1235.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.235,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7388_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Plotter Hp Designjet T250 5Hb06A  610Mm (24)",
+      "url": "https://www.creativecopias.com.br/plotter-hp-designjet-t250-5hb06a-610mm-24.html",
+      "preco": {
+        "valor": 4185.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.185,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8406_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-L5912Dw Mfcl5912 Multifuncional Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-l5912dw-mfcl5912-multifuncional-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 4890.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.890,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9621_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-L5662Dn Dcp-L5662 Multifuncional Laser Monocromática Com Duplex E Rede",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-l5662dn-dcp-l5662-multifuncional-laser-monocromatica-com-duplex-e-rede.html",
+      "preco": {
+        "valor": 4041.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.041,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9620_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-T430W T430W Multifuncional Tanque De Tinta Colorida Com Wirelles",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-t430w-t430w-multifuncional-tanque-de-tinta-colorida-com-wirelles.html",
+      "preco": {
+        "valor": 890.0,
+        "moeda": "BRL",
+        "texto": "R$ 890,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11608_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-T830Dw T830Dw Multifuncional Tanque De Tinta Colorida Com Wirelles E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-t830dw-t830dw-multifuncional-tanque-de-tinta-colorida-com-wirelles-e-duplex.html",
+      "preco": {
+        "valor": 2234.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.234,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11611_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica.html",
+      "preco": {
+        "valor": 1070.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.070,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3743_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-1202 Hl1202 Laser Monocromática",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1202-hl1202-laser-monocromatica.html",
+      "preco": {
+        "valor": 1070.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.070,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3743_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Kyocera Ecosys Ma2100Cfx  Laser Colorida Com Ethernet",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-ma2100cfx-laser-colorida-com-ethernet.html",
+      "preco": {
+        "valor": 3095.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.095,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10550_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh Im 430F 418490  Im430 Im430F Multifuncional Laser Monocromática",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-im-430f-multifuncional-laser-monocromatica.html",
+      "preco": {
+        "valor": 6490.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.490,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/6/7613_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-L1232W Hll1232W Laser Monocromática Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-l1232w-hll1232w-laser-monocromatica-com-wireless.html",
+      "preco": {
+        "valor": 1057.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.057,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11615_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L14150 Ecotank Multifuncional Com Wireless E Duplex A3",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l14150-ecotank-multifuncional-com-wireless-e-duplex-a3.html",
+      "preco": {
+        "valor": 4699.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.699,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8433_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-L6912Dw Mfcl6912 Multifuncional Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-l6912dw-mfcl6912-multifuncional-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 6450.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.450,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9622_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Kyocera Ecosys M2640Idw  Multifuncional Laser Monocromática Duplex Completo E Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-m2640idw-multifuncional-laser-monocromatica-duplex-completo-e-wireless.html",
+      "preco": {
+        "valor": 3990.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.990,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/4/6451_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Plotter Hp Designjet T650 5Hb10A  910Mm (36)",
+      "url": "https://www.creativecopias.com.br/plotter-hp-designjet-t650-5hb10a-910mm-36.html",
+      "preco": {
+        "valor": 8800.0,
+        "moeda": "BRL",
+        "texto": "R$ 8.800,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8413_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-B7535Dw Dcp-B7535 Multifuncional Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-b7535dw-dcp-b7535-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 2248.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.248,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/1/7159_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-L5212Dw L5212Dw Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-l5212dw-l5212dw-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 2599.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.599,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9624_ampliada_1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-L3560Cdw L3560 Multifuncional Laser Colorido Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-l3560cdw-l3560-multifuncional-laser-colorido-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 4330.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.330,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10291_ampliada1.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh M C251Fw Mc251Fw  Multifuncional Laser Colorida Com Wireless 408544",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-m-c251fw-mc251fw-multifuncional-laser-colorida-com-wireless.html",
+      "preco": {
+        "valor": 4790.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.790,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9301_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-B2080Dw B2080Dw Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-b2080dw-b2080dw-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 1742.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.742,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9290_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-T530Dw T530Dw Multifuncional Tanque De Tinta Colorida Com Wirelles",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-t530dw-t530dw-multifuncional-tanque-de-tinta-colorida-com-wirelles.html",
+      "preco": {
+        "valor": 1050.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.050,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11609_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L6270 Ecotank Multifuncional Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l6270-ecotank-multifuncional-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 2545.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.545,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8974_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Officejet 200 Cz993A Portátil Mobile",
+      "url": "https://www.creativecopias.com.br/impressora-hp-officejet-200-cz993a-portatil-mobile.html",
+      "preco": {
+        "valor": 2540.43,
+        "moeda": "BRL",
+        "texto": "R$ 2.540,43"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/7/4795_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Mfp 135W 4Zb83A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-mfp135w-4zb83a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 1705.89,
+        "moeda": "BRL",
+        "texto": "R$ 1.705,89"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7389_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Lexmark Mx331Adn Mx331 Multifuncional Laser Monocromática Com Duplex E Rede",
+      "url": "https://www.creativecopias.com.br/impressora-lexmark-mx331adn-mx331-multifuncional-laser-monocromatica-com-duplex-e-rede.html",
+      "preco": {
+        "valor": 2621.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.621,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9272_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Officejet 200 Cz993A Portátil Mobile",
+      "url": "https://www.creativecopias.com.br/impressora-hp-officejet-200-cz993a-portatil-mobile.html",
+      "preco": {
+        "valor": 2540.43,
+        "moeda": "BRL",
+        "texto": "R$ 2.540,43"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/4/7/4795_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Mfp-135A 4Zb82A Multifuncional Com Usb",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-mfp135a-4zb82a-multifuncional-com-usb.html",
+      "preco": {
+        "valor": 1444.5,
+        "moeda": "BRL",
+        "texto": "R$ 1.444,50"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7390_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Smart Tank 584 5D1C1A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-smart-tank-584-5d1c1a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 903.0,
+        "moeda": "BRL",
+        "texto": "R$ 903,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10477_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Canon Imagerunner Ir 1643If  Multifuncional Laser Monocromática Com Conexão Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-canon-imagerunner-1643if-multifuncional-laser-monocromatica-com-conexao-wireless.html",
+      "preco": {
+        "valor": 3999.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.999,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/5/7593_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L5290 Ecotank Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l5290-ecotank-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 2399.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.399,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8975_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Canon Imagerunner Ir 1643If  Multifuncional Laser Monocromática Com Conexão Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-canon-imagerunner-1643if-multifuncional-laser-monocromatica-com-conexao-wireless.html",
+      "preco": {
+        "valor": 3999.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.999,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/5/7593_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Pro Mfp 4103Fdw Mfp4103Fdw 2Z629A  Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-mfp-4103fdw-mfp4103fdw-2z629a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 2688.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.688,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9231_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp E60165Dn 3Gy10A Laserjet Managed Com Rede Ethernet",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-managed-e60165dn-3gy10a-com-rede-ethernet.html",
+      "preco": {
+        "valor": 6782.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.782,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9233_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Mfp 135W 4Zb83A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-mfp135w-4zb83a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 1705.89,
+        "moeda": "BRL",
+        "texto": "R$ 1.705,89"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7389_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson M3180 Ecotank Multifuncional Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-epson-m3180-ecotank-multifuncional-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 2890.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.890,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/5/7529_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Mfp-135A 4Zb82A Multifuncional Com Usb",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-mfp135a-4zb82a-multifuncional-com-usb.html",
+      "preco": {
+        "valor": 1444.5,
+        "moeda": "BRL",
+        "texto": "R$ 1.444,50"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7390_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Plotter Epson Surecolor T3170 Sct3170Sr  610Mm (24)",
+      "url": "https://www.creativecopias.com.br/plotter-epson-surecolor-t3170-sct3170sr-610mm-24.html",
+      "preco": {
+        "valor": 4799.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.799,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/3/7309_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Dcp-1602 Dcp1602 Multifuncional Laser Monocromática",
+      "url": "https://www.creativecopias.com.br/impressora-brother-dcp-1602-dcp1602-multifuncional-laser-monocromatica.html",
+      "preco": {
+        "valor": 1599.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.599,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/3/7/3725_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Térmica Brother Ql-820Nwb Ql820",
+      "url": "https://www.creativecopias.com.br/impressora-termica-brother-ql-820nwb-ql820.html",
+      "preco": {
+        "valor": 1753.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.753,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10074_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Lexmark Mx522Adhe Mx522 Multifuncional Laser Monocromática Com Duplex E Rede",
+      "url": "https://www.creativecopias.com.br/impressora-lexmark-mx522adhe-mx522-multifuncional-laser-monocromatica-com-duplex-e-rede.html",
+      "preco": {
+        "valor": 3990.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.990,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10003_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Lexmark Mx431Adw Mx431 Multifuncional Laser Monocromática Com Duplex E Rede",
+      "url": "https://www.creativecopias.com.br/impressora-lexmark-mx421adw-mx421-multifuncional-laser-monocromatica-com-duplex-e-rede.html",
+      "preco": {
+        "valor": 2540.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.540,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/4/9446_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh P 502 P502  Laser Monocromática Com Ethernet 418494",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-p-502-p502-laser-monocromatica-com-ethernet.html",
+      "preco": {
+        "valor": 4190.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.190,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9055_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson M1180 Tanque De Tinta Monocromática Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-epson-m1180-tanque-de-tinta-monocromatica-com-wireless.html",
+      "preco": {
+        "valor": 2599.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.599,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/5/7549_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh Im 550F 418458  Im550F Multifuncional Laser Monocromática Com Conexão Bluetooth",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-im-550f-multifuncional-laser-monocromatica-com-conexao-bluetooth.html",
+      "preco": {
+        "valor": 9300.0,
+        "moeda": "BRL",
+        "texto": "R$ 9.300,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9059_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-L5212Dn L5212Dn Laser Monocromática Com Ethernet E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-l5212dn-l5212dn-laser-monocromatica-com-ethernet-e-duplex.html",
+      "preco": {
+        "valor": 2462.18,
+        "moeda": "BRL",
+        "texto": "R$ 2.462,18"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9624_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-L6412Dw Hll6412 Laser Monocromática Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-l6412dw-hll6412-laser-monocromatica-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 3316.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.316,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/6/9626_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Lexmark Cx431Adw Cx431 Multifuncional Laser Colorida Com Duplex E Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-lexmark-cx431adw-cx431-multifuncional-laser-colorida-com-duplex-e-wireless.html",
+      "preco": {
+        "valor": 3190.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.190,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/3/9341_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson Workforce Pro Wf-C5890 C5890  Multifuncional Com Bolsa De Tinta Colorida Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-epson-workforce-pro-wf-c5890-c5890-multifuncional-com-bolsa-de-tinta-colorida-wireless.html",
+      "preco": {
+        "valor": 6400.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.400,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11830_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-L8610Cdw Multifuncional Laser Colorida Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-l8610cdw-multifuncional-laser-colorida-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 5914.0,
+        "moeda": "BRL",
+        "texto": "R$ 5.914,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/6/5694_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Kyocera Ecosys Pa2100Cx  Laser Colorida Com Ethernet",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-pa2100cx-laser-colorida-com-ethernet.html",
+      "preco": {
+        "valor": 2082.99,
+        "moeda": "BRL",
+        "texto": "R$ 2.082,99"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10000_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson Workforce Pro Wf-M5399  Com Bolsa De Tinta Monocromática Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-epson-workforce-pro-wf-m5399-com-bolsa-de-tinta-monocromatica-wireless.html",
+      "preco": {
+        "valor": 3399.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.399,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10586_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson L4260 Multifuncional Tanque De Tinta Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-epson-l4260-multifuncional-tanque-de-tinta-com-wireless.html",
+      "preco": {
+        "valor": 1799.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.799,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/8/8874_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Térmica Epson Tm-T20X Serial E Usb  C31Ch26031  Preto Não Fiscal",
+      "url": "https://www.creativecopias.com.br/impressora-termica-epson-tm-t20x-serial-e-usb-c31ch26031-preto-nao-fiscal.html",
+      "preco": {
+        "valor": 720.0,
+        "moeda": "BRL",
+        "texto": "R$ 720,00"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/7/8/7830_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Pro M4203Dw 5Hh48A_696 Duplex E Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-pro-m4203dw-5hh48a-696-duplex-e-wireless.html",
+      "preco": {
+        "valor": 3100.0,
+        "moeda": "BRL",
+        "texto": "R$ 3.100,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10509_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh Im 460F 423501  Im460 Im460F Multifuncional Laser Monocromática",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-im-460f-423501-im460-im460f-multifuncional-laser-monocromatica.html",
+      "preco": {
+        "valor": 8720.0,
+        "moeda": "BRL",
+        "texto": "R$ 8.720,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10453_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Térmica Brother Ql-800 Ql800",
+      "url": "https://www.creativecopias.com.br/impressora-termica-brother-ql-800.html",
+      "preco": {
+        "valor": 885.0,
+        "moeda": "BRL",
+        "texto": "R$ 885,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/6/9/6972_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-L8360Cdw Hll8360 Laser Colorida Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-l8360cdw-hll8360-laser-colorida-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 4389.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.389,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/6/5691_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Canon Mega Tank G610  Fotográfica Tanque De Tinta Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-canon-mega-tank-g610-fotografica-tanque-de-tinta-para-exames-clinicos-com-wireless.html",
+      "preco": {
+        "valor": 1499.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.499,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8985_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Canon Mega Tank G3110  Multifuncional Tanque De Tinta Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-canon-mega-tank-g3110-multifuncional-tanque-de-tinta-com-wireless.html",
+      "preco": {
+        "valor": 949.0,
+        "moeda": "BRL",
+        "texto": "R$ 949,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8986_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Plotter Hp Designjet T850 Mfp 2Y9H2A Multifuncional  914Mm (36)",
+      "url": "https://www.creativecopias.com.br/plotter-hp-designjet-t850-2y9h2a-914mm-36.html",
+      "preco": {
+        "valor": 31800.0,
+        "moeda": "BRL",
+        "texto": "R$ 31.800,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10014_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Kyocera Ecosys Ma4500Ix Ma4500 4500Ix  Multifuncional Laser Monocromático",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-ma4500ix-ma4500-4500ix-multifuncional-laser-monocromatico.html",
+      "preco": {
+        "valor": 4388.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.388,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10339_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Kyocera Ecosys Pa4500X  Laser Monocromática Com Usb",
+      "url": "https://www.creativecopias.com.br/impressora-kyocera-ecosys-pa4500x-laser-monocromatica-com-usb.html",
+      "preco": {
+        "valor": 2656.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.656,00"
+      },
+      "codigo": null,
+      "marca": null,
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10337_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-J6955Dw Mfcj6955 Multifuncional Jato De Tinta Com Wireless E Duplex A3",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j6955dw-mfcj6955-multifuncional-jato-de-tinta-com-wireless-e-duplex-a3.html",
+      "preco": {
+        "valor": 4547.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.547,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9081_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-L8900Cdw Multifuncional Laser Colorida Com Wireless E Duplex Completo",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-l8900cdw-multifuncional-laser-colorida-com-wireless-e-duplex-completo.html",
+      "preco": {
+        "valor": 6990.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.990,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/6/5693_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Canon Pixma Ix6810 Fotográfica  Jato De Tinta Color A",
+      "url": "https://www.creativecopias.com.br/impressora-canon-pixma-ix6810-fotografica-jato-de-tinta-color-a.html",
+      "preco": {
+        "valor": 1330.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.330,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/5/9530_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Lexmark Mx431Adw Mx431 Multifuncional Laser Monocromática Com Duplex E Rede  Seminova",
+      "url": "https://www.creativecopias.com.br/impressora-lexmark-mx431adw-mx431-multifuncional-laser-monocromatica-com-duplex-e-rede-seminova.html",
+      "preco": {
+        "valor": 2740.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.740,00"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11145_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson Fx-2190Ii Fx2190 Matricial",
+      "url": "https://www.creativecopias.com.br/impressora-epson-fx-2190ii-matricial.html",
+      "preco": {
+        "valor": 4544.65,
+        "moeda": "BRL",
+        "texto": "R$ 4.544,65"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/1/8169_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-L1232Wv Hll1232Wv Hl-L1232 Laser Monocromática Com Wireless 220V",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-l1232w-hll1232w-laser-monocromatica-com-wireless-220v.html",
+      "preco": {
+        "valor": 1228.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.228,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11966_ampliada.png",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Hl-1222 Hl1222V Laser Monocromática 220V",
+      "url": "https://www.creativecopias.com.br/impressora-brother-hl-1222-hl1222-v-laser-monocromatica-220v.html",
+      "preco": {
+        "valor": 895.0,
+        "moeda": "BRL",
+        "texto": "R$ 895,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11973_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Smart Tank 724 2G9Q2A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-tank-smart-tank-724-2g9q2a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 1430.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.430,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9283_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Smart Tank 724 2G9Q2A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-tank-smart-tank-724-2g9q2a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 1430.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.430,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9283_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Managed E62655Dn 3Gy14A  Multifuncional Com Usb E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-managed-e62655dn-3gy14a-multifuncional-com-usb-e-duplex.html",
+      "preco": {
+        "valor": 8900.0,
+        "moeda": "BRL",
+        "texto": "R$ 8.900,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/1/11011_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Canon Mega Tank G7010  Multifuncional Tanque De Tinta Com Wireless E Adf",
+      "url": "https://www.creativecopias.com.br/impressora-canon-mega-tank-g7010-multifuncional-tanque-de-tinta-com-wireless-e-adf.html",
+      "preco": {
+        "valor": 1743.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.743,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/2/8269_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Brother Mfc-J5855Dw Mfc-J5855 Multifuncional Jato De Tinta Com Wireless E Duplex A3",
+      "url": "https://www.creativecopias.com.br/impressora-brother-mfc-j5855dw-mfc-j5855-multifuncional-jato-de-tinta-com-wireless-e-duplex-a3.html",
+      "preco": {
+        "valor": 2452.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.452,00"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9273_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Epson M3170 Ecotank Multifuncional Com Wireless E Duplex",
+      "url": "https://www.creativecopias.com.br/impressora-epson-m3170-ecotank-multifuncional-com-wireless-e-duplex.html",
+      "preco": {
+        "valor": 2564.17,
+        "moeda": "BRL",
+        "texto": "R$ 2.564,17"
+      },
+      "codigo": null,
+      "marca": "Epson",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/3/8391_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Plotter Hp Designjet T950 2Y9H1A  914Mm (36)",
+      "url": "https://www.creativecopias.com.br/plotter-hp-designjet-t950-2y9h1a-914mm-36.html",
+      "preco": {
+        "valor": 22800.0,
+        "moeda": "BRL",
+        "texto": "R$ 22.800,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10015_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Plotter Hp Designjet T650 5Hb08A  610Mm (24)",
+      "url": "https://www.creativecopias.com.br/plotter-hp-designjet-t650-5hb08a-610mm-24.html",
+      "preco": {
+        "valor": 6899.0,
+        "moeda": "BRL",
+        "texto": "R$ 6.899,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/4/8412_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Térmica Brother Ql-810W",
+      "url": "https://www.creativecopias.com.br/impressora-termica-brother-ql-810w.html",
+      "preco": {
+        "valor": 1282.8,
+        "moeda": "BRL",
+        "texto": "R$ 1.282,80"
+      },
+      "codigo": null,
+      "marca": "Brother",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/5/9/5907_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh Im 3000 Im3000  418820  Multifuncional Laser Monocromática Com Ethernet",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-im-3000-im3000-multifuncional-laser-monocromatica-com-conexao-ethernet.html",
+      "preco": {
+        "valor": 19406.0,
+        "moeda": "BRL",
+        "texto": "R$ 19.406,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/220x/9df78eab33525d08d6e5fb8d27136e95/7/5/7597_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      },
+      "imagem_original": null,
+      "imagem_corrigida": true
+    },
+    {
+      "nome": "Impressora Hp Laserjet Tank 2602Sdw 2R7F5A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-tank-2602sdw-2r7f5a-multifuncional-com-wireless-4.html",
+      "preco": {
+        "valor": 2575.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.575,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10613_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Canon Maxify Gx7010  Multifuncional Tanque De Tinta Com Conexão Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-canon-maxify-gx6010-multifuncional-tanque-de-tinta-com-conexao-wireless.html",
+      "preco": {
+        "valor": 4127.0,
+        "moeda": "BRL",
+        "texto": "R$ 4.127,00"
+      },
+      "codigo": null,
+      "marca": "Canon",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/8/9/8987_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh P 801 P801 418472  Laser Monocromática Com Ethernet",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-p-801-p801-laser-monocromatica-com-ethernet.html",
+      "preco": {
+        "valor": 7740.41,
+        "moeda": "BRL",
+        "texto": "R$ 7.740,41"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/0/9054_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Lexmark Mc3224Adwe Mc3224  Multifuncional Laser Colorida Com Duplex E Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-lexmark-mc3224adwe-mc3224-multifuncional-laser-colorida-com-duplex-e-wireless-4.html",
+      "preco": {
+        "valor": 3089.57,
+        "moeda": "BRL",
+        "texto": "R$ 3.089,57"
+      },
+      "codigo": null,
+      "marca": "Lexmark",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10612_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Smart Tank 674 2H5S3A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-tank-smart-tank-674-2h5s3a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 1540.0,
+        "moeda": "BRL",
+        "texto": "R$ 1.540,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/2/9237_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Plotter Hp Designjet T950 Mfp 2Y9H3A Multifuncional  914Mm (36)",
+      "url": "https://www.creativecopias.com.br/plotter-hp-designjet-t950-2y9h3a-914mm-36.html",
+      "preco": {
+        "valor": 34990.0,
+        "moeda": "BRL",
+        "texto": "R$ 34.990,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10016_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Hp Laserjet Tank 2602Sdw 2R7F5A Multifuncional Com Wireless",
+      "url": "https://www.creativecopias.com.br/impressora-hp-laserjet-tank-2602sdw-2r7f5a-multifuncional-com-wireless.html",
+      "preco": {
+        "valor": 2775.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.775,00"
+      },
+      "codigo": null,
+      "marca": "HP",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/9/1/9115_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    },
+    {
+      "nome": "Impressora Ricoh P C311W Pc311W  Laser Colorida Com Wireless 408541",
+      "url": "https://www.creativecopias.com.br/impressora-ricoh-p-c311w-pc311w-laser-colorida-com-wireless-408541.html",
+      "preco": {
+        "valor": 2899.0,
+        "moeda": "BRL",
+        "texto": "R$ 2.899,00"
+      },
+      "codigo": null,
+      "marca": "Ricoh",
+      "descricao": null,
+      "imagem": "https://www.creativecopias.com.br/media/catalog/product/cache/1/small_image/455x/9df78eab33525d08d6e5fb8d27136e95/1/0/10670_ampliada.jpg",
+      "disponivel": true,
+      "id": null,
+      "categoria_url": null,
+      "data_scraped": null,
+      "data_normalized": "2025-06-16 15:16:55",
+      "status": "normalizado",
+      "verificacao_disponibilidade": {
+        "disponivel": true,
+        "motivo": "3 indicadores positivos encontrados",
+        "detalhes": "Página contém elementos que indicam produto ativo",
+        "status_code": 200
+      }
+    }
+  ]
+}

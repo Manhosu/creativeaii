@@ -167,7 +167,7 @@ class AdvancedArticleTemplates:
             nome = product_data.get('nome', 'Produto')
             marca = product_data.get('marca', 'N/A')
             preco = product_data.get('preco', {})
-            preco_texto = preco.get('texto', 'Consulte o preço') if isinstance(preco, dict) else str(preco)
+            preco_texto = self._format_price_for_template(preco)
             codigo = product_data.get('codigo', 'N/A')
             descricao_original = product_data.get('descricao', '')
             url_produto = product_data.get('url', '#')
@@ -575,14 +575,17 @@ class AdvancedArticleTemplates:
     def _generate_meta_description(self, nome: str, marca: str, preco: str, tipo: str) -> str:
         """Gerar meta descrição otimizada (150-160 caracteres)"""
         
+        # 🚨 CORREÇÃO: Formatar preço corretamente
+        preco_formatado = self._format_price_for_template(preco)
+        
         if tipo == "impressora":
-            base = f"Review completo da {nome}. Análise técnica, especificações, preço {preco} e onde comprar."
+            base = f"Review completo da {nome}. Análise técnica, especificações, preço {preco_formatado} e onde comprar."
         elif tipo == "cartucho":
-            base = f"Cartucho {nome} original - Análise de qualidade, rendimento, preço {preco} e compatibilidade."
+            base = f"Cartucho {nome} original - Análise de qualidade, rendimento, preço {preco_formatado} e compatibilidade."
         elif tipo == "cabeça de impressão":
-            base = f"Cabeça de impressão {nome} - Review técnico, qualidade, instalação e preço {preco}."
+            base = f"Cabeça de impressão {nome} - Review técnico, qualidade, instalação e preço {preco_formatado}."
         else:
-            base = f"{nome} - Review completo, especificações técnicas, preço {preco} e análise detalhada."
+            base = f"{nome} - Review completo, especificações técnicas, preço {preco_formatado} e análise detalhada."
         
         # Garantir que não passe de 160 caracteres
         if len(base) > 160:
@@ -625,6 +628,9 @@ class AdvancedArticleTemplates:
         beneficios = tipo_detalhes['beneficios']
         aplicacoes = tipo_detalhes['aplicacoes']
         
+        # 🚨 CORREÇÃO CRÍTICA: Formatar preço logo no início
+        preco_formatado = self._format_price_for_template(preco)
+        
         # Descrição aprimorada se a original for muito básica
         if not descricao or len(descricao) < 50:
             descricao = f"O {nome} é um produto de alta qualidade, desenvolvido para atender às mais exigentes demandas do mercado. Com tecnologia de ponta e materiais premium, oferece desempenho excepcional e durabilidade comprovada."
@@ -642,7 +648,7 @@ class AdvancedArticleTemplates:
         # CORREÇÃO CRÍTICA: Usar URL real do produto se disponível
         url_produto_real = url.strip() if url else ''
         
-        # Link externo baseado na marca
+        # CORREÇÃO CRÍTICA: Link externo baseado na marca correta
         if 'hp' in marca.lower():
             link_externo = '<a href="https://www.hp.com.br" rel="nofollow" target="_blank">Site oficial da HP</a>'
         elif 'canon' in marca.lower():
@@ -651,8 +657,13 @@ class AdvancedArticleTemplates:
             link_externo = '<a href="https://www.epson.com.br" rel="nofollow" target="_blank">Site oficial da Epson</a>'
         elif 'brother' in marca.lower():
             link_externo = '<a href="https://www.brother.com.br" rel="nofollow" target="_blank">Site oficial da Brother</a>'
+        elif 'samsung' in marca.lower():
+            link_externo = '<a href="https://www.samsung.com.br" rel="nofollow" target="_blank">Site oficial da Samsung</a>'
+        elif 'xerox' in marca.lower():
+            link_externo = '<a href="https://www.xerox.com.br" rel="nofollow" target="_blank">Site oficial da Xerox</a>'
         else:
-            link_externo = '<a href="https://www.hp.com.br" rel="nofollow" target="_blank">Site oficial da HP</a>'
+            # CORREÇÃO: Usar página inicial da Creative Cópias como fallback
+            link_externo = '<a href="https://www.creativecopias.com.br" rel="nofollow" target="_blank">catálogo de produtos</a>'
         
         # CORREÇÃO: Priorizar URL real do produto, senão usar categoria
         if url_produto_real and 'creativecopias.com.br' in url_produto_real:
@@ -672,8 +683,10 @@ class AdvancedArticleTemplates:
         if categoria and categoria.strip() and categoria != 'N/A':
             info_produto.append(f'<strong>Categoria:</strong> <span itemprop="category">{categoria}</span>')
         
-        if preco and preco.strip() and preco != 'N/A' and 'Consulte' not in preco:
-            info_produto.append(f'<strong>Preço:</strong> <span itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span itemprop="price" style="color: #28a745; font-weight: bold;">{preco}</span></span>')
+        # 🚨 CORREÇÃO CRÍTICA: Formatar preço para exibição correta
+        preco_formatado = self._format_price_for_template(preco)
+        if preco_formatado and preco_formatado.strip() and preco_formatado != 'N/A' and 'Consulte' not in preco_formatado:
+            info_produto.append(f'<strong>Preço:</strong> <span itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span itemprop="price" style="color: #28a745; font-weight: bold;">{preco_formatado}</span></span>')
         
         if codigo and codigo.strip() and codigo != 'N/A':
             info_produto.append(f'<strong>Código:</strong> <span itemprop="sku">{codigo}</span>')
@@ -759,7 +772,7 @@ class AdvancedArticleTemplates:
 
 <h2>Análise de Custo-Benefício</h2>
 <div style="margin: 20px 0;">
-    <p><strong>Investimento:</strong> Com preço de <strong>{preco}</strong>, este produto oferece excelente retorno sobre o investimento, especialmente considerando sua durabilidade e qualidade superior.</p>
+    <p><strong>Investimento:</strong> Com preço de <strong>{preco_formatado}</strong>, este produto oferece excelente retorno sobre o investimento, especialmente considerando sua durabilidade e qualidade superior.</p>
     
     <p><strong>Facilidade de Uso:</strong> A instalação e configuração são simples e rápidas, não exigindo conhecimentos técnicos avançados. Vem com manual detalhado e suporte técnico disponível.</p>
 </div>
@@ -776,7 +789,7 @@ class AdvancedArticleTemplates:
 <h2>Onde Comprar</h2>
 <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 20px; margin: 20px 0; border-radius: 5px; text-align: center;">
     {self._generate_image_html(imagem_url, nome, is_placeholder, True) if imagem_url else ''}
-    <p style="margin-bottom: 15px;">Produto disponível por <strong style="color: #28a745; font-size: 18px;">{preco}</strong></p>
+    <p style="margin-bottom: 15px;">Produto disponível por <strong style="color: #28a745; font-size: 18px;">{preco_formatado}</strong></p>
     <p style="margin: 15px 0;">
         <a href="{url_produto}" target="_blank" style="background: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
             Ver Produto no Site
@@ -836,7 +849,7 @@ class AdvancedArticleTemplates:
             'titulo': f"Review: {nome}",
             'slug': nome.lower().replace(' ', '-'),
             'meta_descricao': f"Review do {nome} - Análise completa e onde comprar",
-            'conteudo': f"<h1>{nome}</h1><p>Produto de qualidade disponível por {preco}.</p>",
+            'conteudo': f"<h1>{nome}</h1><p>Produto de qualidade disponível por {self._format_price_for_template(preco)}.</p>",
             'tags': [categoria, 'review'],
             'wp_category': categoria,
             'produto_nome': nome,
@@ -849,6 +862,7 @@ class AdvancedArticleTemplates:
     def _search_real_product_image(self, nome_produto: str, marca: str = None) -> str:
         """
         Busca imagem real do produto usando produtos já scraped
+        VERSÃO MELHORADA com busca exata priorizada + MAPEAMENTO ESPECÍFICO
         
         Args:
             nome_produto: Nome do produto para buscar
@@ -860,45 +874,27 @@ class AdvancedArticleTemplates:
         try:
             import sqlite3
             import os
-            
-            # Buscar na base de dados de produtos já scraped
-            db_paths = [
-                'logs/products_cache.db',
-                'data/products.db',
-                'logs/products_single_*.json'
-            ]
-            
-            # Criar termos de busca
-            search_words = []
-            nome_lower = nome_produto.lower()
-            
-            # Extrair palavras importantes
-            if marca:
-                search_words.append(marca.lower())
-            
-            # Extrair modelo/código
             import re
-            model_match = re.search(r'([0-9]+[a-z]*)', nome_lower)
-            if model_match:
-                search_words.append(model_match.group(1))
-                
-            # Extrair tipo de produto
-            if 'cartucho' in nome_lower:
-                search_words.append('cartucho')
-            if 'impressora' in nome_lower:
-                search_words.append('impressora')
-            if 'toner' in nome_lower:
-                search_words.append('toner')
-            if 'papel' in nome_lower:
-                search_words.append('papel')
-            if 'scanner' in nome_lower:
-                search_words.append('scanner')
-                
-            # Extrair números de modelo específicos
-            numbers = re.findall(r'\d+', nome_produto)
-            search_words.extend(numbers)
             
-            logger.info(f"🔍 Buscando imagem para '{nome_produto}' com palavras: {search_words}")
+            # Limpar nome do produto
+            nome_clean = nome_produto.strip()
+            nome_lower = nome_clean.lower()
+            
+            logger.info(f"🔍 Buscando imagem para produto: '{nome_produto}'")
+            
+            # 🎯 MAPEAMENTO ESPECÍFICO PARA PRODUTOS CORRIGIDOS
+            specific_mappings = {
+                'cabo do painel de controle pantum m6800 m7100 m7200': 'https://www.creativecopias.com.br/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/1/1/11689_ampliada.jpg',
+                'cabo painel pantum': 'https://www.creativecopias.com.br/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/1/1/11689_ampliada.jpg',
+                'cabo do painel de controle pantum': 'https://www.creativecopias.com.br/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/1/1/11689_ampliada.jpg',
+                '301022274001': 'https://www.creativecopias.com.br/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/1/1/11689_ampliada.jpg'
+            }
+            
+            # Verificar mapeamento específico primeiro
+            for key, image_url in specific_mappings.items():
+                if key.lower() in nome_lower:
+                    logger.info(f"🎯 MAPEAMENTO ESPECÍFICO encontrado para '{key}': {image_url}")
+                    return image_url
             
             # Verificar arquivos JSON de produtos primeiro
             import glob
@@ -925,46 +921,138 @@ class AdvancedArticleTemplates:
                         
                     for product in products:
                         if isinstance(product, dict) and product.get('imagem'):
-                            product_name = product.get('nome', '').lower()
+                            product_name = product.get('nome', '').strip()
+                            product_name_lower = product_name.lower()
                             
-                            # PRIMEIRO: Tentar busca exata por nome
-                            if nome_produto.lower().strip() == product_name.strip():
+                            # BUSCA EXATA PRIORIZADA (100% match) - NORMALIZAR ESPAÇOS
+                            nome_normalized = ' '.join(nome_lower.split())
+                            product_normalized = ' '.join(product_name_lower.split())
+                            
+                            if nome_normalized == product_normalized:
                                 image_url = product['imagem']
                                 if image_url and 'creativecopias.com.br' in image_url:
                                     valid_url, _ = self._optimize_image_url(image_url, nome_produto)
                                     if valid_url:
-                                        logger.info(f"✅ Imagem encontrada (match exato) em {json_file}: {valid_url}")
+                                        logger.info(f"✅ MATCH EXATO encontrado em {json_file}: {valid_url}")
                                         return valid_url
                             
-                            # SEGUNDO: Verificar similaridade por palavras-chave
+                            # BUSCA POR CÓDIGOS ESPECÍFICOS (BTD1003PK, etc.)
+                            # Extrair códigos alfanuméricos específicos
+                            codes_produto = re.findall(r'[A-Z]+\d+[A-Z]*', nome_produto.upper())
+                            codes_db = re.findall(r'[A-Z]+\d+[A-Z]*', product_name.upper())
+                            
+                            if codes_produto and codes_db:
+                                # Se tem códigos em comum, é muito provável ser o mesmo produto
+                                common_codes = set(codes_produto) & set(codes_db)
+                                if common_codes:
+                                    image_url = product['imagem']
+                                    if image_url and 'creativecopias.com.br' in image_url:
+                                        valid_url, _ = self._optimize_image_url(image_url, nome_produto)
+                                        if valid_url:
+                                            logger.info(f"✅ MATCH POR CÓDIGO {common_codes} em {json_file}: {valid_url}")
+                                            return valid_url
+                            
+                            # BUSCA POR SIMILARIDADE ALTA (75%+ de palavras em comum)
+                            palavras_produto = set(re.findall(r'\w+', nome_lower))
+                            palavras_db = set(re.findall(r'\w+', product_name_lower))
+                            
+                            # Remover palavras muito comuns
+                            stop_words = {'de', 'da', 'do', 'com', 'para', 'e', 'em', 'original', 'compativel'}
+                            palavras_produto = palavras_produto - stop_words
+                            palavras_db = palavras_db - stop_words
+                            
+                            if palavras_produto and palavras_db:
+                                intersecao = palavras_produto & palavras_db
+                                uniao = palavras_produto | palavras_db
+                                similaridade = len(intersecao) / len(uniao) if uniao else 0
+                                
+                                # Se similaridade alta (75%+), usar a imagem
+                                if similaridade >= 0.75:
+                                    image_url = product['imagem']
+                                    if image_url and 'creativecopias.com.br' in image_url:
+                                        valid_url, _ = self._optimize_image_url(image_url, nome_produto)
+                                        if valid_url:
+                                            logger.info(f"✅ MATCH ALTA SIMILARIDADE ({similaridade:.2%}) em {json_file}: {valid_url}")
+                                            return valid_url
+                                        
+                except Exception as e:
+                    logger.debug(f"Erro ao processar {json_file}: {e}")
+                    continue
+            
+            # FALLBACK: Busca por palavras-chave importantes
+            search_words = []
+            
+            # Extrair marca
+            if marca:
+                search_words.append(marca.lower())
+            
+            # Extrair códigos importantes
+            codes = re.findall(r'[A-Z]+\d+[A-Z]*', nome_produto.upper())
+            search_words.extend([code.lower() for code in codes])
+            
+            # Extrair números importantes
+            numbers = re.findall(r'\d{3,}', nome_produto)  # Números de 3+ dígitos
+            search_words.extend(numbers)
+            
+            # Extrair tipo de produto
+            tipos = ['cartucho', 'toner', 'impressora', 'papel', 'scanner', 'multifuncional', 'tinta', 'garrafas', 'kit']
+            for tipo in tipos:
+                if tipo in nome_lower:
+                    search_words.append(tipo)
+            
+            logger.info(f"🔍 Busca por palavras-chave: {search_words}")
+            
+            # Segunda passada com palavras-chave
+            for json_file in json_files:
+                try:
+                    import json
+                    with open(json_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    products = []
+                    if isinstance(data, list):
+                        products = data
+                    elif isinstance(data, dict) and 'produtos' in data:
+                        products = data['produtos']
+                    elif isinstance(data, dict) and 'products' in data:
+                        products = data['products']
+                    else:
+                        if data.get('nome') and data.get('imagem'):
+                            products = [data]
+                        
+                    for product in products:
+                        if isinstance(product, dict) and product.get('imagem'):
+                            product_name = product.get('nome', '').lower()
+                            
+                            # Contar matches de palavras-chave importantes
                             score = 0
                             for word in search_words:
-                                if word and len(word) > 1 and word.lower() in product_name:
+                                if word and len(word) > 2 and word.lower() in product_name:
                                     score += 1
                                     
-                            # Se tem boa similaridade, validar e usar imagem
+                            # Se tem boa similaridade por palavras-chave (2+ matches)
                             if score >= 2:
                                 image_url = product['imagem']
                                 if image_url and 'creativecopias.com.br' in image_url:
                                     valid_url, _ = self._optimize_image_url(image_url, nome_produto)
                                     if valid_url:
-                                        logger.info(f"✅ Imagem encontrada (score {score}) em {json_file}: {valid_url}")
+                                        logger.info(f"✅ MATCH POR PALAVRAS-CHAVE (score {score}) em {json_file}: {valid_url}")
                                         return valid_url
                                         
                 except Exception as e:
                     logger.debug(f"Erro ao processar {json_file}: {e}")
                     continue
             
-            # Se não encontrou em JSON, tentar SQLite
+            # Se não encontrou em JSON, tentar SQLite (mesmo algoritmo)
+            db_paths = ['logs/products_cache.db', 'data/products.db']
             for db_path in db_paths:
-                if not db_path.endswith('.db') or not os.path.exists(db_path):
+                if not os.path.exists(db_path):
                     continue
                     
                 try:
                     conn = sqlite3.connect(db_path)
                     cursor = conn.cursor()
                     
-                    # Buscar produtos similares
                     query = """
                     SELECT nome, imagem FROM products 
                     WHERE imagem IS NOT NULL AND imagem != ''
@@ -978,19 +1066,14 @@ class AdvancedArticleTemplates:
                         if not product_name or not image_url:
                             continue
                             
-                        product_name_lower = product_name.lower()
+                        # Mesma lógica de busca - NORMALIZAR ESPAÇOS
+                        nome_normalized = ' '.join(nome_lower.split())
+                        product_normalized = ' '.join(product_name.lower().split())
                         
-                        # Verificar similaridade
-                        score = 0
-                        for word in search_words:
-                            if word and len(word) > 1 and word.lower() in product_name_lower:
-                                score += 1
-                                
-                        # Se tem boa similaridade, validar e usar imagem
-                        if score >= 2:
+                        if nome_normalized == product_normalized:
                             valid_url, _ = self._optimize_image_url(image_url, nome_produto)
                             if valid_url:
-                                logger.info(f"✅ Imagem real encontrada em BD: {valid_url}")
+                                logger.info(f"✅ MATCH EXATO em BD: {valid_url}")
                                 conn.close()
                                 return valid_url
                     
@@ -1006,3 +1089,47 @@ class AdvancedArticleTemplates:
         except Exception as e:
             logger.error(f"❌ Erro ao buscar imagem real: {e}")
             return None 
+    
+    def _format_price_for_template(self, preco: Any) -> str:
+        """
+        🚨 CORREÇÃO CRÍTICA: Formata preço para exibição correta nos templates
+        
+        Args:
+            preco: Pode ser string ou dict com estrutura de preço
+            
+        Returns:
+            String formatada para exibição (ex: "R$ 359,00")
+        """
+        try:
+            if not preco:
+                return "Consulte o preço"
+            
+            # Se é dicionário estruturado, usar campo 'texto'
+            if isinstance(preco, dict):
+                if 'texto' in preco and preco['texto']:
+                    return str(preco['texto']).strip()
+                elif 'valor' in preco:
+                    valor = preco['valor']
+                    moeda = preco.get('moeda', 'BRL')
+                    if moeda == 'BRL':
+                        return f"R$ {valor:,.2f}".replace(',', '_').replace('.', ',').replace('_', '.')
+                    else:
+                        return f"{valor:,.2f}"
+                else:
+                    return "Consulte o preço"
+            
+            # Se é string, retornar como está
+            elif isinstance(preco, str):
+                return preco.strip()
+            
+            # Se é número
+            elif isinstance(preco, (int, float)):
+                return f"R$ {preco:,.2f}".replace(',', '_').replace('.', ',').replace('_', '.')
+            
+            # Fallback
+            else:
+                return str(preco)
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Erro ao formatar preço {preco}: {e}")
+            return "Consulte o preço" 

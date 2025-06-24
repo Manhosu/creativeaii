@@ -444,25 +444,45 @@ class ActiveCategoriesManager:
                 logger.warning("⚠️ Diretório de logs não encontrado")
                 return False
             
-            # Carregar todos os produtos dos arquivos JSON (apenas arquivos que começam com "products_")
+            # 🚨 CORREÇÃO CRÍTICA: Usar mesma lógica para evitar duplicatas
+            category_files = {}
             category_counts = {}
             
+            # Primeiro, identificar arquivos únicos (preferir _CORRIGIDO)
             for file_path in products_dir.glob("products_*.json"):
+                file_name = file_path.stem
+                category_slug = file_name.replace("products_", "").split("_")[0]
+                
+                if 'CORRIGIDO' in file_name:
+                    # Arquivo corrigido tem prioridade
+                    category_files[category_slug] = file_path
+                elif category_slug not in category_files:
+                    # Primeiro arquivo desta categoria
+                    category_files[category_slug] = file_path
+                # Ignorar arquivos duplicados
+            
+            logger.info(f"📊 CORREÇÃO: {len(category_files)} categorias únicas (eliminando duplicatas)")
+            
+            # Agora contar produtos únicos apenas dos arquivos selecionados
+            for category_slug, file_path in category_files.items():
                 try:
-                    # Extrair categoria do nome do arquivo
-                    file_name = file_path.stem  # nome sem extensão
-                    category_slug = file_name.replace("products_", "").split("_")[0]  # primeira parte após products_
-                    
                     with open(file_path, 'r', encoding='utf-8') as f:
                         data = json.load(f)
                         
+                        # Contar produtos únicos por nome
+                        unique_products = set()
                         if isinstance(data, dict) and 'produtos' in data:
-                            products = data['produtos']
-                            # Contar produtos por arquivo (categoria)
-                            category_counts[category_slug] = len(products)
+                            for product in data['produtos']:
+                                if product.get('nome'):
+                                    unique_products.add(product['nome'])
+                            category_counts[category_slug] = len(unique_products)
                         elif isinstance(data, list):
-                            # Fallback: lista direta
-                            category_counts[category_slug] = len(data)
+                            for product in data:
+                                if product.get('nome'):
+                                    unique_products.add(product['nome'])
+                            category_counts[category_slug] = len(unique_products)
+                            
+                        logger.debug(f"✅ {category_slug}: {len(unique_products)} produtos únicos ({file_path.name})")
                             
                 except Exception as e:
                     logger.warning(f"⚠️ Erro ao ler arquivo {file_path}: {e}")

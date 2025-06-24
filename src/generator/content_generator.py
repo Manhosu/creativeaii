@@ -179,12 +179,41 @@ class ContentGenerator:
             # NOVA OTIMIZAÇÃO: Aplicar melhorias de legibilidade Yoast
             article_data = self._optimize_readability_yoast(article_data)
             
+            # CORREÇÃO: Normalizar título para evitar duplicações
+            if 'titulo' in article_data:
+                article_data['titulo'] = self._normalize_title_avoid_duplicates(
+                    article_data['titulo'], 
+                    produto_nome
+                )
+            
             # NOVA: Aplicar estrutura HTML semântica para Yoast
             if 'conteudo' in article_data:
                 article_data['conteudo'] = self.template_manager.apply_yoast_html_structure(
                     article_data['conteudo'], 
                     produto_nome
                 )
+                
+                # CORREÇÃO: Adicionar fallback de imagem se necessário
+                if product.get('imagem'):
+                    # Verificar se já tem imagem no conteúdo, se não, adicionar
+                    if '<img' not in article_data['conteudo']:
+                        image_html = self._generate_image_fallback(produto_nome, product.get('imagem'))
+                        # Inserir imagem após o primeiro parágrafo
+                        paragraphs = article_data['conteudo'].split('</p>')
+                        if len(paragraphs) > 1:
+                            article_data['conteudo'] = f"{paragraphs[0]}</p>\n\n{image_html}\n\n" + "</p>".join(paragraphs[1:])
+                        else:
+                            article_data['conteudo'] = f"{image_html}\n\n{article_data['conteudo']}"
+                else:
+                    # Produto sem imagem válida - adicionar placeholder
+                    if '<img' not in article_data['conteudo']:
+                        image_html = self._generate_image_fallback(produto_nome)
+                        # Inserir imagem após o primeiro parágrafo
+                        paragraphs = article_data['conteudo'].split('</p>')
+                        if len(paragraphs) > 1:
+                            article_data['conteudo'] = f"{paragraphs[0]}</p>\n\n{image_html}\n\n" + "</p>".join(paragraphs[1:])
+                        else:
+                            article_data['conteudo'] = f"{image_html}\n\n{article_data['conteudo']}"
                 
                 # VALIDAR LEGIBILIDADE YOAST
                 readability_score = self.seo_optimizer.validate_readability_score(
@@ -447,14 +476,19 @@ class ContentGenerator:
             'lexmark': 'https://www.lexmark.com/pt_br.html'
         }
         
-        # Detectar marca no nome do produto
-        brand = 'hp'  # Default
+        # CORREÇÃO CRÍTICA: Detectar marca corretamente no nome do produto
+        brand = None  # Não assumir HP como padrão
         for brand_name in brand_links.keys():
             if brand_name.lower() in product_name.lower():
                 brand = brand_name
                 break
         
-        external_link = f'<a href="{brand_links[brand]}" target="_blank" rel="nofollow">site oficial da {brand.upper()}</a>'
+        # Se não detectar marca específica, usar link genérico do Creative Cópias
+        if brand and brand in brand_links:
+            external_link = f'<a href="{brand_links[brand]}" target="_blank" rel="nofollow">site oficial da {brand.upper()}</a>'
+        else:
+            # Fallback para o próprio site quando marca não identificada
+                            external_link = f'<a href="https://www.creativecopias.com.br" target="_blank">catálogo completo de equipamentos</a>'
         
         # Inserir no segundo parágrafo se disponível
         paragraphs = re.findall(r'<p>(.*?)</p>', content, re.DOTALL)
@@ -476,35 +510,68 @@ class ContentGenerator:
 
     def _add_images_with_keyword_alt(self, content: str, product_name: str) -> str:
         """
-        Adiciona automaticamente alt tags em imagens existentes com a keyword
+        Adiciona textos alt nas imagens com palavra-chave do produto
         
         Args:
             content: Conteúdo HTML
-            product_name: Nome do produto (keyword)
+            product_name: Nome do produto para palavra-chave
             
         Returns:
-            Conteúdo com alt tags otimizados
+            Conteúdo com alt text otimizado
         """
         def add_keyword_alt(match):
-            img_tag = match.group(0)
+            # Manter src original, melhorar alt
+            src = match.group(1)
             
-            # Verificar se já tem alt tag
-            if 'alt=' in img_tag:
-                return img_tag  # Manter existente
+            # Gerar alt text com palavra-chave do produto
+            alt_text = f"{product_name} - Imagem ilustrativa"
             
-            # Gerar alt tag baseado no produto
-            alt_text = f"{product_name} - Equipamento de alta qualidade para escritório"
-            
-            # Inserir alt tag antes do fechamento da tag
-            if img_tag.endswith('/>'):
-                return img_tag[:-2] + f' alt="{alt_text}" />'
-            elif img_tag.endswith('>'):
-                return img_tag[:-1] + f' alt="{alt_text}">'
-            
-            return img_tag
+            return f'<img src="{src}" alt="{alt_text}" loading="lazy">'
         
-        # Aplicar em todas as tags <img> existentes
-        return re.sub(r'<img[^>]*>', add_keyword_alt, content, flags=re.IGNORECASE)
+        # Processar todas as imagens
+        content = re.sub(r'<img[^>]*src=["\']([^"\']*)["\'][^>]*>', add_keyword_alt, content)
+        
+        return content
+
+    def _generate_image_fallback(self, product_name: str, image_url: str = None) -> str:
+        """
+        NOVA FUNÇÃO: Gera fallback inteligente para imagens
+        
+        Args:
+            product_name: Nome do produto
+            image_url: URL da imagem original (se disponível)
+            
+        Returns:
+            HTML da imagem com fallback apropriado
+        """
+        if not product_name:
+            product_name = "produto"
+        
+        # Se temos URL válida, usar com fallback
+        if image_url and image_url.strip() and image_url.startswith('http'):
+            return f'''
+            <div class="product-image">
+                <img src="{image_url}" 
+                     alt="{product_name} - Imagem do produto" 
+                     loading="lazy"
+                     onerror="this.src='/static/img/produto-placeholder.svg'; this.alt='{product_name} - Imagem não disponível'">
+                <noscript>
+                    <img src="/static/img/produto-placeholder.svg" alt="{product_name} - Imagem ilustrativa">
+                </noscript>
+            </div>
+            '''
+        else:
+            # Fallback completo com placeholder
+            return f'''
+            <div class="product-image">
+                <img src="/static/img/produto-placeholder.svg" 
+                     alt="{product_name} - Imagem ilustrativa" 
+                     loading="lazy">
+                <p class="image-notice">
+                    <small><em>Imagem ilustrativa. O produto pode apresentar variações.</em></small>
+                </p>
+            </div>
+            '''
 
     def _ensure_keyword_in_first_paragraph(self, content: str, product_name: str) -> str:
         """
@@ -556,6 +623,56 @@ class ContentGenerator:
         
         return content
 
+    def _normalize_title_avoid_duplicates(self, title: str, product_name: str) -> str:
+        """
+        NOVA FUNÇÃO: Normaliza título removendo redundâncias e duplicações
+        
+        Args:
+            title: Título original
+            product_name: Nome do produto
+            
+        Returns:
+            Título normalizado sem duplicações
+        """
+        if not title or not product_name:
+            return title
+        
+        # Remover caracteres especiais do nome do produto para comparação
+        product_clean = re.sub(r'[^\w\s]', ' ', product_name.lower())
+        product_words = set(product_clean.split())
+        
+        # Dividir título em palavras
+        title_words = title.split()
+        result_words = []
+        
+        # Rastrear palavras já adicionadas (case-insensitive)
+        added_words = set()
+        
+        for word in title_words:
+            word_clean = re.sub(r'[^\w]', '', word.lower())
+            
+            # Evitar duplicações exatas
+            if word_clean and word_clean not in added_words:
+                result_words.append(word)
+                added_words.add(word_clean)
+            
+            # Pular palavras que são substrings umas das outras
+            elif word_clean and not any(word_clean in existing or existing in word_clean 
+                                       for existing in added_words if len(existing) > 2):
+                result_words.append(word)
+                added_words.add(word_clean)
+        
+        normalized_title = ' '.join(result_words)
+        
+        # Verificar padrões específicos de duplicação (ex: "Dcp-1602 Dcp1602")
+        normalized_title = re.sub(r'\b(\w+)[-\s]*\1\b', r'\1', normalized_title, flags=re.IGNORECASE)
+        
+        # Limpar espaços extras
+        normalized_title = re.sub(r'\s+', ' ', normalized_title).strip()
+        
+        logger.debug(f"🔧 Título normalizado: '{title}' → '{normalized_title}'")
+        return normalized_title
+
     def _optimize_title_for_yoast_green(self, title: str, product_name: str) -> str:
         """
         Otimiza título para Yoast VERDE (30-60 chars + keyword no início)
@@ -573,21 +690,48 @@ class ContentGenerator:
         if not title.lower().startswith(product_name.lower()[:20]):  # Primeiras palavras do produto
             title = f"{product_name}: {title}"
         
-        # Ajustar para 30-60 caracteres
+        # 🚨 CORREÇÃO: Ajustar para 30-70 caracteres e cortar em palavras completas
         if len(title) < 30:
             # Muito curto, expandir
             title = f"{product_name}: Análise e Review Completo"
-        elif len(title) > 60:
-            # Muito longo, cortar mantendo produto
+        elif len(title) > 70:
+            # Muito longo, cortar mantendo produto e palavras completas
             if ':' in title:
                 parts = title.split(':', 1)
-                remaining_chars = 60 - len(parts[0]) - 2  # -2 para ': '
+                remaining_chars = 70 - len(parts[0]) - 2  # -2 para ': '
                 if remaining_chars > 10:
-                    title = f"{parts[0]}: {parts[1].strip()[:remaining_chars]}"
+                    # Cortar na parte após os ":" mas em palavra completa
+                    suffix_words = parts[1].strip().split()
+                    suffix = ""
+                    for word in suffix_words:
+                        test_length = len(suffix + " " + word) if suffix else len(word)
+                        if test_length <= remaining_chars:
+                            suffix += (" " if suffix else "") + word
+                        else:
+                            break
+                    title = f"{parts[0]}: {suffix}"
                 else:
-                    title = parts[0][:57] + "..."
+                    # Produto muito longo, cortar o próprio produto em palavra completa
+                    product_words = parts[0].split()
+                    truncated_product = ""
+                    for word in product_words:
+                        test_length = len(truncated_product + " " + word) if truncated_product else len(word)
+                        if test_length <= 67:  # 67 para deixar espaço para "..."
+                            truncated_product += (" " if truncated_product else "") + word
+                        else:
+                            break
+                    title = truncated_product + "..."
             else:
-                title = title[:57] + "..."
+                # Sem ":", cortar em palavra completa
+                words = title.split()
+                truncated = ""
+                for word in words:
+                    test_length = len(truncated + " " + word) if truncated else len(word)
+                    if test_length <= 67:  # 67 para deixar espaço para "..."
+                        truncated += (" " if truncated else "") + word
+                    else:
+                        break
+                title = truncated + "..." if truncated else title[:67] + "..."
         
         return title.strip()
 
@@ -1258,7 +1402,7 @@ class ContentGenerator:
             <p>Desenvolvido com foco na sustentabilidade, o {nome} utiliza tecnologias eco-friendly que reduzem o impacto ambiental sem comprometer a performance.</p>
             
             <h2>Investimento Inteligente</h2>
-            <p>Por {preco_texto}, o {nome} oferece excelente custo-benefício, combinando tecnologia avançada com preço competitivo. {get_buy_link()} agora mesmo!</p>""",
+                            <p>Por {preco_texto}, o {nome} combina tecnologia avançada com preço competitivo, representando uma escolha inteligente para profissionais. {get_buy_link()} agora mesmo!</p>""",
             
             # Estrutura 3: Foco comparativo
             f"""<h1>{titulo_seo}</h1>
@@ -1521,8 +1665,7 @@ class ContentGenerator:
         for pattern, replacement in url_fixes:
             cleaned_content = re.sub(pattern, replacement, cleaned_content, flags=re.IGNORECASE)
         
-        # Segunda passada: Remover qualquer espaço restante em URLs - MAIS AGRESSIVA
-        # Encontrar todas as URLs e corrigir espaços internos
+        # Segunda passada: Remover qualquer espaço restante em URLs e aplicar slugify
         def fix_url_spaces(match):
             url = match.group(1)
             logger.debug(f"🔧 Corrigindo URL com espaços: {url}")
@@ -1535,6 +1678,28 @@ class ContentGenerator:
             
             # Garantir que barras não tenham espaços
             fixed_url = re.sub(r'\s*/\s*', '/', fixed_url)
+            
+            # CORREÇÃO: Aplicar slugify para URLs do site
+            if 'creativecopias.com.br' in fixed_url:
+                try:
+                    # Dividir URL em partes
+                    if '/produto/' in fixed_url:
+                        base_url, product_path = fixed_url.split('/produto/', 1)
+                        # Aplicar slugify apenas no path do produto
+                        if product_path:
+                            product_slug = URLUtils.slugify(product_path.split('/')[0])
+                            fixed_url = f"{base_url}/produto/{product_slug}"
+                    elif '/' in fixed_url and fixed_url.count('/') > 2:
+                        # Para outras URLs, aplicar slugify na parte do path
+                        parts = fixed_url.split('/')
+                        if len(parts) > 3:
+                            # Manter protocolo e domínio, aplicar slugify no path
+                            base = '/'.join(parts[:3])
+                            path_parts = parts[3:]
+                            slugified_path = '/'.join([URLUtils.slugify(part) for part in path_parts if part])
+                            fixed_url = f"{base}/{slugified_path}"
+                except Exception as e:
+                    logger.warning(f"⚠️ Erro ao aplicar slugify em URL: {e}")
             
             logger.debug(f"🔧 URL corrigida: {fixed_url}")
             return f'href="{fixed_url}"'

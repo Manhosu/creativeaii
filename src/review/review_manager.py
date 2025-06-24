@@ -459,6 +459,83 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
             logger.error(f"❌ Erro ao buscar artigo existente: {e}")
             return None
     
+    def check_product_has_non_rejected_article(self, produto_nome: str) -> Optional[Dict[str, Any]]:
+        """
+        Verifica se existe artigo NÃO REJEITADO para o produto
+        CORREÇÃO: Ignora artigos rejeitados para permitir nova geração
+        
+        Args:
+            produto_nome: Nome do produto
+            
+        Returns:
+            Dados do artigo existente ou None se não houver (ou se todos foram rejeitados)
+        """
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                
+                # Buscar artigos NÃO rejeitados para o produto
+                cursor.execute("""
+                    SELECT id, titulo, status, data_criacao, comentario_revisor
+                    FROM articles 
+                    WHERE produto_nome = ? AND status != 'rejeitado'
+                    ORDER BY data_criacao DESC
+                    LIMIT 1
+                """, (produto_nome,))
+                
+                result = cursor.fetchone()
+                if result:
+                    article_data = dict(result)
+                    logger.info(f"📋 Artigo não rejeitado encontrado para '{produto_nome}': ID {article_data['id']} (Status: {article_data['status']})")
+                    return article_data
+                else:
+                    logger.info(f"✅ Nenhum artigo não rejeitado encontrado para '{produto_nome}' - pode gerar novo artigo")
+                    return None
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao verificar artigos do produto: {e}")
+            return None
+    
+    def get_rejection_history_for_product(self, produto_nome: str) -> List[Dict[str, Any]]:
+        """
+        Busca histórico de rejeições para um produto específico
+        NOVO: Para melhorar próximas gerações baseado nos motivos
+        
+        Args:
+            produto_nome: Nome do produto
+            
+        Returns:
+            Lista de rejeições com motivos
+        """
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                
+                cursor.execute("""
+                    SELECT id, titulo, comentario_revisor, data_revisao, revisor_nome
+                    FROM articles 
+                    WHERE produto_nome = ? AND status = 'rejeitado'
+                    ORDER BY data_revisao DESC
+                """, (produto_nome,))
+                
+                results = cursor.fetchall()
+                rejections = [dict(row) for row in results]
+                
+                if rejections:
+                    logger.info(f"📊 Encontradas {len(rejections)} rejeições para '{produto_nome}'")
+                    for rejection in rejections:
+                        logger.debug(f"  - ID {rejection['id']}: {rejection['comentario_revisor']}")
+                else:
+                    logger.debug(f"✨ Nenhuma rejeição anterior para '{produto_nome}'")
+                
+                return rejections
+                
+        except Exception as e:
+            logger.error(f"❌ Erro ao buscar histórico de rejeições: {e}")
+            return []
+    
     def list_articles(self, status: str = None, limit: int = 50, offset: int = 0) -> List[Dict[str, Any]]:
         """
         Lista artigos para revisão
@@ -742,6 +819,7 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
     def reject_article(self, article_id: int, motivo: str, revisor: str = "Sistema") -> bool:
         """
         Rejeita artigo e registra aprendizado automaticamente
+        CORREÇÃO: Permite nova geração do mesmo produto após recusa
         
         Args:
             article_id: ID do artigo
@@ -751,6 +829,10 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
         Returns:
             True se rejeitado com sucesso
         """
+        # CORREÇÃO: Obter dados do artigo antes de rejeitar para liberar o produto
+        article = self.get_article(article_id)
+        product_name = article.get('produto_nome') if article else None
+        
         updates = {
             'status': 'rejeitado',
             'comentario_revisor': motivo
@@ -760,6 +842,17 @@ Uma das melhores opções para gamers que buscam precisão e customização.''',
         
         if success:
             logger.info(f"❌ Artigo rejeitado: ID {article_id} por {revisor} - {motivo}")
+            
+            # CORREÇÃO: Liberar produto para nova geração após recusa
+            if product_name:
+                try:
+                    # Permitir que o mesmo produto seja usado novamente
+                    from src.generator.product_database import ProductDatabase
+                    product_db = ProductDatabase()
+                    product_db.reset_used_product(product_name)
+                    logger.info(f"🔄 Produto '{product_name}' liberado para nova geração após recusa")
+                except Exception as e:
+                    logger.warning(f"⚠️ Erro ao liberar produto após recusa: {e}")
             
             # 🧠 REGISTRAR APRENDIZADO AUTOMÁTICO
             try:

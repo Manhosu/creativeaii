@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Geração Automática de Conteúdo</title>
+    <link rel="stylesheet" href="/static/css/_design_system.css">
+    <style>
+        .page-wrapper {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(48, 209, 88, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 600px;
+            padding: var(--space-6);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: var(--space-16);
+        }
+        
+        .header h1 { 
+            font-size: var(--text-5xl);
+            font-weight: var(--font-bold);
+            margin-bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .main-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-8);
+            margin-bottom: var(--space-16);
+        }
+        
+        .action-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-3xl);
+            padding: var(--space-12);
+            text-align: center;
+            transition: all var(--transition-spring);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.8s ease-out var(--delay, 0.6s) both;
+        }
+        
+        .action-card:nth-child(1) { --delay: 0.2s; }
+        .action-card:nth-child(2) { --delay: 0.4s; }
+        
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(0, 122, 255, 0.05));
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        
+        .action-card:hover::before {
+            opacity: 1;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-2xl), var(--shadow-glow);
+        }
+        
+        .action-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-6);
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+        
+        .action-title {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-bold);
+            margin-bottom: var(--space-4);
+            color: var(--text-primary);
+        }
+        
+        .action-desc {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-8);
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: var(--space-4) var(--space-8);
+            border-radius: var(--radius-2xl);
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            cursor: pointer;
+            transition: all var(--transition-spring);
+            text-decoration: none; 
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+        
+        .action-btn.warning-btn {
+            background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+            box-shadow: var(--shadow-lg), var(--shadow-glow-warning);
+        }
+        
+        .action-btn.warning-btn:hover {
+            box-shadow: var(--shadow-xl), var(--shadow-glow-warning);
+            background: linear-gradient(135deg, var(--warning-light), var(--warning));
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { 
+                font-size: var(--text-3xl); 
+            }
+            .main-actions {
+                grid-template-columns: 1fr;
+            }
+            .action-card { 
+                padding: var(--space-8); 
+            }
+            .action-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="container">
+                <div class="header">
+                    <h1>Sistema de Geração Automática de Conteúdo</h1>
+                </div>
+                
+                <div class="main-actions">
+                    <div class="action-card">
+                        <span class="action-icon">🔍</span>
+                        <h3 class="action-title">Scraper</h3>
+                        <p class="action-desc">Busca de produtos e gera artigos automaticamente</p>
+                        <a href="/interface/scraper" class="action-btn">
+                            <span>Acessar</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                    
+                    <div class="action-card">
+                        <span class="action-icon">⚙️</span>
+                        <h3 class="action-title">Configurações</h3>
+                        <p class="action-desc">Painel de configuração geral do sistema</p>
+                        <a href="/config" class="action-btn warning-btn">
+                            <span>Acessar</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -743,9 +743,11 @@ class TemplateManager:
     
     def _ensure_h1_structure(self, content: str, product_name: str) -> str:
         """Garante que existe um H1 como título principal"""
-        if '<h1>' not in content:
-            # Se não tem H1, converter primeiro H2 em H1
-            content = re.sub(r'<h2([^>]*)>(.*?)</h2>', r'<h1\1>\2</h1>', content, count=1)
+        # CORREÇÃO: Não converter H2 em H1 automaticamente para evitar duplicatas
+        # Deixar que o sistema de publicação gerencie os títulos principais
+        # if '<h1>' not in content:
+        #     # Se não tem H1, converter primeiro H2 em H1
+        #     content = re.sub(r'<h2([^>]*)>(.*?)</h2>', r'<h1\1>\2</h1>', content, count=1)
         return content
     
     def _add_featured_image(self, content: str, product_name: str, image_url: str = None) -> str:
