@@ -752,10 +752,7 @@ class PublicationManager:
                         if not product_name or len(product_name.strip()) < 3:
                             product_name = "equipamento multifuncional"
                         
-                        # Gerar link de compra do produto usando URLUtils
-                        buy_link = URLUtils.generate_buy_link(product_name, validate=True)
-                        
-                        paragraphs[0] = f"{article} {product_name} é uma excelente opção para quem busca qualidade e eficiência. {paragraphs[0]} Para adquirir este produto, acesse: {buy_link}."
+                        paragraphs[0] = f"{article} {product_name} é uma excelente opção para quem busca qualidade e eficiência. {paragraphs[0]}"
                 logger.info("✅ Keyphrase adicionada ao primeiro parágrafo")
             
             content = '\n\n'.join(paragraphs)

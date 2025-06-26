@@ -1075,6 +1075,1083 @@ async def health_check():
     }
 
 
+"""
+Sistema de Geração Automática de Conteúdo SEO
+Arquivo principal do FastAPI
+"""
+
+# -*- coding: utf-8 -*-
+import os
+import sys
+import asyncio
+from pathlib import Path
+
+# Adicionar paths absolutos para importações
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(current_dir))
+
+# Importar loguru logo no início
+from loguru import logger
+
+# Carregar variáveis de ambiente do arquivo .env se existir
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Definir variáveis padrão se não existirem
+os.environ.setdefault('DEBUG', 'false')
+os.environ.setdefault('LOG_LEVEL', 'INFO')
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+os.environ.setdefault('OPENAI_MAX_TOKENS', '2000')
+os.environ.setdefault('OPENAI_TEMPERATURE', '0.7')
+os.environ.setdefault('CONTENT_MIN_WORDS', '300')
+os.environ.setdefault('CONTENT_MAX_WORDS', '1000')
+
+# Configurar outras variáveis importantes
+# Porta será definida pelo Railway via variável de ambiente PORT
+os.environ.setdefault('OPENAI_MODEL', 'gpt-4o-mini')
+
+# Não definir chave de API aqui - deve vir do .env
+if not os.getenv('OPENAI_API_KEY'):
+    logger.warning("⚠️ OPENAI_API_KEY não encontrada nas variáveis de ambiente")
+if not os.getenv('WP_PASSWORD'):
+    logger.warning("⚠️ WP_PASSWORD não encontrada nas variáveis de ambiente")
+
+# Configurar variáveis de ambiente essenciais - valores devem vir do .env
+os.environ.setdefault('WORDPRESS_URL', 'https://blog.creativecopias.com.br/wp-json/wp/v2/')
+os.environ.setdefault('WORDPRESS_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_SITE_URL', 'https://blog.creativecopias.com.br')
+os.environ.setdefault('WP_USERNAME', 'api_seo_bot')
+# WP_PASSWORD deve vir do .env - não definir aqui
+os.environ.setdefault('WP_AUTO_PUBLISH', 'true')
+os.environ.setdefault('WP_DEFAULT_CATEGORY', 'geral')
+
+# Log das variáveis carregadas
+print(f"🔧 Configurações carregadas:")
+print(f"   PORT: {os.getenv('PORT')}")
+print(f"   WP_SITE_URL: {os.getenv('WP_SITE_URL')}")
+print(f"   WP_USERNAME: {os.getenv('WP_USERNAME')}")
+print(f"   OPENAI_API_KEY: {'✅ Configurada' if os.getenv('OPENAI_API_KEY') else '❌ Não encontrada'}")
+print(f"   OPENAI_MODEL: {os.getenv('OPENAI_MODEL')}")
+
+# Configurações WordPress vêm das variáveis de ambiente
+# Não forçar valores hardcoded aqui
+
+from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from contextlib import asynccontextmanager
+from pydantic import BaseModel
+import logging
+from typing import List
+from datetime import datetime
+from fastapi.openapi.utils import get_openapi
+
+# Importar módulo scraper
+try:
+    from src.scraper.scraper_manager import ScraperManager
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("⚠️ Módulo scraper não disponível")
+
+# Importar módulo generator
+try:
+    from src.generator.generator_manager import GeneratorManager
+    GENERATOR_AVAILABLE = True
+except ImportError:
+    GENERATOR_AVAILABLE = False
+    logger.warning("⚠️ Módulo generator não disponível")
+
+# Importar módulo review
+try:
+    from src.review.review_manager import ReviewManager
+    REVIEW_AVAILABLE = True
+except ImportError:
+    REVIEW_AVAILABLE = False
+    logger.warning("⚠️ Módulo review não disponível")
+
+# Importar módulo publisher
+try:
+    from src.publisher.publication_manager import PublicationManager
+    PUBLISHER_AVAILABLE = True
+except ImportError:
+    PUBLISHER_AVAILABLE = False
+    logger.warning("⚠️ Módulo publisher não disponível")
+
+# Importar módulo config
+try:
+    from src.config.config_manager import ConfigManager
+    CONFIG_AVAILABLE = True
+except ImportError:
+    CONFIG_AVAILABLE = False
+    logger.warning("⚠️ Módulo config não disponível")
+
+# Importar módulo scheduler
+try:
+    from src.scheduler.scheduler_manager import SchedulerManager
+    SCHEDULER_AVAILABLE = True
+    logger.info("✅ Módulo scheduler carregado com sucesso")
+except ImportError as e:
+    SCHEDULER_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo scheduler não disponível: {e}")
+
+# Importar módulos de inteligência
+try:
+    from src.intelligence.priority_manager import PriorityManager
+    from src.intelligence.publication_monitor import PublicationMonitor
+    from src.intelligence.ai_learning import AILearning
+    INTELLIGENCE_AVAILABLE = True
+    logger.info("✅ Módulos de inteligência carregados com sucesso")
+except ImportError as e:
+    INTELLIGENCE_AVAILABLE = False
+    logger.warning(f"⚠️ Módulos de inteligência não disponíveis: {e}")
+
+# Importar módulo de categorias ativas
+try:
+    from src.config.active_categories_manager import ActiveCategoriesManager
+    CATEGORIES_AVAILABLE = True
+    logger.info("✅ Módulo de categorias ativas carregado com sucesso")
+except ImportError as e:
+    CATEGORIES_AVAILABLE = False
+    logger.warning(f"⚠️ Módulo de categorias ativas não disponível: {e}")
+
+# Configurações
+APP_NAME = "Sistema de Geração Automática de Conteúdo SEO"
+APP_VERSION = "1.0.0"
+PORT = int(os.getenv("PORT", 3025))
+
+# Configuração de logs
+logger.add("logs/main.log", rotation="1 week", retention="30 days", level="INFO")
+
+# Models para requests
+class ScrapingRequest(BaseModel):
+    url: str = None
+    full_scraping: bool = False
+
+class GenerationRequest(BaseModel):
+    product_id: str = None
+    product_data: dict = None
+    custom_keywords: List[str] = None
+    custom_instructions: str = None
+    tone: str = "profissional"
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewRequest(BaseModel):
+    titulo: str = None
+    slug: str = None
+    meta_descricao: str = None
+    conteudo: str = None
+    tags: List[str] = None
+    comentario_revisor: str = None
+    wp_category: str = None
+    produto_original: str = None
+
+class ReviewActionRequest(BaseModel):
+    comment: str = ""
+    reviewer: str = "Sistema"
+    wp_category: str = None
+    produto_original: str = None
+    skip_availability_check: bool = False
+
+class PublicationRequest(BaseModel):
+    article_id: int
+    publish_immediately: bool = True
+    scheduled_date: str = None  # ISO format string
+
+class WordPressConfigRequest(BaseModel):
+    site_url: str
+    username: str
+    password: str
+
+class ConfigUpdateRequest(BaseModel):
+    configurations: dict = None
+
+class URLAddRequest(BaseModel):
+    category: str
+    name: str
+    url: str
+    priority: int = 5
+
+class TemplateAddRequest(BaseModel):
+    template_name: str
+    product_type: str
+    title_template: str
+    content_template: str
+    meta_description_template: str = None
+    keywords_template: str = None
+
+class JobExecutionRequest(BaseModel):
+    job_id: str = None
+
+class CategoryUpdateRequest(BaseModel):
+    is_active: bool
+
+class CategoryPriorityRequest(BaseModel):
+    priority: int
+
+class CategoriesBatchUpdateRequest(BaseModel):
+    categories: dict
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gerencia o ciclo de vida da aplicação"""
+    logger.info("🚀 Iniciando Sistema de Geração de Conteúdo SEO")
+    
+    # Inicialização
+    try:
+        # Criar diretórios necessários
+        os.makedirs("logs", exist_ok=True)
+        os.makedirs("static", exist_ok=True)
+        os.makedirs("templates", exist_ok=True)
+        
+        logger.info("📁 Diretórios criados com sucesso")
+        
+        # Inicializar banco de dados
+        # await init_database()
+        
+        # Inicializar scheduler automático
+        if SCHEDULER_AVAILABLE:
+            try:
+                global scheduler_manager
+                # Determinar URL base para o scheduler
+                scheduler_base_url = (
+                    os.getenv('SCHEDULER_BASE_URL') or 
+                    os.getenv('SYSTEM_BASE_URL') or 
+                    f"http://{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '3025')}"
+                )
+                logger.info(f"⏰ Inicializando scheduler com URL base: {scheduler_base_url}")
+                
+                scheduler_manager = SchedulerManager(base_url=scheduler_base_url)
+                scheduler_manager.start()
+                logger.info("⏰ Scheduler iniciado com sucesso")
+            except Exception as e:
+                logger.error(f"❌ Erro ao iniciar scheduler: {e}")
+        
+        logger.info("✅ Aplicação iniciada com sucesso")
+        
+    except Exception as e:
+        logger.error(f"❌ Erro na inicialização: {e}")
+        raise
+    
+    yield
+    
+    # Finalização
+    logger.info("🛑 Finalizando aplicação")
+    
+    # Parar scheduler se estiver rodando
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_manager.stop()
+            logger.info("⏰ Scheduler parado com sucesso")
+        except Exception as e:
+            logger.error(f"❌ Erro ao parar scheduler: {e}")
+
+
+# Criação da aplicação FastAPI
+app = FastAPI(
+    title=APP_NAME,
+    description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+    version=APP_VERSION,
+    docs_url=None,
+    redoc_url="/redoc",
+    lifespan=lifespan
+)
+
+# Configurar arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Customização do Swagger UI com CSS e JavaScript
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """Swagger UI customizado com busca e tema dark"""
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+        <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+        <title>Sistema de Geração de Conteúdo SEO - Documentação API</title>
+        <style>
+            /* CSS Customizado para Dark Mode e Melhorias */
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a1a1aa;
+                --accent-blue: #007aff;
+                --accent-green: #34c759;
+                --accent-orange: #ff9500;
+                --accent-red: #ff3b30;
+                --glass-bg: rgba(255, 255, 255, 0.05);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Dark Mode Base */
+            body {
+                background: var(--bg-primary) !important;
+                color: var(--text-primary) !important;
+                font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .swagger-ui {
+                background: var(--bg-primary) !important;
+            }
+            
+            .swagger-ui .topbar {
+                background: var(--bg-secondary) !important;
+                border-bottom: 1px solid var(--glass-border) !important;
+                padding: 10px 0;
+            }
+            
+            .swagger-ui .info {
+                margin: 30px 0 !important;
+                background: var(--bg-secondary) !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+            }
+            
+            .swagger-ui .info .title {
+                color: var(--accent-blue) !important;
+                font-size: 2rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Barra de busca customizada */
+            .custom-search-bar {
+                position: sticky;
+                top: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                margin: 20px;
+                z-index: 1000;
+            }
+            
+            .search-container {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-input {
+                flex: 1;
+                min-width: 300px;
+                padding: 12px 16px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-size: 14px;
+            }
+            
+            .search-input::placeholder {
+                color: var(--text-secondary);
+            }
+            
+            .search-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                background: var(--bg-tertiary);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--accent-blue);
+                color: white;
+                border-color: var(--accent-blue);
+            }
+            
+            .search-stats {
+                color: var(--text-secondary);
+                font-size: 12px;
+                margin-left: 10px;
+            }
+            
+            /* Estilização das operações */
+            .swagger-ui .opblock {
+                margin: 10px 0;
+                border-radius: 8px !important;
+                border: 1px solid var(--glass-border) !important;
+                background: var(--bg-secondary) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-get {
+                border-left: 4px solid var(--accent-blue) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-post {
+                border-left: 4px solid var(--accent-green) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-delete {
+                border-left: 4px solid var(--accent-red) !important;
+            }
+            
+            .swagger-ui .opblock.opblock-put {
+                border-left: 4px solid var(--accent-orange) !important;
+            }
+            
+            /* Dark theme para swagger */
+            .swagger-ui .scheme-container,
+            .swagger-ui .wrapper,
+            .swagger-ui .opblock-tag,
+            .swagger-ui .opblock .opblock-summary {
+                background: var(--bg-secondary) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-description {
+                color: var(--text-primary) !important;
+            }
+            
+            .swagger-ui .opblock .opblock-summary-path {
+                color: var(--accent-blue) !important;
+            }
+            
+            /* Ocultar operações filtradas */
+            .swagger-ui .opblock.hidden-by-search {
+                display: none !important;
+            }
+            
+            .swagger-ui .opblock-tag.hidden-by-search {
+                display: none !important;
+            }
+            
+            /* Botão de voltar ao dashboard */
+            .back-to-dashboard {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white !important;
+                padding: 12px 16px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4);
+                transition: all 0.3s ease;
+                z-index: 1001;
+            }
+            
+            .back-to-dashboard:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 122, 255, 0.6);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .search-container {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                
+                .search-input {
+                    min-width: auto;
+                }
+                
+                .filter-buttons {
+                    justify-content: center;
+                }
+                
+                .custom-search-bar {
+                    margin: 10px;
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="custom-search-bar">
+            <div class="search-container">
+                <input type="text" id="apiSearch" class="search-input" placeholder="🔍 Buscar endpoints, operações ou descrições...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-method="all">Todos</button>
+                    <button class="filter-btn" data-method="get">GET</button>
+                    <button class="filter-btn" data-method="post">POST</button>
+                    <button class="filter-btn" data-method="delete">DELETE</button>
+                    <button class="filter-btn" data-method="put">PUT</button>
+                </div>
+                <span class="search-stats" id="searchStats">Carregando endpoints...</span>
+            </div>
+        </div>
+        <a href="/" class="back-to-dashboard">← Dashboard</a>
+        <div id="swagger-ui"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+        <script>
+            const ui = SwaggerUIBundle({
+                url: '/openapi.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIBundle.presets.standalone
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                syntaxHighlight: {
+                    activated: true,
+                    theme: "agate"
+                },
+                tryItOutEnabled: true,
+                displayRequestDuration: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                docExpansion: "list",
+                operationsSorter: "alpha",
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1
+            });
+            
+            // JavaScript para funcionalidade de busca avançada
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentFilter = 'all';
+                let searchTerm = '';
+                
+                const searchInput = document.getElementById('apiSearch');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const searchStats = document.getElementById('searchStats');
+                
+                // Aguardar o Swagger UI carregar completamente
+                const waitForSwaggerUI = () => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        initializeSearch();
+                    } else {
+                        setTimeout(waitForSwaggerUI, 500);
+                    }
+                };
+                
+                const initializeSearch = () => {
+                    updateStats();
+                    setupEventListeners();
+                };
+                
+                const setupEventListeners = () => {
+                    // Busca em tempo real
+                    searchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value.toLowerCase();
+                        performSearch();
+                    });
+                    
+                    // Filtros por método
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            e.target.classList.add('active');
+                            currentFilter = e.target.dataset.method;
+                            performSearch();
+                        });
+                    });
+                    
+                    // Atalhos de teclado
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            searchInput.focus();
+                        }
+                        
+                        if (e.key === 'Escape' && document.activeElement === searchInput) {
+                            searchInput.value = '';
+                            searchTerm = '';
+                            performSearch();
+                        }
+                    });
+                };
+                
+                const performSearch = () => {
+                    const operations = document.querySelectorAll('.opblock');
+                    const sections = document.querySelectorAll('.opblock-tag');
+                    let visibleCount = 0;
+                    
+                    operations.forEach(op => {
+                        const method = getOperationMethod(op);
+                        const summary = op.querySelector('.opblock-summary-description')?.textContent?.toLowerCase() || '';
+                        const path = op.querySelector('.opblock-summary-path')?.textContent?.toLowerCase() || '';
+                        const tag = op.closest('.opblock-tag')?.querySelector('.opblock-tag-section h3')?.textContent?.toLowerCase() || '';
+                        
+                        const matchesMethod = currentFilter === 'all' || method === currentFilter;
+                        const matchesSearch = searchTerm === '' || 
+                                           summary.includes(searchTerm) || 
+                                           path.includes(searchTerm) || 
+                                           tag.includes(searchTerm);
+                        
+                        if (matchesMethod && matchesSearch) {
+                            op.classList.remove('hidden-by-search');
+                            visibleCount++;
+                        } else {
+                            op.classList.add('hidden-by-search');
+                        }
+                    });
+                    
+                    // Ocultar seções vazias
+                    sections.forEach(section => {
+                        const visibleOps = section.querySelectorAll('.opblock:not(.hidden-by-search)');
+                        if (visibleOps.length === 0) {
+                            section.classList.add('hidden-by-search');
+                        } else {
+                            section.classList.remove('hidden-by-search');
+                        }
+                    });
+                    
+                    updateStats(visibleCount);
+                };
+                
+                const getOperationMethod = (operation) => {
+                    if (operation.classList.contains('opblock-get')) return 'get';
+                    if (operation.classList.contains('opblock-post')) return 'post';
+                    if (operation.classList.contains('opblock-delete')) return 'delete';
+                    if (operation.classList.contains('opblock-put')) return 'put';
+                    if (operation.classList.contains('opblock-patch')) return 'patch';
+                    return 'unknown';
+                };
+                
+                const updateStats = (visible = null) => {
+                    const total = document.querySelectorAll('.opblock').length;
+                    const count = visible !== null ? visible : total;
+                };
+                
+                // Inicializar quando o Swagger UI estiver pronto
+                setTimeout(waitForSwaggerUI, 3000);
+                
+                // Recriar listeners se o Swagger UI recarregar
+                const observer = new MutationObserver(() => {
+                    if (document.querySelectorAll('.opblock').length > 0) {
+                        setTimeout(initializeSearch, 1000);
+                    }
+                });
+                
+                observer.observe(document.getElementById('swagger-ui'), {
+                    childList: true,
+                    subtree: true
+                });
+            });
+        </script>
+    </body>
+    </html>
+    """)
+
+# Configuração de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configuração de arquivos estáticos e templates
+templates = None
+try:
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+    if os.path.exists("templates"):
+        templates = Jinja2Templates(directory="templates")
+    logger.info("✅ Arquivos estáticos e templates configurados")
+except Exception as e:
+    logger.warning(f"⚠️ Não foi possível configurar arquivos estáticos: {e}")
+    templates = None
+
+
+# =====================================================
+# CUSTOMIZAÇÃO DO OPENAPI
+# =====================================================
+
+def custom_openapi():
+    """Geração customizada do OpenAPI para compatibilidade com Swagger UI"""
+    if app.openapi_schema:
+        return app.openapi_schema
+    
+    openapi_schema = get_openapi(
+        title=APP_NAME,
+        version=APP_VERSION,
+        description="Sistema automatizado para geração de conteúdo SEO baseado em produtos de e-commerce",
+        routes=app.routes,
+    )
+    
+    # Forçar versão 3.0.0 para compatibilidade com Swagger UI
+    openapi_schema["openapi"] = "3.0.0"
+    
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+
+# =====================================================
+# ROTAS PRINCIPAIS
+# =====================================================
+
+@app.get("/")
+async def dashboard():
+    """Dashboard principal do sistema - DESIGN ORIGINAL com apenas 2 botões"""
+    try:
+        
+        html_content = """
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Sistema de Geração Automática de Conteúdo</title>
+                <link rel="stylesheet" href="/static/css/_design_system.css">
+                <style>
+                    .page-wrapper {
+                        background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .page-wrapper::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: radial-gradient(circle at 30% 40%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
+                                    radial-gradient(circle at 70% 60%, rgba(48, 209, 88, 0.1) 0%, transparent 50%);
+                        pointer-events: none;
+                        z-index: 0;
+                    }
+                    
+                    .content {
+                        position: relative;
+                        z-index: 1;
+                        width: 100%;
+                        max-width: 900px;
+                        padding: var(--space-6);
+                    }
+                    
+                    .header {
+                        text-align: center;
+                        margin-bottom: var(--space-16);
+                    }
+                    
+                    .header h1 { 
+                        font-size: var(--text-5xl);
+                        font-weight: var(--font-bold);
+                        margin-bottom: 0;
+                        background: linear-gradient(135deg, var(--primary), var(--success));
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        animation: fadeInUp 0.8s ease-out;
+                    }
+                    
+                    .main-actions {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                        gap: var(--space-8);
+                        margin-bottom: var(--space-16);
+                        max-width: 600px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    
+                    .action-card {
+                        background: var(--bg-card);
+                        border: 1px solid var(--border-primary);
+                        border-radius: var(--radius-3xl);
+                        padding: var(--space-12);
+                        text-align: center;
+                        transition: all var(--transition-spring);
+                        position: relative;
+                        overflow: hidden;
+                        backdrop-filter: blur(20px);
+                        animation: fadeInUp 0.8s ease-out var(--delay, 0.6s) both;
+                    }
+                    
+                    .action-card:nth-child(1) { --delay: 0.2s; }
+                    .action-card:nth-child(2) { --delay: 0.4s; }
+                    
+                    .action-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(135deg, transparent, rgba(0, 122, 255, 0.05));
+                        opacity: 0;
+                        transition: var(--transition-normal);
+                    }
+                    
+                    .action-card:hover::before {
+                        opacity: 1;
+                    }
+                    
+                    .action-card:hover {
+                        transform: translateY(-8px) scale(1.02);
+                        border-color: var(--border-accent);
+                        box-shadow: var(--shadow-2xl), var(--shadow-glow);
+                    }
+                    
+                    .action-icon {
+                        font-size: 4rem;
+                        margin-bottom: var(--space-6);
+                        display: block;
+                        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+                    }
+                    
+                    .action-title {
+                        font-size: var(--text-2xl);
+                        font-weight: var(--font-bold);
+                        margin-bottom: var(--space-4);
+                        color: var(--text-primary);
+                    }
+                    
+                    .action-desc {
+                        color: var(--text-secondary);
+                        margin-bottom: var(--space-8);
+                        font-size: var(--text-base);
+                        line-height: var(--leading-relaxed);
+                    }
+                    
+                    .action-btn {
+                        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                        color: white;
+                        border: none;
+                        padding: var(--space-4) var(--space-8);
+                        border-radius: var(--radius-2xl);
+                        font-size: var(--text-lg);
+                        font-weight: var(--font-semibold);
+                        cursor: pointer;
+                        transition: all var(--transition-spring);
+                        text-decoration: none; 
+                        display: inline-flex;
+                        align-items: center;
+                        gap: var(--space-2);
+                        box-shadow: var(--shadow-lg), var(--shadow-glow);
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    
+                    .action-btn:hover {
+                        transform: translateY(-3px);
+                        box-shadow: var(--shadow-xl), var(--shadow-glow);
+                        background: linear-gradient(135deg, var(--primary-light), var(--primary));
+                    }
+                    
+                    .action-btn.warning-btn {
+                        background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+                        box-shadow: var(--shadow-lg), var(--shadow-glow-warning);
+                    }
+                    
+                    .action-btn.warning-btn:hover {
+                        box-shadow: var(--shadow-xl), var(--shadow-glow-warning);
+                        background: linear-gradient(135deg, var(--warning-light), var(--warning));
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .header h1 { 
+                            font-size: var(--text-3xl); 
+                        }
+                        .main-actions {
+                            grid-template-columns: 1fr;
+                        }
+                        .action-card { 
+                            padding: var(--space-8); 
+                        }
+                        .action-icon {
+                            font-size: 3rem;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="page-wrapper">
+                    <div class="content">
+                        <div class="container">
+                            <div class="header">
+                                <h1>Sistema de Geração Automática de Conteúdo</h1>
+                            </div>
+                            
+                            <div class="main-actions">
+                                <div class="action-card">
+                                    <span class="action-icon">🔍</span>
+                                    <h3 class="action-title">Scraper</h3>
+                                    <p class="action-desc">Busca de produtos e gera artigos automaticamente</p>
+                                    <a href="/interface/scraper" class="action-btn">
+                                        <span>Acessar</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="action-card">
+                                    <span class="action-icon">⚙️</span>
+                                    <h3 class="action-title">Configurações</h3>
+                                    <p class="action-desc">Painel de configuração geral do sistema</p>
+                                    <a href="/config" class="action-btn warning-btn">
+                                        <span>Acessar</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+        """
+        
+        return HTMLResponse(content=html_content)
+        
+    except Exception as e:
+        logger.error(f"Erro no dashboard: {e}")
+        return JSONResponse({"error": "Erro interno do servidor"}, status_code=500)
+
+
+@app.get("/health")
+async def health_check():
+    """Verificação de saúde do sistema"""
+    modules_status = {
+        "scraper": "ready" if SCRAPER_AVAILABLE else "not_available",
+        "generator": "ready" if GENERATOR_AVAILABLE else "not_available", 
+        "review": "ready" if REVIEW_AVAILABLE else "not_available",
+        "publisher": "ready" if PUBLISHER_AVAILABLE else "not_available",
+        "config": "ready" if CONFIG_AVAILABLE else "not_available",
+        "scheduler": "ready" if SCHEDULER_AVAILABLE else "not_available"
+    }
+    
+    # Verificar status do scraper se disponível
+    if SCRAPER_AVAILABLE:
+        try:
+            manager = ScraperManager()
+            scraper_data = manager.get_scraping_status()
+            modules_status["scraper"] = "operational"
+            modules_status["scraper_details"] = {
+                "urls_configuradas": scraper_data.get("urls_configuradas", 0),
+                "produtos_processados": scraper_data.get("produtos_processados", 0)
+            }
+        except Exception as e:
+            modules_status["scraper"] = "error"
+            modules_status["scraper_error"] = str(e)
+    
+    # Verificar status do generator se disponível
+    if GENERATOR_AVAILABLE:
+        try:
+            gen_manager = GeneratorManager()
+            gen_stats = gen_manager.get_stats()
+            modules_status["generator"] = "operational"
+            modules_status["generator_details"] = {
+                "simulation_mode": gen_stats.get("simulation_mode", True),
+                "articles_generated": gen_stats.get("total_articles_in_memory", 0),
+                "total_generated": gen_stats["manager_stats"].get("total_generated", 0)
+            }
+        except Exception as e:
+            modules_status["generator"] = "error"
+            modules_status["generator_error"] = str(e)
+    
+    # Verificar status do review se disponível
+    if REVIEW_AVAILABLE:
+        try:
+            review_manager = ReviewManager()
+            review_stats = review_manager.get_statistics()
+            modules_status["review"] = "operational"
+            modules_status["review_details"] = {
+                "total_articles": review_stats.get("total_artigos", 0),
+                "pending_review": review_stats.get("pendentes", 0),
+                "approved": review_stats.get("aprovados", 0),
+                "rejected": review_stats.get("rejeitados", 0)
+            }
+        except Exception as e:
+            modules_status["review"] = "error"
+            modules_status["review_error"] = str(e)
+    
+    # Verificar status do publisher se disponível
+    if PUBLISHER_AVAILABLE:
+        try:
+            pub_manager = PublicationManager()
+            pub_stats = pub_manager.get_publication_statistics()
+            modules_status["publisher"] = "operational"
+            modules_status["publisher_details"] = {
+                "total_publications": pub_stats.get("total_publications", 0),
+                "published": pub_stats.get("published", 0),
+                "failed": pub_stats.get("failed", 0),
+                "pending": pub_stats.get("pending", 0),
+                "wordpress_configured": pub_stats.get("wordpress_configured", False)
+            }
+        except Exception as e:
+            modules_status["publisher"] = "error"
+            modules_status["publisher_error"] = str(e)
+    
+    # Adicionar status do config
+    if CONFIG_AVAILABLE:
+        try:
+            config_manager = ConfigManager()
+            modules_status["config"] = {
+                "status": "operational",
+                "statistics": config_manager.get_statistics()
+            }
+        except Exception as e:
+            modules_status["config"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["config"] = {'status': 'not_available'}
+    
+    # Verificar status do scheduler se disponível
+    if SCHEDULER_AVAILABLE and 'scheduler_manager' in globals():
+        try:
+            scheduler_status = scheduler_manager.get_status()
+            modules_status["scheduler"] = {
+                "status": "operational",
+                "is_running": scheduler_status.get("is_running", False),
+                "jobs_count": scheduler_status.get("jobs_count", 0),
+                "recent_executions": len(scheduler_status.get("recent_executions", [])),
+                "details": scheduler_status
+            }
+        except Exception as e:
+            modules_status["scheduler"] = {'status': 'error', 'error': str(e)}
+    else:
+        modules_status["scheduler"] = {'status': 'not_available' if not SCHEDULER_AVAILABLE else 'not_initialized'}
+    
+    return {
+        "status": "healthy",
+        "app_name": APP_NAME,
+        "version": APP_VERSION,
+        "port": PORT,
+        "modules": modules_status
+    }
+
+
 @app.get("/api-docs", response_class=HTMLResponse)
 async def api_documentation():
     """Documentação interativa da API com campo de busca"""
@@ -1604,6 +2681,14 @@ async def api_documentation():
                                 <span class="endpoint-path">/review/save-from-generator</span>
                             </div>
                             <div class="endpoint-desc">Endpoint interno para salvar artigos do Generator</div>
+                        </div>
+                        
+                        <div class="endpoint post" data-path="/review/validate-links" data-description="Valida e corrige links quebrados nos artigos">
+                            <div class="endpoint-header">
+                                <span class="method post">POST</span>
+                                <span class="endpoint-path">/review/validate-links</span>
+                            </div>
+                            <div class="endpoint-desc">Valida e corrige links quebrados nos artigos</div>
                         </div>
                     </div>
                 </div>
@@ -2232,31 +3317,60 @@ async def get_scraped_products(limit: int = 100, offset: int = 0, categoria: str
             with open(json_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 
-            filename = os.path.basename(json_file)
-            categoria_nome = categorias_mapeamento.get(categoria_key, categoria_key.title())
-            
-            if isinstance(data, list):
-                for product in data:
-                    product['categoria_key'] = categoria_key
-                    product['categoria_nome'] = categoria_nome
-                    product['source_file'] = filename
-                    all_products.append(product)
-                    # Contar produtos únicos
-                    if product.get('nome'):
-                        unique_products.add(product['nome'])
-            elif isinstance(data, dict) and 'produtos' in data:
-                for product in data['produtos']:
-                    product['categoria_key'] = categoria_key
-                    product['categoria_nome'] = categoria_nome
-                    product['source_file'] = filename
-                    all_products.append(product)
-                    # Contar produtos únicos
-                    if product.get('nome'):
-                        unique_products.add(product['nome'])
+                filename = os.path.basename(json_file)
+                categoria_nome = categorias_mapeamento.get(categoria_key, categoria_key.title())
+                
+                if isinstance(data, list):
+                    for product in data:
+                        product['categoria_key'] = categoria_key
+                        product['categoria_nome'] = categoria_nome
+                        product['source_file'] = filename
+                        all_products.append(product)
+                        # Contar produtos únicos
+                        if product.get('nome'):
+                            unique_products.add(product['nome'])
+                elif isinstance(data, dict) and 'produtos' in data:
+                    for product in data['produtos']:
+                        product['categoria_key'] = categoria_key
+                        product['categoria_nome'] = categoria_nome
+                        product['source_file'] = filename
+                        all_products.append(product)
+                        # Contar produtos únicos
+                        if product.get('nome'):
+                            unique_products.add(product['nome'])
             
             logger.info(f"✅ {categoria_key}: carregado de {filename}")
             
         logger.info(f"📊 CORREÇÃO CRÍTICA: {len(unique_products)} produtos únicos de {len(categoria_files)} categorias (era {len(all_products)} incluindo duplicatas)")
+        
+        # 🔍 APLICAR FILTRO DE BUSCA (SEARCH) - CORREÇÃO IMPLEMENTADA
+        if search and search.strip():
+            search_term = search.strip().lower()
+            filtered_by_search = []
+            filtered_unique_search = set()
+            
+            for product in all_products:
+                # Buscar em múltiplos campos - CORREÇÃO: verificar None
+                nome = (product.get('nome') or '').lower()
+                marca = (product.get('marca') or '').lower()
+                codigo = (product.get('codigo') or '').lower()
+                descricao = (product.get('descricao') or '').lower()
+                categoria_nome = (product.get('categoria_nome') or '').lower()
+                
+                # Verificar se o termo de busca está em qualquer campo
+                if (search_term in nome or 
+                    search_term in marca or 
+                    search_term in codigo or 
+                    search_term in descricao or 
+                    search_term in categoria_nome):
+                    
+                    filtered_by_search.append(product)
+                    if product.get('nome'):
+                        filtered_unique_search.add(product['nome'])
+            
+            all_products = filtered_by_search
+            unique_products = filtered_unique_search
+            logger.info(f"🔍 Busca '{search}': {len(filtered_unique_search)} produtos únicos encontrados")
         
         # Aplicar filtro de categoria com COMPARAÇÃO EXATA
         if categoria and categoria.lower() != 'todas':
@@ -2366,10 +3480,10 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
     
     # Garantir que temos todos os campos necessários
     default_values = {
-        'categoria_nome': 'produtos',
-        'preco': 'Consulte',
-        'codigo': 'N/A',
-        'marca': 'N/A',
+                    'categoria_nome': 'produtos',
+                    'preco': 'Consulte',
+                    'codigo': 'N/A',
+                    'marca': 'N/A',
         'descricao': f'Produto {produto_nome} de qualidade disponível em nossa loja.',
         'url': '#',
         'imagem': ''
@@ -2395,7 +3509,7 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
         from src.review.review_manager import ReviewManager
         review_manager = ReviewManager()
         
-        # 🎨 USAR SISTEMA AVANÇADO DE TEMPLATES (com fallback)
+                # 🎨 USAR SISTEMA AVANÇADO DE TEMPLATES (com fallback)
         try:
             from src.generator.article_templates import AdvancedArticleTemplates
             template_generator = AdvancedArticleTemplates()
@@ -2420,7 +3534,7 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
 <li>Preço: {product_data.get('preco', 'Consulte')}</li>
 <li>Código: {product_data.get('codigo', 'N/A')}</li>
 <li>Marca: {product_data.get('marca', 'N/A')}</li>
-</ul>
+    </ul>
 
 <p><a href="{product_data.get('url', '#')}" target="_blank">Ver produto no site</a></p>""",
                 'tags': [categoria, 'produtos']
@@ -2518,12 +3632,12 @@ async def generate_advanced_article_from_product(product_data: dict, allow_dupli
         raise HTTPException(
             status_code=500,
             detail={
-                "success": False,
-                "error": str(e),
-                "message": "Erro ao criar artigo avançado",
+            "success": False,
+            "error": str(e),
+            "message": "Erro ao criar artigo avançado",
                 "suggestion": "💡 Tente adicionar ?allow_duplicates=true na URL se quiser forçar a criação",
                 "error_type": "generation_error"
-            }
+        }
         )
 
 @app.post("/scraper/generate-article")
@@ -2575,7 +3689,6 @@ async def generate_article_from_product(product_data: dict, allow_duplicates: bo
         conteudo_base = f"""<h2>Informações do Produto</h2>
 <ul>
 <li><strong>Categoria:</strong> {categoria}</li>
-<li><strong>Preço:</strong> {product_data.get('preco', 'Consulte')}</li>
 <li><strong>Código:</strong> {product_data.get('codigo', 'N/A')}</li>
 <li><strong>Marca:</strong> {product_data.get('marca', 'N/A')}</li>
 </ul>
@@ -2634,8 +3747,8 @@ async def generate_article_from_product(product_data: dict, allow_duplicates: bo
                 raise HTTPException(
                     status_code=409,  # Conflict
                     detail={
-                        "success": False,
-                        "error": "duplicate_detected",
+                    "success": False,
+                    "error": "duplicate_detected",
                         "message": f"Artigo para '{produto_nome}' já existe (Status: {existing_article['status']})",
                         "suggestion": "💡 Use o botão 'Forçar Novo' para criar mesmo assim",
                         "existing_article_id": existing_article['id'],
@@ -2694,12 +3807,12 @@ async def generate_article_from_product(product_data: dict, allow_duplicates: bo
         raise HTTPException(
             status_code=500,
             detail={
-                "success": False,
-                "error": str(e),
-                "message": "Erro ao criar artigo com sistema inteligente",
+            "success": False,
+            "error": str(e),
+            "message": "Erro ao criar artigo com sistema inteligente",
                 "suggestion": "💡 Tente adicionar ?allow_duplicates=true na URL se quiser forçar a criação",
                 "error_type": "generation_error"
-            }
+        }
         )
 
 @app.post("/scraper/generate-article-smart")
@@ -2735,11 +3848,10 @@ async def generate_article_smart(product_data: dict, update_existing: bool = Tru
         titulo = f"Review: {product_data.get('nome', 'Produto')}"
         slug = product_data.get('nome', 'produto').lower().replace(' ', '-').replace(':', '').replace(',', '')
         
-        # Gerar conteúdo limpo (sem avisos visíveis para o usuário)
+        # Gerar conteúdo limpo (sem avisos visíveis para o usuário) - SEM PREÇOS
         conteudo = f"""<h2>Informações do Produto</h2>
 <ul>
 <li><strong>Categoria:</strong> {categoria}</li>
-<li><strong>Preço:</strong> {product_data.get('preco', 'Consulte')}</li>
 <li><strong>Código:</strong> {product_data.get('codigo', 'N/A')}</li>
 <li><strong>Marca:</strong> {product_data.get('marca', 'N/A')}</li>
 </ul>
@@ -2763,7 +3875,7 @@ async def generate_article_smart(product_data: dict, update_existing: bool = Tru
         article_data = {
             'titulo': titulo,
             'slug': slug,
-            'meta_descricao': f"Review completo do {product_data.get('nome', 'produto')} - Características, preço e onde comprar",
+            'meta_descricao': f"Review completo do {product_data.get('nome', 'produto')} - Características e onde encontrar",
             'conteudo': conteudo,
             'tags': [categoria, product_data.get('marca', '').lower() if product_data.get('marca') else 'produtos'],
             'wp_category': categoria,
@@ -6881,8 +7993,260 @@ async def test_create_article_simple(product_data: dict):
         "categoria": product_data.get('categoria_nome', '')
     }
 
-# Duplicate endpoint removed - using the one at line 2330
+@app.post("/review/validate-links")
+async def validate_article_links(article_id: int = None, validate_all: bool = False):
+    """Valida e corrige links quebrados nos artigos"""
+    if not REVIEW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Sistema de revisão não disponível")
+    
+    try:
+        from src.review.review_manager import ReviewManager
+        from src.intelligence.url_validator import URLValidator
+        
+        review_manager = ReviewManager()
+        url_validator = URLValidator()
+        
+        if validate_all:
+            # Validar todos os artigos
+            articles = review_manager.get_all_articles()
+            results = []
+            
+            for article in articles:
+                try:
+                    validation_result = url_validator.validate_article_links(article.get('conteudo', ''))
+                    
+                    result = {
+                        'article_id': article.get('id'),
+                        'titulo': article.get('titulo', 'Sem título')[:50],
+                        'total_links': validation_result['total_links'],
+                        'valid_links': validation_result['valid_links'],
+                        'invalid_links': validation_result['invalid_links'],
+                        'fixed_links': validation_result['fixed_links'],
+                        'has_issues': validation_result['invalid_links'] > 0
+                    }
+                    
+                    # Se houve correções automáticas, atualizar o artigo
+                    if validation_result['fixed_links'] > 0:
+                        updated_data = {
+                            'conteudo': validation_result['corrected_content']
+                        }
+                        review_manager.update_article(article.get('id'), updated_data)
+                        result['auto_corrected'] = True
+                    
+                    results.append(result)
+                    
+                except Exception as e:
+                    logger.error(f"Erro ao validar artigo {article.get('id')}: {e}")
+                    results.append({
+                        'article_id': article.get('id'),
+                        'titulo': article.get('titulo', 'Sem título')[:50],
+                        'error': str(e)
+                    })
+            
+            # Estatísticas gerais
+            total_articles = len(results)
+            articles_with_issues = len([r for r in results if r.get('has_issues')])
+            total_links_validated = sum(r.get('total_links', 0) for r in results)
+            total_links_fixed = sum(r.get('fixed_links', 0) for r in results)
+            
+            return {
+                "success": True,
+                "message": f"Validação completa realizada em {total_articles} artigos",
+                "summary": {
+                    "total_articles": total_articles,
+                    "articles_with_issues": articles_with_issues,
+                    "total_links_validated": total_links_validated,
+                    "total_links_fixed": total_links_fixed
+                },
+                "results": results
+            }
+            
+        elif article_id:
+            # Validar artigo específico
+            article = review_manager.get_article(article_id)
+            if not article:
+                raise HTTPException(status_code=404, detail="Artigo não encontrado")
+            
+            validation_result = url_validator.validate_article_links(article.get('conteudo', ''))
+            
+            # Se houve correções automáticas, atualizar o artigo
+            if validation_result['fixed_links'] > 0:
+                updated_data = {
+                    'conteudo': validation_result['corrected_content']
+                }
+                review_manager.update_article(article_id, updated_data)
+                
+            return {
+                "success": True,
+                "message": f"Validação concluída para o artigo '{article.get('titulo', 'Sem título')}'",
+                "article_id": article_id,
+                "validation_result": validation_result
+            }
+        else:
+            raise HTTPException(status_code=400, detail="Especifique article_id ou use validate_all=true")
+            
+    except Exception as e:
+        logger.error(f"❌ Erro na validação de links: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/review/broken-links-report")
+async def get_broken_links_report():
+    """Gera relatório de links quebrados nos artigos"""
+    if not REVIEW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Sistema de revisão não disponível")
+    
+    try:
+        from src.review.review_manager import ReviewManager
+        from src.intelligence.url_validator import URLValidator
+        import re
+        
+        review_manager = ReviewManager()
+        url_validator = URLValidator()
+        
+        articles = review_manager.get_all_articles()
+        broken_links_report = []
+        
+        for article in articles:
+            try:
+                content = article.get('conteudo', '')
+                if not content:
+                    continue
+                
+                # Encontrar todos os links
+                link_pattern = r'href=["\']([^"\']+)["\']'
+                links = re.findall(link_pattern, content, re.IGNORECASE)
+                
+                if not links:
+                    continue
+                
+                article_issues = []
+                
+                for link in links:
+                    validation = url_validator.validate_url(link)
+                    
+                    if not validation['valid']:
+                        issue = {
+                            'url': link,
+                            'error': validation['error'],
+                            'suggested_fix': validation.get('corrected_url'),
+                            'auto_fixable': validation.get('auto_fixable', False)
+                        }
+                        article_issues.append(issue)
+                
+                if article_issues:
+                    broken_links_report.append({
+                        'article_id': article.get('id'),
+                        'titulo': article.get('titulo', 'Sem título'),
+                        'total_links': len(links),
+                        'broken_links': len(article_issues),
+                        'issues': article_issues,
+                        'status': article.get('status', 'unknown')
+                    })
+                    
+            except Exception as e:
+                logger.error(f"Erro ao analisar artigo {article.get('id')}: {e}")
+                continue
+        
+        # Estatísticas do relatório
+        total_articles_with_issues = len(broken_links_report)
+        total_broken_links = sum(item['broken_links'] for item in broken_links_report)
+        auto_fixable_links = sum(
+            len([issue for issue in item['issues'] if issue.get('auto_fixable')])
+            for item in broken_links_report
+        )
+        
+        return {
+            "success": True,
+            "message": f"Relatório gerado: {total_articles_with_issues} artigos com links quebrados",
+            "summary": {
+                "total_articles_analyzed": len(articles),
+                "articles_with_broken_links": total_articles_with_issues,
+                "total_broken_links": total_broken_links,
+                "auto_fixable_links": auto_fixable_links
+            },
+            "broken_links_report": broken_links_report
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao gerar relatório de links quebrados: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/review/fix-broken-links")
+async def fix_broken_links_in_articles():
+    """🚨 CORREÇÃO URGENTE: Corrige links quebrados em todos os artigos"""
+    try:
+        from src.review.review_manager import ReviewManager
+        from src.utils.url_utils import URLUtils
+        import re
+        
+        review_manager = ReviewManager()
+        
+        # Buscar todos os artigos
+        articles = review_manager.get_all_articles()
+        
+        fixed_count = 0
+        total_checked = 0
+        
+        for article in articles:
+            total_checked += 1
+            article_id = article['id']
+            content = article['conteudo']
+            
+            # Encontrar todos os links no conteúdo
+            link_pattern = r'<a[^>]+href="([^"]*)"[^>]*>(.*?)</a>'
+            links = re.findall(link_pattern, content)
+            
+            content_modified = False
+            
+            for url, link_text in links:
+                # Verificar se é um link de produto/compra quebrado
+                if ('creativecopias.com.br' in url and 
+                    any(word in link_text.lower() for word in ['comprar', 'consultar', 'ver produto'])):
+                    
+                    # Validar URL
+                    is_valid, message = URLUtils.validate_url(url)
+                    
+                    if not is_valid:
+                        logger.warning(f"🔧 Link quebrado encontrado no artigo {article_id}: {url}")
+                        
+                        # Extrair nome do produto do texto do link
+                        product_name = link_text.replace('Comprar ', '').replace('Consultar ', '').replace('Ver produto', '').strip()
+                        
+                        # Gerar novo link válido
+                        new_link = URLUtils.generate_buy_link(product_name, None, validate=True)
+                        
+                        # Substituir link quebrado
+                        old_link = f'<a href="{url}"[^>]*>{re.escape(link_text)}</a>'
+                        content = re.sub(old_link, new_link, content)
+                        content_modified = True
+                        
+                        logger.info(f"✅ Link corrigido no artigo {article_id}: {product_name}")
+                        
+                        fixed_count += 1
+            
+            # Atualizar artigo se houve modificações
+            if content_modified:
+                try:
+                    review_manager.update_article_content(article_id, content)
+                    logger.info(f"✅ Artigo {article_id} atualizado com links corrigidos")
+                except Exception as e:
+                    logger.error(f"❌ Erro ao atualizar artigo {article_id}: {e}")
+        
+        return {
+            "success": True,
+            "message": f"Correção de links concluída com sucesso",
+            "total_articles_checked": total_checked,
+            "links_fixed": fixed_count,
+            "status": "completed"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Erro ao corrigir links quebrados: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "message": "Erro ao corrigir links quebrados"
+        }
 
 # =====================================================
 # PONTO DE ENTRADA

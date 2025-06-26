@@ -120,150 +120,128 @@ class ContentGenerator:
                         wp_category: str = None,
                         produto_original: str = None) -> Dict[str, Any]:
         """
-        Gera artigo completo para um produto
+        Gera um artigo completo a partir dos dados do produto
         
         Args:
-            product: Dados do produto extraído pelo scraper
-            custom_keywords: Palavras-chave extras
-            custom_instructions: Instruções personalizadas
-            tone: Tom do artigo (profissional, vendedor, amigável)
-            wp_category: Categoria WordPress para classificação
-            produto_original: Nome original do produto para referência
+            product: Dicionário com dados do produto
+            custom_keywords: Lista de palavras-chave personalizadas
+            custom_instructions: Instruções específicas para o artigo
+            tone: Tom do artigo (profissional, casual, técnico)
+            wp_category: Categoria WordPress
+            produto_original: Nome original do produto
             
         Returns:
-            Dicionário com artigo gerado
+            Dicionário com artigo gerado e metadados
         """
         try:
-            produto_nome = produto_original or product.get('nome', 'Produto Desconhecido')
-            logger.info(f"🤖 Iniciando geração de artigo para: {produto_nome}")
+            # 🚨 CORREÇÃO CRÍTICA: Armazenar produto atual para acesso durante geração
+            self._current_product = product
             
-            # Validar produto
+            # Validação básica
             if not self._validate_product(product):
-                logger.error("❌ Produto inválido para geração de conteúdo")
-                return {}
+                raise ValueError("Dados do produto inválidos")
             
-            # Determinar categoria/tipo do produto
+            self.generation_stats['total_generations'] += 1
+            start_time = time.time()
+            
+            product_name = product.get('nome', '').strip()
+            if not product_name:
+                raise ValueError("Nome do produto é obrigatório")
+            
             product_type = self._determine_product_type(product)
-            logger.debug(f"📂 Tipo do produto identificado: {product_type}")
             
-            # Obter template baseado no tipo
-            template = self.template_manager.get_template(product_type)
+            # Log de início da geração
+            logger.info(f"🎯 Gerando artigo para: {product_name} (Tipo: {product_type})")
             
-            # Construir prompt
-            prompt = self.prompt_builder.build_prompt(
-                product=product,
-                template=template,
-                custom_keywords=custom_keywords,
-                custom_instructions=custom_instructions,
-                tone=tone
-            )
+            # Construir prompt personalizado
+            template = self.content_templates.get(product_type, self.content_templates['default'])
             
-            # Gerar conteúdo com IA
-            if self.simulation_mode:
-                ai_content = self._generate_simulated_content(product, template)
+            prompt = f"""
+Crie um artigo completo e profissional sobre o produto: {product_name}
+
+TIPO DE PRODUTO: {product_type}
+TOM: {tone}
+
+DADOS DO PRODUTO:
+- Nome: {product_name}
+- Marca: {product.get('marca', 'N/A')}
+- Categoria: {product.get('categoria_nome', 'Produto')}
+- Código: {product.get('codigo', 'N/A')}
+- Descrição: {product.get('descricao', 'Não informada')}
+
+ESTRUTURA OBRIGATÓRIA DO ARTIGO:
+1. Título principal (30-60 caracteres, iniciando com o nome do produto)
+2. Meta descrição (120-155 caracteres, contendo o produto)
+3. Conteúdo principal:
+   - Introdução (incluir nome do produto na primeira frase)
+   - Características técnicas
+   - Benefícios e vantagens
+   - Onde encontrar/como adquirir
+   - Conclusão
+
+REQUISITOS SEO:
+- Usar "{product_name}" como palavra-chave principal
+- Incluir produto no primeiro parágrafo
+- Usar subtítulos H2 e H3
+- Texto entre 300-500 palavras
+- Tom {tone}
+
+{f"INSTRUÇÕES ADICIONAIS: {custom_instructions}" if custom_instructions else ""}
+
+RETORNE NO FORMATO:
+TÍTULO: [título otimizado]
+META: [meta descrição]
+CONTEÚDO:
+[artigo completo em HTML]
+"""
+            
+            # Tentar gerar com IA
+            ai_content = self._generate_ai_content(prompt)
+            
+            if ai_content:
+                # Processar resposta da IA
+                article_data = self._process_ai_response(ai_content, product)
+                self.generation_stats['ai_generations'] += 1
             else:
-                ai_content = self._generate_ai_content(prompt)
-                
-                # Se falhou na API, usar simulação como fallback
-                if not ai_content:
-                    logger.warning("🎭 API falhou, usando conteúdo simulado como fallback")
-                    ai_content = self._generate_simulated_content(product, template)
+                # Fallback para conteúdo simulado
+                article_data = self._generate_simulated_content(product, template)
+                self.generation_stats['simulated_generations'] += 1
             
-            if not ai_content:
-                logger.error("❌ Falha na geração de conteúdo")
-                return {}
-            
-            # Processar e estruturar resposta
-            article_data = self._process_ai_response(ai_content, product)
-            
-            # NOVA OTIMIZAÇÃO: Aplicar melhorias de legibilidade Yoast
+            # Aplicar otimizações obrigatórias
             article_data = self._optimize_readability_yoast(article_data)
             
-            # CORREÇÃO: Normalizar título para evitar duplicações
-            if 'titulo' in article_data:
-                article_data['titulo'] = self._normalize_title_avoid_duplicates(
-                    article_data['titulo'], 
-                    produto_nome
-                )
-            
-            # NOVA: Aplicar estrutura HTML semântica para Yoast
-            if 'conteudo' in article_data:
-                article_data['conteudo'] = self.template_manager.apply_yoast_html_structure(
-                    article_data['conteudo'], 
-                    produto_nome
-                )
-                
-                # CORREÇÃO: Adicionar fallback de imagem se necessário
-                if product.get('imagem'):
-                    # Verificar se já tem imagem no conteúdo, se não, adicionar
-                    if '<img' not in article_data['conteudo']:
-                        image_html = self._generate_image_fallback(produto_nome, product.get('imagem'))
-                        # Inserir imagem após o primeiro parágrafo
-                        paragraphs = article_data['conteudo'].split('</p>')
-                        if len(paragraphs) > 1:
-                            article_data['conteudo'] = f"{paragraphs[0]}</p>\n\n{image_html}\n\n" + "</p>".join(paragraphs[1:])
-                        else:
-                            article_data['conteudo'] = f"{image_html}\n\n{article_data['conteudo']}"
-                else:
-                    # Produto sem imagem válida - adicionar placeholder
-                    if '<img' not in article_data['conteudo']:
-                        image_html = self._generate_image_fallback(produto_nome)
-                        # Inserir imagem após o primeiro parágrafo
-                        paragraphs = article_data['conteudo'].split('</p>')
-                        if len(paragraphs) > 1:
-                            article_data['conteudo'] = f"{paragraphs[0]}</p>\n\n{image_html}\n\n" + "</p>".join(paragraphs[1:])
-                        else:
-                            article_data['conteudo'] = f"{image_html}\n\n{article_data['conteudo']}"
-                
-                # VALIDAR LEGIBILIDADE YOAST
-                readability_score = self.seo_optimizer.validate_readability_score(
-                    article_data['conteudo'], 
-                    produto_nome
-                )
-                
-                # Adicionar dados de legibilidade
-                article_data['legibilidade'] = readability_score
-                
-                # Log da pontuação
-                logger.info(f"📊 Pontuação Yoast: {readability_score['overall_score']:.1f} ({readability_score['yoast_level']})")
-                logger.info(f"💬 Status: {readability_score['yoast_message']}")
-                
-                # Exibir recomendações se necessário
-                if readability_score['recommendations']:
-                    logger.info("💡 Recomendações de melhoria:")
-                    for rec in readability_score['recommendations']:
-                        logger.info(f"   • {rec}")
-            
-            # Otimizar SEO
-            article_data = self.seo_optimizer.optimize_article(article_data)
-            
-            # Adicionar metadados - incluindo novos campos
+            # Adicionar metadados
             article_data.update({
-                'produto_id': product.get('id'),
-                'produto_nome': produto_nome,
-                'produto_url': product.get('url'),
-                'data_geracao': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'wp_category': wp_category or product_type,
+                'produto_original': produto_original or product_name,
+                'produto_nome': product_name,
                 'tipo_produto': product_type,
                 'tom_usado': tone,
-                'modelo_ia': self.model,
-                'status': 'gerado'
+                'tags': self._generate_tags(product_name, product_type),
+                'keywords': custom_keywords or [product_name],
+                'status': 'pendente',
+                'generation_method': 'ai' if ai_content else 'simulated',
+                'generation_time': round(time.time() - start_time, 2)
             })
             
-            # Adicionar campos opcionais se fornecidos
-            if wp_category:
-                article_data['wp_category'] = wp_category
-                logger.debug(f"📂 Categoria WP definida: {wp_category}")
-                
-            if produto_original:
-                article_data['produto_original'] = produto_original
-                logger.debug(f"🔗 Produto original: {produto_original}")
+            # Validar resultado final
+            if not article_data.get('titulo') or not article_data.get('conteudo'):
+                raise ValueError("Falha na geração: título ou conteúdo vazio")
             
-            logger.info(f"✅ Artigo gerado com sucesso: {len(article_data.get('conteudo', ''))} caracteres")
+            logger.info(f"✅ Artigo gerado com sucesso: {article_data['titulo']}")
+            self.generation_stats['successful_generations'] += 1
+            
             return article_data
             
         except Exception as e:
             logger.error(f"❌ Erro na geração do artigo: {e}")
-            return {}
+            self.generation_stats['failed_generations'] += 1
+            # Retornar artigo básico como último recurso
+            return self._generate_fallback_article(product)
+        
+        finally:
+            # Limpar produto atual
+            self._current_product = None
     
     def _optimize_readability_yoast(self, article_data: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -603,9 +581,7 @@ class ContentGenerator:
                     else:
                         article = "O"
                     
-                    # Gerar link de compra do produto usando URL REAL
-                    product_real_url = "https://www.creativecopias.com.br"  # URL fallback
-                    buy_link = URLUtils.generate_buy_link(product_name, product_real_url, validate=True)
+
                     
                     # VALIDAÇÃO CRÍTICA: Verificar se product_name não está vazio
                     if not product_name or product_name.strip() == "":
@@ -615,9 +591,9 @@ class ContentGenerator:
                     
                     new_first_sentence = f"{article} {product_name} é uma excelente opção para quem busca qualidade e desempenho"
                     if len(sentences) > 1:
-                        enhanced_p = new_first_sentence + '. ' + '. '.join(sentences[1:]) + f' Para adquirir este produto, acesse: {buy_link}.'
+                        enhanced_p = new_first_sentence + '. ' + '. '.join(sentences[1:])
                     else:
-                        enhanced_p = new_first_sentence + '. ' + sentences[0] + f' Para comprar, acesse: {buy_link}.'
+                        enhanced_p = new_first_sentence + '. ' + sentences[0]
                     
                     content = content.replace(f'<p>{first_p}</p>', f'<p>{enhanced_p}</p>', 1)
         
@@ -1823,6 +1799,105 @@ class ContentGenerator:
         logger.info(f"🏷️ Marcas utilizadas: {sorted(used_brands)}")
         
         return articles
+    
+    def _find_product_url_in_database(self, product_name: str) -> str:
+        """
+        Busca URL real do produto nos dados armazenados
+        
+        Args:
+            product_name: Nome do produto
+            
+        Returns:
+            URL real do produto ou string vazia se não encontrar
+        """
+        try:
+            import glob
+            import json
+            import re
+            from difflib import SequenceMatcher
+            
+            # Limpar nome do produto para comparação
+            product_clean = product_name.strip().lower()
+            
+            # Buscar arquivos de produtos
+            json_files = glob.glob('logs/products_*.json')
+            
+            for json_file in json_files:
+                try:
+                    with open(json_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    # Suportar tanto formato lista quanto formato com metadata
+                    products = []
+                    if isinstance(data, list):
+                        products = data
+                    elif isinstance(data, dict) and 'produtos' in data:
+                        products = data['produtos']
+                    elif isinstance(data, dict) and 'products' in data:
+                        products = data['products']
+                    else:
+                        # Se é dict mas não tem produtos/products, pode ser um único produto
+                        if data.get('nome') and data.get('url'):
+                            products = [data]
+                    
+                    for product in products:
+                        if not isinstance(product, dict) or not product.get('url'):
+                            continue
+                            
+                        stored_name = product.get('nome', '').strip().lower()
+                        stored_url = product.get('url', '').strip()
+                        
+                        # BUSCA EXATA (100% match) - normalizar espaços
+                        product_normalized = ' '.join(product_clean.split())
+                        stored_normalized = ' '.join(stored_name.split())
+                        
+                        if product_normalized == stored_normalized:
+                            logger.info(f"✅ MATCH EXATO encontrado: {stored_url}")
+                            return stored_url
+                        
+                        # BUSCA POR SIMILARIDADE ALTA (85%+)
+                        similarity = SequenceMatcher(None, product_normalized, stored_normalized).ratio()
+                        if similarity >= 0.85:
+                            logger.info(f"✅ MATCH ALTA SIMILARIDADE ({similarity:.2%}): {stored_url}")
+                            return stored_url
+                        
+                        # BUSCA POR CÓDIGOS ESPECÍFICOS (ex: L6490, M404n)
+                        codes_product = re.findall(r'[A-Z]+\d+[A-Z]*', product_name.upper())
+                        codes_stored = re.findall(r'[A-Z]+\d+[A-Z]*', stored_name.upper())
+                        
+                        if codes_product and codes_stored:
+                            common_codes = set(codes_product) & set(codes_stored)
+                            if common_codes:
+                                logger.info(f"✅ MATCH POR CÓDIGO {common_codes}: {stored_url}")
+                                return stored_url
+                        
+                        # BUSCA POR PALAVRAS-CHAVE IMPORTANTES
+                        # Extrair palavras significativas (3+ caracteres, não stop words)
+                        stop_words = {'de', 'da', 'do', 'com', 'para', 'e', 'em', 'original', 'compativel'}
+                        
+                        product_words = set(re.findall(r'\w{3,}', product_clean)) - stop_words
+                        stored_words = set(re.findall(r'\w{3,}', stored_name)) - stop_words
+                        
+                        if product_words and stored_words:
+                            intersection = product_words & stored_words
+                            union = product_words | stored_words
+                            word_similarity = len(intersection) / len(union) if union else 0
+                            
+                            # Se tem 70%+ de palavras em comum
+                            if word_similarity >= 0.70:
+                                logger.info(f"✅ MATCH POR PALAVRAS ({word_similarity:.2%}): {stored_url}")
+                                return stored_url
+                        
+                except Exception as e:
+                    logger.debug(f"Erro ao processar {json_file}: {e}")
+                    continue
+            
+            logger.warning(f"⚠️ URL não encontrada para produto: {product_name}")
+            return ""
+            
+        except Exception as e:
+            logger.error(f"❌ Erro ao buscar URL do produto: {e}")
+            return ""
  
  
  

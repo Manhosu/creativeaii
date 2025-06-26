@@ -6,6 +6,7 @@ import os
 import re
 from typing import Dict, List, Any
 import logging
+from difflib import SequenceMatcher
 
 logger = logging.getLogger(__name__)
 
@@ -573,19 +574,16 @@ class AdvancedArticleTemplates:
         return slug[:50]  # Limitar tamanho
     
     def _generate_meta_description(self, nome: str, marca: str, preco: str, tipo: str) -> str:
-        """Gerar meta descrição otimizada (150-160 caracteres)"""
-        
-        # 🚨 CORREÇÃO: Formatar preço corretamente
-        preco_formatado = self._format_price_for_template(preco)
+        """Gerar meta descrição otimizada (150-160 caracteres) - SEM PREÇOS"""
         
         if tipo == "impressora":
-            base = f"Review completo da {nome}. Análise técnica, especificações, preço {preco_formatado} e onde comprar."
+            base = f"Review completo da {nome}. Análise técnica, especificações e onde comprar."
         elif tipo == "cartucho":
-            base = f"Cartucho {nome} original - Análise de qualidade, rendimento, preço {preco_formatado} e compatibilidade."
+            base = f"Cartucho {nome} original - Análise de qualidade, rendimento e compatibilidade."
         elif tipo == "cabeça de impressão":
-            base = f"Cabeça de impressão {nome} - Review técnico, qualidade, instalação e preço {preco_formatado}."
+            base = f"Cabeça de impressão {nome} - Review técnico, qualidade e instalação."
         else:
-            base = f"{nome} - Review completo, especificações técnicas, preço {preco_formatado} e análise detalhada."
+            base = f"{nome} - Review completo, especificações técnicas e análise detalhada."
         
         # Garantir que não passe de 160 caracteres
         if len(base) > 160:
@@ -665,7 +663,7 @@ class AdvancedArticleTemplates:
             # CORREÇÃO: Usar página inicial da Creative Cópias como fallback
             link_externo = '<a href="https://www.creativecopias.com.br" rel="nofollow" target="_blank">catálogo de produtos</a>'
         
-        # CORREÇÃO: Priorizar URL real do produto, senão usar categoria
+        # CORREÇÃO: Priorizar URL real do produto, senão buscar nos dados, senão usar categoria
         if url_produto_real and 'creativecopias.com.br' in url_produto_real:
             # Garantir que a URL está correta
             if not url_produto_real.startswith('http'):
@@ -673,20 +671,25 @@ class AdvancedArticleTemplates:
             if 'www.' not in url_produto_real and 'creativecopias.com.br' in url_produto_real:
                 url_produto_real = url_produto_real.replace('creativecopias.com.br', 'www.creativecopias.com.br')
             url_produto = url_produto_real
+            logger.info(f"✅ Usando URL real do produto: {url_produto}")
         else:
-            # Fallback para categoria
-            url_produto = categoria_url_vendas
+            # Tentar buscar URL real nos dados armazenados
+            found_url = self._search_product_url_in_data(nome)
+            if found_url:
+                url_produto = found_url
+                logger.info(f"🔍 URL encontrada nos dados: {url_produto}")
+            else:
+                # Fallback para categoria
+                url_produto = categoria_url_vendas
+                logger.info(f"⚠️ Usando categoria como fallback: {url_produto}")
         
-        # Preparar informações do produto (apenas as preenchidas)
+        # Preparar informações do produto (apenas as preenchidas) - SEM PREÇOS
         info_produto = []
         
         if categoria and categoria.strip() and categoria != 'N/A':
             info_produto.append(f'<strong>Categoria:</strong> <span itemprop="category">{categoria}</span>')
         
-        # 🚨 CORREÇÃO CRÍTICA: Formatar preço para exibição correta
-        preco_formatado = self._format_price_for_template(preco)
-        if preco_formatado and preco_formatado.strip() and preco_formatado != 'N/A' and 'Consulte' not in preco_formatado:
-            info_produto.append(f'<strong>Preço:</strong> <span itemprop="offers" itemscope itemtype="https://schema.org/Offer"><span itemprop="price" style="color: #28a745; font-weight: bold;">{preco_formatado}</span></span>')
+        # ❌ PREÇOS REMOVIDOS - Cliente solicitou remoção pois mudam constantemente
         
         if codigo and codigo.strip() and codigo != 'N/A':
             info_produto.append(f'<strong>Código:</strong> <span itemprop="sku">{codigo}</span>')
@@ -732,7 +735,7 @@ class AdvancedArticleTemplates:
     <p style="margin-bottom: 0; line-height: 1.8;">{info_items}</p>
 </div>"""
 
-        # Template HTML completo - estilo sóbrio e profissional
+        # Template HTML completo - estilo sóbrio e profissional - SEM PREÇOS
         conteudo = f"""
 <div itemscope itemtype="https://schema.org/Product">
 
@@ -770,9 +773,9 @@ class AdvancedArticleTemplates:
     </p>
 </div>
 
-<h2>Análise de Custo-Benefício</h2>
+<h2>Características do Produto</h2>
 <div style="margin: 20px 0;">
-    <p><strong>Investimento:</strong> Com preço de <strong>{preco_formatado}</strong>, este produto oferece excelente retorno sobre o investimento, especialmente considerando sua durabilidade e qualidade superior.</p>
+    <p><strong>Qualidade Superior:</strong> Este produto oferece excelente desempenho e durabilidade, especialmente considerando sua qualidade superior e tecnologia avançada.</p>
     
     <p><strong>Facilidade de Uso:</strong> A instalação e configuração são simples e rápidas, não exigindo conhecimentos técnicos avançados. Vem com manual detalhado e suporte técnico disponível.</p>
 </div>
@@ -786,10 +789,10 @@ class AdvancedArticleTemplates:
     </ul>
 </div>
 
-<h2>Onde Comprar</h2>
+<h2>Onde Encontrar</h2>
 <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 20px; margin: 20px 0; border-radius: 5px; text-align: center;">
     {self._generate_image_html(imagem_url, nome, is_placeholder, True) if imagem_url else ''}
-    <p style="margin-bottom: 15px;">Produto disponível por <strong style="color: #28a745; font-size: 18px;">{preco_formatado}</strong></p>
+    <p style="margin-bottom: 15px;">Produto disponível para consulta de valores atualizados</p>
     <p style="margin: 15px 0;">
         <a href="{url_produto}" target="_blank" style="background: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
             Ver Produto no Site
@@ -815,6 +818,11 @@ class AdvancedArticleTemplates:
         <p>Claro! Temos política de troca e devolução conforme o Código de Defesa do Consumidor. Você tem até 7 dias para desistir da compra.</p>
     </div>
     
+    <div style="margin-bottom: 20px;">
+        <h3>Como consultar o preço atualizado?</h3>
+        <p>Os preços são atualizados constantemente. Para obter o valor mais recente e condições de pagamento, acesse o produto em nosso site oficial.</p>
+    </div>
+    
     <div>
         <h3>Como entrar em contato?</h3>
         <p>Nossa equipe de suporte está sempre disponível para esclarecer dúvidas e oferecer o melhor atendimento. Entre em contato através do nosso site.</p>
@@ -829,7 +837,7 @@ class AdvancedArticleTemplates:
     
     <div style="text-align: center; margin-top: 20px;">
         <a href="{url_produto}" target="_blank" style="background: #28a745; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
-            Adquirir Agora
+            Consultar Valores
         </a>
     </div>
 </div>
@@ -840,16 +848,15 @@ class AdvancedArticleTemplates:
         return conteudo.strip()
     
     def _generate_basic_fallback(self, product_data: Dict[str, Any], categoria: str) -> Dict[str, Any]:
-        """Template básico como fallback em caso de erro"""
+        """Template básico como fallback em caso de erro - SEM PREÇOS"""
         
         nome = product_data.get('nome', 'Produto')
-        preco = product_data.get('preco', 'Consulte')
         
         return {
             'titulo': f"Review: {nome}",
             'slug': nome.lower().replace(' ', '-'),
-            'meta_descricao': f"Review do {nome} - Análise completa e onde comprar",
-            'conteudo': f"<h1>{nome}</h1><p>Produto de qualidade disponível por {self._format_price_for_template(preco)}.</p>",
+            'meta_descricao': f"Review do {nome} - Análise completa e onde encontrar",
+            'conteudo': f"<h1>{nome}</h1><p>Produto de qualidade disponível para consulta de valores atualizados.</p>",
             'tags': [categoria, 'review'],
             'wp_category': categoria,
             'produto_nome': nome,
@@ -857,7 +864,7 @@ class AdvancedArticleTemplates:
             'tipo_produto': categoria,
             'tom_usado': 'profissional',
             'status': 'pendente'
-        } 
+        }
     
     def _search_real_product_image(self, nome_produto: str, marca: str = None) -> str:
         """
@@ -1133,3 +1140,103 @@ class AdvancedArticleTemplates:
         except Exception as e:
             logger.warning(f"⚠️ Erro ao formatar preço {preco}: {e}")
             return "Consulte o preço" 
+    
+    def _search_product_url_in_data(self, nome_produto: str) -> str:
+        """
+        Busca URL real do produto nos dados armazenados
+        Similar à função do content_generator mas adaptada para templates
+        
+        Args:
+            nome_produto: Nome do produto
+            
+        Returns:
+            URL real do produto ou string vazia se não encontrar
+        """
+        try:
+            import glob
+            import json
+            import re
+            from difflib import SequenceMatcher
+            
+            # Limpar nome do produto para comparação
+            product_clean = nome_produto.strip().lower()
+            
+            # Buscar arquivos de produtos
+            json_files = glob.glob('logs/products_*.json')
+            
+            for json_file in json_files:
+                try:
+                    with open(json_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    # Suportar tanto formato lista quanto formato com metadata
+                    products = []
+                    if isinstance(data, list):
+                        products = data
+                    elif isinstance(data, dict) and 'produtos' in data:
+                        products = data['produtos']
+                    elif isinstance(data, dict) and 'products' in data:
+                        products = data['products']
+                    else:
+                        # Se é dict mas não tem produtos/products, pode ser um único produto
+                        if data.get('nome') and data.get('url'):
+                            products = [data]
+                    
+                    for product in products:
+                        if not isinstance(product, dict) or not product.get('url'):
+                            continue
+                            
+                        stored_name = product.get('nome', '').strip().lower()
+                        stored_url = product.get('url', '').strip()
+                        
+                        # BUSCA EXATA (100% match) - normalizar espaços
+                        product_normalized = ' '.join(product_clean.split())
+                        stored_normalized = ' '.join(stored_name.split())
+                        
+                        if product_normalized == stored_normalized:
+                            logger.info(f"✅ TEMPLATE: MATCH EXATO encontrado: {stored_url}")
+                            return stored_url
+                        
+                        # BUSCA POR SIMILARIDADE ALTA (85%+)
+                        similarity = SequenceMatcher(None, product_normalized, stored_normalized).ratio()
+                        if similarity >= 0.85:
+                            logger.info(f"✅ TEMPLATE: MATCH ALTA SIMILARIDADE ({similarity:.2%}): {stored_url}")
+                            return stored_url
+                        
+                        # BUSCA POR CÓDIGOS ESPECÍFICOS (ex: L6490, M404n)
+                        codes_product = re.findall(r'[A-Z]+\d+[A-Z]*', nome_produto.upper())
+                        codes_stored = re.findall(r'[A-Z]+\d+[A-Z]*', stored_name.upper())
+                        
+                        if codes_product and codes_stored:
+                            common_codes = set(codes_product) & set(codes_stored)
+                            if common_codes:
+                                logger.info(f"✅ TEMPLATE: MATCH POR CÓDIGO {common_codes}: {stored_url}")
+                                return stored_url
+                        
+                        # BUSCA POR PALAVRAS-CHAVE IMPORTANTES
+                        # Extrair palavras significativas (3+ caracteres, não stop words)
+                        stop_words = {'de', 'da', 'do', 'com', 'para', 'e', 'em', 'original', 'compativel'}
+                        
+                        product_words = set(re.findall(r'\w{3,}', product_clean)) - stop_words
+                        stored_words = set(re.findall(r'\w{3,}', stored_name)) - stop_words
+                        
+                        if product_words and stored_words:
+                            intersection = product_words & stored_words
+                            union = product_words | stored_words
+                            word_similarity = len(intersection) / len(union) if union else 0
+                            
+                            # Se tem 70%+ de palavras em comum
+                            if word_similarity >= 0.70:
+                                logger.info(f"✅ TEMPLATE: MATCH POR PALAVRAS ({word_similarity:.2%}): {stored_url}")
+                                return stored_url
+                        
+                except Exception as e:
+                    logger.debug(f"Erro ao processar {json_file}: {e}")
+                    continue
+            
+            logger.warning(f"⚠️ TEMPLATE: URL não encontrada para produto: {nome_produto}")
+            return ""
+            
+        except Exception as e:
+            logger.error(f"❌ TEMPLATE: Erro ao buscar URL do produto: {e}")
+            return "" 

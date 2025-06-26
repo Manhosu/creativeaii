@@ -106,28 +106,69 @@ class URLUtils:
     
     @staticmethod
     def generate_buy_link(product_name: str, real_product_url: str = None, validate: bool = True) -> str:
-        """Gera link de compra usando URL REAL do produto"""
+        """
+        CORRIGIDO: Gera link de compra usando URL REAL do produto ou categoria válida
+        Evita links quebrados direcionando sempre para URLs válidas
+        """
         if not product_name or len(product_name.strip()) < 3:
             product_name = "equipamento"
         
+        product_url = None
+        
+        # PRIORIDADE 1: Usar URL real do produto se fornecida e válida
         if real_product_url and real_product_url.strip():
-            product_url = real_product_url.strip()
+            test_url = real_product_url.strip()
+            
+            # Corrigir URL se necessário
+            test_url = URLUtils.fix_broken_url(test_url)
             
             if validate:
-                is_valid, message = URLUtils.validate_url(product_url)
-                if not is_valid:
-                    logger.warning(f"⚠️ URL real não é válida: {message} - {product_url}")
-                    product_url = URLUtils.generate_product_url(product_name)
-        else:
-            product_url = URLUtils.generate_product_url(product_name)
+                is_valid, message = URLUtils.validate_url(test_url)
+                if is_valid:
+                    product_url = test_url
+                    logger.info(f"✅ Usando URL real validada: {product_url}")
+                else:
+                    logger.warning(f"⚠️ URL real inválida: {message} - {test_url}")
+            else:
+                product_url = test_url
         
+        # PRIORIDADE 2: Se URL real não é válida, usar categoria específica
+        if not product_url:
+            # Determinar categoria baseada no nome do produto
+            product_lower = product_name.lower()
+            
+            if 'impressora' in product_lower or 'multifuncional' in product_lower:
+                product_url = "https://www.creativecopias.com.br/impressoras"
+            elif 'cartucho' in product_lower and 'tinta' in product_lower:
+                product_url = "https://www.creativecopias.com.br/cartuchos-de-tinta"
+            elif 'cartucho' in product_lower or 'tinta' in product_lower:
+                product_url = "https://www.creativecopias.com.br/cartuchos-de-tinta"
+            elif 'toner' in product_lower:
+                product_url = "https://www.creativecopias.com.br/cartuchos-de-toner"
+            elif 'papel' in product_lower:
+                product_url = "https://www.creativecopias.com.br/papel-fotografico"
+            elif 'scanner' in product_lower:
+                product_url = "https://www.creativecopias.com.br/scanner"
+            elif 'refil' in product_lower:
+                if 'toner' in product_lower:
+                    product_url = "https://www.creativecopias.com.br/refil-de-toner"
+                else:
+                    product_url = "https://www.creativecopias.com.br/refil-de-tinta"
+            else:
+                # Fallback para página geral de impressoras
+                product_url = "https://www.creativecopias.com.br/impressoras"
+            
+            logger.info(f"✅ Usando categoria específica: {product_url}")
+        
+        # VALIDAÇÃO FINAL: Garantir que URL é sempre válida
         if validate:
             is_valid, message = URLUtils.validate_url(product_url)
             if not is_valid:
-                logger.warning(f"⚠️ URL gerada não é válida: {message} - {product_url}")
-                product_url = f"{URLUtils.BASE_URL}/impressoras"
+                logger.error(f"❌ URL final inválida: {message} - {product_url}")
+                # Último fallback seguro
+                product_url = "https://www.creativecopias.com.br"
         
-        return f'<a href="{product_url}" target="_blank" rel="noopener"><strong>Comprar {product_name}</strong></a>'
+        return f'<a href="{product_url}" target="_blank" rel="noopener"><strong>Consultar {product_name}</strong></a>'
     
     @staticmethod
     def generate_internal_link(category: str, text: str) -> str:
